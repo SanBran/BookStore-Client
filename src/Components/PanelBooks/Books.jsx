@@ -1,10 +1,12 @@
-import React from 'react';
+//import React from 'react';
 import Book from '../CardBook/Book';
-const Books= ()=>{
+const Books= ({allBooks})=>{
+
+
 return(
     <div>
         <span> There are some Books right here </span>
-        <Book/>
+        {allBooks?.map(book=><Book key={book.id} books={book}/>)}
     </div>
 )
 }
