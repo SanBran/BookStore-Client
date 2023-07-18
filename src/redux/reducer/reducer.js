@@ -1,9 +1,10 @@
-import { GET_ALL_BOOKS, GET_BOOK_BY_AUTHOR, GET_BOOK_BY_ID, GET_BOOKS_BY_TITLE, POST_BOOK, UPDATE_BOOK_BY_ID, DELETE_BOOK_BY_ID, GET_FAILURE, GET_PENDING, GET_SUCCESS, POST_MERCADOPAGO, POST_WEBHOOK_PAGO, POST_EMAIL, POST_SMS_WHATSAPP, FILTER_BY_AUTHOR, FILTER_BY_GENRER, FILTER_BY_LANGUAJE, FILTER_BY_TITLE, FILTER_BY_PUBLISHED_DATE, ORDER_BY_PRICE, ORDER_BY_PUBLISHED_DATE, ORDER_BY_TITLE } from "../actions/types";;
+import { GET_ALL_BOOKS, GET_BOOK_BY_AUTHOR, GET_BOOK_BY_ID, GET_BOOKS_BY_TITLE, POST_BOOK, UPDATE_BOOK_BY_ID, DELETE_BOOK_BY_ID, GET_FAILURE, GET_PENDING, GET_SUCCESS, POST_MERCADOPAGO, POST_WEBHOOK_PAGO, POST_EMAIL, POST_SMS_WHATSAPP, FILTER_BY_AUTHOR, FILTER_BY_GENRER, FILTER_BY_LANGUAJE, FILTER_BY_TITLE, FILTER_BY_PUBLISHED_DATE, ORDER_BY_PRICE, ORDER_BY_PUBLISHED_DATE, ORDER_BY_TITLE, GET_COMMENTS, POST_COMMENT, UPDATE_COMMENT_BY_ID, DELETE_COMMENT_BY_ID } from "../actions/types";;
 
 let initialState = {
   allBooks: [],
   allBooksCopy: [],
   details: [],
+  comments: [],
   paymentStatus: null,
   response: {},
   error: null,
@@ -22,7 +23,7 @@ const reducer = (state = initialState, { type, payload }) => {
     case GET_BOOKS_BY_TITLE:
       return {
         ...state,
-        
+
         allBooksCopy: payload
       };
     case GET_BOOK_BY_AUTHOR:
@@ -222,7 +223,30 @@ const reducer = (state = initialState, { type, payload }) => {
         response: payload,
         error: null,
       };
-
+    //----------------------------COMMETS--------------------
+    case GET_COMMENTS:
+      return {
+        ...state,
+        comments: payload
+      };
+    case POST_COMMENT:
+      return {
+        ...state,
+        comments: [...state.allBooks, payload],
+      };
+    case UPDATE_COMMENT_BY_ID:
+      return {
+        ...state,
+        comments: state.comments.map((comment) =>
+        comment.id === payload.id ? payload : comment
+        )
+      };
+    case DELETE_COMMENT_BY_ID:
+      return {
+        ...state,
+        comments: state.comments.filter((comment) => comment.id !== payload),
+        
+      };
 
     default:
       return { ...state };
