@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 //Aquí los action Types
-import { GET_ALL_BOOKS, GET_BOOK_BY_AUTHOR, GET_BOOK_BY_ID, GET_BOOKS_BY_TITLE, POST_BOOK, UPDATE_BOOK_BY_ID, DELETE_BOOK_BY_ID, GET_FAILURE, GET_PENDING, GET_SUCCESS, POST_MERCADOPAGO, POST_WEBHOOK_PAGO, POST_EMAIL, POST_SMS_WHATSAPP, FILTER_BY_AUTHOR, FILTER_BY_GENRER, FILTER_BY_LANGUAJE, FILTER_BY_TITLE, FILTER_BY_PUBLISHED_DATE, ORDER_BY_PRICE, ORDER_BY_PUBLISHED_DATE, ORDER_BY_TITLE, POST_COMMENT, GET_COMMENTS, UPDATE_COMMENT_BY_ID, DELETE_COMMENT_BY_ID } from './types';
+import { GET_ALL_BOOKS, GET_BOOK_BY_AUTHOR, GET_BOOK_BY_ID, GET_BOOKS_BY_TITLE, POST_BOOK, UPDATE_BOOK_BY_ID, DELETE_BOOK_BY_ID, GET_FAILURE, GET_PENDING, GET_SUCCESS, POST_MERCADOPAGO, POST_WEBHOOK_PAGO, POST_EMAIL, POST_SMS_WHATSAPP, FILTER_BY_AUTHOR, FILTER_BY_GENRER, FILTER_BY_LANGUAJE, FILTER_BY_TITLE, FILTER_BY_PUBLISHED_DATE, ORDER_BY_PRICE, ORDER_BY_PUBLISHED_DATE, ORDER_BY_TITLE, POST_COMMENT, GET_COMMENTS, UPDATE_COMMENT_BY_ID, DELETE_COMMENT_BY_ID, GET_USERS, GET_USER_BY_ID, POST_USER, UPDATE_USER } from './types';
 
 //Y aquí irán los action en sí :)
 //--------------BOOKS----------   
@@ -320,6 +320,66 @@ export function deleteCommentById(id) {
             const response = await axios.delete(`http://localhost:8000/deleteComment/${id}`);
             return dispatch({
                 type: DELETE_COMMENT_BY_ID,
+                payload: response.data
+            })
+        } catch (error) {
+            throw Error(error.message)
+        }
+    }
+}
+//-------------------------USER-----------------------
+
+
+export function getUsers() {
+    return async function (dispatch) {
+        try {
+            const response = await axios.get(`http://localhost:8000/findUser`);
+            return dispatch({
+                type: GET_USERS,
+                payload: response.data
+            })
+        } catch (error) {
+            throw Error(error.message)
+        }
+    }
+}
+export function getUserById(id) {
+    return async function (dispatch) {
+        try {
+            //console.log(title);
+            const response = await axios.get(`http://localhost:8000/getBooks/bookDetail/${id}`);
+            return dispatch({
+                type: GET_USER_BY_ID,
+                payload: response.data
+            })
+        } catch (error) {
+            throw Error(error.message)
+        }
+    }
+}
+//userData={name, birthday, country, phone, phoneCode, gender, email, password, dniPasaport, status, rol, photoUser, listWish}
+export function postUser(userData) {
+    return async function (dispatch) {
+        try {
+            //console.log(userData);
+            const response = await axios.post(`http://localhost:8000/newUser`, userData);
+            return dispatch({
+                type: POST_USER,
+                payload: response.data
+            })
+        } catch (error) {
+            throw Error(error.message)
+        }
+    }
+}
+//editCommet={id, rating, comment }
+export function updateUser(userData) {
+    return async function (dispatch) {
+        try {
+            //console.log(userData);
+            const response = await axios.put(`http://localhost:8000/updUser`, userData);
+            return dispatch({
+                type: UPDATE_USER,
                 payload: response.data
             })
         } catch (error) {

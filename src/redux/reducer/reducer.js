@@ -1,4 +1,4 @@
-import { GET_ALL_BOOKS, GET_BOOK_BY_AUTHOR, GET_BOOK_BY_ID, GET_BOOKS_BY_TITLE, POST_BOOK, UPDATE_BOOK_BY_ID, DELETE_BOOK_BY_ID, GET_FAILURE, GET_PENDING, GET_SUCCESS, POST_MERCADOPAGO, POST_WEBHOOK_PAGO, POST_EMAIL, POST_SMS_WHATSAPP, FILTER_BY_AUTHOR, FILTER_BY_GENRER, FILTER_BY_LANGUAJE, FILTER_BY_TITLE, FILTER_BY_PUBLISHED_DATE, ORDER_BY_PRICE, ORDER_BY_PUBLISHED_DATE, ORDER_BY_TITLE, GET_COMMENTS, POST_COMMENT, UPDATE_COMMENT_BY_ID, DELETE_COMMENT_BY_ID } from "../actions/types";;
+import { GET_ALL_BOOKS, GET_BOOK_BY_AUTHOR, GET_BOOK_BY_ID, GET_BOOKS_BY_TITLE, POST_BOOK, UPDATE_BOOK_BY_ID, DELETE_BOOK_BY_ID, GET_FAILURE, GET_PENDING, GET_SUCCESS, POST_MERCADOPAGO, POST_WEBHOOK_PAGO, POST_EMAIL, POST_SMS_WHATSAPP, FILTER_BY_AUTHOR, FILTER_BY_GENRER, FILTER_BY_LANGUAJE, FILTER_BY_TITLE, FILTER_BY_PUBLISHED_DATE, ORDER_BY_PRICE, ORDER_BY_PUBLISHED_DATE, ORDER_BY_TITLE, GET_COMMENTS, POST_COMMENT, UPDATE_COMMENT_BY_ID, DELETE_COMMENT_BY_ID, GET_USERS, GET_USER_BY_ID, POST_USER, UPDATE_USER } from "../actions/types";;
 
 let initialState = {
   allBooks: [],
@@ -8,6 +8,8 @@ let initialState = {
   paymentStatus: null,
   response: {},
   error: null,
+  users: [],
+  userDetail:[],
 };
 // !Tener el cuenta reducir el reducer en varias partes.
 const reducer = (state = initialState, { type, payload }) => {
@@ -238,16 +240,38 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         comments: state.comments.map((comment) =>
-        comment.id === payload.id ? payload : comment
+          comment.id === payload.id ? payload : comment
         )
       };
     case DELETE_COMMENT_BY_ID:
       return {
         ...state,
         comments: state.comments.filter((comment) => comment.id !== payload),
-        
-      };
 
+      };
+    //-----------------------------------------USER--------------------------------
+    case GET_USERS:
+      return {
+        ...state,
+        users: payload
+      };
+    case GET_USER_BY_ID:
+      return {
+        ...state,
+        userDetail: payload
+      };
+    case POST_USER:
+      return {
+        ...state,
+        users: [...state.users, payload],
+      };
+    case UPDATE_USER:
+      return {
+        ...state,
+        users: state.users.map((user) =>
+        user.id === payload.id ? payload : user
+        )
+      };
     default:
       return { ...state };
   }
