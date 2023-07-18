@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 //Aquí los action Types
-import { GET_ALL_BOOKS, GET_BOOK_BY_AUTHOR, GET_BOOK_BY_ID, GET_BOOKS_BY_TITLE, POST_BOOK, UPDATE_BOOK_BY_ID, DELETE_BOOK_BY_ID, GET_FAILURE, GET_PENDING, GET_SUCCESS, POST_MERCADOPAGO, POST_WEBHOOK_PAGO, POST_EMAIL, POST_SMS_WHATSAPP, FILTER_BY_AUTHOR, FILTER_BY_GENRER, FILTER_BY_LANGUAJE, FILTER_BY_TITLE, FILTER_BY_PUBLISHED_DATE, ORDER_BY_PRICE, ORDER_BY_PUBLISHED_DATE, ORDER_BY_TITLE } from './types';
+import { GET_ALL_BOOKS, GET_BOOK_BY_AUTHOR, GET_BOOK_BY_ID, GET_BOOKS_BY_TITLE, POST_BOOK, UPDATE_BOOK_BY_ID, DELETE_BOOK_BY_ID, GET_FAILURE, GET_PENDING, GET_SUCCESS, POST_MERCADOPAGO, POST_WEBHOOK_PAGO, POST_EMAIL, POST_SMS_WHATSAPP, FILTER_BY_AUTHOR, FILTER_BY_GENRER, FILTER_BY_LANGUAJE, FILTER_BY_TITLE, FILTER_BY_PUBLISHED_DATE, ORDER_BY_PRICE, ORDER_BY_PUBLISHED_DATE, ORDER_BY_TITLE,POST_COMMENT,GET_COMMENTS,UPDATE_COMMENT_BY_ID,DELETE_COMMENT_BY_ID } from './types';
 
 //Y aquí irán los action en sí :)
 //--------------BOOKS----------   
@@ -239,7 +239,66 @@ export function orderByTitle(order) {
 }
 export function orderByPublishedDate(order) {
     return {
-        type: ORDER_BY_PRICE,
+        type: ORDER_BY_PUBLISHED_DATE,
         payload: order
+    }
+}
+//--------------------COMMETS--------------------
+
+export function getComents () {
+    return async function (dispatch) {
+        try {
+            const response = await axios.get(`http://localhost:8000/getComments`);
+            return dispatch({
+                type: GET_COMMENTS,
+                payload: response.data
+            })
+        } catch (error) {
+            throw Error(error.message)
+        }
+    }
+}
+//comment= {rating, comment, bookId, userId}
+export function postComment(comment) {
+    return async function (dispatch) {
+        try {
+            //console.log(comment);
+            const response = await axios.post(`http://localhost:8000/postComment`, comment);
+            return dispatch({
+                type: POST_COMMENT,
+                payload: response.data
+            })
+        } catch (error) {
+            throw Error(error.message)
+        }
+    }
+}
+//editCommet={id, rating, comment }
+export function updateCommentById({id, rating, comment }) {
+    return async function (dispatch) {
+        try {
+            //console.log(id, rating, comment);
+            const response = await axios.put(`http://localhost:8000/updateComment/${id}`,rating,comment);
+            return dispatch({
+                type: UPDATE_COMMENT_BY_ID,
+                payload: response.data
+            })
+        } catch (error) {
+            throw Error(error.message)
+        }
+    }
+}
+export function deleteCommentById(id) {
+    return async function (dispatch) {
+        try {
+            //console.log(id);
+            const response = await axios.delete(`http://localhost:8000/deleteComment/${id}`);
+            return dispatch({
+                type: DELETE_COMMENT_BY_ID,
+                payload: response.data
+            })
+        } catch (error) {
+            throw Error(error.message)
+        }
     }
 }
