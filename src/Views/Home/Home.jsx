@@ -9,7 +9,7 @@ import {useDispatch, useSelector} from 'react-redux';
 
 const Home = () => {
   const dispatch = useDispatch();
-  const allBooks = useSelector(state=> state.allBooks);
+  const allBooks = useSelector(state=> state.allBooksCopy);
 
   useEffect(()=>{
     dispatch(getAllBooks());
