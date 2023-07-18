@@ -1,0 +1,13 @@
+.accessContainer{
+    width: 100vw;
+    height: 100vh;
+    background: F5F5F5;
+
+    margin: 0;
+}
+
+.structure{
+    width: 546px;
+    height: fit-content;
+    border: 1px solid red;
+}
