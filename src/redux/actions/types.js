@@ -44,7 +44,7 @@ export const UPDATE_COMMENT_BY_ID = "UPDATE_COMMENT_BY_ID";
 export const DELETE_COMMENT_BY_ID = "DELETE_COMMENT_BY_ID";
 
 //USERS 
-export const GET_USER = "GET_USER";
+export const GET_USERS = "GET_USER";
 export const GET_USER_BY_ID = "GET_USER_BY_ID";
 export const POST_USER = "POST_USER";
 export const UPDATE_USER = "UPDATE_USER";
