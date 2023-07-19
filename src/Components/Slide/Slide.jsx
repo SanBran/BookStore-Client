@@ -1,11 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './Slide.module.css';
 import StarRating from '../StarRating/StarRating';
 
 function Slide({ books }) {
+  
+
   const [actualImage, setActualImage] = useState(0);
-  const selectBooks = [books[51], books[52], books[53], books[54], books[55]];
+  const maxIndex = 40;
+  const numberOfBooksToShow = 5;
+  
+  const randomIndices = Array.from({ length: numberOfBooksToShow }, () =>
+  Math.floor(Math.random() * maxIndex)
+  );
+  
+  const [selectBooks, setSelectBooks] = useState([]);
+  useEffect(() => {
+    const randomBooks = randomIndices.map(i => books[i]);
+    setSelectBooks(randomBooks);
+  }, [books]);
   const number = selectBooks?.length;
+
+console.log(selectBooks);
 
 
   if (!Array.isArray(selectBooks) || number === 0) {

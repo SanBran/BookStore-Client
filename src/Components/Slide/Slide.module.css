@@ -26,7 +26,7 @@
     height:50vh;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.493);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(20px);
 }
 
 .leftButton {
