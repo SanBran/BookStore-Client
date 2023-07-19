@@ -21,7 +21,7 @@ const Home = () => {
   return (
     <div className={styles.container}>
       <div>
-        <Slide className={styles.slide} books={allBooks}/>
+        <Slide books={allBooks}/>
       </div>
       <div>
         <Navbar/>

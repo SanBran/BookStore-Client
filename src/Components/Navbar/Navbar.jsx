@@ -1,8 +1,9 @@
 import {Link} from 'react-router-dom';
+import styles from './Navbar.module.css'
 
 const Navbar= ()=>{
 return(
-    <nav>
+    <nav className={styles.container}>
         <div>
 <Link to='/home'> Wanna go to the main books????</Link>
         </div>
