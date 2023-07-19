@@ -1,0 +1,101 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    
+    height: 50vh;
+    max-height: 500px;
+}
+
+.bookContainer{
+    display: flex;
+    width: 99.7vw;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+}
+
+.background{
+    width: 100vw;
+    
+}
+.layout{
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    height:50vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.493);
+    backdrop-filter: blur(10px);
+}
+
+.leftButton {
+    position: absolute;
+    margin-left: 25px;
+    top: 22.5vh;
+    z-index: 1;
+    border-radius:100px;
+    padding: 1%;
+    padding-right: 1.5%;
+    background-color: #FA9D1B;
+
+}
+.rightButton {
+    position: absolute;
+    margin-right: 25px;
+    top: 22.5vh;
+    right: 0;
+    border-radius:100px;
+    padding: 1%;
+    padding-left: 1.5%;
+    background-color: #FA9D1B;
+
+}
+
+.bookInfo{
+    position: absolute;
+    display: flex;
+    width: 35vw;
+}
+
+.image{
+    height: 35vh;
+    width: 22vh;
+}
+
+.textContainer{
+    display: flex;
+    padding-left: 10px;
+    flex-direction: column;
+    text-align: start;
+    align-items: flex-start;
+    justify-content: end;
+}
+
+.title{
+    font-size:xx-large;
+    text-align: start;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.author{
+    font-size: large;
+    font-weight: 200;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+
+
+
+@media (max-width: 768px) {
+    .container {
+        display: none;
+    }
+  
+    
+  }
+
+
+  
