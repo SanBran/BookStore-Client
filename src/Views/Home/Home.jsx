@@ -10,7 +10,7 @@ import styles from './Home.module.css'
 
 const Home = () => {
   const dispatch = useDispatch();
-  const allBooks = useSelector(state=> state.allBooks);
+  const allBooks = useSelector(state=> state.allBooksCopy);
 
   useEffect(()=>{
     dispatch(getAllBooks());
