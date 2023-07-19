@@ -3,6 +3,9 @@ import Login from "../../Components/Login/Login";
 import SignUp from "../../Components/Signup/Signup";
 import style from "./Access.module.css"
 
+//importando icon del boton cerrar
+import close_button from "../../assets/icons/close_button.svg"
+
 const Access = () => { 
     const [form, setForm] = useState('login');
 
@@ -13,23 +16,22 @@ const Access = () => {
     return (
         <div className={style.accessContainer}>
             <div className={style.structure}>
-                {/* cambiar a img con el icon despues */}
-                <button>x</button>
+                <img className={style.buttonClose} src={close_button} alt='x' />
                 <div className={style.switchForms}>
                     <div 
-                    className={style.switchLogIn}
+                    className={form === 'login' ? style.switchFocus : style.switch}
                     onClick={()=>{handlerSwitchForms("login")}}
                     >
-                        <h1>LOG IN</h1>
+                        <h1 className={style.switchTitle}>LOG IN</h1>
                     </div>
                     <div 
-                    className={style.switchSingUp}
+                    className={form === 'singup' ? style.switchFocus : style.switch}
                     onClick={()=>{handlerSwitchForms("singup")}}
                     >
-                        <h1>SING UP</h1>
+                        <h1 className={style.switchTitle}>SING UP</h1>
                     </div>
                 </div>
-                <div className={style.formContainer}>
+                <div className={form === 'login' ? style.loginContainer : style.singupContainer}>
                     {form === 'login'
                     ?(<Login />)
                     :(<SignUp />)
