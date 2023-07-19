@@ -1,12 +1,18 @@
 //import React from 'react'
 import { useState} from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import style from './Login.module.css'
 
 const Login = () => {
+  //estado local para saber cuando el usurio presiono la opcion de <Remember me>
+  const [rememberMe, setRememberMe] = useState(false)
 
-  const [logInfo, setLogInfo]= useState({username: '', password: ''});
+  const handlerRemeberMe = (event)=>{
+    setRememberMe(event.target.checked)
+  }
+
+  const [logInfo, setLogInfo]= useState({email: '', password: ''});
 
   const handleLoginChanges = (event)=>{
     event.preventDefault();
@@ -15,17 +21,18 @@ const Login = () => {
 
     setLogInfo({...logInfo, [property]: value})
   }
+
   return (
     <form className={style.fromContainer} >
       <div className={style.inputsContainer}>
-          <input className={style.input} type='text' placeholder='Email address' name='usernameOrEmail' value={logInfo.username} onChange={handleLoginChanges} />
+          <input className={style.input} type='text' placeholder='Email address' name='email' value={logInfo.username} onChange={handleLoginChanges} />
           <input className={style.input} type='text' placeholder='Password' name='password' value={logInfo.password} onChange={handleLoginChanges}/>
       </div>
 
       <div className={style.otherStuffContainer}>
         <div className={style.rememberMe}>
-          <input className={style.checkBox} type="checkbox" id="toggle-btn"/>
-          <label className={style.checkBoxLabel} for="toggle-btn">Remember me</label>
+          <input className={style.checkBox} type="checkbox" id="toggle-btn" onChange={handlerRemeberMe}/>
+          <label className={style.checkBoxLabel} htmlFor="toggle-btn">Remember me</label>
         </div>
         <Link className={style.linkForgotPass}>
           Forgotten password?
