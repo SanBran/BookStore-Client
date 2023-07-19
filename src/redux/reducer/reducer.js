@@ -1,4 +1,4 @@
-import { GET_ALL_BOOKS, GET_BOOK_BY_AUTHOR, GET_BOOK_BY_ID, GET_BOOKS_BY_TITLE, POST_BOOK, UPDATE_BOOK_BY_ID, DELETE_BOOK_BY_ID, GET_FAILURE, GET_PENDING, GET_SUCCESS, POST_MERCADOPAGO, POST_WEBHOOK_PAGO, POST_EMAIL, POST_SMS_WHATSAPP, FILTER_BY_AUTHOR, FILTER_BY_GENRER, FILTER_BY_LANGUAJE, FILTER_BY_TITLE, FILTER_BY_PUBLISHED_DATE, ORDER_BY_PRICE, ORDER_BY_PUBLISHED_DATE, ORDER_BY_TITLE, GET_COMMENTS, POST_COMMENT, UPDATE_COMMENT_BY_ID, DELETE_COMMENT_BY_ID, GET_USERS, GET_USER_BY_ID, POST_USER, UPDATE_USER } from "../actions/types";;
+import { GET_ALL_BOOKS, GET_BOOK_BY_AUTHOR, GET_BOOK_BY_ID, GET_BOOKS_BY_TITLE, POST_BOOK, UPDATE_BOOK_BY_ID, DELETE_BOOK_BY_ID, GET_FAILURE, GET_PENDING, GET_SUCCESS, POST_MERCADOPAGO, POST_WEBHOOK_PAGO, POST_EMAIL, POST_SMS_WHATSAPP,FILTER_BY_AUTHOR_NAME, FILTER_BY_GENRER, FILTER_BY_LANGUAJE, FILTER_BY_PUBLISHED_DATE, ORDER_BY_PRICE, ORDER_BY_PUBLISHED_DATE, ORDER_BY_TITLE, GET_COMMENTS, POST_COMMENT, UPDATE_COMMENT_BY_ID, DELETE_COMMENT_BY_ID, GET_USERS, GET_USER_BY_ID, POST_USER, UPDATE_USER } from "../actions/types";
 
 let initialState = {
   allBooks: [],
@@ -50,41 +50,39 @@ const reducer = (state = initialState, { type, payload }) => {
         allBooks: state.allBooks.map((book) =>
           book.id === payload.id ? payload : book
         ),
-        allBooksCopy: allBooks
+        allBooksCopy: [...state.allBooks]
       };
     case DELETE_BOOK_BY_ID:
       return {
         ...state,
         allBooks: state.allBooks.filter((book) => book.id !== payload),
-        allBooksCopy: allBooks
+        allBooksCopy: [...state.allBooks]
       };
     //----------------------------FILTERS-------------------
+    case FILTER_BY_AUTHOR_NAME:
+      return {
+        ...state,
+        allBooksCopy: payload
+      };
     case FILTER_BY_GENRER:
       if (payload === "ALL")
         return {
           ...state,
           allBooksCopy: state.allBooks,
         };
-      const BooksCopy = [...state.dogs];
-      let filteredBook = BooksCopy.filter((book) =>
-        book.genrer?.includes(payload)
-      );
       return {
         ...state,
-        dogsCopy: filteredBook,
+        allBooksCopy: payload,
       };
-
     case FILTER_BY_LANGUAJE:
       if (payload === "ALL")
         return {
           ...state,
-          allBooksCopy: state.allBooks,
+          allBooksCopy: payload,
         };
-      const BooksCopy2 = [...state.dogs];
-      let filteredBook2 = BooksCopy2.filter((book) => book.languaje === payload);
       return {
         ...state,
-        allBooksCopy: filteredBook2,
+        allBooksCopy: payload,
       };
 
     case FILTER_BY_PUBLISHED_DATE:
@@ -93,14 +91,12 @@ const reducer = (state = initialState, { type, payload }) => {
           ...state,
           allBooksCopy: state.allBooks,
         };
-      const BooksCopy3 = [...state.dogs];
-      let filteredBook3 = BooksCopy3.filter((book) => book.publishedDate === payload);
       return {
         ...state,
-        allBooksCopy: filteredBook3,
+        allBooksCopy: payload,
       };
     //----------------------------ORDER-------------------
-    case ORDER_BY_PRICE:
+    case ORDER_BY_PRICE:{
       let orderedBookPrice = [...state.allBooksCopy];
       if (payload === "A") { //ascendente mayor
         orderedBookPrice = orderedBookPrice.sort((a, b) => {
@@ -120,13 +116,14 @@ const reducer = (state = initialState, { type, payload }) => {
           if (b.price > a.price) {
             return 1;
           }
+          return 0;
         });
       }
       return {
         ...state,
         allBooksCopy: orderedBookPrice,
-      };
-    case ORDER_BY_TITLE:
+      };}
+    case ORDER_BY_TITLE:{
       let orderedBookName = [...state.allBooksCopy];
       if (payload === "A") { //ascendente mayor
         orderedBookName = orderedBookName.sort((a, b) => {
@@ -151,8 +148,8 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         allBooksCopy: orderedBookName,
-      };
-    case ORDER_BY_PUBLISHED_DATE:
+      };}
+    case ORDER_BY_PUBLISHED_DATE:{
       let orderedBookPublishedDate = [...state.allBooksCopy];
       if (payload === "A") { //ascendente mayor
         orderedBookPublishedDate = orderedBookPublishedDate.sort((a, b) => {
@@ -177,7 +174,7 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         allBooksCopy: orderedBookPublishedDate,
-      };
+      };}
 
     //----------------------------mercadoPago----------------
     // revisar mercadoPago no estoy seguro como funciona

@@ -26,8 +26,8 @@ export const POST_EMAIL = "POST_EMAIL";
 
 //FILTER
 export const FILTER_BY_GENRER = "FILTER_BY_GENRER";
-export const FILTER_BY_AUTHOR = "FILTER_BY_AUTHOR";// temporary is used by the searchBar
-export const FILTER_BY_TITLE = "FILTER_BY_TITLE";// temporary is used by the searchBar
+export const FILTER_BY_AUTHOR_NAME = "FILTER_BY_AUTHOR_NAME";// temporary is used by the searchBar
+export const FILTER_BY_TITLE = "FILTER_BY_TITLE";
 export const FILTER_BY_LANGUAJE = "FILTER_BY_LANGUAJE";
 export const FILTER_BY_PUBLISHED_DATE = "FILTER_BY_PUBLISHED_DATE";
 
