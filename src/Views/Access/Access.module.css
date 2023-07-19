@@ -27,6 +27,8 @@
     margin-top: 20px;
     margin-left: 600px;
     display: flex;
+
+    cursor: pointer;
 }
 
 /* ----------------Estilo del switch  */
@@ -53,6 +55,8 @@
     font-style: normal;
     font-weight: lighter;
     text-transform: uppercase;
+
+    cursor: pointer;
 }
 
 /* ----------------Estilo a contenedor de formularios  */
