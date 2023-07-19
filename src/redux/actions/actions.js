@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 //Aquí los action Types
-import { GET_ALL_BOOKS, GET_BOOK_BY_AUTHOR, GET_BOOK_BY_ID, GET_BOOKS_BY_TITLE, POST_BOOK, UPDATE_BOOK_BY_ID, DELETE_BOOK_BY_ID, GET_FAILURE, GET_PENDING, GET_SUCCESS, POST_MERCADOPAGO, POST_WEBHOOK_PAGO, POST_EMAIL, POST_SMS_WHATSAPP, FILTER_BY_AUTHOR, FILTER_BY_GENRER, FILTER_BY_LANGUAJE, FILTER_BY_TITLE, FILTER_BY_PUBLISHED_DATE, ORDER_BY_PRICE, ORDER_BY_PUBLISHED_DATE, ORDER_BY_TITLE, POST_COMMENT, GET_COMMENTS, UPDATE_COMMENT_BY_ID, DELETE_COMMENT_BY_ID, GET_USERS, GET_USER_BY_ID, POST_USER, UPDATE_USER } from './types';
+import { GET_ALL_BOOKS, GET_BOOK_BY_AUTHOR, GET_BOOK_BY_ID, GET_BOOKS_BY_TITLE, POST_BOOK, UPDATE_BOOK_BY_ID, DELETE_BOOK_BY_ID, GET_FAILURE, GET_PENDING, GET_SUCCESS, POST_MERCADOPAGO, POST_WEBHOOK_PAGO, POST_EMAIL, POST_SMS_WHATSAPP, FILTER_BY_AUTHOR_NAME, FILTER_BY_GENRER, FILTER_BY_LANGUAJE, FILTER_BY_PUBLISHED_DATE, ORDER_BY_PRICE, ORDER_BY_PUBLISHED_DATE, ORDER_BY_TITLE, POST_COMMENT, GET_COMMENTS, UPDATE_COMMENT_BY_ID, DELETE_COMMENT_BY_ID, GET_USERS, GET_USER_BY_ID, POST_USER, UPDATE_USER } from './types';
 
 //Y aquí irán los action en sí :)
 //--------------BOOKS----------   
@@ -54,6 +54,20 @@ export function getByPublishedDate(publishedDate) {
             const response = await axios.get(`http://localhost:8000/getBooks?publishedDate=${publishedDate}`);
             return dispatch({
                 type: FILTER_BY_PUBLISHED_DATE,
+                payload: response.data
+            })
+        } catch (error) {
+            throw Error(error.message)
+        }
+    }
+}
+export function filterBooksByAuthorAndTitle(author,title) {
+    return async function (dispatch) {
+        try {
+            //console.log(author);
+            const response = await axios.get(`http://localhost:8000/getBooks?author=${author}&title=${title}`);
+            return dispatch({
+                type: FILTER_BY_AUTHOR_NAME,
                 payload: response.data
             })
         } catch (error) {
