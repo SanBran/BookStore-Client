@@ -1,13 +1,18 @@
 //import React from 'react';
+import { useState } from 'react';
 import Book from '../CardBook/Book';
+import styles from './Books.module.css'
+
 const Books= ({allBooks})=>{
 
-
 return(
-    <div>
-        <span> There are some Books right here </span>
+  
+    <div className={styles.booksContainer}>
+    <h2 className={styles.title}>New Arraivals</h2>
         {allBooks?.map(book=><Book key={book.id} books={book}/>)}
+
     </div>
+    
 )
 }
 

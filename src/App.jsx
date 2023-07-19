@@ -12,10 +12,8 @@ function App() {
   const location = useLocation();
   return (
     <>
-      {/* <h1>Book Store</h1> */}
-      {location.pathname !== "/" ? <Dashboard /> : <Access />}
       <Routes>
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
 
         <Route path="/login" element={<Login />} />
 

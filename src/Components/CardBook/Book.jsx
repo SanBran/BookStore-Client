@@ -1,23 +1,31 @@
 //import React from 'react';
 import {Link} from 'react-router-dom';
+import styles from './Book.module.css'
+
 const Book = ({books})=>{
 const {id, image, title, author, price} = books;
 
-    return(
-        <div>
-            <strong>This is were the info will be rendered. Please be patient.</strong>
-            <div>
-<Link to={`/details:${id}`}><img src={image} alt={`${title} from ${author}`}/></Link>
-            </div>
+const genericCover = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhRKhJb1aLmjwGX_ox0TA6eTxCv_5g3Nlr6w&usqp=CAU"
 
-            <div>
-                {title}
-            </div>
-            <div>
-                {author}
-            </div>
-            <div>
-                <strong>And the price is: {price}</strong>
+    return(
+        <div className={styles.container}>
+            
+            <Link className={styles.image} to={`/details:${id}`}>
+            <img
+          className={styles.imageSize}
+          src={image !== 'Image not Available' ? image : genericCover}
+          alt={`${title} from ${author}`}
+        />
+                </Link>
+            
+            <div className={styles.textContainer}>
+                <div className={styles.title}>
+                    {title}
+                </div>
+                <div className={styles.author}>
+                    {author[0]}
+                </div>
+                {price && price? <div className={styles.price}>{price}</div> : <div className={styles.price}>N/A</div>}
             </div>
         </div>
     )

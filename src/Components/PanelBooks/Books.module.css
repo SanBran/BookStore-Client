@@ -1,0 +1,20 @@
+.booksContainer {
+    position: relative;
+    top: 20px;
+    
+     width: 100vw;
+     height: fit-content;
+     
+     
+     display: flex;
+     flex-wrap: wrap;
+     justify-content:center;
+     gap: 40px;
+     
+ 
+ }
+ .title{
+    color: #FA9D1B;
+    text-align: start;
+    width: 100%;
+ }
