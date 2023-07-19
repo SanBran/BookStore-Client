@@ -1,11 +1,12 @@
 //import React from 'react'
 import { useEffect } from 'react';
-//import styles from "./Home.module.css"
 import Books from "../../Components/PanelBooks/Books";
 import SearchBar from "../../Components/SearchBar/SearchBar";
 import Navbar from '../../Components/Navbar/Navbar';
+import Slide from "../../Components/Slide/Slide"
 import {getAllBooks} from '../../redux/actions/actions'
 import {useDispatch, useSelector} from 'react-redux';
+import styles from './Home.module.css'
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -18,11 +19,14 @@ const Home = () => {
   }, [dispatch]);
 
   return (
-    <div>
-      Home
+    <div className={styles.container}>
+      <div>
+        <Slide className={styles.slide} books={allBooks}/>
+      </div>
       <div>
         <Navbar/>
       </div>
+      
       <div>
         <SearchBar />
       </div>

@@ -1,0 +1,7 @@
+.container{
+    display: flex;
+}
+.star{
+    font-size: larger;
+    margin-bottom: 10px;
+}

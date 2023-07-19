@@ -1,0 +1,42 @@
+.container {
+    display: flex;
+    height: 190px;
+    width: 370px;
+    gap: 10px;
+    cursor: pointer;
+    -moz-osx-font-smoothing: grayscale;
+    margin-bottom: 40px;
+    position: relative; 
+    background-color: rgb(245, 245, 245);
+}
+
+.textContainer {
+    text-align: start;
+    color: black;
+}
+
+.title {
+    font-weight: 700;
+    font-size: larger;
+    
+}
+
+.author {
+    font-size: medium;
+    color:grey
+}
+
+.image {
+    height: 190px;
+}
+.imageSize {
+    height: 190px;
+    max-width: 130px;
+}
+
+.price {
+    font-weight: 800;
+    position: absolute; /* Agregamos posicionamiento absoluto */
+    bottom: 0;
+}
+
