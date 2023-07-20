@@ -23,7 +23,7 @@ const genericCover = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhRK
                     {title}
                 </div>
                 <div className={styles.author}>
-                    {author[0]}
+                    {author}
                 </div>
                 {price && price? <div className={styles.price}>{price}</div> : <div className={styles.price}>N/A</div>}
             </div>

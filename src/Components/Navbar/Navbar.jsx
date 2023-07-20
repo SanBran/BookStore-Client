@@ -1,22 +1,18 @@
 import {Link} from 'react-router-dom';
 import styles from './Navbar.module.css'
+import SearchBar from '../SearchBar/SearchBar';
 
 const Navbar= ()=>{
 return(
     <nav className={styles.container}>
         <div>
-<Link to='/home'> Wanna go to the main books????</Link>
+            <Link to='/'><h1 className={styles.logo}>Book Store</h1></Link>
         </div>
-
-        <div>
-            <Link to='/settings'> Let have some settings, shall we?</Link>
-        </div>
-
-<div>
-    <Link to='/profile'> See your profile here </Link>
-</div>
-        <div>
-            <Link to='/login'> Want to log out?</Link>
+            <div className={styles.search}>
+            <SearchBar/>
+            </div>
+        <div className={styles.profile}>
+            <Link to='/profile'> See your profile here </Link>
         </div>
     </nav>
 )

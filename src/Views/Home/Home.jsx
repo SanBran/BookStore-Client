@@ -1,8 +1,6 @@
 //import React from 'react'
 import { useEffect } from 'react';
 import Books from "../../Components/PanelBooks/Books";
-import SearchBar from "../../Components/SearchBar/SearchBar";
-import Navbar from '../../Components/Navbar/Navbar';
 import Slide from "../../Components/Slide/Slide"
 import {getAllBooks} from '../../redux/actions/actions'
 import {useDispatch, useSelector} from 'react-redux';
@@ -22,14 +20,7 @@ const Home = () => {
     <div className={styles.container}>
       <div>
         <Slide books={allBooks}/>
-      </div>
-      <div>
-        <Navbar/>
-      </div>
-      
-      <div>
-        <SearchBar />
-      </div>
+      </div>     
       <div>
         <Books allBooks={allBooks}/>
       </div>
