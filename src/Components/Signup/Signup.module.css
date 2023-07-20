@@ -133,3 +133,14 @@
 .singUpBtn:focus-visible, .singUpBtn:focus{
     outline: 0;
 }
+
+
+/* --------Estilo para el texto de errores */
+.textError{
+    width: 100%;
+    margin: 0;
+    text-align: start;
+    color: rgb(241, 57, 57);
+    font-size: 12px;
+    
+}
