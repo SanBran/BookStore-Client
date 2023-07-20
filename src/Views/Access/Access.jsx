@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import Login from "../../Components/Login/Login";
 import SignUp from "../../Components/Signup/Signup";
 import style from "./Access.module.css"
@@ -16,7 +17,9 @@ const Access = () => {
     return (
         <div className={style.accessContainer}>
             <div className={style.structure}>
-                <img className={style.buttonClose} src={close_button} alt='x' />
+                <Link to="/">
+                    <img className={style.buttonClose} src={close_button} alt='x' />
+                </Link>
                 <div className={style.switchForms}>
                     <div 
                     className={form === 'login' ? style.switchFocus : style.switch}
