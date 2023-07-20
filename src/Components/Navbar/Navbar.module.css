@@ -1,0 +1,29 @@
+.container{
+    z-index: 10;
+    height:90px;
+    top: 0;
+    left: 0;
+    padding-left: 50px;
+    padding-right: 50px;
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    gap: 80px;
+    width: 95vw;
+}
+
+.logo{
+    color: #FA9D1B;
+    margin: 0;
+    font-size:3rem;
+}
+
+
+@media (max-width: 550px) {
+    .logo{
+        font-size:2rem;
+    }
+  
+    
+  }
+

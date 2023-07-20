@@ -1,24 +1,36 @@
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
+import styles from "./Navbar.module.css";
+import SearchBar from "../SearchBar/SearchBar";
+import { overlayProfile } from "../../redux/actions/actions";
+import { useDispatch, useSelector } from "react-redux";
 
-const Navbar= ()=>{
-return(
-    <nav>
-        <div>
-<Link to='/home'> Wanna go to the main books????</Link>
-        </div>
 
-        <div>
-            <Link to='/settings'> Let have some settings, shall we?</Link>
-        </div>
+const Navbar = () => {
+  //const [overlayPerfile,setOverlayPerfile] = useState(false);
+  const dispatch = useDispatch();
+  const showOverlayPerfile= useSelector(state=> state.overlayProfile);
 
-<div>
-    <Link to='/profile'> See your profile here </Link>
-</div>
+  const handleOverlayToggle = () => {
+    dispatch(overlayProfile(showOverlayPerfile));
+    console.log(showOverlayPerfile);
+  };
+  return (
+    <div>
+      <nav>
         <div>
-            <Link to='/login'> Want to log out?</Link>
+          <Link to="/">
+            <h1 className={styles.logo}>Book Store</h1>
+          </Link>
         </div>
-    </nav>
-)
-}
+        <div className={styles.search}>
+          <SearchBar />
+        </div>
+      </nav>
+      <div className={styles.profile}>
+        <button onClick={handleOverlayToggle}>Perfil</button>
+      </div>
+    </div>
+  );
+};
 
 export default Navbar;

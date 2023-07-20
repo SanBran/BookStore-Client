@@ -8,7 +8,7 @@ const Books= ({allBooks})=>{
 return(
   
     <div className={styles.booksContainer}>
-    <h2 className={styles.title}>New Arraivals</h2>
+    <h2 className={styles.title}>New Arrivals</h2>
         {allBooks?.map(book=><Book key={book.id} books={book}/>)}
 
     </div>

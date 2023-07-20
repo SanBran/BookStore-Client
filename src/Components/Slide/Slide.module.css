@@ -1,14 +1,14 @@
 .container{
+    position: relative;
     display: flex;
     flex-direction: row;
-    
-    height: 50vh;
-    max-height: 500px;
+    height: 60vh;
+    max-height: 600px;
 }
 
 .bookContainer{
     display: flex;
-    width: 99.7vw;
+    width: 100vw;
     overflow: hidden;
     align-items: center;
     justify-content: center;
@@ -23,16 +23,16 @@
     z-index: 0;
     top: 0;
     left: 0;
-    height:50vh;
+    height:60vh;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.493);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(20px);
 }
 
 .leftButton {
     position: absolute;
     margin-left: 25px;
-    top: 22.5vh;
+    top: 30vh;
     z-index: 1;
     border-radius:100px;
     padding: 1%;
@@ -43,7 +43,7 @@
 .rightButton {
     position: absolute;
     margin-right: 25px;
-    top: 22.5vh;
+    top: 30vh;
     right: 0;
     border-radius:100px;
     padding: 1%;
@@ -55,6 +55,7 @@
 .bookInfo{
     position: absolute;
     display: flex;
+    top:15vh;
     width: 35vw;
 }
 
@@ -89,6 +90,19 @@
 
 
 
+@media (max-width: 1370px) {
+    .container {
+        height: 60vh;
+    }
+
+    .layout{
+        
+        height:60vh;
+        
+    }
+  
+    
+  }
 @media (max-width: 768px) {
     .container {
         display: none;
@@ -97,5 +111,3 @@
     
   }
 
-
-  

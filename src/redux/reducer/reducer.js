@@ -1,4 +1,4 @@
-import { GET_ALL_BOOKS, GET_BOOK_BY_AUTHOR, GET_BOOK_BY_ID, GET_BOOKS_BY_TITLE, POST_BOOK, UPDATE_BOOK_BY_ID, DELETE_BOOK_BY_ID, GET_FAILURE, GET_PENDING, GET_SUCCESS, POST_MERCADOPAGO, POST_WEBHOOK_PAGO, POST_EMAIL, POST_SMS_WHATSAPP,FILTER_BY_AUTHOR_NAME, FILTER_BY_GENRER, FILTER_BY_LANGUAJE, FILTER_BY_PUBLISHED_DATE, ORDER_BY_PRICE, ORDER_BY_PUBLISHED_DATE, ORDER_BY_TITLE, GET_COMMENTS, POST_COMMENT, UPDATE_COMMENT_BY_ID, DELETE_COMMENT_BY_ID, GET_USERS, GET_USER_BY_ID, POST_USER, UPDATE_USER } from "../actions/types";
+import { GET_ALL_BOOKS, GET_BOOK_BY_AUTHOR, GET_BOOK_BY_ID, GET_BOOKS_BY_TITLE, POST_BOOK, UPDATE_BOOK_BY_ID, DELETE_BOOK_BY_ID, GET_FAILURE, GET_PENDING, GET_SUCCESS, POST_MERCADOPAGO, POST_WEBHOOK_PAGO, POST_EMAIL, POST_SMS_WHATSAPP, FILTER_BY_GENRER, FILTER_BY_LANGUAJE, FILTER_BY_PUBLISHED_DATE, ORDER_BY_PRICE, ORDER_BY_PUBLISHED_DATE, ORDER_BY_TITLE, GET_COMMENTS, POST_COMMENT, UPDATE_COMMENT_BY_ID, DELETE_COMMENT_BY_ID, GET_USERS, GET_USER_BY_ID, POST_USER, UPDATE_USER,OVERLAY_PROFILE } from "../actions/types";
 
 let initialState = {
   allBooks: [],
@@ -10,7 +10,9 @@ let initialState = {
   error: null,
   users: [],
   userDetail:[],
+  overlayProfile: false,
 };
+
 // !Tener el cuenta reducir el reducer en varias partes.
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
@@ -59,11 +61,6 @@ const reducer = (state = initialState, { type, payload }) => {
         allBooksCopy: [...state.allBooks]
       };
     //----------------------------FILTERS-------------------
-    case FILTER_BY_AUTHOR_NAME:
-      return {
-        ...state,
-        allBooksCopy: payload
-      };
     case FILTER_BY_GENRER:
       if (payload === "ALL")
         return {
@@ -250,12 +247,12 @@ const reducer = (state = initialState, { type, payload }) => {
     case GET_USERS:
       return {
         ...state,
-        users: payload
+        users: payload.detail
       };
     case GET_USER_BY_ID:
       return {
         ...state,
-        userDetail: payload
+        userDetail: payload.detail
       };
     case POST_USER:
       return {
@@ -268,6 +265,11 @@ const reducer = (state = initialState, { type, payload }) => {
         users: state.users.map((user) =>
         user.id === payload.id ? payload : user
         )
+      };
+    case OVERLAY_PROFILE:
+      return {
+        ...state,
+        overlayProfile: !payload
       };
     default:
       return { ...state };

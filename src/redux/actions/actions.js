@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 //Aquí los action Types
-import { GET_ALL_BOOKS, GET_BOOK_BY_AUTHOR, GET_BOOK_BY_ID, GET_BOOKS_BY_TITLE, POST_BOOK, UPDATE_BOOK_BY_ID, DELETE_BOOK_BY_ID, GET_FAILURE, GET_PENDING, GET_SUCCESS, POST_MERCADOPAGO, POST_WEBHOOK_PAGO, POST_EMAIL, POST_SMS_WHATSAPP, FILTER_BY_AUTHOR_NAME, FILTER_BY_GENRER, FILTER_BY_LANGUAJE, FILTER_BY_PUBLISHED_DATE, ORDER_BY_PRICE, ORDER_BY_PUBLISHED_DATE, ORDER_BY_TITLE, POST_COMMENT, GET_COMMENTS, UPDATE_COMMENT_BY_ID, DELETE_COMMENT_BY_ID, GET_USERS, GET_USER_BY_ID, POST_USER, UPDATE_USER } from './types';
+import { GET_ALL_BOOKS, GET_BOOK_BY_AUTHOR, GET_BOOK_BY_ID, GET_BOOKS_BY_TITLE, POST_BOOK, UPDATE_BOOK_BY_ID, DELETE_BOOK_BY_ID, GET_FAILURE, GET_PENDING, GET_SUCCESS, POST_MERCADOPAGO, POST_WEBHOOK_PAGO, POST_EMAIL, POST_SMS_WHATSAPP, FILTER_BY_GENRER, FILTER_BY_LANGUAJE, FILTER_BY_PUBLISHED_DATE, ORDER_BY_PRICE, ORDER_BY_PUBLISHED_DATE, ORDER_BY_TITLE, POST_COMMENT, GET_COMMENTS, UPDATE_COMMENT_BY_ID, DELETE_COMMENT_BY_ID, GET_USERS, GET_USER_BY_ID, POST_USER, UPDATE_USER, OVERLAY_PROFILE } from './types';
 
 //Y aquí irán los action en sí :)
 //--------------BOOKS----------   
@@ -54,20 +54,6 @@ export function getByPublishedDate(publishedDate) {
             const response = await axios.get(`http://localhost:8000/getBooks?publishedDate=${publishedDate}`);
             return dispatch({
                 type: FILTER_BY_PUBLISHED_DATE,
-                payload: response.data
-            })
-        } catch (error) {
-            throw Error(error.message)
-        }
-    }
-}
-export function filterBooksByAuthorAndTitle(author,title) {
-    return async function (dispatch) {
-        try {
-            //console.log(author);
-            const response = await axios.get(`http://localhost:8000/getBooks?author=${author}&title=${title}`);
-            return dispatch({
-                type: FILTER_BY_AUTHOR_NAME,
                 payload: response.data
             })
         } catch (error) {
@@ -343,11 +329,18 @@ export function deleteCommentById(id) {
 }
 //-------------------------USER-----------------------
 
-
+export function overlayProfile(bool) {
+    
+    return {
+        type: OVERLAY_PROFILE,
+        payload: bool
+    }
+}
 export function getUsers() {
     return async function (dispatch) {
         try {
             const response = await axios.get(`http://localhost:8000/findUser`);
+            console.log(response.data.detail);
             return dispatch({
                 type: GET_USERS,
                 payload: response.data
@@ -361,7 +354,7 @@ export function getUserById(id) {
     return async function (dispatch) {
         try {
             //console.log(title);
-            const response = await axios.get(`http://localhost:8000/getBooks/bookDetail/${id}`);
+            const response = await axios.get(`http://localhost:8000/getBooks/findUser/${id}`);
             return dispatch({
                 type: GET_USER_BY_ID,
                 payload: response.data
