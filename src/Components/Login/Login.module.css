@@ -17,14 +17,14 @@
 }
 .input{
     width: 95%;
-    height: 35px;
+    height: 30px;
     padding-left: 20px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 100;
     
-    border: 2px solid #B6B6B6;
+    border: 1px solid #B6B6B6;
 
     background-color: #F5F5F5;
 }
@@ -58,6 +58,7 @@ input:focus-visible {
 .linkForgotPass{
     color: black;
     font-weight: bolder;
+    font-size: 13px;
 }
 .linkForgotPass:hover{
     color: #FA9D1B;
@@ -71,14 +72,17 @@ input:focus-visible {
     margin: 25px 0;
 }
 .loginBtn{
-    height: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
     border-radius: 0;
     border: none;
     background-color: #FA9D1B;
 
     color: #F5F5F5;
     font-weight: bolder;
-    font-size: 20px;
+    font-size: 18px;
 }
 .loginBtn:focus-visible, .loginBtn:focus{
     outline: 0;
@@ -87,7 +91,7 @@ input:focus-visible {
     width: 100%;
     display: flex;
     justify-content: space-around;
-    margin: 30px 0;
+    margin: 20px 0;
 
     text-transform: uppercase;
     font-weight: lighter;
@@ -104,14 +108,17 @@ input:focus-visible {
 }
 
 .googleBtn{
-    height: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
     border-radius: 0;
-    border: solid 3px #FA9D1B;
+    border: solid 2px #FA9D1B;
     background-color: #F5F5F5;
 
     color: #FA9D1B;
-    font-weight: bolder;
-    font-size: 20px;
+    font-weight: normal;
+    font-size: 18px;
 
     transition: all 0.3s ease-in-out;
 }
