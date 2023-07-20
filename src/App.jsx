@@ -2,8 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./Views/Home/Home";
 import BooksDetail from "./Views/BooksDetail/BooksDetail";
 import "./App.css";
-import Login from "./Components/Login/Login";
-import SignUp from "./Components/Signup/Signup";
+import Access from "./Views/Access/Access";
 import Navbar from "./Components/Navbar/Navbar";
 import Profile from "./Views/Profile/Profile";
 import Wishlist from "./Components/Wishlist/Wishlist";
@@ -19,7 +18,7 @@ function App() {
     <>
     {showOverlayPerfile && <Profile />}
 
-    {location.pathname !== "/profile" ? (
+    {location.pathname !== "/profile" && location.pathname !== "/access" ? (
         <Navbar  />
       ) : (
         <></>
@@ -27,9 +26,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
 
-        <Route path="/login" element={<Login />} />
-
-        <Route path="/signup" element={<SignUp />} />
+        <Route path="/access" element={<Access />} />
 
         <Route path="/details:id" element={<BooksDetail />} />
 
