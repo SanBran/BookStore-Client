@@ -125,14 +125,24 @@ const SignUp = () => {
   };
 
   const validateSubmit =()=>{
-    console.log('submit:',signUpInfo);
-    console.log('submit:',errors);
+    //console.log('submit:',signUpInfo);
+    //console.log('submit:',errors);
+    for (const property in errors) {
+      //console.log(errors[property]);
+      if(errors[property].length) return "hay errores";
+    }
+    for (const property in signUpInfo) {
+      if(!signUpInfo[property].length) return "faltan llenar espacios";
+    }
+
+    return true
+
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('submit');
-    validateSubmit()
+    //console.log('submit');
+    console.log(validateSubmit());
   };
 
 
