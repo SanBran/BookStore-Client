@@ -1,7 +1,11 @@
-import { GET_ALL_BOOKS, GET_BOOK_BY_AUTHOR, GET_BOOK_BY_ID, GET_BOOKS_BY_TITLE, POST_BOOK, UPDATE_BOOK_BY_ID, DELETE_BOOK_BY_ID, GET_FAILURE, GET_PENDING, GET_SUCCESS, POST_MERCADOPAGO, POST_WEBHOOK_PAGO, POST_EMAIL, POST_SMS_WHATSAPP, FILTER_BY_GENRER, FILTER_BY_LANGUAJE, FILTER_BY_PUBLISHED_DATE, ORDER_BY_PRICE, ORDER_BY_PUBLISHED_DATE, ORDER_BY_TITLE, GET_COMMENTS, POST_COMMENT, UPDATE_COMMENT_BY_ID, DELETE_COMMENT_BY_ID, GET_USERS, GET_USER_BY_ID, POST_USER, UPDATE_USER,OVERLAY_PROFILE } from "../actions/types";
+import { GET_ALL_BOOKS, DETAIL_BOOK_BY_ID, BOOK_BY_NAME, GET_BOOK_BY_AUTHOR, GET_BOOK_BY_ID, GET_BOOKS_BY_TITLE, POST_BOOK, UPDATE_BOOK_BY_ID, DELETE_BOOK_BY_ID, GET_FAILURE, GET_PENDING, GET_SUCCESS, POST_MERCADOPAGO, POST_WEBHOOK_PAGO, POST_EMAIL, POST_SMS_WHATSAPP, FILTER_BY_GENRER, FILTER_BY_LANGUAJE, FILTER_BY_PUBLISHED_DATE, ORDER_BY_PRICE, ORDER_BY_PUBLISHED_DATE, ORDER_BY_TITLE, GET_COMMENTS, POST_COMMENT, UPDATE_COMMENT_BY_ID, DELETE_COMMENT_BY_ID, GET_USERS, GET_USER_BY_ID, POST_USER, UPDATE_USER, OVERLAY_PROFILE } from "../actions/types";
 
 let initialState = {
+
   allBooks: [],
+  book: [],
+  bookByName: []
+  ,
   allBooksCopy: [],
   details: [],
   comments: [],
@@ -9,7 +13,7 @@ let initialState = {
   response: {},
   error: null,
   users: [],
-  userDetail:[],
+  userDetail: [],
   overlayProfile: false,
 };
 
@@ -93,7 +97,7 @@ const reducer = (state = initialState, { type, payload }) => {
         allBooksCopy: payload,
       };
     //----------------------------ORDER-------------------
-    case ORDER_BY_PRICE:{
+    case ORDER_BY_PRICE: {
       let orderedBookPrice = [...state.allBooksCopy];
       if (payload === "A") { //ascendente mayor
         orderedBookPrice = orderedBookPrice.sort((a, b) => {
@@ -119,8 +123,9 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         allBooksCopy: orderedBookPrice,
-      };}
-    case ORDER_BY_TITLE:{
+      };
+    }
+    case ORDER_BY_TITLE: {
       let orderedBookName = [...state.allBooksCopy];
       if (payload === "A") { //ascendente mayor
         orderedBookName = orderedBookName.sort((a, b) => {
@@ -145,8 +150,9 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         allBooksCopy: orderedBookName,
-      };}
-    case ORDER_BY_PUBLISHED_DATE:{
+      };
+    }
+    case ORDER_BY_PUBLISHED_DATE: {
       let orderedBookPublishedDate = [...state.allBooksCopy];
       if (payload === "A") { //ascendente mayor
         orderedBookPublishedDate = orderedBookPublishedDate.sort((a, b) => {
@@ -171,7 +177,8 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         allBooksCopy: orderedBookPublishedDate,
-      };}
+      };
+    }
 
     //----------------------------mercadoPago----------------
     // revisar mercadoPago no estoy seguro como funciona
@@ -263,7 +270,7 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         users: state.users.map((user) =>
-        user.id === payload.id ? payload : user
+          user.id === payload.id ? payload : user
         )
       };
     case OVERLAY_PROFILE:

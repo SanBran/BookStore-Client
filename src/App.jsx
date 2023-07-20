@@ -12,14 +12,14 @@ import { useSelector } from "react-redux";
 
 
 function App() {
-  const showOverlayPerfile= useSelector(state=> state.overlayProfile);
+  const showOverlayPerfile = useSelector(state => state.overlayProfile);
 
   return (
     <>
-    {showOverlayPerfile && <Profile />}
+      {showOverlayPerfile && <Profile />}
 
-    {location.pathname !== "/profile" && location.pathname !== "/access" ? (
-        <Navbar  />
+      {location.pathname !== "/profile" && location.pathname !== "/access" ? (
+        <Navbar />
       ) : (
         <></>
       )}
@@ -37,7 +37,7 @@ function App() {
         <Route path="/history" element={<History />} />
 
         <Route path="/settings" element={<Settings />} />
-        
+
       </Routes>
     </>
   );

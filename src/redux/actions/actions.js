@@ -1,14 +1,17 @@
-import axios from 'axios';
+import axios from '../../utils/axios';
 
 //Aquí los action Types
 import { GET_ALL_BOOKS, GET_BOOK_BY_AUTHOR, GET_BOOK_BY_ID, GET_BOOKS_BY_TITLE, POST_BOOK, UPDATE_BOOK_BY_ID, DELETE_BOOK_BY_ID, GET_FAILURE, GET_PENDING, GET_SUCCESS, POST_MERCADOPAGO, POST_WEBHOOK_PAGO, POST_EMAIL, POST_SMS_WHATSAPP, FILTER_BY_GENRER, FILTER_BY_LANGUAJE, FILTER_BY_PUBLISHED_DATE, ORDER_BY_PRICE, ORDER_BY_PUBLISHED_DATE, ORDER_BY_TITLE, POST_COMMENT, GET_COMMENTS, UPDATE_COMMENT_BY_ID, DELETE_COMMENT_BY_ID, GET_USERS, GET_USER_BY_ID, POST_USER, UPDATE_USER, OVERLAY_PROFILE } from './types';
 
+
+export const DETAIL_BOOK_BY_ID = 'DETAIL_BOOK_BY_ID'
+export const BOOK_BY_NAME = 'BOOK_BY_NAME'
 //Y aquí irán los action en sí :)
 //--------------BOOKS----------   
 export function getAllBooks() {
     return async function (dispatch) {
         try {
-            const response = await axios.post("http://localhost:8000/getBooks");
+            const response = await axios.post("/getBooks");
             return dispatch({
                 type: GET_ALL_BOOKS,
                 payload: response.data
@@ -16,6 +19,26 @@ export function getAllBooks() {
         } catch (error) {
             throw Error(error.message);
         }
+    }
+}
+
+export function detailBookById(id) {
+    return async function (dispatch) {
+        try {
+            const response = await axios(`/bookDetail/${id}`)
+            const data = response.data
+            return dispatch({ type: DETAIL_BOOK_BY_ID, payload: data })
+        } catch (error) {
+            throw Error(error.message)
+        }
+    }
+}
+
+export function bookByName(name) {
+    return async function (dispatch) {
+        const response = await axios(`/getBooks?author=${name}`)
+        const data = response.data
+        return dispatch({ type: BOOK_BY_NAME, payload: data })
     }
 }
 //--------------------FILTERS--------------------
@@ -330,7 +353,7 @@ export function deleteCommentById(id) {
 //-------------------------USER-----------------------
 
 export function overlayProfile(bool) {
-    
+
     return {
         type: OVERLAY_PROFILE,
         payload: bool
