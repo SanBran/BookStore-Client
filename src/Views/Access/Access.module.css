@@ -73,11 +73,12 @@
     transition: all 1s ease;
 }
 .singupContainer{
+    margin-top: -30px;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 600px;
+    height: 700px;
     overflow: hidden;
 
     transition: all 1s ease;
