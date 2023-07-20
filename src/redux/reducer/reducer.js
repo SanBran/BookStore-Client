@@ -21,8 +21,8 @@ const reducer = (state = initialState, { type, payload }) => {
     case GET_ALL_BOOKS:
       return {
         ...state,
-        allBooks: payload,
-        allBooksCopy: payload
+        allBooks: payload.books,
+        allBooksCopy: payload.books
       };
     case GET_BOOKS_BY_TITLE:
       return {

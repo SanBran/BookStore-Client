@@ -8,7 +8,7 @@ import { GET_ALL_BOOKS, GET_BOOK_BY_AUTHOR, GET_BOOK_BY_ID, GET_BOOKS_BY_TITLE, 
 export function getAllBooks() {
     return async function (dispatch) {
         try {
-            const response = await axios.get("http://localhost:8000/getBooks");
+            const response = await axios.post("http://localhost:8000/getBooks");
             return dispatch({
                 type: GET_ALL_BOOKS,
                 payload: response.data
