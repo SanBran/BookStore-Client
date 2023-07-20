@@ -5,6 +5,8 @@
   text-align: center;
 }
 
-
+.contentShift {
+  transform: translateX(20%); /* Mover el contenido hacia la derecha */
+}
 
 

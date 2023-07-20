@@ -17,7 +17,8 @@ function App() {
   return (
     <>
     {showOverlayPerfile && <Profile />}
-
+    <div className={`main-content ${showOverlayPerfile ? 'contentShift' : ''}`}>
+      
     {location.pathname !== "/profile" && location.pathname !== "/access" ? (
         <Navbar  />
       ) : (
@@ -39,6 +40,7 @@ function App() {
         <Route path="/settings" element={<Settings />} />
         
       </Routes>
+      </div>
     </>
   );
 }
