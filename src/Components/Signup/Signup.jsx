@@ -30,36 +30,32 @@ const SignUp = () => {
     gender: "",
   });
 
-  //-----------VALIDACIONES DEL FORMULARIO
+//-----------VALIDACIONES DEL FORMULARIO
   const expresions = {
     fullname: /^[a-zA-Z]+( [a-zA-Z]+)+$/,
     email: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-    //contrasena debe tener entre 8-15 caract., minus, mayus, numeros y caracter especial [$@$!%*?&#.] cualquier a delos que estan dentro de los corchetes
-    password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&#.])[A-Za-z\d$@$!%*?&#.]{8,15}$/,
+    password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&#.])[A-Za-z\d$@$!%*?&#.]{8,15}$/, //contrasena debe tener entre 8-15 caract., minus, mayus, num y caract especial [$@$!%*?&#.] cualquier a de los que estan dentro de los corchetes
     codePhone: /^(?:\+)?[1-9]{1,3}$/,
     phoneNumber: /^[0-9]{6,15}$/,
     dateOfBirth: /^(?:19[5-9]\d|20[0-1]\d)(\/|-)(0[1-9]|1[0-2])(\/|-)([0-2][0-9]|3[0-1])$/
   }
-  const validate = (state, property)=>{
-    //console.log(state);
-    console.log(property);
+  const validateInputs = (state, property)=>{
     switch(property){
       case 'confirmPassword': {
-        if(state.password !== state.confirmPassword ){
-          setErrors({...errors, [property]: 'Passwords do not match'})
-        } else{
-          setErrors({...errors, [property]: ''})         
-        }
+        if(state.password !== state.confirmPassword) setErrors({...errors, [property]: 'Passwords do not match'})
+        else setErrors({...errors, [property]: ''})         
       }
       break;
       case 'country': {
-        if(state.country === "none" ){
-          setErrors({...errors, [property]: 'No country selected'})
-        } else{
-          setErrors({...errors, [property]: ''})         
-        }
-
+        if(state.country === "none") setErrors({...errors, [property]: 'No country selected'})
+        else setErrors({...errors, [property]: ''})        
       }
+      break;
+      case 'dniPassport': {
+        if(state.dniPassport === "" )setErrors({...errors, [property]: 'Enter your identity document'})
+        else setErrors({...errors, [property]: ''})        
+      }
+      break;
     }
 
     if(property === 'dniPassport' || property === 'confirmPassword' || property === 'country' || property === 'gender') return;
@@ -97,51 +93,45 @@ const SignUp = () => {
     }
 
   }
-  //------------FIN DE LAS VALIDACIONES
-
-  
+  //------------FIN DE LAS VALIDACIONES de inputs
 
   const handleSignUpChanges = (event) => {
-    event.preventDefault();
     const property = event.target.name;
     const value= event.target.value;
 
     if(property==='codePhone'){
-      //esto es solo para el input de codigo de telefono
-      if (!value.startsWith('+') && value.trim() !== '') {
-        setSignUpInfo({...signUpInfo, [property]: '+' + value});
-      } else {
-        setSignUpInfo({...signUpInfo, [property]: value});
-      }
+//----Esto es solo para el input de codigo de telefono
+      if (!value.startsWith('+') && value.trim() !== '') setSignUpInfo({...signUpInfo, [property]: '+' + value});
+      else setSignUpInfo({...signUpInfo, [property]: value});
     }
     else{
-      //Este es para todos los demas inputs
+//----Este es para todos los demas inputs
       setSignUpInfo({...signUpInfo, [property]: value});
-      //console.log({...signUpInfo, [property]: value});
     }
-
-    //Validar los inputs cuando se hacen cambios
-    validate({...signUpInfo, [property]: value}, property)
+//--Validar los inputs cuando se hacen cambios
+    validateInputs({...signUpInfo, [property]: value}, property)
   };
 
+//------------VALIDACION DEL SUBMIT
   const validateSubmit =()=>{
-    //console.log('submit:',signUpInfo);
-    //console.log('submit:',errors);
-    for (const property in errors) {
-      //console.log(errors[property]);
-      if(errors[property].length) return "hay errores";
-    }
     for (const property in signUpInfo) {
-      if(!signUpInfo[property].length) return "faltan llenar espacios";
+      if(property==='gender') continue;
+      if(!signUpInfo[property].length) {
+        setErrors({...errors, [property]: 'Incomplete'});
+        return false
+      }
     }
+    for (const property in errors) {
+      if(property==='gender') continue;
+      if(errors[property].length) return false;
+    }
+
 
     return true
-
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    //console.log('submit');
+  const handleSubmit = (event) => {
+    event.preventDefault();
     console.log(validateSubmit());
   };
 
@@ -150,7 +140,7 @@ const SignUp = () => {
     <form className={style.formContainer} onSubmit={handleSubmit}>
       <div className={style.inputsContainer}>
         <input 
-          className={style.input}
+          className={errors.fullname.length ? (`${style.input} ${style.error}`): style.input}
           name="fullname"
           onChange={handleSignUpChanges}
           value={signUpInfo.fullname}
@@ -161,7 +151,7 @@ const SignUp = () => {
         {errors.fullname.length ? <p className={style.textError}>{errors.fullname}</p> : <></>}
 
         <input
-        className={style.input}
+        className={errors.email.length ? (`${style.input} ${style.error}`): style.input}
         name="email"
         onChange={handleSignUpChanges}
         value={signUpInfo.email}
@@ -172,7 +162,7 @@ const SignUp = () => {
         {errors.email.length ? <p className={style.textError}>{errors.email}</p> : <></>}
 
         <input
-        className={style.input}
+        className={errors.password.length ? (`${style.input} ${style.error}`): style.input}
         name="password"
         onChange={handleSignUpChanges}
         value={signUpInfo.password}
@@ -183,7 +173,7 @@ const SignUp = () => {
         {errors.password.length ? <p className={style.textError}>{errors.password}</p> : <></>}
 
         <input
-        className={style.input}
+        className={errors.confirmPassword.length ? (`${style.input} ${style.error}`): style.input}
         name="confirmPassword"
         onChange={handleSignUpChanges}
         value={signUpInfo.confirmPassword}
@@ -194,7 +184,7 @@ const SignUp = () => {
         {errors.confirmPassword.length ? <p className={style.textError}>{errors.confirmPassword}</p> : <></>}
 
         <input
-        className={style.input}
+        className={errors.dniPassport.length ? (`${style.input} ${style.error}`): style.input}
         name="dniPassport"
         onChange={handleSignUpChanges}
         value={signUpInfo.dniPassport}
@@ -206,7 +196,7 @@ const SignUp = () => {
 
         <div className={style.phoneInputs}>
           <input
-          className={style.codeInput}
+          className={errors.codePhone.length ? (`${style.input} ${style.codeInput} ${style.error}`): (`${style.input} ${style.codeInput}`)}
           name="codePhone"
           onChange={handleSignUpChanges}
           value={signUpInfo.codePhone}
@@ -215,7 +205,7 @@ const SignUp = () => {
           required
           />
           <input
-          className={style.phoneInput}
+          className={errors.phoneNumber.length ? (`${style.input} ${style.phoneInput} ${style.error}`): (`${style.input} ${style.phoneInput}`)}
           name="phoneNumber"
           onChange={handleSignUpChanges}
           value={signUpInfo.phoneNumber}
@@ -229,7 +219,7 @@ const SignUp = () => {
 
         <select 
         name="country" 
-        className={style.select}
+        className={errors.country.length ? (`${style.input} ${style.select} ${style.error}`): (`${style.input} ${style.select}`)}
         onChange={handleSignUpChanges} 
         >
           <option value="none">Select a country</option>
@@ -242,7 +232,7 @@ const SignUp = () => {
         <div className={style.dateContainer}> 
           <label className={style.dateLabel} htmlFor="date">Date of birth</label>
           <input 
-          className={style.dateInput}
+          className={errors.dateOfBirth.length ? (`${style.input} ${style.dateInput} ${style.error}`): (`${style.input} ${style.dateInput}`)}
           id="date"
           name="dateOfBirth"
           onChange={handleSignUpChanges}
@@ -256,7 +246,7 @@ const SignUp = () => {
 
         <select 
         name="gender"
-        className={style.select}
+        className={(`${style.input} ${style.select}`)}
         onChange={handleSignUpChanges} 
         required
         >
