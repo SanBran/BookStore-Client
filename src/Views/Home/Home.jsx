@@ -10,13 +10,11 @@ import Wishlist from "../../Components/Wishlist/Wishlist";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const allBooks = useSelector((state) => state.allBooksCopy);
+  const allBooks = useSelector((state) => state.allBooks);
   const showListWishlist = useSelector((state) => state.showListwish);
   useEffect(() => {
     dispatch(getAllBooks());
-    return console.log("Desmontado!!");
   }, [dispatch]);
-//console.log(allBooks);
   return (
     <div className={styles.container}>
       <div>

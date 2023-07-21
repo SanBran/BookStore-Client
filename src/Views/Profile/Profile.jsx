@@ -4,6 +4,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { listWish } from "../../redux/actions/actions";
+import {overlayProfile} from '../../redux/actions/actions'
 import styles from "./Profile.module.css";
 
 
@@ -98,14 +99,22 @@ const Profile = () => {
   };
   const dispatch = useDispatch();
   const showlistWish= useSelector(state=> state.showListwish);
+  const showOverlayPerfile= useSelector(state=> state.overlayProfile);
 
   const handleOverlayToggle = () => {
-    dispatch(listWish(showlistWish));
+    dispatch(listWish(showlistWish));;
     
   };
+
+  const handleCloseOverlayToggle = () => {
+    dispatch(overlayProfile(showOverlayPerfile));
+    console.log(showOverlayPerfile);
+  };
+
   return (
     
     <div className={styles.overlay} >
+      <div className={styles.close} onClick={handleCloseOverlayToggle}></div>
       <div className={styles.overlayContent}>
         <div>
           <img src={user.photoUser} width="70" height="70" />

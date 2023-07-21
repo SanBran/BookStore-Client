@@ -1,0 +1,26 @@
+.container{
+    display: flex;
+}
+
+.bar{
+    width: 40vw;
+    height: 45px;
+    border: none;
+    border-radius:0 50px 50px 0 ;
+    padding: 10px;
+    color: rgb(68, 68, 68);
+    background-color: rgb(255, 255, 255);
+
+}
+
+.icon{
+
+    padding: 0;
+    padding-left: 10px;
+    background-color: rgb(255, 255, 255);
+    font-size:xx-large;
+    font-weight: bolder;
+    
+    border-radius:50px 0 0 50px ;
+    color: black;
+}
