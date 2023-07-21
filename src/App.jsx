@@ -8,7 +8,9 @@ import Profile from "./Views/Profile/Profile";
 import Wishlist from "./Components/Wishlist/Wishlist";
 import History from "./Components/History/History";
 import Settings from "./Views/Settings/Settings";
+import Filters from "./Components/Filters/Filters";
 import { useSelector } from "react-redux";
+
 
 
 function App() {
@@ -38,6 +40,8 @@ function App() {
         <Route path="/history" element={<History />} />
 
         <Route path="/settings" element={<Settings />} />
+
+        <Route path="/Filters" element={<Filters />} />
         
       </Routes>
       </div>
@@ -45,4 +49,5 @@ function App() {
   );
 }
 
-export default App;
+export default App;   
+
