@@ -457,7 +457,7 @@ export function postUser(userData) {
     }
   };
 }
-//editCommet={id, rating, comment }
+//editUser={id,name, birthday, country, phone, phoneCode, gender, dniPasaport, status, rol, photoUser, listWish}
 export function updateUser(userData) {
   return async function (dispatch) {
     try {

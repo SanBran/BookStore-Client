@@ -311,7 +311,7 @@ const reducer = (state = initialState, { type, payload }) => {
     case SHOW_LISTWISH:
       return {
         ...state,
-        showListwish: !payload,
+        showListwish: payload,
       };
     default:
       return { ...state };

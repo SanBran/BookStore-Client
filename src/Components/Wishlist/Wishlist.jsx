@@ -1,10 +1,14 @@
 //import React from 'react'
+
 import Book from "../CardBook/Book";
 import styles from "./Wishlist.module.css";
 
 
-function Wishlist({listWish2}) {
-  const listWish= [{
+
+
+function Wishlist() {
+
+  const listWish2= [{
     "id": "6608837f-2e33-4089-aafe-d72fb77b9923",
     "title": "Abeloff. Oncología clínica",
     "author": "John E. Niederhuber, James O. Armitage, James H Doroshow, Michael B. Kastan, Joel E. Tepper",
@@ -70,10 +74,11 @@ function Wishlist({listWish2}) {
     "payId": null,
     "comments": []
   },];
+    
   return (
     <div className={styles.booksContainer}>
       <h2 className={styles.title}>Wishlist</h2>
-      {listWish?.map((book) => (
+      {listWish2?.map((book) => (
         <Book key={book.id} books={book} />
       ))}
     </div>
