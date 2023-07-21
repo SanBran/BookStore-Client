@@ -1,27 +1,46 @@
 .container{
+    position: absolute;
     z-index: 10;
     height:90px;
     top: 0;
     left: 0;
-    padding-left: 50px;
-    padding-right: 50px;
+    
     display: flex;
     align-items: center;
     justify-content:space-between;
-    gap: 80px;
     width: 95vw;
+    gap: 30px;
 }
+
 
 .logo{
     color: #FA9D1B;
     margin: 0;
     font-size:3rem;
+    padding-left: 5vw;
+}
+
+.profile{
+    height: 50px;
+    cursor: pointer;
 }
 
 
-@media (max-width: 550px) {
+@media (max-width: 1020px) {
     .logo{
         font-size:2rem;
+    }
+  
+    
+  }
+
+@media (max-width: 400px) {
+    .logo{
+        font-size:1.5rem;
+    }
+
+    .profile{
+        height: 30px;
     }
   
     

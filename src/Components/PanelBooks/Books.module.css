@@ -20,3 +20,17 @@
     text-align: start;
     width: 100%;
  }
+
+ @media (max-width: 770px) {
+    .title{
+        font-size:2rem;
+    }
+
+    .booksContainer {
+        position: relative;
+        top: 80px;
+     
+     }
+  
+    
+  }

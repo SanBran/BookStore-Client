@@ -4,12 +4,11 @@ import Book from '../CardBook/Book';
 import styles from './Books.module.css'
 
 const Books= ({allBooks})=>{
-//console.log(allBooks);
 return(
   
     <div className={styles.booksContainer}>
       <h2 className={styles.title}>New Arrivals</h2>
-      {allBooks?.books?.map(books=> <Book key={books.id} books={books}/>)}
+      {allBooks?.map(books=> <Book key={books.id} books={books}/>)}
     </div>
 
     

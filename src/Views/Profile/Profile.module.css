@@ -6,18 +6,27 @@
 .overlay {
     position: fixed;
     top: 0;
-    left: 0;
+    right: 0;
     width: 20%; /* Abarca un 20% de la pantalla */
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente para el overlay */
     z-index: 9999; /* Asegura que el overlay esté en la parte superior */
     transition: transform 0.3s ease;
   }
+
+  .close {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 78%; /* Abarca un 20% de la pantalla */
+    height: 100%;
+    z-index: 9999;
+  }
   
   .overlayContent {
     position: fixed;
     top: 0;
-    left: 0;
+    right: 0;
     width: 20%; /* Abarca un 20% de la pantalla */
     height: 100%;
     background-color: #fff; /* Color de fondo del contenido del overlay */
