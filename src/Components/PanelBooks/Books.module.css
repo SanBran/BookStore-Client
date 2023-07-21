@@ -15,11 +15,7 @@
      
  
  }
- .title{
-    color: #FA9D1B;
-    text-align: start;
-    width: 100%;
- }
+ 
 
  @media (max-width: 770px) {
     .title{

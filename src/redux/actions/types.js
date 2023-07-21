@@ -1,7 +1,7 @@
-// datos de los libros 
+// datos de los libros
 // title,author,country,language,image,gender,sinopsis
 //price,publishedDate,pdfLink,editorial,numPages
-export const GET_ALL_BOOKS = 'GET_ALL_BOOKS';
+export const GET_ALL_BOOKS = "GET_ALL_BOOKS";
 export const GET_BOOK_BY_AUTHOR = "GET_BOOK_BY_AUTHOR";
 export const GET_BOOK_BY_ID = "GET_BOOK_BY_ID";
 export const GET_BOOKS_BY_TITLE = "GET_BOOK_BY_TITLE";
@@ -26,7 +26,7 @@ export const POST_EMAIL = "POST_EMAIL";
 
 //FILTER
 export const FILTER_BY_GENRER = "FILTER_BY_GENRER";
-export const FILTER_BY_AUTHOR_NAME = "FILTER_BY_AUTHOR_NAME";// temporary is used by the searchBar
+export const FILTER_BY_AUTHOR_NAME = "FILTER_BY_AUTHOR_NAME"; // temporary is used by the searchBar
 export const FILTER_BY_TITLE = "FILTER_BY_TITLE";
 export const FILTER_BY_LANGUAJE = "FILTER_BY_LANGUAJE";
 export const FILTER_BY_PUBLISHED_DATE = "FILTER_BY_PUBLISHED_DATE";
@@ -43,7 +43,7 @@ export const GET_COMMENTS = "GET_COMMENTS";
 export const UPDATE_COMMENT_BY_ID = "UPDATE_COMMENT_BY_ID";
 export const DELETE_COMMENT_BY_ID = "DELETE_COMMENT_BY_ID";
 
-//USERS 
+//USERS
 export const OVERLAY_PROFILE = "OVERLAY_PROFILE";
 export const SHOW_LISTWISH = "SHOW_LISTWISH";
 

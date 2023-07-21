@@ -117,13 +117,14 @@ export function getBooksByAuthor(author) {
 export function getBooksByTitle(title) {
   return async function (dispatch) {
     try {
-      //console.log(title);
+      console.log(title);
       const response = await axios.post(
-        `http://localhost:8000/getBooks?title=${title}`
+        `http://localhost:8000/getBooks`,
+        title
       );
       return dispatch({
         type: GET_BOOKS_BY_TITLE,
-        payload: response.data,
+        payload: response.data.books,
       });
     } catch (error) {
       throw Error(error.message);

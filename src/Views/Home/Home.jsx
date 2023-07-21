@@ -20,7 +20,7 @@ const Home = () => {
       <div>
         <Slide books={allBooks} />
       </div>
-
+      <h2 className={styles.title}>New Arrivals</h2>
       <div>
         {showListWishlist ? <Wishlist /> : <Books allBooks={allBooks} />}
       </div>

@@ -9,6 +9,7 @@ import Wishlist from "./Components/Wishlist/Wishlist";
 import History from "./Components/History/History";
 import Settings from "./Views/Settings/Settings";
 import Filters from "./Components/Filters/Filters";
+import Results from "./Views/Results/Results";
 import { useSelector } from "react-redux";
 
 
@@ -42,6 +43,8 @@ function App() {
         <Route path="/settings" element={<Settings />} />
 
         <Route path="/Filters" element={<Filters />} />
+
+        <Route path="/Results" element={<Results />} />
         
       </Routes>
       </div>
