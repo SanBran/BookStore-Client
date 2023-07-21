@@ -1,0 +1,17 @@
+.title{
+    position: relative;
+    color: #FA9D1B;
+    padding-left: 5vw;
+    text-align: start;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .title {
+        top: 10vh;
+        text-align: center;
+    }
+  
+    
+  }
+

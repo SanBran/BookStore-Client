@@ -7,7 +7,7 @@ const Books= ({allBooks})=>{
 return(
   
     <div className={styles.booksContainer}>
-      <h2 className={styles.title}>New Arrivals</h2>
+      
       {allBooks?.map(books=> <Book key={books.id} books={books}/>)}
     </div>
 
