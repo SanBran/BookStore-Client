@@ -1,43 +1,47 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import countriesData from "./data/countries.json";
+import { postUser } from "../../redux/actions/actions";
 
 import style from './Signup.module.css';
 
 const SignUp = () => {
+  const dispatch = useDispatch();
+
   const [errors, setErrors] = useState({
-    fullname: "",
+    name: "",
     email: "",
     password: "",
     confirmPassword: "",
     dniPassport: "",
-    codePhone: "",
-    phoneNumber: "",
+    phoneCode: "",
+    phone: "",
     country: "",
-    dateOfBirth: "",
+    birthday: "",
   })
 
   const [signUpInfo, setSignUpInfo] = useState({
-    fullname: "",
+    name: "",
     email: "",
     password: "",
     confirmPassword: "",
     dniPassport: "",
-    codePhone: "",
-    phoneNumber: "",
+    phoneCode: "",
+    phone: "",
     country: "",
-    dateOfBirth: "",
+    birthday: "",
     gender: "",
   });
 
 //-----------VALIDACIONES DEL FORMULARIO
   const expresions = {
-    fullname: /^[a-zA-Z]+( [a-zA-Z]+)+$/,
+    name: /^[a-zA-Z]+( [a-zA-Z]+)+$/,
     email: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
     password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&#.])[A-Za-z\d$@$!%*?&#.]{8,15}$/, //contrasena debe tener entre 8-15 caract., minus, mayus, num y caract especial [$@$!%*?&#.] cualquier a de los que estan dentro de los corchetes
-    codePhone: /^(?:\+)?[1-9]{1,3}$/,
-    phoneNumber: /^[0-9]{6,15}$/,
-    dateOfBirth: /^(?:19[5-9]\d|20[0-1]\d)(\/|-)(0[1-9]|1[0-2])(\/|-)([0-2][0-9]|3[0-1])$/
+    phoneCode: /^(?:\+)?[1-9]{1,3}$/,
+    phone: /^[0-9]{6,15}$/,
+    birthday: /^(?:19[5-9]\d|20[0-1]\d)(\/|-)(0[1-9]|1[0-2])(\/|-)([0-2][0-9]|3[0-1])$/
   }
   const validateInputs = (state, property)=>{
     switch(property){
@@ -62,32 +66,32 @@ const SignUp = () => {
 
     if(!expresions[property].test(state[property])){
       switch(property){
-        case 'fullname': setErrors({...errors, [property]: 'Invalid name'})
+        case 'name': setErrors({...errors, [property]: 'Invalid name'})
         break;
         case 'email': setErrors({...errors, [property]: 'Invalid email'})
         break;
         case 'password': setErrors({...errors, [property]: 'Password must be between 8-15 characters, lowercase, uppercase, numbers and special character'})
         break;
-        case 'codePhone': setErrors({...errors, [property]: 'Invalid code'})
+        case 'phoneCode': setErrors({...errors, [property]: 'Invalid code'})
         break;
-        case 'phoneNumber': setErrors({...errors, [property]: 'Invalid phone number'})
+        case 'phone': setErrors({...errors, [property]: 'Invalid phone number'})
         break;
-        case 'dateOfBirth': setErrors({...errors, [property]: 'Invalid date'})
+        case 'birthday': setErrors({...errors, [property]: 'Invalid date'})
         break;
       }
     } else{
       switch(property){
-        case 'fullname': setErrors({...errors, [property]: ''})          
+        case 'name': setErrors({...errors, [property]: ''})          
         break;
         case 'email': setErrors({...errors, [property]: ''})          
         break;
         case 'password': setErrors({...errors, [property]: ''})          
         break;
-        case 'codePhone': setErrors({...errors, [property]: ''})         
+        case 'phoneCode': setErrors({...errors, [property]: ''})         
         break;
-        case 'phoneNumber': setErrors({...errors, [property]: ''})          
+        case 'phone': setErrors({...errors, [property]: ''})          
         break;
-        case 'dateOfBirth': setErrors({...errors, [property]: ''})         
+        case 'birthday': setErrors({...errors, [property]: ''})         
         break;
       }
     }
@@ -99,7 +103,7 @@ const SignUp = () => {
     const property = event.target.name;
     const value= event.target.value;
 
-    if(property==='codePhone'){
+    if(property==='phoneCode'){
 //----Esto es solo para el input de codigo de telefono
       if (!value.startsWith('+') && value.trim() !== '') setSignUpInfo({...signUpInfo, [property]: '+' + value});
       else setSignUpInfo({...signUpInfo, [property]: value});
@@ -130,9 +134,26 @@ const SignUp = () => {
     return true
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault();
-    console.log(validateSubmit());
+    validateSubmit();
+    if(validateSubmit()){
+      console.log('entro a crear usuario');
+      await dispatch(postUser(signUpInfo))
+      console.log('se debio haber creado');
+      setSignUpInfo({
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        dniPassport: "",
+        phoneCode: "",
+        phone: "",
+        country: "",
+        birthday: "",
+        gender: "",
+      })
+    }
   };
 
 
@@ -140,15 +161,15 @@ const SignUp = () => {
     <form className={style.formContainer} onSubmit={handleSubmit}>
       <div className={style.inputsContainer}>
         <input 
-          className={errors.fullname.length ? (`${style.input} ${style.error}`): style.input}
-          name="fullname"
+          className={errors.name.length ? (`${style.input} ${style.error}`): style.input}
+          name="name"
           onChange={handleSignUpChanges}
-          value={signUpInfo.fullname}
+          value={signUpInfo.name}
           type="text"
           placeholder="Full name"
           required
         />
-        {errors.fullname.length ? <p className={style.textError}>{errors.fullname}</p> : <></>}
+        {errors.name.length ? <p className={style.textError}>{errors.name}</p> : <></>}
 
         <input
         className={errors.email.length ? (`${style.input} ${style.error}`): style.input}
@@ -196,26 +217,26 @@ const SignUp = () => {
 
         <div className={style.phoneInputs}>
           <input
-          className={errors.codePhone.length ? (`${style.input} ${style.codeInput} ${style.error}`): (`${style.input} ${style.codeInput}`)}
-          name="codePhone"
+          className={errors.phoneCode.length ? (`${style.input} ${style.codeInput} ${style.error}`): (`${style.input} ${style.codeInput}`)}
+          name="phoneCode"
           onChange={handleSignUpChanges}
-          value={signUpInfo.codePhone}
+          value={signUpInfo.phoneCode}
           type='text'
           placeholder="+00"
           required
           />
           <input
-          className={errors.phoneNumber.length ? (`${style.input} ${style.phoneInput} ${style.error}`): (`${style.input} ${style.phoneInput}`)}
-          name="phoneNumber"
+          className={errors.phone.length ? (`${style.input} ${style.phoneInput} ${style.error}`): (`${style.input} ${style.phoneInput}`)}
+          name="phone"
           onChange={handleSignUpChanges}
-          value={signUpInfo.phoneNumber}
+          value={signUpInfo.phone}
           type="telephone"
           placeholder="Phone number"
           required
           />
         </div>
-        {errors.codePhone.length ? <p className={style.textError}>{errors.codePhone}</p> : <></>}
-        {errors.phoneNumber.length ? <p className={style.textError}>{errors.phoneNumber}</p> : <></>}
+        {errors.phoneCode.length ? <p className={style.textError}>{errors.codePhone}</p> : <></>}
+        {errors.phone.length ? <p className={style.textError}>{errors.phoneNumber}</p> : <></>}
 
         <select 
         name="country" 
@@ -232,17 +253,17 @@ const SignUp = () => {
         <div className={style.dateContainer}> 
           <label className={style.dateLabel} htmlFor="date">Date of birth</label>
           <input 
-          className={errors.dateOfBirth.length ? (`${style.input} ${style.dateInput} ${style.error}`): (`${style.input} ${style.dateInput}`)}
+          className={errors.birthday.length ? (`${style.input} ${style.dateInput} ${style.error}`): (`${style.input} ${style.dateInput}`)}
           id="date"
-          name="dateOfBirth"
+          name="birthday"
           onChange={handleSignUpChanges}
-          value={signUpInfo.dateOfBirth}
+          value={signUpInfo.birthday}
           type="date"
           min="1950/01/01"
           max="2023/07/15"
           />
         </div>
-        {errors.dateOfBirth.length ? <p className={style.textError}>{errors.dateOfBirth}</p> : <></>}
+        {errors.birthday.length ? <p className={style.textError}>{errors.dateOfBirth}</p> : <></>}
 
         <select 
         name="gender"
