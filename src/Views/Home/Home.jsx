@@ -16,7 +16,7 @@ const Home = () => {
     dispatch(getAllBooks());
     return console.log("Desmontado!!");
   }, [dispatch]);
-
+//console.log(allBooks);
   return (
     <div className={styles.container}>
       <div>

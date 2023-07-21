@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getBooksByTitle } from "../../redux/actions/actions";
+//import FilterAuthor from "../Filter/FilterAuthor";
 const SearchBar = () => {
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
@@ -18,6 +19,7 @@ const SearchBar = () => {
         placeholder="Search the book that you want"
         onChange={handleSearch}
       />
+    
     </nav>
   );
 };

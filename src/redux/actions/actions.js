@@ -23,7 +23,7 @@ export function getByGenrer(gender) {
     return async function (dispatch) {
         try {
             //console.log(gender);
-            const response = await axios.get(`http://localhost:8000/getBooks?gender=${gender}`);
+            const response = await axios.post(`http://localhost:8000/getBooks?gender=${gender}`);
             return dispatch({
                 type: FILTER_BY_GENRER,
                 payload: response.data
@@ -37,7 +37,7 @@ export function getByLanguaje(languaje) {
     return async function (dispatch) {
         try {
             //console.log(languaje);
-            const response = await axios.get(`http://localhost:8000/getBooks?languaje=${languaje}`);
+            const response = await axios.post(`http://localhost:8000/getBooks?languaje=${languaje}`);
             return dispatch({
                 type: FILTER_BY_LANGUAJE,
                 payload: response.data
@@ -51,7 +51,7 @@ export function getByPublishedDate(publishedDate) {
     return async function (dispatch) {
         try {
             //console.log(publishedDate);
-            const response = await axios.get(`http://localhost:8000/getBooks?publishedDate=${publishedDate}`);
+            const response = await axios.post(`http://localhost:8000/getBooks?publishedDate=${publishedDate}`);
             return dispatch({
                 type: FILTER_BY_PUBLISHED_DATE,
                 payload: response.data
@@ -65,7 +65,7 @@ export function getBooksByAuthor(author) {
     return async function (dispatch) {
         try {
             //console.log(author);
-            const response = await axios.get(`http://localhost:8000/getBooks?author=${author}`);
+            const response = await axios.post(`http://localhost:8000/getBooks?author=${author}`);
             return dispatch({
                 type: GET_BOOK_BY_AUTHOR,
                 payload: response.data
@@ -79,7 +79,7 @@ export function getBooksByTitle(title) {
     return async function (dispatch) {
         try {
             //console.log(title);
-            const response = await axios.get(`http://localhost:8000/getBooks?title=${title}`);
+            const response = await axios.post(`http://localhost:8000/getBooks?title=${title}`);
             return dispatch({
                 type: GET_BOOKS_BY_TITLE,
                 payload: response.data
@@ -94,7 +94,7 @@ export function getBooksById(id) {
     return async function (dispatch) {
         try {
             //console.log(title);
-            const response = await axios.get(`http://localhost:8000/getBooks/bookDetail/${id}`);
+            const response = await axios.post(`http://localhost:8000/getBooks/bookDetail/${id}`);
             return dispatch({
                 type: GET_BOOK_BY_ID,
                 payload: response.data
