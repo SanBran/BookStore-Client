@@ -40,6 +40,7 @@ import {
   FILTER_BY_NUM_PAGES,
   FILTER_BY_PUBLISHED_DATE,
   FILTER_BY_COUNTRY,
+  ACTIVATE_USER,
 } from "./types";
 
 //Y aquí irán los action en sí :)
@@ -535,6 +536,22 @@ export function postUser(userData) {
       throw Error(error.message);
     }
   };
+}
+export function activateUser(dataToken){
+  return async function(dispatch){
+    try{
+      const response = await axios.post(`http://localhost:8000/activateUser/`,
+      dataToken)
+      return dispatch({
+        type: ACTIVATE_USER,
+        payload: response.data
+      })
+    } 
+    catch(error){
+      console.log(error);
+      throw Error(error.message)
+    }
+  }
 }
 //editUser={id,name, birthday, country, phone, phoneCode, gender, dniPasaport, status, rol, photoUser, listWish}
 export function updateUser(userData) {
