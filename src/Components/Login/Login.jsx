@@ -37,7 +37,7 @@ const Login = () => {
     }
   }
 
-  return (
+  return ( 
     <form className={style.fromContainer} >
       <div className={style.inputsContainer}>
           <input className={style.input} type='text' placeholder='Email address' name='email' value={logInfo.username} onChange={handleLoginChanges} />
