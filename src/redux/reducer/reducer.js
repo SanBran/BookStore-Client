@@ -16,6 +16,7 @@ import {
   FILTER_BY_GENRER,
   FILTER_BY_LANGUAJE,
   FILTER_BY_PUBLISHED_DATE,
+  SELECT_PAGE,
   ORDER_BY_PRICE,
   ORDER_BY_PUBLISHED_DATE,
   ORDER_BY_TITLE,
@@ -119,6 +120,13 @@ const reducer = (state = initialState, { type, payload }) => {
         };
       return {
         ...state,
+        allBooksCopy: payload,
+      };
+    //----------------------------PAGINATION-------------------
+    case SELECT_PAGE:
+      return {
+        ...state,
+        allBooks: payload,
         allBooksCopy: payload,
       };
     //----------------------------ORDER-------------------

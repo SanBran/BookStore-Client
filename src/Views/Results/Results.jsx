@@ -7,7 +7,6 @@ import styles from './Results.module.css'
 // import styles from "./Home.module.css";
 
 function Results() {
-    console.log("entrando");
     const dispatch = useDispatch();
 
     useEffect( () => {

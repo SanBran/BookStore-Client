@@ -3,12 +3,14 @@
 import Book from '../CardBook/Book';
 import styles from './Books.module.css'
 
-const Books= ({allBooks})=>{
+const Books= ({currentBooks})=>{
+
+  console.log(currentBooks);
 return(
   
     <div className={styles.booksContainer}>
       
-      {allBooks?.map(books=> <Book key={books.id} books={books}/>)}
+      {currentBooks?.map(books=> <Book key={books.id} books={books}/>)}
     </div>
 
     
