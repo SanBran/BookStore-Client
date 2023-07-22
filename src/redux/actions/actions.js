@@ -19,6 +19,7 @@ import {
   FILTER_BY_GENRER,
   FILTER_BY_LANGUAJE,
   FILTER_BY_PUBLISHED_DATE,
+  SELECT_PAGE,
   ORDER_BY_PRICE,
   ORDER_BY_PUBLISHED_DATE,
   ORDER_BY_TITLE,
@@ -187,6 +188,22 @@ export function deleteBooksById(id) {
       );
       return dispatch({
         type: DELETE_BOOK_BY_ID,
+        payload: response.data,
+      });
+    } catch (error) {
+      throw Error(error.message);
+    }
+  };
+}
+//--------------------PAGINATION--------------------
+export function selectPage(page) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.post(
+        `http://localhost:8000/getBooks?page=${page}`
+      );
+      return dispatch({
+        type: SELECT_PAGE,
         payload: response.data,
       });
     } catch (error) {
