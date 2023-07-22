@@ -37,7 +37,7 @@ const Access = () => {
                 <div className={form === 'login' ? style.loginContainer : style.singupContainer}>
                     {form === 'login'
                     ?(<Login />)
-                    :(<SignUp />)
+                    :(<SignUp setForm={setForm}/>)
                     }
                 </div>
             </div>

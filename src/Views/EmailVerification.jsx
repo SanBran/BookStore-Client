@@ -10,7 +10,6 @@ const EmailVerification = ()=>{
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const urlParams = new URLSearchParams(window.location.search);
-    const [validate, setValidate] = useState(false)
     
     
     // Obtenemos el valor de la variable 'valtoken'
@@ -24,29 +23,25 @@ const EmailVerification = ()=>{
     }
 
     useEffect(()=>{
-        //console.log(user);
-        return async()=>{
+        //console.log(userToken);
+        const validate =async()=>{
             try {
                 const response = await axios.post(`http://localhost:8000/activateUser/`,
                 userToken)
                 console.log('val:,', response);
                 //dispatch(activateUser(token))
-                setValidate(true)
+                navigate('/?true')
                 
             } catch (error) {
                 //console.log('email ya esta activado previamente');
-
+    
                 //la respuesta del error me viene en error.response.data.text
-                console.log(error.response.data.text);
+                console.log(error.response.data);
+                console.log('no se puse validar');
             }
-            
         }
-        
+        validate()
     },[])
-    console.log(validate);
-
-    validate && navigate('/?true')
-    !validate && alert('No se pudo validar')
 }
 
 export default EmailVerification;
