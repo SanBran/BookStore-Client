@@ -55,6 +55,8 @@ export const GET_USER_BY_ID = "GET_USER_BY_ID";
 export const POST_USER = "POST_USER";
 export const UPDATE_USER = "UPDATE_USER";
 
+export const ACTIVATE_USER = "ACTIVATE_USER";
+
 
 //BACKEND FILTERS
 export const FILTER_BY_PRICE = "FILTER_BY_PRICE";

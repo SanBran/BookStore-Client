@@ -10,6 +10,9 @@ import History from "./Components/History/History";
 import Settings from "./Views/Settings/Settings";
 import Filters from "./Components/Filters/Filters";
 import Results from "./Views/Results/Results";
+
+import EmailVerification from "./Views/EmailVerification";
+
 import { useSelector } from "react-redux";
 
 
@@ -45,6 +48,8 @@ function App() {
         <Route path="/Filters" element={<Filters />} />
 
         <Route path="/Results" element={<Results />} />
+
+        <Route path="/access/validate" element={<EmailVerification />} />
         
       </Routes>
       </div>
