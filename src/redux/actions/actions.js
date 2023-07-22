@@ -18,7 +18,6 @@ import {
   POST_SMS_WHATSAPP,
   FILTER_BY_GENRER,
   FILTER_BY_LANGUAJE,
-  FILTER_BY_PUBLISHED_DATE,
   SELECT_PAGE,
   ORDER_BY_PRICE,
   ORDER_BY_PUBLISHED_DATE,
@@ -33,6 +32,14 @@ import {
   UPDATE_USER,
   OVERLAY_PROFILE,
   SHOW_LISTWISH,
+  FILTER_BY_PRICE,
+  FILTER_BY_AUTHOR,
+  FILTER_BY_GENDER,
+  FILTER_BY_LANGUAGE,
+  FILTER_BY_EDITORIAL,
+  FILTER_BY_NUM_PAGES,
+  FILTER_BY_PUBLISHED_DATE,
+  FILTER_BY_COUNTRY,
 } from "./types";
 
 //Y aquí irán los action en sí :)
@@ -131,6 +138,61 @@ export function getBooksByTitle(title) {
       throw Error(error.message);
     }
   };
+}
+export function FilterByGender(gender) {
+    console.log('soy el action',gender)
+  return {       
+  type:FILTER_BY_GENDER,
+  payload: gender
+  }
+}
+
+export function FilterByAuthor(author) {
+  return {       
+  type: FILTER_BY_AUTHOR,
+  payload: author
+  }
+}
+
+export function FilterByPrice(price) {
+  return {       
+  type:  FILTER_BY_PRICE,
+  payload: price
+  }
+}
+
+export function FilterByEditorial(Editorial) {
+  return {       
+  type:FILTER_BY_EDITORIAL,
+  payload: Editorial
+  }
+}
+
+export function FilterByLanguage(language) {
+  return {       
+  type:  FILTER_BY_LANGUAGE,
+  payload: language
+  }
+}
+export function FilterByPages(pages) {
+  return {       
+  type:FILTER_BY_NUM_PAGES,
+  payload: pages
+  }
+}
+
+export function FilterByPublishedDate(publishedDate) {
+  return {       
+  type:  FILTER_BY_PUBLISHED_DATE,
+  payload: publishedDate
+  }
+}
+
+export function FilterByCountry(country) {
+  return {       
+  type:FILTER_BY_COUNTRY,
+  payload: country
+  }
 }
 //----------------------------------------------------------------
 export function getBooksById(id) {
