@@ -1,7 +1,7 @@
-// datos de los libros 
+// datos de los libros
 // title,author,country,language,image,gender,sinopsis
 //price,publishedDate,pdfLink,editorial,numPages
-export const GET_ALL_BOOKS = 'GET_ALL_BOOKS';
+export const GET_ALL_BOOKS = "GET_ALL_BOOKS";
 export const GET_BOOK_BY_AUTHOR = "GET_BOOK_BY_AUTHOR";
 export const GET_BOOK_BY_ID = "GET_BOOK_BY_ID";
 export const GET_BOOKS_BY_TITLE = "GET_BOOK_BY_TITLE";
@@ -26,10 +26,13 @@ export const POST_EMAIL = "POST_EMAIL";
 
 //FILTER
 export const FILTER_BY_GENRER = "FILTER_BY_GENRER";
-export const FILTER_BY_AUTHOR_NAME = "FILTER_BY_AUTHOR_NAME";// temporary is used by the searchBar
+export const FILTER_BY_AUTHOR_NAME = "FILTER_BY_AUTHOR_NAME"; // temporary is used by the searchBar
 export const FILTER_BY_TITLE = "FILTER_BY_TITLE";
 export const FILTER_BY_LANGUAJE = "FILTER_BY_LANGUAJE";
-export const FILTER_BY_PUBLISHED_DATE = "FILTER_BY_PUBLISHED_DATE";
+//export const FILTER_BY_PUBLISHED_DATE = "FILTER_BY_PUBLISHED_DATE";
+
+//PAGINATION
+export const SELECT_PAGE = "SELECT_PAGE";
 
 //ORDER
 export const ORDER_BY_PRICE = "ORDER_BY_PRICE";
@@ -43,10 +46,23 @@ export const GET_COMMENTS = "GET_COMMENTS";
 export const UPDATE_COMMENT_BY_ID = "UPDATE_COMMENT_BY_ID";
 export const DELETE_COMMENT_BY_ID = "DELETE_COMMENT_BY_ID";
 
-//USERS 
+//USERS
 export const OVERLAY_PROFILE = "OVERLAY_PROFILE";
+export const SHOW_LISTWISH = "SHOW_LISTWISH";
 
 export const GET_USERS = "GET_USER";
 export const GET_USER_BY_ID = "GET_USER_BY_ID";
 export const POST_USER = "POST_USER";
 export const UPDATE_USER = "UPDATE_USER";
+
+
+//BACKEND FILTERS
+export const FILTER_BY_PRICE = "FILTER_BY_PRICE";
+export const FILTER_BY_AUTHOR = "FILTER_BY_AUTHOR";
+export const FILTER_BY_GENDER = "FILTER_BY_GENDER";
+export const FILTER_BY_LANGUAGE = "FILTER_BY_LANGUAGE";
+export const FILTER_BY_EDITORIAL = "FILTER_BY_EDITORIAL";
+export const FILTER_BY_NUM_PAGES = "FILTER_BY_NUM_PAGES";
+export const FILTER_BY_PUBLISHED_DATE = "FILTER_BY_PUBLISHED_DATE";
+export const FILTER_BY_COUNTRY = "FILTER_BY_COUNTRY";
+

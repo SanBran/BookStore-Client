@@ -18,7 +18,7 @@
     width: 95%;
     height: 30px;
     padding-left: 20px;
-    margin-bottom: 10px;
+    margin-top: 10px;
 
     font-size: 16px;
     font-weight: 100;
@@ -27,18 +27,11 @@
 
     background-color: #F5F5F5;
 }
+.error{
+    border: 1px solid red !important;
+}
 .select{
-    width: 100%;
-    height: 30px;
-    padding-left: 20px;
-    margin-bottom: 10px;
-
-    font-size: 16px;
-    font-weight: 100;
-    
-    border: 1px solid #B6B6B6;
-
-    background-color: #F5F5F5;
+    width: 100% !important;
 }
 /* -------Estilos para los inputs de phone number */
 .phoneInputs{
@@ -49,37 +42,17 @@
     padding: 0;
 }
 .codeInput{
-    width: 15%;
-    height: 30px;
-    padding-left: 20px;
-    margin-bottom: 10px;
-
-    font-size: 16px;
-    font-weight: 100;
-    
-    border: 1px solid #B6B6B6;
-    border-right: none;
-
-    background-color: #F5F5F5;
+    width: 15% !important;
 }
 .phoneInput{
-    width: 85%;
-    height: 30px;
-    padding-left: 20px;
-    margin-bottom: 10px;
-
-    font-size: 16px;
-    font-weight: 100;
-    
-    border: 1px solid #B6B6B6;
-
-    background-color: #F5F5F5;
+    width: 85% !important;
 }
 /* --------Estilos date input */
 .dateContainer{
     width: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
     margin: 0;
     padding: 0;
 }
@@ -87,19 +60,11 @@
     width: 30%;
     display: flex;
     font-size: 16px;
+    margin-top: 10px;
+
 }
 .dateInput{
-    width: 70%;
-    height: 30px;
-    padding-left: 20px;
-    margin-bottom: 10px;
-
-    font-size: 16px;
-    font-weight: 100;
-    
-    border: 1px solid #B6B6B6;
-
-    background-color: #F5F5F5;
+    width: 70% !important;
 }
 
 /* -------Estilos boton Sing Up */
@@ -132,4 +97,15 @@
 }
 .singUpBtn:focus-visible, .singUpBtn:focus{
     outline: 0;
+}
+
+
+/* --------Estilo para el texto de errores */
+.textError{
+    width: 100%;
+    margin: 0;
+    text-align: start;
+    color: rgb(241, 57, 57);
+    font-size: 12px;
+    
 }

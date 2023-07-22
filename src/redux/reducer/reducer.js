@@ -1,4 +1,44 @@
-import { GET_ALL_BOOKS, DETAIL_BOOK_BY_ID, BOOK_BY_NAME, GET_BOOK_BY_AUTHOR, GET_BOOK_BY_ID, GET_BOOKS_BY_TITLE, POST_BOOK, UPDATE_BOOK_BY_ID, DELETE_BOOK_BY_ID, GET_FAILURE, GET_PENDING, GET_SUCCESS, POST_MERCADOPAGO, POST_WEBHOOK_PAGO, POST_EMAIL, POST_SMS_WHATSAPP, FILTER_BY_GENRER, FILTER_BY_LANGUAJE, FILTER_BY_PUBLISHED_DATE, ORDER_BY_PRICE, ORDER_BY_PUBLISHED_DATE, ORDER_BY_TITLE, GET_COMMENTS, POST_COMMENT, UPDATE_COMMENT_BY_ID, DELETE_COMMENT_BY_ID, GET_USERS, GET_USER_BY_ID, POST_USER, UPDATE_USER, OVERLAY_PROFILE } from "../actions/types";
+import {
+  GET_ALL_BOOKS,
+  GET_BOOK_BY_AUTHOR,
+  GET_BOOK_BY_ID,
+  GET_BOOKS_BY_TITLE,
+  POST_BOOK,
+  UPDATE_BOOK_BY_ID,
+  DELETE_BOOK_BY_ID,
+  GET_FAILURE,
+  GET_PENDING,
+  GET_SUCCESS,
+  POST_MERCADOPAGO,
+  POST_WEBHOOK_PAGO,
+  POST_EMAIL,
+  POST_SMS_WHATSAPP,
+  FILTER_BY_GENRER,
+  FILTER_BY_LANGUAJE,
+  SELECT_PAGE,
+  ORDER_BY_PRICE,
+  ORDER_BY_PUBLISHED_DATE,
+  ORDER_BY_TITLE,
+  GET_COMMENTS,
+  POST_COMMENT,
+  UPDATE_COMMENT_BY_ID,
+  DELETE_COMMENT_BY_ID,
+  GET_USERS,
+  GET_USER_BY_ID,
+  POST_USER,
+  UPDATE_USER,
+  OVERLAY_PROFILE,
+  SHOW_LISTWISH,
+  FILTER_BY_PRICE,
+  FILTER_BY_AUTHOR,
+  FILTER_BY_GENDER,
+  FILTER_BY_LANGUAGE,
+  FILTER_BY_EDITORIAL,
+  FILTER_BY_NUM_PAGES,
+  FILTER_BY_PUBLISHED_DATE,
+  FILTER_BY_COUNTRY,
+
+} from "../actions/types";
 
 let initialState = {
 
@@ -15,34 +55,33 @@ let initialState = {
   users: [],
   userDetail: [],
   overlayProfile: false,
+  showListwish: false,
 };
 
 // !Tener el cuenta reducir el reducer en varias partes.
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
-
     //-----------------------------BOOK----------------------------------
     case GET_ALL_BOOKS:
       return {
         ...state,
         allBooks: payload.books,
-        allBooksCopy: payload.books
+        allBooksCopy: payload.books,
       };
     case GET_BOOKS_BY_TITLE:
       return {
         ...state,
-
-        allBooksCopy: payload
+        allBooksCopy: payload,
       };
     case GET_BOOK_BY_AUTHOR:
       return {
         ...state,
-        allBooksCopy: payload
+        allBooksCopy: payload,
       };
     case GET_BOOK_BY_ID:
       return {
         ...state,
-        details: payload
+        details: payload,
       };
     case POST_BOOK:
       return {
@@ -56,50 +95,58 @@ const reducer = (state = initialState, { type, payload }) => {
         allBooks: state.allBooks.map((book) =>
           book.id === payload.id ? payload : book
         ),
-        allBooksCopy: [...state.allBooks]
+        allBooksCopy: [...state.allBooks],
       };
     case DELETE_BOOK_BY_ID:
       return {
         ...state,
         allBooks: state.allBooks.filter((book) => book.id !== payload),
-        allBooksCopy: [...state.allBooks]
+        allBooksCopy: [...state.allBooks],
       };
     //----------------------------FILTERS-------------------
-    case FILTER_BY_GENRER:
-      if (payload === "ALL")
-        return {
-          ...state,
-          allBooksCopy: state.allBooks,
-        };
-      return {
-        ...state,
-        allBooksCopy: payload,
-      };
-    case FILTER_BY_LANGUAJE:
-      if (payload === "ALL")
-        return {
-          ...state,
-          allBooksCopy: payload,
-        };
-      return {
-        ...state,
-        allBooksCopy: payload,
-      };
+    //case FILTER_BY_GENRER:
+    // if (payload === "ALL")
+    // return {
+    // ...state,
+    //allBooksCopy: state.allBooks,
+    // };
+    // return {
+    //  ...state,
+    // allBooksCopy: payload,
+    // };
+    //case FILTER_BY_LANGUAJE:
+    // if (payload === "ALL")
+    //  return {
+    //   ...state,
+    //  allBooksCopy: payload,
+    //};
+    // return {
+    // ...state,
+    // allBooksCopy: payload,
+    //};
 
-    case FILTER_BY_PUBLISHED_DATE:
-      if (payload === "ALL")
-        return {
-          ...state,
-          allBooksCopy: state.allBooks,
-        };
+    //case FILTER_BY_PUBLISHED_DATE:
+    // if (payload === "ALL")
+    //  return {
+    //   ...state,
+    //  allBooksCopy: state.allBooks,
+    //};
+    // return {
+    //  ...state,
+    // allBooksCopy: payload,
+    // };
+    //----------------------------PAGINATION-------------------
+    case SELECT_PAGE:
       return {
         ...state,
+        allBooks: payload,
         allBooksCopy: payload,
       };
     //----------------------------ORDER-------------------
     case ORDER_BY_PRICE: {
       let orderedBookPrice = [...state.allBooksCopy];
-      if (payload === "A") { //ascendente mayor
+      if (payload === "A") {
+        //ascendente mayor
         orderedBookPrice = orderedBookPrice.sort((a, b) => {
           if (a.price > b.price) {
             return 1;
@@ -109,7 +156,8 @@ const reducer = (state = initialState, { type, payload }) => {
           }
           return 0;
         });
-      } else if (payload === "D") { //desendente menor
+      } else if (payload === "D") {
+        //desendente menor
         orderedBookPrice = orderedBookPrice.sort((a, b) => {
           if (a.price > b.price) {
             return -1;
@@ -127,7 +175,8 @@ const reducer = (state = initialState, { type, payload }) => {
     }
     case ORDER_BY_TITLE: {
       let orderedBookName = [...state.allBooksCopy];
-      if (payload === "A") { //ascendente mayor
+      if (payload === "A") {
+        //ascendente mayor
         orderedBookName = orderedBookName.sort((a, b) => {
           if (a.title > b.title) {
             return 1;
@@ -137,7 +186,8 @@ const reducer = (state = initialState, { type, payload }) => {
           }
           return 0;
         });
-      } else if (payload === "D") { //desendente menor
+      } else if (payload === "D") {
+        //desendente menor
         orderedBookName = orderedBookName.sort((a, b) => {
           if (a.title > b.title) {
             return -1;
@@ -154,7 +204,8 @@ const reducer = (state = initialState, { type, payload }) => {
     }
     case ORDER_BY_PUBLISHED_DATE: {
       let orderedBookPublishedDate = [...state.allBooksCopy];
-      if (payload === "A") { //ascendente mayor
+      if (payload === "A") {
+        //ascendente mayor
         orderedBookPublishedDate = orderedBookPublishedDate.sort((a, b) => {
           if (a.publishedDate > b.publishedDate) {
             return 1;
@@ -164,7 +215,8 @@ const reducer = (state = initialState, { type, payload }) => {
           }
           return 0;
         });
-      } else if (payload === "D") { //desendente menor
+      } else if (payload === "D") {
+        //desendente menor
         orderedBookPublishedDate = orderedBookPublishedDate.sort((a, b) => {
           if (a.publishedDate > b.publishedDate) {
             return -1;
@@ -179,6 +231,77 @@ const reducer = (state = initialState, { type, payload }) => {
         allBooksCopy: orderedBookPublishedDate,
       };
     }
+
+
+    //----------------------------BACKEND FILTERS-------------------
+
+    case FILTER_BY_GENDER:
+      if (payload === "") {
+        return {
+          ...state,
+          allBookCopy: state.allBooks,
+        };
+      }
+      return {
+        ...state,
+        allBooksCopy: payload,
+      };
+
+    case FILTER_BY_AUTHOR:
+      if (payload === "") {
+        return {
+          ...state,
+          allBooksCopy: state.allBooks,
+        };
+      }
+      return {
+        ...state,
+        allBookCopy: payload,
+      };
+
+    case FILTER_BY_PRICE:
+      if (payload === "") {
+        return {
+          ...state,
+          allBookCopy: state.allBooks,
+        };
+      }
+      return {
+        ...state,
+        allBooksCopy: payload,
+      }
+
+    case FILTER_BY_LANGUAGE:
+      if (payload === "") {
+        return {
+          ...state,
+          allBooksCopy: state.allBooks,
+        };
+      }
+      return {
+        ...state,
+        allBookCopy: payload,
+      };
+
+    case FILTER_BY_EDITORIAL:
+      if (payload === "") {
+        return {
+          ...state,
+          allBooksCopy: state.allBooks,
+        };
+      }
+      return {
+        ...state,
+        allBookCopy: payload,
+      };
+    case FILTER_BY_PUBLISHED_DATE:
+      if (payload === "") {
+        return {
+          ...state,
+          allBooksCopy: state.allBooks,
+        };
+      }
+      break
 
     //----------------------------mercadoPago----------------
     // revisar mercadoPago no estoy seguro como funciona
@@ -230,7 +353,7 @@ const reducer = (state = initialState, { type, payload }) => {
     case GET_COMMENTS:
       return {
         ...state,
-        comments: payload
+        comments: payload,
       };
     case POST_COMMENT:
       return {
@@ -242,24 +365,23 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         comments: state.comments.map((comment) =>
           comment.id === payload.id ? payload : comment
-        )
+        ),
       };
     case DELETE_COMMENT_BY_ID:
       return {
         ...state,
         comments: state.comments.filter((comment) => comment.id !== payload),
-
       };
     //-----------------------------------------USER--------------------------------
     case GET_USERS:
       return {
         ...state,
-        users: payload.detail
+        users: payload.detail,
       };
     case GET_USER_BY_ID:
       return {
         ...state,
-        userDetail: payload.detail
+        userDetail: payload.detail,
       };
     case POST_USER:
       return {
@@ -271,12 +393,17 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         users: state.users.map((user) =>
           user.id === payload.id ? payload : user
-        )
+        ),
       };
     case OVERLAY_PROFILE:
       return {
         ...state,
-        overlayProfile: !payload
+        overlayProfile: !payload,
+      };
+    case SHOW_LISTWISH:
+      return {
+        ...state,
+        showListwish: payload,
       };
     default:
       return { ...state };

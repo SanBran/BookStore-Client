@@ -7,7 +7,7 @@ function Slide({ books }) {
   
 
   const [actualImage, setActualImage] = useState(0);
-  const maxIndex = 40;
+  const maxIndex = 10;
   const numberOfBooksToShow = 5;
   
   const randomIndices = Array.from({ length: numberOfBooksToShow }, () =>
@@ -15,6 +15,7 @@ function Slide({ books }) {
   );
   
   const [selectBooks, setSelectBooks] = useState([]);
+
   useEffect(() => {
     const randomBooks = randomIndices.map(i => books[i]);
     setSelectBooks(randomBooks);
@@ -52,7 +53,7 @@ function Slide({ books }) {
               </Link>
               <div className={styles.textContainer}>
               <h1 className={styles.title}>{book.title}</h1>
-              <h2 className={styles.author}>{book.author}</h2>
+              <h2 className={styles.author}>{book.author !== 'Author not Available' ? book.author : ''}</h2>
               <StarRating/>
               </div>
               </div>

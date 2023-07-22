@@ -1,27 +1,39 @@
-/* Estilos para el overlay */
+.overlayContainer {
+    position: relative;
+    z-index: 1; /* Asegura que el contenido esté por debajo del overlay */
+  }
+  
 .overlay {
     position: fixed;
     top: 0;
-    left: 0;
-    width: 100%;
+    right: 0;
+    width: 20%; /* Abarca un 20% de la pantalla */
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente para el overlay */
+    z-index: 9999; /* Asegura que el overlay esté en la parte superior */
+    transition: transform 0.3s ease;
+  }
 
-/* Estilos para el contenido del overlay */
-.overlay-content {
-    position: absolute;
+  .close {
+    position: fixed;
+    top: 0;
     left: 0;
-    /* Alineamos el contenido del overlay en el lado izquierdo */
-    top: 50%;
-    /* Lo centramos verticalmente en la pantalla */
-    transform: translateY(-50%);
-    /* Lo movemos hacia arriba un 50% de su altura */
-    background-color: white;
+    width: 78%; /* Abarca un 20% de la pantalla */
+    height: 100%;
+    z-index: 9999;
+  }
+  
+  .overlayContent {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 20%; /* Abarca un 20% de la pantalla */
+    height: 100%;
+    background-color: #fff; /* Color de fondo del contenido del overlay */
     padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-}
+    border-radius: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+ /*  .contentShift {
+ } */

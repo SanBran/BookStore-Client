@@ -1,19 +1,20 @@
 //import React from 'react';
-import { useState } from 'react';
+//import { useState } from 'react';
 import Book from '../CardBook/Book';
 import styles from './Books.module.css'
 
-const Books= ({allBooks})=>{
+const Books= ({currentBooks})=>{
 
+  console.log(currentBooks);
 return(
   
     <div className={styles.booksContainer}>
-    <h2 className={styles.title}>New Arrivals</h2>
-        {allBooks?.map(book=><Book key={book.id} books={book}/>)}
-
+      
+      {currentBooks?.map(books=> <Book key={books.id} books={books}/>)}
     </div>
+
     
-)
+    )
 }
 
 export default Books;

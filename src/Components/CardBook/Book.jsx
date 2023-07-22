@@ -25,7 +25,7 @@ const Book = ({ books }) => {
                 <div className={styles.author}>
                     {author}
                 </div>
-                {price && price ? <div className={styles.price}>{price}</div> : <div className={styles.price}>N/A</div>}
+                {price && price ? <div className={styles.price}>${price}</div> : <div className={styles.price}>Free</div>}
             </div>
         </div>
     )

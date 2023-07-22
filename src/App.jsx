@@ -8,7 +8,10 @@ import Profile from "./Views/Profile/Profile";
 import Wishlist from "./Components/Wishlist/Wishlist";
 import History from "./Components/History/History";
 import Settings from "./Views/Settings/Settings";
+import Filters from "./Components/Filters/Filters";
+import Results from "./Views/Results/Results";
 import { useSelector } from "react-redux";
+
 
 
 function App() {
@@ -17,30 +20,37 @@ function App() {
   return (
     <>
       {showOverlayPerfile && <Profile />}
+      <div className={`main-content ${showOverlayPerfile ? 'contentShift' : ''}`}>
 
-      {location.pathname !== "/profile" && location.pathname !== "/access" ? (
-        <Navbar />
-      ) : (
-        <></>
-      )}
-      <Routes>
-        <Route path="/" element={<Home />} />
+        {location.pathname !== "/profile" && location.pathname !== "/access" ? (
+          <Navbar />
+        ) : (
+          <></>
+        )}
+        <Routes>
+          <Route path="/" element={<Home />} />
 
-        <Route path="/access" element={<Access />} />
+          <Route path="/access" element={<Access />} />
 
-        <Route path="/details:id" element={<BooksDetail />} />
+          <Route path="/details:id" element={<BooksDetail />} />
 
-        <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<Profile />} />
 
-        <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/wishlist" element={<Wishlist />} />
 
-        <Route path="/history" element={<History />} />
+          <Route path="/history" element={<History />} />
 
-        <Route path="/settings" element={<Settings />} />
+          <Route path="/settings" element={<Settings />} />
 
-      </Routes>
+          <Route path="/Filters" element={<Filters />} />
+
+          <Route path="/Results" element={<Results />} />
+
+        </Routes>
+      </div>
     </>
   );
 }
 
 export default App;
+

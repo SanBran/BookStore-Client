@@ -3,6 +3,7 @@ import styles from "./Navbar.module.css";
 import SearchBar from "../SearchBar/SearchBar";
 import { overlayProfile } from "../../redux/actions/actions";
 import { useDispatch, useSelector } from "react-redux";
+import profileLogo from '../../sources/profile-user.png'
 
 
 const Navbar = () => {
@@ -15,8 +16,8 @@ const Navbar = () => {
     console.log(showOverlayPerfile);
   };
   return (
-    <div>
-      <nav>
+    
+      <nav className={styles.container}>
         <div>
           <Link to="/">
             <h1 className={styles.logo}>Book Store</h1>
@@ -25,11 +26,11 @@ const Navbar = () => {
         <div className={styles.search}>
           <SearchBar />
         </div>
-      </nav>
       <div className={styles.profile}>
-        <button onClick={handleOverlayToggle}>Perfil</button>
+        <img className={styles.profile} src={profileLogo} alt="" onClick={handleOverlayToggle} />
       </div>
-    </div>
+      </nav>
+    
   );
 };
 
