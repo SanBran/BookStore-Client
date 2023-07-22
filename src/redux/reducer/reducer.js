@@ -1,4 +1,5 @@
 import {
+  ACTIVATE_USER,
   GET_ALL_BOOKS,
   GET_BOOK_BY_AUTHOR,
   GET_BOOK_BY_ID,
@@ -407,6 +408,11 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         users: [...state.users, payload],
       };
+    case ACTIVATE_USER:
+      return {
+        ...state,
+        users: [...state.users, payload]
+      }
     case UPDATE_USER:
       return {
         ...state,

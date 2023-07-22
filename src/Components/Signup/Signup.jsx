@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import countriesData from "./data/countries.json";
 import { postUser } from "../../redux/actions/actions";
 
 import style from './Signup.module.css';
 
-const SignUp = () => {
+const SignUp = ({setForm}) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [errors, setErrors] = useState({
@@ -153,6 +154,7 @@ const SignUp = () => {
         birthday: "",
         gender: "",
       })
+      setForm('login')
     }
   };
 
