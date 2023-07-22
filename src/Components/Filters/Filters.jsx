@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllBooks,FilterByGender } from "../../redux/actions/actions";
+import { getAllBooks,FilterByGender,FilterByAuthor,FilterByPrice,FilterByEditorial,FilterByLanguage,FilterByPages ,FilterByPublishedDate,FilterByCountry,FilterByPriceRange} from "../../redux/actions/actions";
 import "./Filters.css";
 import Demo from "./Demo";
 import React from "react";
@@ -54,15 +54,19 @@ const Filters = () => {
       priceRange: `${priceMin}-${priceMax}`,
     };
 
-    console.log(sendBody);
+     const filteredBooks = allBooks.filter((book) => {
+    const bookPrice = parseFloat(book.price);
+    return !isNaN(bookPrice) && bookPrice >= priceMin && bookPrice <= priceMax;
+  });
 
-    const response = await axios.post(
-      "http://localhost:8000/getBooks",
-      sendBody
-    );
-    console.log(response.data);
-    setBooks(response.data);
-  };
+
+  if(filteredBooks.length === 0){
+alert("No hay libros en ese rango de precio")
+  }
+   dispatch(FilterByPriceRange(filteredBooks));
+    
+  
+   } 
 
   const handleData = (event) => {
     // event.preventDefault();
@@ -72,7 +76,7 @@ const Filters = () => {
       [name]: value,
     });
 
-    // que paso ?
+    
   };
 
   const handleFilterData = async (event) => {
@@ -83,8 +87,12 @@ const Filters = () => {
       const filteredBooks = allBooks.filter(
         (Book) => Book.gender === data.gender
       );
-      setallBooks(filteredBooks);
-      console.log(filteredBooks);
+     // setallBooks(filteredBooks);
+      dispatch(FilterByGender(filteredBooks));
+     
+
+
+      
     }
 
     if (data.editorial) {
@@ -92,36 +100,35 @@ const Filters = () => {
       const filteredBooks = allBooks.filter(
         (Book) => Book.editorial === data.editorial
       );
-      setallBooks(filteredBooks);
-      console.log(filteredBooks);
+      dispatch(FilterByEditorial(filteredBooks));
     }
     if (data.publishedDate) {
       sendBody.publishedDate = data.publishedDate;
       const filteredBooks = allBooks.filter(
         (Book) => Book.publishedDate === data.publishedDate
       );
-      console.log(filteredBooks);
+      dispatch(FilterByPublishedDate(filteredBooks));
     }
     if (data.country) {
       sendBody.country = data.country;
       const filteredBooks = allBooks.filter(
         (Book) => Book.country === data.country
       );
-      console.log(filteredBooks);
+      dispatch(FilterByCountry(filteredBooks));
     }
     if (data.language) {
       sendBody.language = data.language;
       const filteredBooks = allBooks.filter(
         (Book) => Book.language === data.language
       );
-      console.log(filteredBooks);
+      dispatch(FilterByLanguage(filteredBooks));
     }
     if (data.pages) {
       sendBody.pages = data.pages;
       const filteredBooks = allBooks.filter(
         (Book) => Book.pages === data.pages
       );
-      console.log(filteredBooks);
+      dispatch(FilterByPages(filteredBooks));
     }
 
    
@@ -138,6 +145,7 @@ const Filters = () => {
         price: "",
       });
       }
+      
     return (
       <div class="container-principal">
         <div class="filter">

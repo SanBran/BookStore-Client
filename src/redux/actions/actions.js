@@ -40,6 +40,7 @@ import {
   FILTER_BY_NUM_PAGES,
   FILTER_BY_PUBLISHED_DATE,
   FILTER_BY_COUNTRY,
+  FILTER_BY_PriceRange
   ACTIVATE_USER,
 } from "./types";
 
@@ -140,6 +141,8 @@ export function getBooksByTitle(title) {
     }
   };
 }
+
+// --------------Backend Super Filters ----------------
 export function FilterByGender(gender) {
     console.log('soy el action',gender)
   return {       
@@ -195,6 +198,15 @@ export function FilterByCountry(country) {
   payload: country
   }
 }
+
+export function FilterByPriceRange(PriceRange) {
+  return {       
+  type:FILTER_BY_PriceRange,
+  payload: PriceRange
+  }
+}
+
+
 //----------------------------------------------------------------
 export function getBooksById(id) {
   return async function (dispatch) {

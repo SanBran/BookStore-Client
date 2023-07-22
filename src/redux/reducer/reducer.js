@@ -38,6 +38,7 @@ import {
   FILTER_BY_NUM_PAGES,
   FILTER_BY_PUBLISHED_DATE,
   FILTER_BY_COUNTRY,
+  FILTER_BY_PriceRange
 
 } from "../actions/types";
 
@@ -232,15 +233,16 @@ const reducer = (state = initialState, { type, payload }) => {
 
     //----------------------------BACKEND FILTERS-------------------
 
-    case FILTER_BY_GENDER:
+     case FILTER_BY_GENDER:
       if (payload === "") {
         return {
           ...state,
-          allBookCopy: state.allBooks,
+          allBooksCopy: state.allBooks,
         };
+      } else {
         return {
           ...state,
-          allBooksCopy: action.payload,
+          allBooksCopy: payload,
         };
       }
 
@@ -250,9 +252,10 @@ const reducer = (state = initialState, { type, payload }) => {
           ...state,
           allBooksCopy: state.allBooks,
         };
+      } else {
         return {
           ...state,
-          allBookCopy: action.payload,
+          allBooksCopy: payload,
         };
       }
 
@@ -260,11 +263,12 @@ const reducer = (state = initialState, { type, payload }) => {
       if (payload === "") {
         return {
           ...state,
-          allBookCopy: state.allBooks,
+          allBooksCopy: state.allBooks,
         };
+      } else {
         return {
           ...state,
-          allBooksCopy: action.payload,
+          allBooksCopy: payload,
         };
       }
 
@@ -274,9 +278,10 @@ const reducer = (state = initialState, { type, payload }) => {
           ...state,
           allBooksCopy: state.allBooks,
         };
+      } else {
         return {
           ...state,
-          allBookCopy: action.payload,
+          allBooksCopy: payload,
         };
       }
 
@@ -286,9 +291,10 @@ const reducer = (state = initialState, { type, payload }) => {
           ...state,
           allBooksCopy: state.allBooks,
         };
+      } else {
         return {
           ...state,
-          allBookCopy: action.payload,
+          allBooksCopy: payload,
         };
       }
 
@@ -298,7 +304,25 @@ const reducer = (state = initialState, { type, payload }) => {
           ...state,
           allBooksCopy: state.allBooks,
         };
-        }
+      } else {
+        return {
+          ...state,
+          allBooksCopy: payload,
+        };
+      }
+       case FILTER_BY_PriceRange:
+      if (payload === "") {
+        return {
+          ...state,
+          allBooksCopy: state.allBooks,
+        };
+      } else {
+        return {
+          ...state,
+          allBooksCopy: payload,
+        };
+      }
+      
     //----------------------------mercadoPago----------------
     // revisar mercadoPago no estoy seguro como funciona
     case GET_FAILURE:
