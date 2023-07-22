@@ -1,6 +1,8 @@
 import { useState} from 'react';
 import { Link } from 'react-router-dom';
 
+import axios from 'axios';
+
 import style from './Login.module.css'
 
 const Login = () => {
@@ -14,18 +16,32 @@ const Login = () => {
   const [logInfo, setLogInfo]= useState({email: '', password: ''});
 
   const handleLoginChanges = (event)=>{
-    event.preventDefault();
     const property = event.target.name;
     const value= event.target.value;
 
     setLogInfo({...logInfo, [property]: value})
   }
 
+  const handlerLogIn = async(event)=>{
+    event.preventDefault();
+    const userData = {
+      id:"2",
+      data1:logInfo.email,
+      data2:logInfo.password
+    }
+    try {
+      const response = await axios.post(`http://localhost:8000/activateUser/`, userData)
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <form className={style.fromContainer} >
       <div className={style.inputsContainer}>
           <input className={style.input} type='text' placeholder='Email address' name='email' value={logInfo.username} onChange={handleLoginChanges} />
-          <input className={style.input} type='text' placeholder='Password' name='password' value={logInfo.password} onChange={handleLoginChanges}/>
+          <input className={style.input} type='password' placeholder='Password' name='password' value={logInfo.password} onChange={handleLoginChanges}/>
       </div>
 
       <div className={style.otherStuffContainer}>
@@ -39,7 +55,7 @@ const Login = () => {
       </div>
 
       <div className={style.loginContainer}>
-        <button className={style.loginBtn} type='submit'>Log In</button>
+        <button className={style.loginBtn} onClick={handlerLogIn} type='submit'>Log In</button>
         <div className={style.divider}>
           <div className={style.line}></div>
           <span className={style.dividerSpan}>Or</span>
