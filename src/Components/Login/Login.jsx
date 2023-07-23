@@ -42,6 +42,7 @@ const Login = () => {
       data2:logInfo.password
     }
     try {
+      //PASAR A REDUX
       const response = await axios.post(`http://localhost:8000/activateUser/`, userData)
       //console.log(response.data);
       navigate('/')
@@ -55,7 +56,7 @@ const Login = () => {
   return ( 
     <form className={style.fromContainer} >
       <div className={style.inputsContainer}>
-          {access.ref.length ? (<p className={style.textError}>{access.ref}</p>):(<></>)}
+          {!access.state && access.ref.length ? (<p className={style.textError}>{access.ref}</p>):(<></>)}
           <input className={access.ref.length ?(`${style.input} ${style.error}`) :(style.input)} type='text' placeholder='Email address' name='email' value={logInfo.username} onChange={handleLoginChanges} />
           <input className={access.ref.length ?(`${style.input} ${style.error}`) :(style.input)} type='password' placeholder='Password' name='password' value={logInfo.password} onChange={handleLoginChanges}/>
       </div>
