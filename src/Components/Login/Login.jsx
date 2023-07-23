@@ -4,10 +4,13 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import style from './Login.module.css'
+import { useDispatch} from 'react-redux';
+import { accessUser } from '../../redux/actions/actions';
 
 const Login = () => {
+  const dispatch = useDispatch();
   //estado local para saber cuando el usurio presiono la opcion de <Remember me>
-  const [rememberMe, setRememberMe] = useState(false)
+  const [rememberMe, setRememberMe] = useState(false);
 
   const handlerRemeberMe = (event)=>{
     setRememberMe(event.target.checked)
@@ -32,6 +35,7 @@ const Login = () => {
     try {
       const response = await axios.post(`http://localhost:8000/activateUser/`, userData)
       console.log(response.data);
+      return(dispatch(accessUser(true)))
     } catch (error) {
       console.log(error);
       console.log(error);

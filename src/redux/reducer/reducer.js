@@ -1,5 +1,6 @@
 import {
   ACTIVATE_USER,
+  ACCESS,
   GET_ALL_BOOKS,
   GET_BOOK_BY_AUTHOR,
   GET_BOOK_BY_ID,
@@ -43,6 +44,7 @@ import {
 } from "../actions/types";
 
 let initialState = {
+  access: false,
   allBooks: [],
   allBooksCopy: [],
   details: [],
@@ -103,36 +105,36 @@ const reducer = (state = initialState, { type, payload }) => {
       };
     //----------------------------FILTERS-------------------
     //case FILTER_BY_GENRER:
-     // if (payload === "ALL")
-       // return {
-         // ...state,
-          //allBooksCopy: state.allBooks,
-       // };
-     // return {
-      //  ...state,
-       // allBooksCopy: payload,
-     // };
+    // if (payload === "ALL")
+    // return {
+    // ...state,
+    //allBooksCopy: state.allBooks,
+    // };
+    // return {
+    //  ...state,
+    // allBooksCopy: payload,
+    // };
     //case FILTER_BY_LANGUAJE:
-     // if (payload === "ALL")
-      //  return {
-       //   ...state,
-        //  allBooksCopy: payload,
-        //};
-     // return {
-       // ...state,
-       // allBooksCopy: payload,
-      //};
+    // if (payload === "ALL")
+    //  return {
+    //   ...state,
+    //  allBooksCopy: payload,
+    //};
+    // return {
+    // ...state,
+    // allBooksCopy: payload,
+    //};
 
     //case FILTER_BY_PUBLISHED_DATE:
-     // if (payload === "ALL")
-      //  return {
-       //   ...state,
-        //  allBooksCopy: state.allBooks,
-        //};
-     // return {
-      //  ...state,
-       // allBooksCopy: payload,
-     // };
+    // if (payload === "ALL")
+    //  return {
+    //   ...state,
+    //  allBooksCopy: state.allBooks,
+    //};
+    // return {
+    //  ...state,
+    // allBooksCopy: payload,
+    // };
     //----------------------------PAGINATION-------------------
     case SELECT_PAGE:
       return {
@@ -233,7 +235,7 @@ const reducer = (state = initialState, { type, payload }) => {
 
     //----------------------------BACKEND FILTERS-------------------
 
-     case FILTER_BY_GENDER:
+    case FILTER_BY_GENDER:
       if (payload === "") {
         return {
           ...state,
@@ -310,7 +312,7 @@ const reducer = (state = initialState, { type, payload }) => {
           allBooksCopy: payload,
         };
       }
-       case FILTER_BY_PriceRange:
+    case FILTER_BY_PriceRange:
       if (payload === "") {
         return {
           ...state,
@@ -322,7 +324,7 @@ const reducer = (state = initialState, { type, payload }) => {
           allBooksCopy: payload,
         };
       }
-      
+
     //----------------------------mercadoPago----------------
     // revisar mercadoPago no estoy seguro como funciona
     case GET_FAILURE:
@@ -429,6 +431,11 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         showListwish: payload,
+      };
+      case ACCESS:
+      return {
+        ...state,
+        access: payload,
       };
     default:
       return { ...state };

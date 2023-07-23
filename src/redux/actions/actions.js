@@ -40,8 +40,9 @@ import {
   FILTER_BY_NUM_PAGES,
   FILTER_BY_PUBLISHED_DATE,
   FILTER_BY_COUNTRY,
-  FILTER_BY_PriceRange
+  FILTER_BY_PriceRange,
   ACTIVATE_USER,
+  ACCESS,
 } from "./types";
 
 //Y aquí irán los action en sí :)
@@ -487,7 +488,13 @@ export function deleteCommentById(id) {
   };
 }
 //-------------------------USER-----------------------
+export function accessUser(bool) {
+  return {
+    type: ACCESS,
+    payload: bool,
+  };
 
+}
 export function overlayProfile(bool) {
   return {
     type: OVERLAY_PROFILE,

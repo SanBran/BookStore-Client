@@ -23,7 +23,7 @@ function App() {
   return (
     <>
     {showOverlayPerfile && <Profile />}
-    <div className={`main-content ${showOverlayPerfile ? 'contentShift' : ''}`}>
+    <div >
       
     {location.pathname !== "/profile" && location.pathname !== "/access" ? (
         <Navbar  />
