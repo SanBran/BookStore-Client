@@ -139,22 +139,27 @@ const SignUp = ({setForm}) => {
     event.preventDefault();
     validateSubmit();
     if(validateSubmit()){
-      console.log('entro a crear usuario');
-      await dispatch(postUser(signUpInfo))
-      console.log('se debio haber creado');
-      setSignUpInfo({
-        name: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-        dniPassport: "",
-        phoneCode: "",
-        phone: "",
-        country: "",
-        birthday: "",
-        gender: "",
-      })
-      setForm('login')
+      try {
+        //console.log('entro a crear usuario');
+        await dispatch(postUser(signUpInfo))
+        //console.log('se debio haber creado');
+        setSignUpInfo({
+          name: "",
+          email: "",
+          password: "",
+          confirmPassword: "",
+          dniPassport: "",
+          phoneCode: "",
+          phone: "",
+          country: "",
+          birthday: "",
+          gender: "",
+        })
+        setForm('login')
+      } catch (error) {
+        console.log(error.message);
+        setErrors({...errors, email: 'This email is already registered'})
+      }
     }
   };
 
