@@ -1,13 +1,17 @@
 import { useState} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
 
 import style from './Login.module.css'
-import { useDispatch} from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 import { accessUser } from '../../redux/actions/actions';
 
 const Login = () => {
+  const access = useSelector(state=>state.access)
+
+  const navigate = useNavigate()
+
   const dispatch = useDispatch();
   //estado local para saber cuando el usurio presiono la opcion de <Remember me>
   const [rememberMe, setRememberMe] = useState(false);
@@ -15,6 +19,11 @@ const Login = () => {
   const handlerRemeberMe = (event)=>{
     setRememberMe(event.target.checked)
   }
+
+  const [userState, SetUserState] = useState({
+    state: false,
+    text:''
+  })
 
   const [logInfo, setLogInfo]= useState({email: '', password: ''});
 
@@ -34,23 +43,21 @@ const Login = () => {
     }
     try {
       const response = await axios.post(`http://localhost:8000/activateUser/`, userData)
-      console.log(response.data);
-      return(dispatch(accessUser(true)))
+      //console.log(response.data);
+      navigate('/')
+      return(dispatch(accessUser(true, response.data.detail.id)))
     } catch (error) {
-      console.log(error);
-      console.log(error);
-      console.log(error);
-      console.log(error);
-      console.log(error);
-      console.log(error);
+      console.log(error.response.data.text);
+      return(dispatch(accessUser(false, error.response.data.text)))
     }
   }
 
   return ( 
     <form className={style.fromContainer} >
       <div className={style.inputsContainer}>
-          <input className={style.input} type='text' placeholder='Email address' name='email' value={logInfo.username} onChange={handleLoginChanges} />
-          <input className={style.input} type='password' placeholder='Password' name='password' value={logInfo.password} onChange={handleLoginChanges}/>
+          {access.ref.length ? (<p className={style.textError}>{access.ref}</p>):(<></>)}
+          <input className={access.ref.length ?(`${style.input} ${style.error}`) :(style.input)} type='text' placeholder='Email address' name='email' value={logInfo.username} onChange={handleLoginChanges} />
+          <input className={access.ref.length ?(`${style.input} ${style.error}`) :(style.input)} type='password' placeholder='Password' name='password' value={logInfo.password} onChange={handleLoginChanges}/>
       </div>
 
       <div className={style.otherStuffContainer}>

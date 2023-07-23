@@ -44,7 +44,7 @@ import {
 } from "../actions/types";
 
 let initialState = {
-  access: false,
+  access: {state: false, ref:''},
   allBooks: [],
   allBooksCopy: [],
   details: [],

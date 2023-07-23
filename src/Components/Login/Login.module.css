@@ -28,6 +28,9 @@
 
     background-color: #F5F5F5;
 }
+.error{
+    border: 1px solid red !important;
+}
 .input::placeholder{
     color: #B6B6B6;
 }
@@ -35,6 +38,14 @@ input:focus-visible {
     outline: 0;
 }
 
+.textError{
+    width: 100%;
+    margin: 0;
+    text-align: start;
+    color: rgb(241, 57, 57);
+    font-size: 15px;
+    
+}
 /* ---------Estilo en del checkbox y el link en el medio del formulario */
 .otherStuffContainer{
     width: 100%;
