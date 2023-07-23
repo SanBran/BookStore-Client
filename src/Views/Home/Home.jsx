@@ -13,21 +13,23 @@ const Home = () => {
   const dispatch = useDispatch();
   const allBooks = useSelector((state) => state.allBooks);
   const showListWishlist = useSelector((state) => state.showListwish);
+  const userId = useSelector((state) => state.access);
 
   const [currentPage, setCurrentPage] = useState(1);
-    const [active, setActive] = useState(1);
+  const [active, setActive] = useState(1);
 
   useEffect(() => {
     dispatch(getAllBooks());
-    dispatch(listWish(false));    
-
+    dispatch(listWish(false));
+    console.log(userId ? userId : "no esta logeado");
   }, [dispatch]);
 
-  const booksPerPage =  12 // Cards por página
-    const paginationSize = 7; // paginas visibles en paginación
-    const lastCountryIndex = currentPage * booksPerPage; 
-    const firstCountryIndex = lastCountryIndex - booksPerPage; 
-    const currentBooks= (!allBooks.error) && allBooks.slice(firstCountryIndex, lastCountryIndex);
+  const booksPerPage = 12; // Cards por página
+  const paginationSize = 7; // paginas visibles en paginación
+  const lastCountryIndex = currentPage * booksPerPage;
+  const firstCountryIndex = lastCountryIndex - booksPerPage;
+  const currentBooks =
+    !allBooks.error && allBooks.slice(firstCountryIndex, lastCountryIndex);
 
   return (
     <div className={styles.container}>
@@ -36,18 +38,23 @@ const Home = () => {
       </div>
       <h2 className={styles.title}>New Arrivals</h2>
       <div>
-        {showListWishlist ? <Wishlist /> : <Books currentBooks={currentBooks} />}
+        {showListWishlist ? (
+          <Wishlist />
+        ) : (
+          <Books currentBooks={currentBooks} />
+        )}
       </div>
       <div className={styles.paginationContainer}>
-            <Pagination 
-            numBooks={allBooks.length}
-            booksPerPage={booksPerPage}
-            paginationSize={paginationSize}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-            active={active}
-            setActive={setActive} />
-            </div>
+        <Pagination
+          numBooks={allBooks.length}
+          booksPerPage={booksPerPage}
+          paginationSize={paginationSize}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          active={active}
+          setActive={setActive}
+        />
+      </div>
     </div>
   );
 };

@@ -20,11 +20,6 @@ const Login = () => {
     setRememberMe(event.target.checked)
   }
 
-  const [userState, SetUserState] = useState({
-    state: false,
-    text:''
-  })
-
   const [logInfo, setLogInfo]= useState({email: '', password: ''});
 
   const handleLoginChanges = (event)=>{

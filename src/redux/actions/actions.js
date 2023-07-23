@@ -511,7 +511,7 @@ export function listWish(bool) {
 export function getUsers() {
   return async function (dispatch) {
     try {
-      const response = await axios.get(`http://localhost:8000/findUser`);
+      const response = await axios.post(`http://localhost:8000/findUser`);
       console.log(response.data.detail);
       return dispatch({
         type: GET_USERS,
@@ -526,8 +526,8 @@ export function getUserById(id) {
   return async function (dispatch) {
     try {
       //console.log(title);
-      const response = await axios.get(
-        `http://localhost:8000/getBooks/findUser/${id}`
+      const response = await axios.post(
+        `http://localhost:8000/findUser/${id}`
       );
       return dispatch({
         type: GET_USER_BY_ID,

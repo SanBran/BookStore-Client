@@ -1,9 +1,10 @@
 //import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { listWish } from "../../redux/actions/actions";
+import { getUserById, listWish } from "../../redux/actions/actions";
 import { overlayProfile } from "../../redux/actions/actions";
 import styles from "./Profile.module.css";
+import { useEffect } from "react";
 
 
 
@@ -12,6 +13,14 @@ const Profile = () => {
   const dispatch = useDispatch();
   const showlistWish = useSelector((state) => state.showListwish);
   const showOverlayPerfile = useSelector((state) => state.overlayProfile);
+  const userId = useSelector((state) => state.access.ref);
+  const user = useSelector((state) => state.userDetail);
+
+  useEffect(() => {
+    dispatch(getUserById(userId));
+    
+  }, [dispatch]);
+
 
   const handleOverlayToggle = () => {
     dispatch(listWish(!showlistWish));
@@ -29,9 +38,9 @@ const Profile = () => {
       <div className={styles.close} onClick={handleCloseOverlayToggle}></div>
       <div className={styles.overlayContent}>
         <div>
-          <img width="70" height="70" />
-          <h3 style={{ color: "BLACK" }}>Nombre</h3>
-          <h5 style={{ color: "BLACK" }}>Email</h5>
+          <img src={user.photoUser} width="70" height="70" />
+          <h3 style={{ color: "BLACK" }}>{user.name}</h3>
+          <h5 style={{ color: "BLACK" }}>{user.email}</h5>
         </div>
         <nav>
           <div>
