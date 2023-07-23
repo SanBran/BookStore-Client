@@ -10,7 +10,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const showOverlayPerfile = useSelector((state) => state.overlayProfile);
-  const access = useSelector((state) => state.access);
+  const access = useSelector((state) => state.access[0]);
   
   const handleOverlayToggle = () => {
     if (access) {
