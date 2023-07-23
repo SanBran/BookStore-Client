@@ -488,10 +488,10 @@ export function deleteCommentById(id) {
   };
 }
 //-------------------------USER-----------------------
-export function accessUser(bool) {
+export function accessUser(bool, ref) {
   return {
     type: ACCESS,
-    payload: bool,
+    payload: {state:bool, ref},
   };
 
 }

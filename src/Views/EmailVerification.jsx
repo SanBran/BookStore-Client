@@ -42,8 +42,6 @@ const EmailVerification = ()=>{
                 //la respuesta del error me viene en error.response.data.text
                 console.log(error.response.data);
                 console.log('no se puse validar');
-                return navigate('/access?false')
-                //navigate('/access?false')
             }
         }
         validate()
