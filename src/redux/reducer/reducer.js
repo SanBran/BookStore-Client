@@ -39,14 +39,14 @@ import {
   FILTER_BY_NUM_PAGES,
   FILTER_BY_PUBLISHED_DATE,
   FILTER_BY_COUNTRY,
-  FILTER_BY_PriceRange
-
+  FILTER_BY_PriceRange,
 } from "../actions/types";
 
 let initialState = {
-  access: {state: false, ref:''},
+  access: { state: false, ref: "" },
   allBooks: [],
   allBooksCopy: [],
+  filteredBooks: [],
   details: [],
   comments: [],
   paymentStatus: null,
@@ -66,7 +66,6 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         allBooks: payload.books,
-        allBooksCopy: payload.books,
       };
     case GET_BOOKS_BY_TITLE:
       return {
@@ -231,7 +230,6 @@ const reducer = (state = initialState, { type, payload }) => {
         allBooksCopy: orderedBookPublishedDate,
       };
     }
-
 
     //----------------------------BACKEND FILTERS-------------------
 
@@ -413,8 +411,8 @@ const reducer = (state = initialState, { type, payload }) => {
     case ACTIVATE_USER:
       return {
         ...state,
-        users: [...state.users, payload]
-      }
+        users: [...state.users, payload],
+      };
     case UPDATE_USER:
       return {
         ...state,
@@ -432,7 +430,7 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         showListwish: payload,
       };
-      case ACCESS:
+    case ACCESS:
       return {
         ...state,
         access: payload,

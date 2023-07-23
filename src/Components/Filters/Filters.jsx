@@ -1,13 +1,13 @@
+import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllBooks,FilterByGender,FilterByAuthor,FilterByPrice,FilterByEditorial,FilterByLanguage,FilterByPages ,FilterByPublishedDate,FilterByCountry,FilterByPriceRange} from "../../redux/actions/actions";
-import "./Filters.css";
-import Demo from "./Demo";
-import React from "react";
-import axios from "axios";
+import { getAllBooks,FilterByPriceRange} from "../../redux/actions/actions";
+import Pagination from "../Pagination/Pagination";
+import styles from './Filters.module.css'
+import Books from "../PanelBooks/Books";
 
 const Filters = () => {
-  const Books = useSelector((state) => state.allBooksCopy);
+  const currentBooks = useSelector((state) => state.allBooksCopy);
   const dispatch = useDispatch();
   const [data, setData] = useState({
     gender: "",
@@ -29,10 +29,10 @@ const Filters = () => {
 
   // este useEfect se ejecuta para llenar el estado local
   useEffect(() => {
-    setallBooks(Books);
-  }, [Books]);
+    setallBooks(currentBooks);
+  }, [currentBooks]);
 
-  console.log("soy el mamalon de los books", allBooks);
+  console.log(currentBooks);
   const handlePriceMin = (event) => {
     event.preventDefault();
     const priceRange = event.target.value;
@@ -48,7 +48,6 @@ const Filters = () => {
   };
 
   const handleFilter = async (event) => {
-    //event.preventDefault();
 
     const sendBody = {
       priceRange: `${priceMin}-${priceMax}`,
@@ -69,7 +68,6 @@ alert("No hay libros en ese rango de precio")
    } 
 
   const handleData = (event) => {
-    // event.preventDefault();
     const { name, value } = event.target;
     setData({
       ...data,
@@ -80,57 +78,82 @@ alert("No hay libros en ese rango de precio")
   };
 
   const handleFilterData = async (event) => {
+    if (
+      !data.gender &&
+      !data.editorial &&
+      !data.publishedDate &&
+      !data.country &&
+      !data.language &&
+      !data.pages &&
+      !data.price
+    ) {
+      setallBooks(currentBooks);
+      return;
+    }
+
     const sendBody = {};
 
     if (data.gender) {
       sendBody.gender = data.gender;
+    }
+    if (data.editorial) {
+      sendBody.editorial = data.editorial;
+    }
+    if (data.publishedDate) {
+      sendBody.publishedDate = data.publishedDate;
+    }
+    if (data.country) {
+      sendBody.country = data.country;
+    }
+    if (data.language) {
+      sendBody.language = data.language;
+    }
+    if (data.pages) {
+      sendBody.pages = data.pages;
+    }
+
+    if (data.gender) {
       const filteredBooks = allBooks.filter(
         (Book) => Book.gender === data.gender
       );
-     // setallBooks(filteredBooks);
-      dispatch(FilterByGender(filteredBooks));
-     
-
-
+     setallBooks(filteredBooks);
       
     }
 
     if (data.editorial) {
-      sendBody.editorial = data.editorial;
       const filteredBooks = allBooks.filter(
         (Book) => Book.editorial === data.editorial
       );
-      dispatch(FilterByEditorial(filteredBooks));
+      setallBooks(filteredBooks);
     }
     if (data.publishedDate) {
-      sendBody.publishedDate = data.publishedDate;
       const filteredBooks = allBooks.filter(
         (Book) => Book.publishedDate === data.publishedDate
       );
-      dispatch(FilterByPublishedDate(filteredBooks));
+      setallBooks(filteredBooks);
     }
     if (data.country) {
-      sendBody.country = data.country;
       const filteredBooks = allBooks.filter(
         (Book) => Book.country === data.country
       );
-      dispatch(FilterByCountry(filteredBooks));
+      setallBooks(filteredBooks);
     }
     if (data.language) {
-      sendBody.language = data.language;
       const filteredBooks = allBooks.filter(
         (Book) => Book.language === data.language
       );
-      dispatch(FilterByLanguage(filteredBooks));
+      setallBooks(filteredBooks);
     }
     if (data.pages) {
-      sendBody.pages = data.pages;
       const filteredBooks = allBooks.filter(
         (Book) => Book.pages === data.pages
       );
-      dispatch(FilterByPages(filteredBooks));
+      setallBooks(filteredBooks);
     }
 
+    if (!data.gender && !data.editorial && !data.publishedDate && !data.country && !data.language && !data.pages && !data.price) {
+      setallBooks(currentBooks);
+    }
    
     };
 
@@ -141,116 +164,113 @@ alert("No hay libros en ese rango de precio")
         publishedDate: "",
         country: "",
         language: "",
-        pages: "",
         price: "",
       });
+      setPriceMin("");
+    setPriceMax("");
+    setallBooks(currentBooks);
       }
+
+      const getUniqueValues = (data, key) => {
+        const uniqueValuesSet = new Set();
+      
+        data?.forEach((item) => {
+          if (item[key]) {
+            uniqueValuesSet.add(item[key]);
+          }
+        });
+      
+        return Array.from(uniqueValuesSet);
+      };
+
+      const uniqueGenders = getUniqueValues(allBooks, "gender");
+      const uniqueEditorial = getUniqueValues(allBooks, "editorial");
+      const uniquePublishedDate = getUniqueValues(allBooks, "publishedDate");
+      const uniqueCountry = getUniqueValues(allBooks, "country");
+      const uniqueLanguage = getUniqueValues(allBooks, "language");
+      const uniquePrice = getUniqueValues(allBooks, "price");
+
+      console.log(data);
       
     return (
-      <div class="container-principal">
-        <div class="filter">
-          <h1>Filtros</h1>
+      <div className={styles.masterContainer}>
+        <div className={styles.container}>
+        <div className={styles.filters}>
+          <h1 className={styles.filterTitle}>Filters</h1>
 
-          <select onChange={handleData} name="gender">
-            <option selected disabled value="gender">
-              Gender
+          <select onChange={handleData} defaultValue="Gender" name="gender">
+            <option defaultValue value="">
+              Genre
             </option>
-            {allBooks?.map((Book) => {
-              return Book.gender === "Gender not Available" ? null : (
-                <option key={Book.id} value={Book.gender}>
-                  {Book.gender}
-                </option>
-              );
+            {uniqueGenders?.map((genre) => {
+              return <option key={genre} value={genre}>
+              {genre}
+            </option>
             })}
           </select>
-          <select onChange={handleData} name="editorial">
-            <option selected disabled value="editorial">
+          <select onChange={handleData} defaultValue="Editorial" name="editorial">
+            <option defaultValue value="">
               Editorial
             </option>
-            {allBooks?.map((Book) => {
-              return Book.editorial === "Publisher not available" ? null : (
-                <option key={Book.id} value={Book.editorial}>
-                  {Book.editorial}
-                </option>
-              );
+            {uniqueEditorial?.map((editorial) => {
+              return <option key={editorial} value={editorial}>
+              {editorial}
+            </option>
             })}
           </select>
-          <select onChange={handleData} name="publishedDate">
-            <option selected disabled value="publishedDate">
+          <select onChange={handleData} defaultValue="Published Date" name="publishedDate">
+            <option defaultValue value="">
               Published-Date
             </option>
-            {allBooks?.map((Book) => {
-              return Book.publishedDate === "Publisher not available" ? null : (
-                <option key={Book.id} value={Book.publishedDate}>
-                  {Book.publishedDate}
-                </option>
-              );
+            {uniquePublishedDate?.map((date) => {
+              return <option key={date} value={date}>
+              {date}
+            </option>
             })}
           </select>
-          <select onChange={handleData} name="country">
-            <option selected disabled value="country">
+          <select onChange={handleData} defaultValue="Country" name="country">
+            <option defaultValue value="">
               Country
             </option>
-            {allBooks?.map((Book) => {
-              return Book.country === "" ? null : (
-                <option key={Book.id} value={Book.country}>
-                  {Book.country}
-                </option>
-              );
+            {uniqueCountry?.map((country) => {
+              return <option key={country} value={country}>
+              {country}
+            </option>
             })}
           </select>
-          <select onChange={handleData} name="language">
-            <option selected disabled value="language">
+          <select onChange={handleData} defaultValue="Language" name="language">
+            <option defaultValue value="">
               Language
             </option>
-            {allBooks?.map((Book) => {
-              return Book.language === "" ? null : (
-                <option key={Book.id} value={Book.language}>
-                  {Book.language}
-                </option>
-              );
-            })}
-          </select>
-          <select onChange={handleData} name="pages">
-            <option selected disabled value="Pages">
-              Pages
+            {uniqueLanguage?.map((language) => {
+              return <option key={language} value={language}>
+              {language}
             </option>
-            {allBooks?.map((Book) => {
-              return Book.numPages === 0 ? null : (
-                <option key={Book.id} value={Book.numPages}>
-                  {Book.numPages}
-                </option>
-              );
             })}
           </select>
-          <select onChange={handleData} name="price">
-            <option selected disabled value="Price">
+          
+          <select onChange={handleData} defaultValue="Price" name="price">
+            <option defaultValue value="">
               Price
             </option>
-            {allBooks?.map((Book) => {
-              return Book.price === 0 ? (
-                <option key={Book.id} value={Book.price}>
-                  Free
-                </option>
-              ) : (
-                <option key={Book.id} value={Book.price}>
-                  {Book.price}
-                </option>
-              );
+            {uniquePrice?.map((price) => {
+              return <option key={price} value={price}>
+              {price}
+            </option>
             })}
           </select>
           <button
-            class="btnFilter"
+            className={styles.btnFilter}
             type="submit"
             placeholder="Filtrar"
             onClick={() => handleFilterData()}
-          />
+          >Apply</button>
           <button
-            class="btnCleanFilter"
-            type="btn"
+            className={styles.btnCleanFilter}
+            type="reset"
             placeholder="Limpiar Filters"
             onClick={() => handleCleanFilter()}
-          />
+          >Clean</button>
           <input
             name="price"
             placeholder="Min"
@@ -266,33 +286,20 @@ alert("No hay libros en ese rango de precio")
             onChange={handlePriceMax}
           />
           <button
-            class="btnRangePrice"
+            className={styles.btnRangePrice}
             type="submit"
             placeholder="Filtrar"
             onClick={() => handleFilter()}
-          />
+          >Filter price</button>
         </div>
 
-        <div class="Books">
-          {allBooks?.map((book) => {
-            //{ id, title, author, image, price, gender, pages, language, editorial, publicationDate }
-            return (
-              <Demo
-                key={book.id}
-                id={book.id}
-                title={book.title}
-                author={book.author}
-                image={book.image}
-                price={book.price}
-                gender={book.gender}
-                pages={book.pages}
-                language={book.language}
-                editorial={book.editorial}
-                publicationDate={book.publicationDate}
-              />
-            );
-          })}
+        <div className={styles.bookContainer}>
+
+          {currentBooks.length == 0? <h2 className={styles.noResults}>No results</h2>: <Books currentBooks={allBooks}/>}
+          
         </div>
+        </div>
+        <Pagination/>
       </div>
     );
   };

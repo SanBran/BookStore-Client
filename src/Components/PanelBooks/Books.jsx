@@ -5,7 +5,6 @@ import styles from './Books.module.css'
 
 const Books= ({currentBooks})=>{
 
-  console.log(currentBooks);
 return(
   
     <div className={styles.booksContainer}>
