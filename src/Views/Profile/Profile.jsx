@@ -1,15 +1,14 @@
 //import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { getUserById, listWish } from "../../redux/actions/actions";
+import { Link, useNavigate } from "react-router-dom";
+import { accessUser, getUserById, listWish } from "../../redux/actions/actions";
 import { overlayProfile } from "../../redux/actions/actions";
 import styles from "./Profile.module.css";
 import { useEffect } from "react";
 
-
-
 //userData={name, birthday, country, phone, phoneCode, gender, email, password, dniPasaport, status, rol, photoUser, listWish}
 const Profile = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const showlistWish = useSelector((state) => state.showListwish);
   const showOverlayPerfile = useSelector((state) => state.overlayProfile);
@@ -18,9 +17,7 @@ const Profile = () => {
 
   useEffect(() => {
     dispatch(getUserById(userId));
-    
   }, [dispatch]);
-
 
   const handleOverlayToggle = () => {
     dispatch(listWish(!showlistWish));
@@ -28,14 +25,18 @@ const Profile = () => {
 
   const handleCloseOverlayToggle = () => {
     dispatch(overlayProfile(showOverlayPerfile));
-    console.log(showOverlayPerfile);
+  };
+  const handleLogOut = () => {
+    dispatch(overlayProfile(showOverlayPerfile));
+    dispatch(accessUser(false, ""));
+    navigate("/");
   };
   //! cuando se entra al wislist desde otro compomente ejemplo histoy, el estado queda sin actualizar
   //! si esta en true cuando vuelve al wishlist pasa a false y no se muestra
-
+  //! hacer el Log Out
   return (
     <div className={styles.overlay}>
-      <div className={styles.close} onClick={handleCloseOverlayToggle}></div>
+      <div onClick={handleCloseOverlayToggle}></div>
       <div className={styles.overlayContent}>
         <div>
           <img src={user.photoUser} width="70" height="70" />
@@ -57,6 +58,11 @@ const Profile = () => {
             <Link to="/settings">Settings</Link>
           </div>
         </nav>
+        <div className={styles.Logout}>
+          <button onClick={handleLogOut} type="button">
+            Log Out
+          </button>
+        </div>
       </div>
     </div>
   );
