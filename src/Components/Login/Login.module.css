@@ -65,6 +65,7 @@ input:focus-visible {
     margin-left: 5px;
     font-weight: lighter;
     font-size: 13px;
+    color:#FA9D1B;
 }
 .linkForgotPass{
     color: black;
