@@ -38,7 +38,9 @@ import {
   FILTER_BY_NUM_PAGES,
   FILTER_BY_PUBLISHED_DATE,
   FILTER_BY_COUNTRY,
-  RESET_BOOKS_BY_AUTHOR
+  RESET_BOOKS_BY_AUTHOR,
+  FILTER_BY_PriceRange
+
 } from "../actions/types";
 
 let initialState = {
@@ -248,7 +250,7 @@ const reducer = (state = initialState, { type, payload }) => {
       if (payload === "") {
         return {
           ...state,
-          allBookCopy: state.allBooks,
+          allBooksCopy: state.allBooks,
         };
       }
       return {
@@ -278,7 +280,8 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         allBooksCopy: payload,
-      }
+      };
+
 
     case FILTER_BY_LANGUAGE:
       if (payload === "") {
@@ -310,7 +313,20 @@ const reducer = (state = initialState, { type, payload }) => {
           allBooksCopy: state.allBooks,
         };
       }
-      break
+      return {
+        ...state,
+        allBooksCopy: payload,
+      };
+    case FILTER_BY_PriceRange:
+      if (payload === "") {
+        return {
+          ...state,
+          allBooksCopy: state.allBooks,
+        };
+      } return {
+        ...state,
+        allBooksCopy: payload,
+      };
 
     //----------------------------mercadoPago----------------
     // revisar mercadoPago no estoy seguro como funciona

@@ -23,21 +23,16 @@ function App() {
   return (
     <>
 
-      {showOverlayPerfile && <Profile />}
-      <div >
+    {showOverlayPerfile && <Profile />}
+    <div >
+      
+    {location.pathname !== "/profile" && location.pathname !== "/access" && location.pathname !== "/Results" ? (
+        <Navbar  />
+      ) : (
+        <></>
+      )}
 
-        {location.pathname !== "/profile" && location.pathname !== "/access" && location.pathname !== "/Results" ? (
-          <Navbar />
-        ) : (
-          <></>
-        )}
 
-
-        {location.pathname !== "/profile" && location.pathname !== "/access" ? (
-          <Navbar />
-        ) : (
-          <></>
-        )}
         <Routes>
           <Route path="/" element={<Home />} />
 

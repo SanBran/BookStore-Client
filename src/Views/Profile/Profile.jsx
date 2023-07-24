@@ -17,7 +17,7 @@ const Profile = () => {
 
   useEffect(() => {
     dispatch(getUserById(userId));
-  }, [dispatch]);
+  }, [dispatch,userId]);
 
   const handleOverlayToggle = () => {
     dispatch(listWish(!showlistWish));

@@ -21,9 +21,8 @@ const Home = () => {
   useEffect(() => {
     dispatch(getAllBooks());
     dispatch(listWish(false));
-
     console.log(userId ? userId : "no esta logeado");
-  }, [dispatch]);
+  }, [dispatch,userId]);
 
   const booksPerPage = 12; // Cards por página
   const paginationSize = 7; // paginas visibles en paginación
