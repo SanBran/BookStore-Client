@@ -423,5 +423,5 @@ const reducer = (state = initialState, { type, payload }) => {
       return { ...state };
   }
 };
-
+console.log('reducer reparado');
 export default reducer;
