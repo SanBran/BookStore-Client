@@ -31,15 +31,7 @@ function App() {
       ) : (
         <></>
       )}
-      <Routes>
-        <Route path="/" element={<Home />} />
 
-
-        {location.pathname !== "/profile" && location.pathname !== "/access" ? (
-          <Navbar />
-        ) : (
-          <></>
-        )}
         <Routes>
           <Route path="/" element={<Home />} />
 

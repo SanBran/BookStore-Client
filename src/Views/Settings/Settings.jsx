@@ -9,6 +9,8 @@ function Settings() {
   const [visibleSegurity, setVisibleSegurity] = useState(false);
   const user = useSelector((state) => state.userDetail);
 
+
+  
   // Función para manejar el clic en el botón
   const toggleData = () => {
     setVisibleData(!visibleData);
