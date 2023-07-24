@@ -2,10 +2,12 @@
 import styles from "./Settings.module.css";
 import axios from "axios";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 function Settings() {
   const [visibleData, setVisibleData] = useState(false);
   const [visibleSegurity, setVisibleSegurity] = useState(false);
+  const user = useSelector((state) => state.userDetail);
 
   // Función para manejar el clic en el botón
   const toggleData = () => {
@@ -18,7 +20,7 @@ function Settings() {
   //userData={name, birthday, country, phone, phoneCode, gender,  dniPasaport, status, rol, photoUser,email, password, listWish}
 
   // Estado para mantener los datos editados
-  const [userData, setUserData] = useState("initialData");
+  const [userData, setUserData] = useState(user);
 
   // Función para manejar el cambio del user
   const handleDataChange = (name, value) => {
@@ -29,7 +31,7 @@ function Settings() {
   };
   const sendData = () => {
     axios
-      .post("ruta post", { userData })
+      .put(`http://localhost:8000/updUser`, userData)
       .then((response) => {
         // mensaje de exito
         console.log(response.data);
@@ -42,8 +44,8 @@ function Settings() {
   return (
     <div className={styles.container}>
       <div className={styles.containerData}>
-        <img  width="70" height="70" />
-        <h2 style={{ color: "BLACK" }}>Nombre Usuario</h2>
+        <img src={user.photoUser} width="70" height="70" />
+        <h2 style={{ color: "BLACK" }}>{userData.name}</h2>
       </div>
       <div>
         <button onClick={toggleData}>My Data</button>
@@ -112,9 +114,7 @@ function Settings() {
               <input
                 type="text"
                 value={userData.photoUser}
-                onChange={(e) =>
-                  handleDataChange("photoUser", e.target.value)
-                }
+                onChange={(e) => handleDataChange("photoUser", e.target.value)}
               />
             </div>
             <button onClick={sendData}>Guardar Cambios</button>
@@ -125,7 +125,6 @@ function Settings() {
         <button onClick={toggleSegurity}>Security</button>
         {visibleSegurity && (
           <div>
-            
             <div className={styles.containerData}>
               <p>Email:</p>
               <input
