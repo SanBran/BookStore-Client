@@ -33,7 +33,10 @@ const BooksDetail = () => {
 
   const { id } = useParams()
   const dispatch = useDispatch()
-  console.log(id)
+  console.log('esto es ID', id)
+
+  console.log('/detail')
+
   useEffect(() => {
     dispatch(resetBooksByAuthor())
   }, [dispatch, id])
