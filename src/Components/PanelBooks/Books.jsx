@@ -5,9 +5,9 @@ import styles from './Books.module.css'
 
 const Books = ({ currentBooks }) => {
 
-  console.log(currentBooks);
-  return (
 
+return(
+  
     <div className={styles.booksContainer}>
 
       {currentBooks?.map(books => <Book key={books.id} books={books} />)}

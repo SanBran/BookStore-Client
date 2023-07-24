@@ -22,8 +22,18 @@ function App() {
 
   return (
     <>
-      {showOverlayPerfile && <Profile />}
-      <div className={`main-content ${showOverlayPerfile ? 'contentShift' : ''}`}>
+
+    {showOverlayPerfile && <Profile />}
+    <div >
+      
+    {location.pathname !== "/profile" && location.pathname !== "/access" && location.pathname !== "/Results" ? (
+        <Navbar  />
+      ) : (
+        <></>
+      )}
+      <Routes>
+        <Route path="/" element={<Home />} />
+
 
         {location.pathname !== "/profile" && location.pathname !== "/access" ? (
           <Navbar />

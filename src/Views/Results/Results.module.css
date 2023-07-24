@@ -1,3 +1,8 @@
-.container{
-    padding-top: 10vh;
+.navbar{
+    position: fixed;
+    top: 0;
+    background-color: #f3f3f3;
+    width: 100vw;
+    height: 90px;
+    z-index: 999;
 }

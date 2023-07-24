@@ -27,10 +27,7 @@ const Demo = ({
       <p>{author}</p>
       <p>{price}</p>
       <p>{gender}</p>
-      <p>{pages}</p>
-      <p>{language}</p>
       <p>{editorial}</p>
-      <p>{publicationDate}</p>
     </div>
   );
 };

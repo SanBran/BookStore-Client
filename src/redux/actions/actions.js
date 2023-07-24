@@ -1,46 +1,50 @@
 import axios from "axios";
 //Aquí los action Types
 import {
-    GET_ALL_BOOKS,
-    GET_BOOK_BY_AUTHOR,
-    GET_BOOK_BY_ID,
-    GET_BOOKS_BY_TITLE,
-    POST_BOOK,
-    UPDATE_BOOK_BY_ID,
-    DELETE_BOOK_BY_ID,
-    GET_FAILURE,
-    GET_PENDING,
-    GET_SUCCESS,
-    POST_MERCADOPAGO,
-    POST_WEBHOOK_PAGO,
-    POST_EMAIL,
-    POST_SMS_WHATSAPP,
-    FILTER_BY_GENRER,
-    FILTER_BY_LANGUAJE,
-    SELECT_PAGE,
-    ORDER_BY_PRICE,
-    ORDER_BY_PUBLISHED_DATE,
-    ORDER_BY_TITLE,
-    POST_COMMENT,
-    GET_COMMENTS,
-    UPDATE_COMMENT_BY_ID,
-    DELETE_COMMENT_BY_ID,
-    GET_USERS,
-    GET_USER_BY_ID,
-    POST_USER,
-    UPDATE_USER,
-    OVERLAY_PROFILE,
-    SHOW_LISTWISH,
-    FILTER_BY_PRICE,
-    FILTER_BY_AUTHOR,
-    FILTER_BY_GENDER,
-    FILTER_BY_LANGUAGE,
-    FILTER_BY_EDITORIAL,
-    FILTER_BY_NUM_PAGES,
-    FILTER_BY_PUBLISHED_DATE,
-    FILTER_BY_COUNTRY,
-    ACTIVATE_USER,
-    RESET_BOOKS_BY_AUTHOR
+
+  GET_ALL_BOOKS,
+  GET_BOOK_BY_AUTHOR,
+  GET_BOOK_BY_ID,
+  GET_BOOKS_BY_TITLE,
+  POST_BOOK,
+  UPDATE_BOOK_BY_ID,
+  DELETE_BOOK_BY_ID,
+  GET_FAILURE,
+  GET_PENDING,
+  GET_SUCCESS,
+  POST_MERCADOPAGO,
+  POST_WEBHOOK_PAGO,
+  POST_EMAIL,
+  POST_SMS_WHATSAPP,
+  FILTER_BY_GENRER,
+  FILTER_BY_LANGUAJE,
+  SELECT_PAGE,
+  ORDER_BY_PRICE,
+  ORDER_BY_PUBLISHED_DATE,
+  ORDER_BY_TITLE,
+  POST_COMMENT,
+  GET_COMMENTS,
+  UPDATE_COMMENT_BY_ID,
+  DELETE_COMMENT_BY_ID,
+  GET_USERS,
+  GET_USER_BY_ID,
+  POST_USER,
+  UPDATE_USER,
+  OVERLAY_PROFILE,
+  SHOW_LISTWISH,
+  FILTER_BY_PRICE,
+  FILTER_BY_AUTHOR,
+  FILTER_BY_GENDER,
+  FILTER_BY_LANGUAGE,
+  FILTER_BY_EDITORIAL,
+  FILTER_BY_NUM_PAGES,
+  FILTER_BY_PUBLISHED_DATE,
+  FILTER_BY_COUNTRY,
+  FILTER_BY_PriceRange,
+  ACTIVATE_USER,
+  ACCESS,
+  RESET_BOOKS_BY_AUTHOR
+
 } from "./types";
 
 
@@ -177,6 +181,8 @@ export function getBooksByTitle(title) {
         }
     };
 }
+
+// --------------Backend Super Filters ----------------
 export function FilterByGender(gender) {
     console.log('soy el action', gender)
     return {
@@ -232,6 +238,15 @@ export function FilterByCountry(country) {
         payload: country
     }
 }
+
+export function FilterByPriceRange(PriceRange) {
+  return {       
+  type:FILTER_BY_PriceRange,
+  payload: PriceRange
+  }
+}
+
+
 //----------------------------------------------------------------
 export function getBooksById(id) {
     return async function (dispatch) {
@@ -512,7 +527,13 @@ export function deleteCommentById(id) {
     };
 }
 //-------------------------USER-----------------------
+export function accessUser(bool, ref) {
+  return {
+    type: ACCESS,
+    payload: {state:bool, ref},
+  };
 
+}
 export function overlayProfile(bool) {
     return {
         type: OVERLAY_PROFILE,
@@ -527,34 +548,36 @@ export function listWish(bool) {
 }
 
 export function getUsers() {
-    return async function (dispatch) {
-        try {
-            const response = await axios.get(`http://localhost:8000/findUser`);
-            console.log(response.data.detail);
-            return dispatch({
-                type: GET_USERS,
-                payload: response.data,
-            });
-        } catch (error) {
-            throw Error(error.message);
-        }
-    };
+
+  return async function (dispatch) {
+    try {
+      const response = await axios.post(`http://localhost:8000/findUser`);
+      console.log(response.data.detail);
+      return dispatch({
+        type: GET_USERS,
+        payload: response.data,
+      });
+    } catch (error) {
+      throw Error(error.message);
+    }
+  };
 }
 export function getUserById(id) {
-    return async function (dispatch) {
-        try {
-            //console.log(title);
-            const response = await axios.get(
-                `http://localhost:8000/getBooks/findUser/${id}`
-            );
-            return dispatch({
-                type: GET_USER_BY_ID,
-                payload: response.data,
-            });
-        } catch (error) {
-            throw Error(error.message);
-        }
-    };
+  return async function (dispatch) {
+    try {
+      //console.log(title);
+      const response = await axios.post(
+        `http://localhost:8000/findUser/${id}`
+      );
+      return dispatch({
+        type: GET_USER_BY_ID,
+        payload: response.data,
+      });
+    } catch (error) {
+      throw Error(error.message);
+    }
+  };
+
 }
 //userData={name, birthday, country, phone, phoneCode, gender, email, password, dniPasaport, status, rol, photoUser, listWish}
 export function postUser(userData) {
