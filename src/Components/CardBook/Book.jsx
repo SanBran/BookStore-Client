@@ -10,7 +10,7 @@ const Book = ({ books }) => {
     return (
         <div className={styles.container}>
 
-            <Link className={styles.image} to={`/details:${id}`}>
+            <Link className={styles.image} to={`/detail/${id}`}>
                 <img
                     className={styles.imageSize}
                     src={image !== 'Image not Available' ? image : genericCover}

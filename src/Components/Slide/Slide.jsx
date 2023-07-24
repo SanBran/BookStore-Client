@@ -4,16 +4,16 @@ import styles from './Slide.module.css';
 import StarRating from '../StarRating/StarRating';
 
 function Slide({ books }) {
-  
+
 
   const [actualImage, setActualImage] = useState(0);
   const maxIndex = 10;
   const numberOfBooksToShow = 5;
-  
+
   const randomIndices = Array.from({ length: numberOfBooksToShow }, () =>
-  Math.floor(Math.random() * maxIndex)
+    Math.floor(Math.random() * maxIndex)
   );
-  
+
   const [selectBooks, setSelectBooks] = useState([]);
 
   useEffect(() => {
@@ -48,14 +48,14 @@ function Slide({ books }) {
               <img className={styles.background} src={book.image !== 'Image not Available' ? book.image : genericCover} alt="image" />
               <div className={styles.layout}></div>
               <div className={styles.bookInfo}>
-              <Link className={styles.image} to={`/details:${book.id}`}>
-              <img className={styles.image} src={book.image !== 'Image not Available' ? book.image : genericCover} alt="image" />
-              </Link>
-              <div className={styles.textContainer}>
-              <h1 className={styles.title}>{book.title}</h1>
-              <h2 className={styles.author}>{book.author !== 'Author not Available' ? book.author : ''}</h2>
-              <StarRating/>
-              </div>
+                <Link className={styles.image} to={`/detail/${book.id}`}>
+                  <img className={styles.image} src={book.image !== 'Image not Available' ? book.image : genericCover} alt="image" />
+                </Link>
+                <div className={styles.textContainer}>
+                  <h1 className={styles.title}>{book.title}</h1>
+                  <h2 className={styles.author}>{book.author !== 'Author not Available' ? book.author : ''}</h2>
+                  <StarRating />
+                </div>
               </div>
             </div>
           );

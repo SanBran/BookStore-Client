@@ -1,4 +1,5 @@
 import {
+  ACTIVATE_USER,
   GET_ALL_BOOKS,
   GET_BOOK_BY_AUTHOR,
   GET_BOOK_BY_ID,
@@ -37,7 +38,7 @@ import {
   FILTER_BY_NUM_PAGES,
   FILTER_BY_PUBLISHED_DATE,
   FILTER_BY_COUNTRY,
-
+  RESET_BOOKS_BY_AUTHOR
 } from "../actions/types";
 
 let initialState = {
@@ -48,6 +49,7 @@ let initialState = {
   ,
   allBooksCopy: [],
   details: [],
+  booksByAuthor: [],
   comments: [],
   paymentStatus: null,
   response: {},
@@ -76,12 +78,19 @@ const reducer = (state = initialState, { type, payload }) => {
     case GET_BOOK_BY_AUTHOR:
       return {
         ...state,
-        allBooksCopy: payload,
+        booksByAuthor: payload,
       };
     case GET_BOOK_BY_ID:
       return {
         ...state,
         details: payload,
+      };
+    case RESET_BOOKS_BY_AUTHOR:
+      return {
+        ...state,
+        booksByAuthor: {
+          books: [],
+        },
       };
     case POST_BOOK:
       return {
@@ -388,6 +397,11 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         users: [...state.users, payload],
       };
+    case ACTIVATE_USER:
+      return {
+        ...state,
+        users: [...state.users, payload]
+      }
     case UPDATE_USER:
       return {
         ...state,

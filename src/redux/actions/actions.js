@@ -1,5 +1,4 @@
 import axios from "axios";
-
 //Aquí los action Types
 import {
     GET_ALL_BOOKS,
@@ -40,6 +39,8 @@ import {
     FILTER_BY_NUM_PAGES,
     FILTER_BY_PUBLISHED_DATE,
     FILTER_BY_COUNTRY,
+    ACTIVATE_USER,
+    RESET_BOOKS_BY_AUTHOR
 } from "./types";
 
 
@@ -64,9 +65,38 @@ export function getAllBooks() {
 export function detailBookById(id) {
     return async function (dispatch) {
         try {
-            const response = await axios(`/bookDetail/${id}`)
+            const response = await axios.post(`http://localhost:8000/bookDetail/${id}`)
             const data = response.data
-            return dispatch({ type: DETAIL_BOOK_BY_ID, payload: data })
+            return dispatch({ type: GET_BOOK_BY_ID, payload: data })
+        } catch (error) {
+            throw Error(error.message)
+        }
+    }
+}
+export function getBooksByAuthor(author) {
+    return async function (dispatch) {
+        try {
+            if (author === 'Author not Available') {
+                return
+            }
+            console.log(author);
+            const response = await axios.post(
+                `http://localhost:8000/getBooks?author=${author}`
+            );
+            return dispatch({
+                type: GET_BOOK_BY_AUTHOR,
+                payload: response.data,
+            });
+        } catch (error) {
+            throw Error(error.message);
+        }
+    };
+}
+
+export function resetBooksByAuthor() {
+    return async function (dispatch) {
+        try {
+            return dispatch({ type: RESET_BOOKS_BY_AUTHOR })
         } catch (error) {
             throw Error(error.message)
         }
@@ -129,22 +159,7 @@ export function getByPublishedDate(publishedDate) {
         }
     };
 }
-export function getBooksByAuthor(author) {
-    return async function (dispatch) {
-        try {
-            //console.log(author);
-            const response = await axios.post(
-                `http://localhost:8000/getBooks?author=${author}`
-            );
-            return dispatch({
-                type: GET_BOOK_BY_AUTHOR,
-                payload: response.data,
-            });
-        } catch (error) {
-            throw Error(error.message);
-        }
-    };
-}
+
 export function getBooksByTitle(title) {
     return async function (dispatch) {
         try {
@@ -223,7 +238,7 @@ export function getBooksById(id) {
         try {
             //console.log(title);
             const response = await axios.post(
-                `http://localhost:8000/getBooks/bookDetail/${id}`
+                `http://localhost:8000/bookDetail/${id}`
             );
             return dispatch({
                 type: GET_BOOK_BY_ID,
@@ -550,14 +565,32 @@ export function postUser(userData) {
                 `http://localhost:8000/newUser`,
                 userData
             );
+            console.log(userData)
             return dispatch({
                 type: POST_USER,
                 payload: response.data,
             });
         } catch (error) {
+            console.log('entro aca');
             throw Error(error.message);
         }
     };
+}
+export function activateUser(dataToken) {
+    return async function (dispatch) {
+        try {
+            const response = await axios.post(`http://localhost:8000/activateUser/`,
+                dataToken)
+            return dispatch({
+                type: ACTIVATE_USER,
+                payload: response.data
+            })
+        }
+        catch (error) {
+            console.log(error);
+            throw Error(error.message)
+        }
+    }
 }
 //editUser={id,name, birthday, country, phone, phoneCode, gender, dniPasaport, status, rol, photoUser, listWish}
 export function updateUser(userData) {

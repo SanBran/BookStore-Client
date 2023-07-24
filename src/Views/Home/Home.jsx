@@ -28,7 +28,8 @@ const Home = () => {
   const lastCountryIndex = currentPage * booksPerPage;
   const firstCountryIndex = lastCountryIndex - booksPerPage;
   const currentBooks = (!allBooks.error) && allBooks.slice(firstCountryIndex, lastCountryIndex);
-
+  const book = useSelector(state => state)
+  console.log(book.book, 'book');
   return (
     <div className={styles.container}>
       <div>

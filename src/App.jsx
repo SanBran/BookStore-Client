@@ -10,6 +10,9 @@ import History from "./Components/History/History";
 import Settings from "./Views/Settings/Settings";
 import Filters from "./Components/Filters/Filters";
 import Results from "./Views/Results/Results";
+
+import EmailVerification from "./Views/EmailVerification";
+
 import { useSelector } from "react-redux";
 
 
@@ -32,7 +35,7 @@ function App() {
 
           <Route path="/access" element={<Access />} />
 
-          <Route path="/details:id" element={<BooksDetail />} />
+          <Route path="/detail/:id" element={<BooksDetail />} />
 
           <Route path="/profile" element={<Profile />} />
 
@@ -46,11 +49,12 @@ function App() {
 
           <Route path="/Results" element={<Results />} />
 
+          <Route path="/access/validate" element={<EmailVerification />} />
+
         </Routes>
       </div>
     </>
   );
 }
 
-export default App;
-
+export default App;   
