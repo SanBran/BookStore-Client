@@ -39,15 +39,19 @@ import {
   FILTER_BY_NUM_PAGES,
   FILTER_BY_PUBLISHED_DATE,
   FILTER_BY_COUNTRY,
-  FILTER_BY_PriceRange,
+  RESET_BOOKS_BY_AUTHOR  
 } from "../actions/types";
 
 let initialState = {
   access: { state: false, ref: "" },
   allBooks: [],
+  book: [],
+  bookByName: []
+  ,
   allBooksCopy: [],
   filteredBooks: [],
   details: [],
+  booksByAuthor: [],
   comments: [],
   paymentStatus: null,
   response: {},
@@ -75,12 +79,19 @@ const reducer = (state = initialState, { type, payload }) => {
     case GET_BOOK_BY_AUTHOR:
       return {
         ...state,
-        allBooksCopy: payload,
+        booksByAuthor: payload,
       };
     case GET_BOOK_BY_ID:
       return {
         ...state,
         details: payload,
+      };
+    case RESET_BOOKS_BY_AUTHOR:
+      return {
+        ...state,
+        booksByAuthor: {
+          books: [],
+        },
       };
     case POST_BOOK:
       return {
@@ -245,6 +256,10 @@ const reducer = (state = initialState, { type, payload }) => {
           allBooksCopy: payload,
         };
       }
+      return {
+        ...state,
+        allBooksCopy: payload,
+      };
 
     case FILTER_BY_AUTHOR:
       if (payload === "") {
@@ -258,6 +273,10 @@ const reducer = (state = initialState, { type, payload }) => {
           allBooksCopy: payload,
         };
       }
+      return {
+        ...state,
+        allBookCopy: payload,
+      };
 
     case FILTER_BY_PRICE:
       if (payload === "") {
@@ -265,11 +284,18 @@ const reducer = (state = initialState, { type, payload }) => {
           ...state,
           allBooksCopy: state.allBooks,
         };
+
+      }
+      return {
+        ...state,
+        allBooksCopy: payload,
+
       } else {
         return {
           ...state,
           allBooksCopy: payload,
         };
+
       }
 
     case FILTER_BY_LANGUAGE:
@@ -278,12 +304,19 @@ const reducer = (state = initialState, { type, payload }) => {
           ...state,
           allBooksCopy: state.allBooks,
         };
+
+
       } else {
         return {
           ...state,
           allBooksCopy: payload,
         };
+
       }
+      return {
+        ...state,
+        allBookCopy: payload,
+      };
 
     case FILTER_BY_EDITORIAL:
       if (payload === "") {
@@ -291,19 +324,28 @@ const reducer = (state = initialState, { type, payload }) => {
           ...state,
           allBooksCopy: state.allBooks,
         };
+
       } else {
         return {
           ...state,
           allBooksCopy: payload,
         };
-      }
 
+      }
+      return {
+        ...state,
+        allBookCopy: payload,
+      };
     case FILTER_BY_PUBLISHED_DATE:
       if (payload === "") {
         return {
           ...state,
           allBooksCopy: state.allBooks,
         };
+
+      }
+
+
       } else {
         return {
           ...state,
@@ -322,6 +364,7 @@ const reducer = (state = initialState, { type, payload }) => {
           allBooksCopy: payload,
         };
       }
+
 
     //----------------------------mercadoPago----------------
     // revisar mercadoPago no estoy seguro como funciona

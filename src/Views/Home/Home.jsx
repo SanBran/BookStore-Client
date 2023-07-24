@@ -21,6 +21,7 @@ const Home = () => {
   useEffect(() => {
     dispatch(getAllBooks());
     dispatch(listWish(false));
+
     console.log(userId ? userId : "no esta logeado");
   }, [dispatch]);
 
@@ -28,8 +29,7 @@ const Home = () => {
   const paginationSize = 7; // paginas visibles en paginación
   const lastCountryIndex = currentPage * booksPerPage;
   const firstCountryIndex = lastCountryIndex - booksPerPage;
-  const currentBooks =
-    !allBooks.error && allBooks.slice(firstCountryIndex, lastCountryIndex);
+  const currentBooks =!allBooks.error && allBooks.slice(firstCountryIndex, lastCountryIndex);
 
   return (
     <div className={styles.container}>
@@ -52,8 +52,8 @@ const Home = () => {
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           active={active}
-          setActive={setActive}
-        />
+
+          setActive={setActive}/>
       </div>
     </div>
   );

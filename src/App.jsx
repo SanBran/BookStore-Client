@@ -18,10 +18,11 @@ import { useSelector } from "react-redux";
 
 
 function App() {
-  const showOverlayPerfile= useSelector(state=> state.overlayProfile);
+  const showOverlayPerfile = useSelector(state => state.overlayProfile);
 
   return (
     <>
+
     {showOverlayPerfile && <Profile />}
     <div >
       
@@ -33,29 +34,37 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
 
-        <Route path="/access" element={<Access />} />
 
-        <Route path="/details:id" element={<BooksDetail />} />
+        {location.pathname !== "/profile" && location.pathname !== "/access" ? (
+          <Navbar />
+        ) : (
+          <></>
+        )}
+        <Routes>
+          <Route path="/" element={<Home />} />
 
-        <Route path="/profile" element={<Profile />} />
+          <Route path="/access" element={<Access />} />
 
-        <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/detail/:id" element={<BooksDetail />} />
 
-        <Route path="/history" element={<History />} />
+          <Route path="/profile" element={<Profile />} />
 
-        <Route path="/settings" element={<Settings />} />
+          <Route path="/wishlist" element={<Wishlist />} />
 
-        <Route path="/Filters" element={<Filters />} />
+          <Route path="/history" element={<History />} />
 
-        <Route path="/Results" element={<Results />} />
+          <Route path="/settings" element={<Settings />} />
 
-        <Route path="/access/validate" element={<EmailVerification />} />
-        
-      </Routes>
+          <Route path="/Filters" element={<Filters />} />
+
+          <Route path="/Results" element={<Results />} />
+
+          <Route path="/access/validate" element={<EmailVerification />} />
+
+        </Routes>
       </div>
     </>
   );
 }
 
 export default App;   
-

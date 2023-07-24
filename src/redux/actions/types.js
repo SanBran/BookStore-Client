@@ -8,6 +8,7 @@ export const GET_BOOKS_BY_TITLE = "GET_BOOK_BY_TITLE";
 export const POST_BOOK = "POST_BOOK";
 export const UPDATE_BOOK_BY_ID = "UPDATE_BOOK_BY_ID";
 export const DELETE_BOOK_BY_ID = "DELETE_BOOK_BY_ID";
+export const RESET_BOOKS_BY_AUTHOR = "RESET_BOOKS_BY_AUTHOR";
 
 // datos de mercadopago
 //name,email,IdBook,carrito:[{productId,quantity}],typeMoney,userId
