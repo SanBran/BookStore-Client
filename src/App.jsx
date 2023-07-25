@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./Views/Home/Home";
 import BooksDetail from "./Views/BooksDetail/BooksDetail";
 import "./App.css";
@@ -18,10 +18,12 @@ import { useSelector } from "react-redux";
 
 
 function App() {
-  const showOverlayPerfile= useSelector(state=> state.overlayProfile);
+  const showOverlayPerfile = useSelector(state => state.overlayProfile);
+  const location = useLocation()
 
   return (
     <>
+
     {showOverlayPerfile && <Profile />}
     <div >
       
@@ -30,32 +32,32 @@ function App() {
       ) : (
         <></>
       )}
-      <Routes>
-        <Route path="/" element={<Home />} />
 
-        <Route path="/access" element={<Access />} />
+        <Routes>
+          <Route path="/" element={<Home />} />
 
-        <Route path="/details:id" element={<BooksDetail />} />
+          <Route path="/access" element={<Access />} />
 
-        <Route path="/profile" element={<Profile />} />
+          <Route path="/detail/:id" element={<BooksDetail />} />
 
-        <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/profile" element={<Profile />} />
 
-        <Route path="/history" element={<History />} />
+          <Route path="/wishlist" element={<Wishlist />} />
 
-        <Route path="/settings" element={<Settings />} />
+          <Route path="/history" element={<History />} />
 
-        <Route path="/Filters" element={<Filters />} />
+          <Route path="/settings" element={<Settings />} />
 
-        <Route path="/Results" element={<Results />} />
+          <Route path="/Filters" element={<Filters />} />
 
-        <Route path="/access/validate" element={<EmailVerification />} />
-        
-      </Routes>
+          <Route path="/Results" element={<Results />} />
+
+          <Route path="/access/validate" element={<EmailVerification />} />
+
+        </Routes>
       </div>
     </>
   );
 }
 
 export default App;   
-

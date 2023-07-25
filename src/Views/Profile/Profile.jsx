@@ -17,7 +17,7 @@ const Profile = () => {
 
   useEffect(() => {
     dispatch(getUserById(userId));
-  }, [dispatch]);
+  }, [dispatch,userId]);
 
   const handleOverlayToggle = () => {
     dispatch(listWish(!showlistWish));
@@ -25,6 +25,7 @@ const Profile = () => {
 
   const handleCloseOverlayToggle = () => {
     dispatch(overlayProfile(showOverlayPerfile));
+    console.log(showOverlayPerfile);
   };
   const handleLogOut = () => {
     dispatch(overlayProfile(showOverlayPerfile));
@@ -35,9 +36,11 @@ const Profile = () => {
   //! si esta en true cuando vuelve al wishlist pasa a false y no se muestra
   //! hacer el Log Out
   return (
+    
     <div className={styles.overlay}>
-      <div onClick={handleCloseOverlayToggle}></div>
+      <div onClick={handleCloseOverlayToggle}>
       <div className={styles.overlayContent}>
+        
         <div>
           <img src={user.photoUser} width="70" height="70" />
           <h3 style={{ color: "BLACK" }}>{user.name}</h3>
@@ -63,6 +66,7 @@ const Profile = () => {
             Log Out
           </button>
         </div>
+      </div>
       </div>
     </div>
   );
