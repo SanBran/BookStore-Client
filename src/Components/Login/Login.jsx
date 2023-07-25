@@ -7,7 +7,9 @@ import style from './Login.module.css'
 import { useDispatch, useSelector} from 'react-redux';
 import { accessUser } from '../../redux/actions/actions';
 
-const Login = () => {
+import ChangePassword from '../ChangePassword/ChangePassword';
+
+const Login = ({setForm}) => {
   const access = useSelector(state=>state.access)
 
   const navigate = useNavigate()
@@ -20,7 +22,15 @@ const Login = () => {
     setRememberMe(event.target.checked)
   }
 
+//-------CAMBIO DE CONTRASENA
+  const handleForgotPass = (event)=>{
+    event.preventDefault();
+    setForm('changePassword')
+  }
+//-------FIN DE CAMBIO DE CONTRASENA
+
   const [logInfo, setLogInfo]= useState({email: '', password: ''});
+
 
   const handleLoginChanges = (event)=>{
     const property = event.target.name;
@@ -61,9 +71,9 @@ const Login = () => {
           <input className={style.checkBox} type="checkbox" id="toggle-btn" onChange={handlerRemeberMe}/>
           <label className={style.checkBoxLabel} htmlFor="toggle-btn">Remember me</label>
         </div>
-        <Link className={style.linkForgotPass}>
+        <button onClick={handleForgotPass} className={style.linkForgotPass}>
           Forgotten password?
-        </Link>
+        </button>
       </div>
 
       <div className={style.loginContainer}>
@@ -75,7 +85,6 @@ const Login = () => {
         </div>
         <button className={style.googleBtn} type='submit'> Sign in with Google </button>
       </div>
-
     </form>
   )
 }
