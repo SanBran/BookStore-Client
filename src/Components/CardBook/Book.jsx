@@ -4,7 +4,7 @@ import styles from './Book.module.css'
 
 const Book = ({ books }) => {
     const { id, image, title, author, price } = books;
-    console.log('');
+
     const genericCover = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhRKhJb1aLmjwGX_ox0TA6eTxCv_5g3Nlr6w&usqp=CAU"
 
     return (

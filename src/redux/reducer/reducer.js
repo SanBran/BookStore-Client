@@ -1,5 +1,6 @@
 import {
   ACTIVATE_USER,
+  ACCESS,
   GET_ALL_BOOKS,
   GET_BOOK_BY_AUTHOR,
   GET_BOOK_BY_ID,
@@ -40,7 +41,6 @@ import {
   FILTER_BY_COUNTRY,
   RESET_BOOKS_BY_AUTHOR,
   FILTER_BY_PriceRange
-
 } from "../actions/types";
 
 let initialState = {
@@ -49,6 +49,7 @@ let initialState = {
   book: [],
   bookByName: [],
   allBooksCopy: [],
+  filteredBooks: [],
   details: [],
   booksByAuthor: [],
   comments: [],
@@ -69,7 +70,6 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         allBooks: payload.books,
-        allBooksCopy: payload.books,
       };
     case GET_BOOKS_BY_TITLE:
       return {
@@ -242,7 +242,6 @@ const reducer = (state = initialState, { type, payload }) => {
       };
     }
 
-
     //----------------------------BACKEND FILTERS-------------------
 
     case FILTER_BY_GENDER:
@@ -273,13 +272,15 @@ const reducer = (state = initialState, { type, payload }) => {
       if (payload === "") {
         return {
           ...state,
-          allBookCopy: state.allBooks,
+          allBooksCopy: state.allBooks,
         };
+
       }
       return {
         ...state,
         allBooksCopy: payload,
       };
+
 
 
     case FILTER_BY_LANGUAGE:
@@ -300,6 +301,7 @@ const reducer = (state = initialState, { type, payload }) => {
           ...state,
           allBooksCopy: state.allBooks,
         };
+
       }
       return {
         ...state,
@@ -311,6 +313,7 @@ const reducer = (state = initialState, { type, payload }) => {
           ...state,
           allBooksCopy: state.allBooks,
         };
+
       }
       return {
         ...state,
@@ -326,7 +329,6 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         allBooksCopy: payload,
       };
-
     //----------------------------mercadoPago----------------
     // revisar mercadoPago no estoy seguro como funciona
     case GET_FAILURE:
@@ -415,8 +417,8 @@ const reducer = (state = initialState, { type, payload }) => {
     case ACTIVATE_USER:
       return {
         ...state,
-        users: [...state.users, payload]
-      }
+        users: [...state.users, payload],
+      };
     case UPDATE_USER:
       return {
         ...state,
@@ -434,9 +436,14 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         showListwish: payload,
       };
+    case ACCESS:
+      return {
+        ...state,
+        access: payload,
+      };
     default:
       return { ...state };
   }
 };
-console.log('reducer reparado');
+
 export default reducer;
