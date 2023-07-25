@@ -46,10 +46,9 @@ import {
 let initialState = {
   access: { state: false, ref: "" },
   allBooks: [],
-  book: [],
-  bookByName: []
-  ,
   allBooksCopy: [],
+  book: [],
+  bookByName: [],
   filteredBooks: [],
   details: [],
   booksByAuthor: [],

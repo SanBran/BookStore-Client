@@ -13,7 +13,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const allBooks = useSelector((state) => state.allBooks);
   const showListWishlist = useSelector((state) => state.showListwish);
-  const userId = useSelector((state) => state.access);
+  const userId = useSelector((state) => state.access.state);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [active, setActive] = useState(1);
