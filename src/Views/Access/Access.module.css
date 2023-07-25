@@ -43,7 +43,7 @@
 .switch {
     margin: 0;
     border-bottom: 2px solid #FA9D1B;
-    color:black;
+    color:#bbbbbb;
 }
 .switchFocus{
     color: #FA9D1B;
