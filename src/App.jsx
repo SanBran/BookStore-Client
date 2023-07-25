@@ -32,7 +32,6 @@ function App() {
         <></>
       )}
 
-
         <Routes>
           <Route path="/" element={<Home />} />
 
@@ -57,7 +56,7 @@ function App() {
         </Routes>
       </div>
     </>
-  )
+  );
 }
 
 export default App;   
