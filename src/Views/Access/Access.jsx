@@ -22,7 +22,10 @@ const Access = () => {
             <div className={style.structure}>
 {/* ------------vista del componente para el cambio de contrasena */}
                 {form === 'changePassword' && 
-                (<ChangePassword/>)}
+                (<div className={style.changePasswordcontainer}>
+                    <ChangePassword setForm={setForm}/>
+                </div>
+                )}
 
 {/* ------------vista de los componentes login y signup */}
                 {(form === 'login' || form === 'signup') &&

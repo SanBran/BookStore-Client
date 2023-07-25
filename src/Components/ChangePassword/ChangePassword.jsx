@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import style from './ChangePassword.Module.css';
 
-const ChangePassword = ()=>{
+const ChangePassword = ({setForm})=>{
     const [send, setSend] = useState(false)
 
     const [userID, setUserID]= useState({email: ''});    
@@ -13,8 +13,9 @@ const ChangePassword = ()=>{
         setLogInfo({...logInfo, [property]: value})
     }
 
-    const BackLogIn = ()=>{
-
+    const BackLogIn = (event)=>{
+        event.preventDefault();
+        setForm('login')
     }
 
     const handleSubmit = (event)=>{
