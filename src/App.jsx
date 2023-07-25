@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./Views/Home/Home";
 import BooksDetail from "./Views/BooksDetail/BooksDetail";
 import "./App.css";
@@ -19,6 +19,7 @@ import { useSelector } from "react-redux";
 
 function App() {
   const showOverlayPerfile = useSelector(state => state.overlayProfile);
+  const location = useLocation()
 
   return (
     <>
