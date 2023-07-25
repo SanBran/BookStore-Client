@@ -42,11 +42,10 @@ import {
 } from "../actions/types";
 
 let initialState = {
-
+  access: { state: false, ref: "" },
   allBooks: [],
   book: [],
-  bookByName: []
-  ,
+  bookByName: [],
   allBooksCopy: [],
   details: [],
   booksByAuthor: [],

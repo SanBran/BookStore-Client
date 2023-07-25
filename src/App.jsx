@@ -10,6 +10,7 @@ import History from "./Components/History/History";
 import Settings from "./Views/Settings/Settings";
 import Filters from "./Components/Filters/Filters";
 import Results from "./Views/Results/Results";
+import NotFound from "./Views/Not Found/NotFound";
 
 import EmailVerification from "./Views/EmailVerification";
 
@@ -59,6 +60,7 @@ function App() {
 
           <Route path="/access/validate" element={<EmailVerification />} />
 
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </>
