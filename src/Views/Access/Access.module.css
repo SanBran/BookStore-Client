@@ -43,7 +43,7 @@
 .switch {
     margin: 0;
     border-bottom: 2px solid #FA9D1B;
-    color:#bbbbbb;
+    color:black;
 }
 .switchFocus{
     color: #FA9D1B;
@@ -80,6 +80,16 @@
     align-items: center;
     width: 100%;
     height: 700px;
+    overflow: hidden;
+    
+    transition: all 1s ease;
+}
+.changePasswordcontainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 400px;
     overflow: hidden;
 
     transition: all 1s ease;
