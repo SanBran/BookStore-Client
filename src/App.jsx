@@ -27,7 +27,7 @@ function App() {
     {showOverlayPerfile && <Profile />}
     <div >
       
-    {location.pathname !== "/profile" && location.pathname !== "/access" && location.pathname !== "/Results" ? (
+    {location.pathname !== "/profile" && location.pathname !== "/access" && location.pathname !== "/results/:title" ? (
         <Navbar  />
       ) : (
         <></>
@@ -50,7 +50,7 @@ function App() {
 
           <Route path="/Filters" element={<Filters />} />
 
-          <Route path="/Results" element={<Results />} />
+          <Route path="/results" element={<Results />} />
 
           <Route path="/access/validate" element={<EmailVerification />} />
 
