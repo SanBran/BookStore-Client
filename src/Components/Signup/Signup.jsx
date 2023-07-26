@@ -7,7 +7,6 @@ import { expresions } from "../../utils/regex";
 
 import style from './Signup.module.css';
 
-
 const SignUp = ({ setForm }) => {
   const dispatch = useDispatch();
 
@@ -130,9 +129,9 @@ const SignUp = ({ setForm }) => {
     event.preventDefault();
     validateSubmit();
     if(validateSubmit()){
-      console.log('entro a crear usuario');
+      //console.log('entro a crear usuario');
       await dispatch(postUser(signUpInfo));
-      console.log('se debio haber creado');
+      //console.log('se debio haber creado');
       setSignUpInfo({
         name: "",
         email: "",

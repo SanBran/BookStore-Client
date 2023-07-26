@@ -572,7 +572,6 @@ export function accessLogIn({email, password}) {
                 `http://localhost:8000/activateUser/`,
                 userData
             );
-            //console.log(response.data.detail.id);
             return dispatch({
                 type: ACCESS,
                 payload: { state: true, ref: response.data.detail.id },
@@ -670,22 +669,7 @@ export function postUser(userData) {
     }
   };
 }
-// export function activateUser(dataToken) {
-//     return async function (dispatch) {
-//         try {
-//             const response = await axios.post(`http://localhost:8000/activateUser/`,
-//                 dataToken)
-//             return dispatch({
-//                 type: ACTIVATE_USER,
-//                 payload: response.data
-//             })
-//         }
-//         catch (error) {
-//             console.log(error);
-//             throw Error(error.message)
-//         }
-//     }
-// }
+
 export function activateUser(token) {
     return async function (dispatch) {
         try {
@@ -697,15 +681,12 @@ export function activateUser(token) {
             const response = await axios.post(`http://localhost:8000/activateUser/`,
                 tokenData
             );
-            console.log(response.data);
-
             return dispatch({
                 type: ACTIVATE_USER,
                 payload: response.data
             })
         }
         catch (error) {
-            //console.log(error);
             throw Error(error.message)
         }
     }

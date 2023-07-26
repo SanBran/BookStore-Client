@@ -42,7 +42,6 @@ const Login = ({setForm}) => {
       setError("")
       navigate('/')
     } catch (error) {
-      //console.log('error en login:',error.message);
       setError(error.message)
     }
   }

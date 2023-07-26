@@ -21,7 +21,7 @@ const Access = () => {
     const handlerSwitchForms = (formName) => {
         setForm(formName)
     }
-    console.log(form);
+    //console.log(form);
     return (
         <>
 
