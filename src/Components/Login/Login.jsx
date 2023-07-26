@@ -5,10 +5,12 @@ import axios from 'axios';
 
 import style from './Login.module.css'
 import { useDispatch, useSelector} from 'react-redux';
-import { accessUser } from '../../redux/actions/actions';
+import { accessLogIn } from '../../redux/actions/actions';
 
 const Login = ({setForm}) => {
   const access = useSelector(state=>state.access)
+
+  const [error, setError] = useState("")
 
   const navigate = useNavigate()
 
@@ -39,29 +41,22 @@ const Login = ({setForm}) => {
 
   const handlerLogIn = async(event)=>{
     event.preventDefault();
-    const userData = {
-      id:"2",
-      data1:logInfo.email,
-      data2:logInfo.password
-    }
     try {
-      //PASAR A REDUX
-      const response = await axios.post(`http://localhost:8000/activateUser/`, userData)
-      //console.log(response.data);
+      await dispatch(accessLogIn(logInfo))
+      setError("")
       navigate('/')
-      return(dispatch(accessUser(true, response.data.detail.id)))
     } catch (error) {
-      console.log(error.response.data.text);
-      return(dispatch(accessUser(false, error.response.data.text)))
+      //console.log('error en login:',error.message);
+      setError(error.message)
     }
   }
 
   return ( 
     <form className={style.fromContainer} >
       <div className={style.inputsContainer}>
-          {!access.state && access.ref.length ? (<p className={style.textError}>{access.ref}</p>):(<></>)}
-          <input className={access.ref.length ?(`${style.input} ${style.error}`) :(style.input)} type='text' placeholder='Email address' name='email' value={logInfo.username} onChange={handleLoginChanges} />
-          <input className={access.ref.length ?(`${style.input} ${style.error}`) :(style.input)} type='password' placeholder='Password' name='password' value={logInfo.password} onChange={handleLoginChanges}/>
+          {error.length ? (<p className={style.textError}>{error}</p>):(<></>)}
+          <input className={error.length ?(`${style.input} ${style.error}`) :(style.input)} type='text' placeholder='Email address' name='email' value={logInfo.username} onChange={handleLoginChanges} />
+          <input className={error.length ?(`${style.input} ${style.error}`) :(style.input)} type='password' placeholder='Password' name='password' value={logInfo.password} onChange={handleLoginChanges}/>
       </div>
 
       <div className={style.otherStuffContainer}>
@@ -69,9 +64,9 @@ const Login = ({setForm}) => {
           <input className={style.checkBox} type="checkbox" id="toggle-btn" onChange={handlerRemeberMe}/>
           <label className={style.checkBoxLabel} htmlFor="toggle-btn">Remember me</label>
         </div>
-        <button onClick={handleForgotPass} className={style.linkForgotPass}>
+        <Link onClick={handleForgotPass} className={style.linkForgotPass}>
           Forgotten password?
-        </button>
+        </Link>
       </div>
 
       <div className={style.loginContainer}>

@@ -17,7 +17,7 @@ const SignUp = ({ setForm }) => {
     email: "",
     password: "",
     confirmPassword: "",
-    dniPassport: "",
+    dniPasaport: "",
     phoneCode: "",
     phone: "",
     country: "",
@@ -29,7 +29,7 @@ const SignUp = ({ setForm }) => {
     email: "",
     password: "",
     confirmPassword: "",
-    dniPassport: "",
+    dniPasaport: "",
     phoneCode: "",
     phone: "",
     country: "",
@@ -51,14 +51,14 @@ const SignUp = ({ setForm }) => {
         else setErrors({ ...errors, [property]: '' })
       }
         break;
-      case 'dniPassport': {
-        if (state.dniPassport === "") setErrors({ ...errors, [property]: 'Enter your identity document' })
+      case 'dniPasaport': {
+        if (state.dniPasaport === "") setErrors({ ...errors, [property]: 'Enter your identity document' })
         else setErrors({ ...errors, [property]: '' })
       }
         break;
     }
 
-    if (property === 'dniPassport' || property === 'confirmPassword' || property === 'country' || property === 'gender') return;
+    if (property === 'dniPasaport' || property === 'confirmPassword' || property === 'country' || property === 'gender') return;
 
     if (!expresions[property].test(state[property])) {
       switch (property) {
@@ -144,7 +144,7 @@ const SignUp = ({ setForm }) => {
           email: "",
           password: "",
           confirmPassword: "",
-          dniPassport: "",
+          dniPasaport: "",
           phoneCode: "",
           phone: "",
           country: "",
@@ -209,15 +209,15 @@ const SignUp = ({ setForm }) => {
         {errors.confirmPassword.length ? <p className={style.textError}>{errors.confirmPassword}</p> : <></>}
 
         <input
-          className={errors.dniPassport.length ? (`${style.input} ${style.error}`) : style.input}
-          name="dniPassport"
+          className={errors.dniPasaport.length ? (`${style.input} ${style.error}`) : style.input}
+          name="dniPasaport"
           onChange={handleSignUpChanges}
-          value={signUpInfo.dniPassport}
+          value={signUpInfo.dniPasaport}
           type="text"
           placeholder="DNI / passport"
           required
         />
-        {errors.dniPassport.length ? <p className={style.textError}>{errors.dniPassport}</p> : <></>}
+        {errors.dniPasaport.length ? <p className={style.textError}>{errors.dniPassport}</p> : <></>}
 
         <div className={style.phoneInputs}>
           <input

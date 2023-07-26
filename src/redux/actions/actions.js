@@ -560,6 +560,29 @@ export function deleteCommentById(id) {
     };
 }
 //-------------------------USER-----------------------
+export function accessLogIn({email, password}) {
+    return async function (dispatch){
+        try {
+            const userData = {
+                id:"2",
+                data1:email,
+                data2:password
+            }
+            const response = await axios.post(
+                `http://localhost:8000/activateUser/`,
+                userData
+            );
+            //console.log(response.data.detail.id);
+            return dispatch({
+                type: ACCESS,
+                payload: { state: true, ref: response.data.detail.id },
+            });
+        } catch (error) {
+            throw Error(error.response.data.text);
+        }
+    }
+}
+
 export function accessUser(bool, ref) {
     return {
         type: ACCESS,

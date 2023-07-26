@@ -3,6 +3,7 @@ import style from './ChangePassword.Module.css';
 import axios from 'axios';
 
 import { expresions } from '../../utils/regex';
+import { Link } from 'react-router-dom';
 
 const ChangePassword = ({form, setForm})=>{
     const urlParams = new URLSearchParams(window.location.search);
@@ -108,12 +109,10 @@ const ChangePassword = ({form, setForm})=>{
         }
     }
 
-
-
     return (
         <form className={style.formContainer}>
             <div className={style.buttonContainer}>
-                <button onClick={BackLogIn}>Back to Log in</button>
+                <Link onClick={BackLogIn}>Back to Log in</Link>
             </div>
             { form === 'changePassword' &&
                 (<>
