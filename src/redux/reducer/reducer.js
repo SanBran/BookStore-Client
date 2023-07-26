@@ -441,7 +441,7 @@ const reducer = (state = initialState, { type, payload }) => {
     case ACTIVATE_USER:
       return {
         ...state,
-        users: [...state.users, payload],
+        //por el momento no guarda nada en el estado global
       };
     case UPDATE_USER:
       return {

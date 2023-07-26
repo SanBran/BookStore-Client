@@ -705,7 +705,7 @@ export function activateUser(token) {
             })
         }
         catch (error) {
-            console.log(error);
+            //console.log(error);
             throw Error(error.message)
         }
     }
