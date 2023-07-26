@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import style from './ChangePassword.Module.css';
 import axios from 'axios';
 
+import { expresions } from '../../utils/regex';
+
 const ChangePassword = ({form, setForm})=>{
     const urlParams = new URLSearchParams(window.location.search);
     const valtokenPass = urlParams.get('token');
-
 
     const [sendEmail, setSendEmail] = useState(false);
     const [sendPass, setSendPass] = useState(false);
@@ -14,7 +15,7 @@ const ChangePassword = ({form, setForm})=>{
         email: "",
         password: "",
         confirmPassword: "",
-      })
+    })
         
     const [userData, setUserData]= useState({
         email: '',
@@ -23,18 +24,13 @@ const ChangePassword = ({form, setForm})=>{
 
     });    
 
-    //-----------VALIDACIONES DEL FORMULARIO
-    const expresions = {
-    email: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-    password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&#.])[A-Za-z\d$@$!%*?&#.]{8,15}$/, //contrasena debe tener entre 8-15 caract., minus, mayus, num y caract especial [$@$!%*?&#.] cualquier a de los que estan dentro de los corchetes
-    }
+//-----------VALIDACIONES DEL FORMULARIO
     const validateInputs = (state, property) => {
         if(property === 'confirmPassword'){
             if (state.password !== state.confirmPassword) setErrors({ ...errors, [property]: 'Passwords do not match' })
             else setErrors({ ...errors, [property]: '' })
             return;
         }
-        
         if (!expresions[property].test(state[property])) {
           switch (property) {
             case 'email': setErrors({ ...errors, [property]: 'Invalid email' })
@@ -51,7 +47,7 @@ const ChangePassword = ({form, setForm})=>{
           }
         }
       }
-      //------------FIN DE LAS VALIDACIONES de inputs
+//------------FIN DE LAS VALIDACIONES de inputs
     
 
     const handleChanges = (event)=>{
