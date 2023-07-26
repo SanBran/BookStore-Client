@@ -1,4 +1,5 @@
 import {
+  ADD_FAVORITE,
   ACTIVATE_USER,
   ACCESS,
   GET_ALL_BOOKS,
@@ -40,7 +41,9 @@ import {
   FILTER_BY_PUBLISHED_DATE,
   FILTER_BY_COUNTRY,
   RESET_BOOKS_BY_AUTHOR,
-  FILTER_BY_PriceRange
+  FILTER_BY_PriceRange,
+  ADD_CART,
+  REMOVE_CART,
 } from "../actions/types";
 
 let initialState = {
@@ -49,6 +52,7 @@ let initialState = {
   allBooksCopy: [],
   book: [],
   bookByName: [],
+  cart: [],
   filteredBooks: [],
   details: [],
   booksByAuthor: [],
@@ -66,6 +70,7 @@ let initialState = {
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
     //-----------------------------BOOK----------------------------------
+   
     case GET_ALL_BOOKS:
       return {
         ...state,
@@ -331,6 +336,20 @@ const reducer = (state = initialState, { type, payload }) => {
       };
     //----------------------------mercadoPago----------------
     // revisar mercadoPago no estoy seguro como funciona
+    case ADD_CART:
+      console.log(state.cart);
+
+      return {
+        ...state,
+        cart: [ ...state.cart,payload],
+      };
+    case REMOVE_CART:
+      console.log(state.cart);
+      let filter=state.cart.filter((book) => book.id !== payload); 
+      return {
+        ...state,
+        cart: filter
+      };
     case GET_FAILURE:
       return {
         ...state,
@@ -399,6 +418,11 @@ const reducer = (state = initialState, { type, payload }) => {
         comments: state.comments.filter((comment) => comment.id !== payload),
       };
     //-----------------------------------------USER--------------------------------
+    case ADD_FAVORITE:
+      return {
+          ...state,
+          userDetail: payload,
+        };
     case GET_USERS:
       return {
         ...state,
@@ -422,9 +446,7 @@ const reducer = (state = initialState, { type, payload }) => {
     case UPDATE_USER:
       return {
         ...state,
-        users: state.users.map((user) =>
-          user.id === payload.id ? payload : user
-        ),
+        userDetail: payload,
       };
     case OVERLAY_PROFILE:
       return {

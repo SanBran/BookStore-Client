@@ -47,16 +47,19 @@ export const GET_COMMENTS = "GET_COMMENTS";
 export const UPDATE_COMMENT_BY_ID = "UPDATE_COMMENT_BY_ID";
 export const DELETE_COMMENT_BY_ID = "DELETE_COMMENT_BY_ID";
 
+//CART
+export const REMOVE_CART = "REMOVE_CART";
+export const ADD_CART = "ADD_CART";
+
 //USERS
 export const ACCESS = "ACCESS";
 export const OVERLAY_PROFILE = "OVERLAY_PROFILE";
 export const SHOW_LISTWISH = "SHOW_LISTWISH";
-
+export const ADD_FAVORITE = "ADD_FAVORITE";
 export const GET_USERS = "GET_USER";
 export const GET_USER_BY_ID = "GET_USER_BY_ID";
 export const POST_USER = "POST_USER";
 export const UPDATE_USER = "UPDATE_USER";
-
 export const ACTIVATE_USER = "ACTIVATE_USER";
 
 
