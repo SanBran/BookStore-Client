@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
   const dispatch = useDispatch();
-  const [placeHolder, setPlaceHolder] = useState("Search the book that you want")
   const [search, setSearch] = useState({
     title:""
   });
@@ -23,10 +22,15 @@ const SearchBar = () => {
   const handleSearch = (e) => {
     e.preventDefault()
     dispatch(getBooksByTitle(search));
-    navigate("/Results")
+    navigate(`/results/?title=${search.title}`)
     setSearch({
       title: ""
     });;
+  };
+
+  const handleGenre = (e) => {
+    e.preventDefault()
+    
   };
 
   const handleKeyPress = (e) => {
@@ -49,11 +53,12 @@ const SearchBar = () => {
         name="searchBar"
         type="search"
         value={search.title}
-        placeholder={placeHolder}
+        placeholder="Search the book that you want"
         onChange={handleChange}
         onKeyPress={handleKeyPress} 
         className={styles.bar}
       />
+      <button onClick={handleGenre} className={styles.genre}>⌵ all genres</button>
     </nav>
   );
 };

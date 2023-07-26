@@ -12,8 +12,11 @@ import Pagination from "../../Components/Pagination/Pagination";
 const Home = () => {
   const dispatch = useDispatch();
   const allBooks = useSelector((state) => state.allBooks);
+  const totalPages = useSelector((state)=> state.booksObject)
   const showListWishlist = useSelector((state) => state.showListwish);
 
+
+ 
 
   const [currentPage, setCurrentPage] = useState(1);
   const [active, setActive] = useState(1);
@@ -26,11 +29,6 @@ useEffect(() => {
   }, [dispatch]);
 
  
-  const booksPerPage = 12; // Cards por página
-  const paginationSize = 7; // paginas visibles en paginación
-  const lastCountryIndex = currentPage * booksPerPage;
-  const firstCountryIndex = lastCountryIndex - booksPerPage;
-  const currentBooks =!allBooks.error && allBooks.slice(firstCountryIndex, lastCountryIndex);
 
   return (
     <div className={styles.container}>
@@ -42,19 +40,18 @@ useEffect(() => {
         {showListWishlist ? (
           <Wishlist />
         ) : (
-          <Books currentBooks={currentBooks} />
+          <Books currentBooks={allBooks} />
         )}
       </div>
       <div className={styles.paginationContainer}>
         <Pagination
-          numBooks={allBooks.length}
-          booksPerPage={booksPerPage}
-          paginationSize={paginationSize}
+          numBooks={totalPages}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           active={active}
-
-          setActive={setActive}/>
+          setActive={setActive}
+          filter={false}/>
+          
       </div>
     </div>
   );
