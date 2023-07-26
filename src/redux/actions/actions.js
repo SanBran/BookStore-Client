@@ -670,11 +670,35 @@ export function postUser(userData) {
     }
   };
 }
-export function activateUser(dataToken) {
+// export function activateUser(dataToken) {
+//     return async function (dispatch) {
+//         try {
+//             const response = await axios.post(`http://localhost:8000/activateUser/`,
+//                 dataToken)
+//             return dispatch({
+//                 type: ACTIVATE_USER,
+//                 payload: response.data
+//             })
+//         }
+//         catch (error) {
+//             console.log(error);
+//             throw Error(error.message)
+//         }
+//     }
+// }
+export function activateUser(token) {
     return async function (dispatch) {
         try {
+            const tokenData = {
+                id:"1",
+                data1:token,
+                data2:""
+            }
             const response = await axios.post(`http://localhost:8000/activateUser/`,
-                dataToken)
+                tokenData
+            );
+            console.log(response.data);
+
             return dispatch({
                 type: ACTIVATE_USER,
                 payload: response.data

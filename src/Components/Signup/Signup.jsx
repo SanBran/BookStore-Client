@@ -131,20 +131,21 @@ const SignUp = ({ setForm }) => {
     validateSubmit();
     if(validateSubmit()){
       console.log('entro a crear usuario');
-      await dispatch(postUser(signUpInfo))
+      await dispatch(postUser(signUpInfo));
       console.log('se debio haber creado');
       setSignUpInfo({
         name: "",
         email: "",
         password: "",
         confirmPassword: "",
-        dniPassport: "",
+        dniPasaport: "",
         phoneCode: "",
         phone: "",
         country: "",
         birthday: "",
         gender: "",
-      })
+      });
+      setForm('login');
     }
   };
 
@@ -204,7 +205,7 @@ const SignUp = ({ setForm }) => {
           placeholder="DNI / passport"
           required
         />
-        {errors.dniPasaport.length ? <p className={style.textError}>{errors.dniPassport}</p> : <></>}
+        {errors.dniPasaport.length ? <p className={style.textError}>{errors.dniPasaport}</p> : <></>}
 
         <div className={style.phoneInputs}>
           <input
