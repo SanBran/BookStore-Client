@@ -1,20 +1,16 @@
 import { useState} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import axios from 'axios';
-
 import style from './Login.module.css'
 import { useDispatch, useSelector} from 'react-redux';
 import { accessLogIn } from '../../redux/actions/actions';
 
 const Login = ({setForm}) => {
-  const access = useSelector(state=>state.access)
+  
+  const navigate = useNavigate()
+  const dispatch = useDispatch();
 
   const [error, setError] = useState("")
-
-  const navigate = useNavigate()
-
-  const dispatch = useDispatch();
   //estado local para saber cuando el usurio presiono la opcion de <Remember me>
   const [rememberMe, setRememberMe] = useState(false);
 
@@ -22,7 +18,7 @@ const Login = ({setForm}) => {
     setRememberMe(event.target.checked)
   }
 
-//-------CAMBIO DE CONTRASENA
+//-------SOLICITUD CAMBIO DE CONTRASENA
   const handleForgotPass = (event)=>{
     event.preventDefault();
     setForm('requestChangePass')
