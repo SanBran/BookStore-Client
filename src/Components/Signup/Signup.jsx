@@ -1,17 +1,14 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import countriesData from "./data/countries.json";
 import { postUser } from "../../redux/actions/actions";
-
 import { expresions } from "../../utils/regex";
 
 import style from './Signup.module.css';
-import axios from "axios";
 
 
 const SignUp = ({ setForm }) => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [errors, setErrors] = useState({
@@ -38,9 +35,8 @@ const SignUp = ({ setForm }) => {
     birthday: "",
     gender: "",
   });
-  //console.log(signUpInfo);
   
-  //-----------VALIDACIONES DEL FORMULARIO
+//-----------VALIDACIONES DEL FORMULARIO
   const validateInputs = (state, property) => {
     switch (property) {
       case 'confirmPassword': {
@@ -95,7 +91,7 @@ const SignUp = ({ setForm }) => {
     }
 
   }
-  //------------FIN DE LAS VALIDACIONES de inputs
+//-----------FIN DE LAS VALIDACIONES de inputs
 
   const handleSignUpChanges = (event) => {
     const property = event.target.name;
@@ -127,8 +123,6 @@ const SignUp = ({ setForm }) => {
       if (property === 'gender') continue;
       if (errors[property].length) return false;
     }
-
-
     return true
   }
 
@@ -153,7 +147,6 @@ const SignUp = ({ setForm }) => {
       })
     }
   };
-
 
   return (
     <form className={style.formContainer} onSubmit={handleSubmit}>
