@@ -10,20 +10,16 @@ import {
   removeCart,
 } from "../../redux/actions/actions";
 
-const Book = ({ books }) => {
+const Book = ({ books, onRemove  }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.access);
   const userDat = useSelector((state) => state.userDetail);
 
-  useEffect(() => { 
-    if(user.ref !== "") {
-    dispatch(getUserById(user.ref));}
-  }, [dispatch, user.ref]);
+
+  //editUser={id,name, birthday, country, phone, phoneCode, gender, dniPasaport, status, rol, photoUser, listWish}
 
   const { id, image, title, author, price } = books;
-
   const [userData, setUserData] = useState(userDat);
-
   const [isFav, setIsFav] = useState(false);
   const [cart, setCart] = useState(false);
 
@@ -34,21 +30,29 @@ const Book = ({ books }) => {
     let list;
     if (isFav) {
       setIsFav(false);
-      list = userData.listWish.filter((bookF) => bookF.id !== id);
+      list = userData.listWish.filter((idF) => idF !== id);
+      onRemove(books.id);
+
     } else {
       setIsFav(true);
-      userData.listWish
-        ? (list = [...userData.listWish, books])
-        : (list = [books]);
+      userData.listWish ? (list = [...userData.listWish, id]) : (list = [id]);
     }
     sendData(list);
   };
-  const sendData = (list)=>{
-    console.log(userData);
-    userData.listWish=list;
+  const sendData = (list) => {
+    userData.listWish = list;
     dispatch(addFavorite(userData));
-
-} 
+    console.log(userData.listWish);
+  };
+  useEffect(() => {
+    if (user.state) {
+      if (userData.listWish && userData.listWish.includes(id)) {
+        setIsFav(true);
+      } else {
+        setIsFav(false);
+      }
+    }
+  }, [userData.listWish, id, user.state]);
   const handleCart = () => {
     if (cart) {
       setCart(false);

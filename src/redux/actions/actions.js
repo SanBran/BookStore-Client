@@ -50,49 +50,6 @@ import {
     PASSWORD_REQUEST,
     PASSWORD_CHANGE,
     REDIRECT_TOKEN,
-  GET_ALL_BOOKS,
-  GET_BOOK_BY_AUTHOR,
-  GET_BOOK_BY_ID,
-  GET_BOOKS_BY_TITLE,
-  POST_BOOK,
-  UPDATE_BOOK_BY_ID,
-  DELETE_BOOK_BY_ID,
-  GET_FAILURE,
-  GET_PENDING,
-  GET_SUCCESS,
-  POST_MERCADOPAGO,
-  POST_WEBHOOK_PAGO,
-  POST_EMAIL,
-  POST_SMS_WHATSAPP,
-  FILTER_BY_GENRER,
-  FILTER_BY_LANGUAJE,
-  SELECT_PAGE,
-  SELECT_FILTER_PAGE,
-  ORDER_BY_PRICE,
-  ORDER_BY_PUBLISHED_DATE,
-  ORDER_BY_TITLE,
-  POST_COMMENT,
-  GET_COMMENTS,
-  UPDATE_COMMENT_BY_ID,
-  DELETE_COMMENT_BY_ID,
-  GET_USERS,
-  GET_USER_BY_ID,
-  POST_USER,
-  UPDATE_USER,
-  OVERLAY_PROFILE,
-  SHOW_LISTWISH,
-  FILTER_BY_PRICE,
-  FILTER_BY_AUTHOR,
-  FILTER_BY_GENDER,
-  FILTER_BY_LANGUAGE,
-  FILTER_BY_EDITORIAL,
-  FILTER_BY_NUM_PAGES,
-  FILTER_BY_PUBLISHED_DATE,
-  FILTER_BY_COUNTRY,
-  FILTER_BY_PriceRange,
-  ACTIVATE_USER,
-  ACCESS,
-  RESET_BOOKS_BY_AUTHOR,
 } from "./types";
 
 export const DETAIL_BOOK_BY_ID = "DETAIL_BOOK_BY_ID";
@@ -178,7 +135,10 @@ export function bookByName(name) {
   return async function (dispatch) {
     const response = await axios(`/getBooks?author=${name}`);
     const data = response.data;
-    return dispatch({ type: BOOK_BY_NAME, payload: data });
+    return dispatch({
+      type: BOOK_BY_NAME,
+      payload: data
+    });
   };
 }
 //--------------------FILTERS--------------------
@@ -410,17 +370,17 @@ export function selectFilterPage(page) {
 }
 //------------------MERCADOPAGO-------------------------------
 export function addCart(book) {
-    return ({
-        type: ADD_CART,
-        payload: book,
-    });
+  return ({
+    type: ADD_CART,
+    payload: book,
+  });
 
 }
 export function removeCart(bookId) {
-    return ({
-        type: REMOVE_CART,
-        payload: bookId,
-    });
+  return ({
+    type: REMOVE_CART,
+    payload: bookId,
+  });
 }
 export function getMercadoPagoFailure() {
   return async function (dispatch) {
@@ -622,32 +582,32 @@ export function deleteCommentById(id) {
   };
 }
 //-------------------------USER-----------------------
-export function accessLogIn({email, password}) {
-    return async function (dispatch){
-        try {
-            const userData = {
-                id:"2",
-                data1:email,
-                data2:password
-            }
-            const response = await axios.post(
-                `http://localhost:8000/activateUser/`,
-                userData
-            );
-            return dispatch({
-                type: ACCESS,
-                payload: { state: true, ref: response.data.detail.id },
-            });
-        } catch (error) {
-            throw Error(error.response.data.text);
-        }
+export function accessLogIn({ email, password }) {
+  return async function (dispatch) {
+    try {
+      const userData = {
+        id: "2",
+        data1: email,
+        data2: password
+      }
+      const response = await axios.post(
+        `http://localhost:8000/activateUser/`,
+        userData
+      );
+      return dispatch({
+        type: ACCESS,
+        payload: { state: true, ref: response.data.detail.id },
+      });
+    } catch (error) {
+      throw Error(error.response.data.text);
     }
+  }
 }
 
 export function accessUser(bool, ref) {
   return {
     type: ACCESS,
-    payload: {state:bool, ref},
+    payload: { state: bool, ref },
   };
 
 }
@@ -716,23 +676,24 @@ export function postUser(userData) {
     }
   };
 }
+
 export function activateUser(dataToken) {
-    return async function (dispatch) {
-        try {
-            const response = await axios.post(`http://localhost:8000/activateUser/`,
-                dataToken)
-            return dispatch({
-                type: ACTIVATE_USER,
-                payload: response.data
-            })
-        }
-        catch (error) {
-            console.log(error);
-            throw Error(error.message)
-        }
+  return async function (dispatch) {
+    try {
+      const response = await axios.post(`http://localhost:8000/activateUser/`,
+        dataToken)
+      return dispatch({
+        type: ACTIVATE_USER,
+        payload: response.data
+      })
     }
-  };
+    catch (error) {
+      console.log(error);
+      throw Error(error.message)
+    }
+  }
 }
+
 //editUser={id,name, birthday, country, phone, phoneCode, gender, dniPasaport, status, rol, photoUser, listWish}
 export function updateUser(userData) {
   return async function (dispatch) {
@@ -753,58 +714,58 @@ export function updateUser(userData) {
 }
 
 export function redirectToken(token) {
-    return {
-        type: REDIRECT_TOKEN,
-        payload: token,
-    }
+  return {
+    type: REDIRECT_TOKEN,
+    payload: token,
+  }
 }
 
 export function passwordRequest(email) {
-    return async function (dispatch){
-        try {
-            const userData = {
-                id:"3",
-                data1:email,
-                data2:''
-            }
+  return async function (dispatch) {
+    try {
+      const userData = {
+        id: "3",
+        data1: email,
+        data2: ''
+      }
 
-            console.log(userData);
-            const response = await axios.post(
-                `http://localhost:8000/activateUser/`,
-                userData
-            );
-            return dispatch({
-                type: PASSWORD_REQUEST,
-                payload: response.data,
-            });
-        } catch (error) {
-            console.log(error);
-            throw Error(error.response ? error.response.data.text : error.message);
-        }
+      console.log(userData);
+      const response = await axios.post(
+        `http://localhost:8000/activateUser/`,
+        userData
+      );
+      return dispatch({
+        type: PASSWORD_REQUEST,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+      throw Error(error.response ? error.response.data.text : error.message);
     }
+  }
 }
 
 export function passwordChange(token, password) {
-    return async function (dispatch){
-        try {
-            const changeData = {
-                id:"4",
-                data1:token,
-                data2:password
-            }
+  return async function (dispatch) {
+    try {
+      const changeData = {
+        id: "4",
+        data1: token,
+        data2: password
+      }
 
-            const response = await axios.post(
-                `http://localhost:8000/activateUser/`,
-                changeData
-            );
-            return dispatch({
-                type: PASSWORD_CHANGE,
-                payload: response.data,
-            });
-        } catch (error) {
-            console.log(error);
-            throw Error(error.response ? error.response.data.text : error.message);
-        }
+      const response = await axios.post(
+        `http://localhost:8000/activateUser/`,
+        changeData
+      );
+      return dispatch({
+        type: PASSWORD_CHANGE,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+      throw Error(error.response ? error.response.data.text : error.message);
     }
+  }
 }
 
