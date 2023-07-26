@@ -18,7 +18,7 @@ const EmailVerification = ()=>{
     
     // Obtenemos el valor de la variable 'valtoken'
     const valtoken = urlParams.get('valtoken');
-    //console.log('Valor de valtoken:', valtoken);
+    const valtokenPass = urlParams.get('valtokenPass');
     
     const userToken = {
         id:"1",
@@ -28,7 +28,8 @@ const EmailVerification = ()=>{
 
     useEffect(()=>{
         //console.log(userToken);
-        const validate =async()=>{
+        if(valtoken)
+        return async()=>{
             try {
                 //PASAR ESTO A REDUX
                 const response = await axios.post(`http://localhost:8000/activateUser/`,
@@ -44,7 +45,9 @@ const EmailVerification = ()=>{
                 console.log('no se puse validar');
             }
         }
-        validate()
+
+//------Redireccion al componente de Cambio de contrasena
+        if(valtokenPass) return navigate(`/access?token=${valtokenPass}`)
     },[]);
     
 }

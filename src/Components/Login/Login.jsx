@@ -7,8 +7,6 @@ import style from './Login.module.css'
 import { useDispatch, useSelector} from 'react-redux';
 import { accessUser } from '../../redux/actions/actions';
 
-import ChangePassword from '../ChangePassword/ChangePassword';
-
 const Login = ({setForm}) => {
   const access = useSelector(state=>state.access)
 
@@ -25,7 +23,7 @@ const Login = ({setForm}) => {
 //-------CAMBIO DE CONTRASENA
   const handleForgotPass = (event)=>{
     event.preventDefault();
-    setForm('changePassword')
+    setForm('requestChangePass')
   }
 //-------FIN DE CAMBIO DE CONTRASENA
 

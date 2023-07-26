@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Login from "../../Components/Login/Login";
 import SignUp from "../../Components/Signup/Signup";
@@ -9,8 +9,15 @@ import style from "./Access.module.css"
 import close_button from "../../assets/icons/close_button.svg"
 
 const Access = () => { 
+    
     const [form, setForm] = useState('login');
+    
+    useEffect(()=>{
+        const urlParams = new URLSearchParams(window.location.search);
+        if(urlParams.get('token') && setForm('changePassword'));
 
+    },[])
+    
     const handlerSwitchForms = (formName) => {
         setForm(formName)
     }
@@ -21,9 +28,9 @@ const Access = () => {
         <div className={style.accessContainer}>
             <div className={style.structure}>
 {/* ------------vista del componente para el cambio de contrasena */}
-                {form === 'changePassword' && 
+                {(form === 'requestChangePass' || form === 'changePassword') && 
                 (<div className={style.changePasswordcontainer}>
-                    <ChangePassword setForm={setForm}/>
+                    <ChangePassword form={form} setForm={setForm}/>
                 </div>
                 )}
 
