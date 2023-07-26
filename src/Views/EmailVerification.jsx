@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { useDispatch } from "react-redux";
 import { activateUser } from "../redux/actions/actions"; 
+import { redirectToken } from "../redux/actions/actions";
 import { useNavigate } from "react-router-dom";
 
 const EmailVerification = ()=>{
@@ -13,13 +14,17 @@ const EmailVerification = ()=>{
     const valtokenPass = urlParams.get('valtokenPass');
     
     useEffect(()=>{
-        const validate = async()=>{
+        const validateEmail = async()=>{
             await dispatch(activateUser(valtoken))
             return navigate('/access')
-        }
-        if(valtoken) validate()
+        };
+        if(valtoken) validateEmail();
 
-        if(valtokenPass) navigate(`/access?token=${valtokenPass}`)
+        const validatePassword = async()=>{
+            await dispatch(redirectToken(valtokenPass))
+            return navigate(`/access?changePass=${valtokenPass}`)
+        };
+        if(valtokenPass) validatePassword();
 
     },[valtoken, dispatch, navigate]);   
 }
