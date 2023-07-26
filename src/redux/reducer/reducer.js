@@ -44,6 +44,10 @@ import {
   FILTER_BY_PriceRange,
   ADD_CART,
   REMOVE_CART,
+  PASSWORD_REQUEST,
+  PASSWORD_CHANGE,
+  REDIRECT_TOKEN,
+
 } from "../actions/types";
 
 let initialState = {
@@ -64,6 +68,7 @@ let initialState = {
   userDetail: [],
   overlayProfile: false,
   showListwish: false,
+  token:""
 };
 
 // !Tener el cuenta reducir el reducer en varias partes.
@@ -463,9 +468,27 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         access: payload,
       };
+    
+    case PASSWORD_REQUEST:
+      return {
+        ...state,
+        //SIN RESPUESTA AL ESTADO
+      };
+    
+    case PASSWORD_CHANGE:
+      return {
+        ...state,
+        token: "",
+      };
+    
+    case REDIRECT_TOKEN:
+      return {
+        ...state,
+        token: payload,
+      };
+    
     default:
       return { ...state };
   }
 };
-
 export default reducer;

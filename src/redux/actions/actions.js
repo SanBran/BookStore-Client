@@ -47,6 +47,9 @@ import {
     ADD_CART,
     REMOVE_CART,
     ADD_FAVORITE,
+    PASSWORD_REQUEST,
+    PASSWORD_CHANGE,
+    REDIRECT_TOKEN,
 } from "./types";
 
 
@@ -581,7 +584,7 @@ export function accessLogIn({email, password}) {
         }
     }
 }
- 
+
 export function accessUser(bool, ref) {
     return {
         type: ACCESS,
@@ -653,21 +656,6 @@ export function postUser(userData) {
             throw Error(error.message);
         }
     };
-  return async function (dispatch) {
-    try {
-      console.log(userData);
-      const response = await axios.post(
-        `http://localhost:8000/newUser`,
-        userData
-      );
-      return dispatch({
-        type: POST_USER,
-        payload: response.data,
-      });
-    } catch (error) {
-      throw Error(error.message);
-    }
-  };
 }
 
 export function activateUser(token) {
@@ -709,3 +697,60 @@ export function updateUser(userData) {
         }
     };
 }
+
+export function redirectToken(token) {
+    return {
+        type: REDIRECT_TOKEN,
+        payload: token,
+    }
+}
+
+export function passwordRequest(email) {
+    return async function (dispatch){
+        try {
+            const userData = {
+                id:"3",
+                data1:email,
+                data2:''
+            }
+
+            console.log(userData);
+            const response = await axios.post(
+                `http://localhost:8000/activateUser/`,
+                userData
+            );
+            return dispatch({
+                type: PASSWORD_REQUEST,
+                payload: response.data,
+            });
+        } catch (error) {
+            console.log(error);
+            throw Error(error.response ? error.response.data.text : error.message);
+        }
+    }
+}
+
+export function passwordChange(token, password) {
+    return async function (dispatch){
+        try {
+            const changeData = {
+                id:"4",
+                data1:token,
+                data2:password
+            }
+
+            const response = await axios.post(
+                `http://localhost:8000/activateUser/`,
+                changeData
+            );
+            return dispatch({
+                type: PASSWORD_CHANGE,
+                payload: response.data,
+            });
+        } catch (error) {
+            console.log(error);
+            throw Error(error.response ? error.response.data.text : error.message);
+        }
+    }
+}
+

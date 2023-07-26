@@ -14,7 +14,7 @@ const Access = () => {
     
     useEffect(()=>{
         const urlParams = new URLSearchParams(window.location.search);
-        if(urlParams.get('token') && setForm('changePassword'));
+        if(urlParams.get('changePass') && setForm('changePassword'));
 
     },[])
     

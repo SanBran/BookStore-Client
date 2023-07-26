@@ -1,14 +1,15 @@
-import { useEffect, useState } from 'react';
-//import style from './ChangePassword.Module.css';
-import axios from 'axios';
-
+import { useState } from 'react';
 import { expresions } from '../../utils/regex';
 import { Link } from 'react-router-dom';
 import style from './ChangePassword.module.css'
+import { useDispatch, useSelector } from 'react-redux';
+
+import { passwordRequest } from '../../redux/actions/actions';
+import { passwordChange } from '../../redux/actions/actions';
 
 const ChangePassword = ({form, setForm})=>{
-    const urlParams = new URLSearchParams(window.location.search);
-    const valtokenPass = urlParams.get('token');
+    const idUser = useSelector(state=>state.token)
+    const dispatch = useDispatch()
 
     const [sendEmail, setSendEmail] = useState(false);
     const [sendPass, setSendPass] = useState(false);
@@ -67,39 +68,21 @@ const ChangePassword = ({form, setForm})=>{
 
     const handleSubmitRequest = async(event)=>{
         event.preventDefault();
-        const dataUser = {
-            id:"3",
-            data1:userData.email,
-            data2: ''
-        }
         try {
-            console.log(dataUser);
-            await axios.post(`http://localhost:8000/activateUser/`, dataUser)
+            console.log(userData);
+            await dispatch(passwordRequest(userData.email))
     
             setUserData({...userData, email: ""})
             setSendEmail(true)
         } catch (error) {
-            setErrors({...errors, email:error.response.data.text})
             console.log(error);
+            setErrors({...errors, email:error.message})
         }
     }
-
-    const dataUser = {
-        id:"4",
-        data1:valtokenPass,
-        data2:userData.password
-    }
-    console.log(dataUser);
     const handleSubmitChangePass = async(event)=>{
         event.preventDefault();
-        const dataUser = {
-            id:"4",
-            data1:valtokenPass,
-            data2:userData.password
-        }
         try {
-            console.log(dataUser);
-            await axios.post(`http://localhost:8000/activateUser/`, dataUser)
+            await dispatch(passwordChange(idUser, userData.password))
     
             setUserData({...userData, 
             password: "",
@@ -108,6 +91,7 @@ const ChangePassword = ({form, setForm})=>{
             setSendPass(true)
         } catch (error) {
             console.log(error);
+            setErrors({...errors, password:error.message})
         }
     }
 
