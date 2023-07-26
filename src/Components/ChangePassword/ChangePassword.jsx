@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import style from './ChangePassword.Module.css';
+//import style from './ChangePassword.Module.css';
 import axios from 'axios';
 
 import { expresions } from '../../utils/regex';
 import { Link } from 'react-router-dom';
+import style from './ChangePassword.module.css'
 
 const ChangePassword = ({form, setForm})=>{
     const urlParams = new URLSearchParams(window.location.search);
@@ -78,6 +79,7 @@ const ChangePassword = ({form, setForm})=>{
             setUserData({...userData, email: ""})
             setSendEmail(true)
         } catch (error) {
+            setErrors({...errors, email:error.response.data.text})
             console.log(error);
         }
     }
@@ -111,16 +113,16 @@ const ChangePassword = ({form, setForm})=>{
 
     return (
         <form className={style.formContainer}>
-            <div className={style.buttonContainer}>
-                <Link onClick={BackLogIn}>Back to Log in</Link>
+            <div className={style.backLogIn}>
+                <Link onClick={BackLogIn}>{`<`} Back to Log in</Link>
             </div>
             { form === 'changePassword' &&
                 (<>
                     {sendPass
-                    ?(<>Se cambio la contrasena exitosamente</>)
+                    ?(<h5 className={style.message}>Se cambio la contrasena exitosamente</h5>)
                     :(<>
-                        <div>
-                        <h1>CHANGE PASSWORD</h1>
+                        <div className={style.titleContainer}>
+                            <h1 className={style.title}>CHANGE PASSWORD</h1>
                         </div>
                         
                         <div className={style.inputsContainer}>
@@ -147,7 +149,7 @@ const ChangePassword = ({form, setForm})=>{
                             {errors.confirmPassword.length ? <p className={style.textError}>{errors.confirmPassword}</p> : <></>}
                         </div>
                         <div className={style.buttonContainer}>
-                            <button onClick={handleSubmitChangePass}>Change Password</button>
+                            <button className={style.submitBtn} onClick={handleSubmitChangePass}>Change Password</button>
                         </div>
                     </>)
                     
@@ -157,14 +159,14 @@ const ChangePassword = ({form, setForm})=>{
             {form === 'requestChangePass' && 
                 (<>
                     {sendEmail
-                    ?(<>Revisa tu mail para cambiar la contrasena</>)
+                    ?(<h5 className={style.message}>Revisa tu mail para cambiar la contrasena</h5>)
                     :(<>
-                    <div>
-                        <h1>Request password change</h1>
+                    <div className={style.titleContainer}>
+                        <h1 className={style.title}>Request password change</h1>
                     </div>
                     
                     <div className={style.inputsContainer}>
-                        <input className={style.input} 
+                        <input className={errors.email.length ? (`${style.input} ${style.error}`) : style.input} 
                         type='text' 
                         placeholder='Email address' 
                         name='email' 
@@ -173,7 +175,7 @@ const ChangePassword = ({form, setForm})=>{
 
                     </div>
                     <div className={style.buttonContainer}>
-                        <button onClick={handleSubmitRequest}>Send request</button>
+                        <button className={style.submitBtn} onClick={handleSubmitRequest}>Send request</button>
                     </div>
                     </>)
                     }
