@@ -7,6 +7,8 @@ import { postUser } from "../../redux/actions/actions";
 import { expresions } from "../../utils/regex";
 
 import style from './Signup.module.css';
+import axios from "axios";
+
 
 const SignUp = ({ setForm }) => {
   const navigate = useNavigate();
@@ -133,30 +135,22 @@ const SignUp = ({ setForm }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     validateSubmit();
-
     if(validateSubmit()){
-      try {
-        //console.log('entro a crear usuario');
-        await dispatch(postUser(signUpInfo))
-        //console.log('se debio haber creado');
-        setSignUpInfo({
-          name: "",
-          email: "",
-          password: "",
-          confirmPassword: "",
-          dniPasaport: "",
-          phoneCode: "",
-          phone: "",
-          country: "",
-          birthday: "",
-          gender: "",
-        })
-        setForm('login')
-      } catch (error) {
-        console.log(error.message);
-        setErrors({...errors, email: 'This email is already registered'})
-      }
-
+      console.log('entro a crear usuario');
+      await dispatch(postUser(signUpInfo))
+      console.log('se debio haber creado');
+      setSignUpInfo({
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        dniPassport: "",
+        phoneCode: "",
+        phone: "",
+        country: "",
+        birthday: "",
+        gender: "",
+      })
     }
   };
 

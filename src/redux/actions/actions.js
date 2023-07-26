@@ -654,6 +654,21 @@ export function postUser(userData) {
             throw Error(error.message);
         }
     };
+  return async function (dispatch) {
+    try {
+      console.log(userData);
+      const response = await axios.post(
+        `http://localhost:8000/newUser`,
+        userData
+      );
+      return dispatch({
+        type: POST_USER,
+        payload: response.data,
+      });
+    } catch (error) {
+      throw Error(error.message);
+    }
+  };
 }
 export function activateUser(dataToken) {
     return async function (dispatch) {
