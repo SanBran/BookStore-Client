@@ -34,7 +34,6 @@ const Profile = () => {
   };
   //! cuando se entra al wislist desde otro compomente ejemplo histoy, el estado queda sin actualizar
   //! si esta en true cuando vuelve al wishlist pasa a false y no se muestra
-  //! hacer el Log Out
   return (
     
     <div className={styles.overlay}>

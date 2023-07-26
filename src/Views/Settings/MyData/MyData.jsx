@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "../Settings.module.css";
 import axios from "axios";
 
-const MyData = ({ user,onBack }) => {
-
+const MyData = ({ user, onBack }) => {
   const [formData, setFormData] = useState(user);
 
   const expressions = {
@@ -12,7 +11,7 @@ const MyData = ({ user,onBack }) => {
     phone: /^[0-9]{6,15}$/,
     birthday:
       /^(?:19[5-9]\d|20[0-1]\d)(\/|-)(0[1-9]|1[0-2])(\/|-)([0-2][0-9]|3[0-1])$/,
-    dniPassport:/^[0-9]/,
+    dniPasaport: /^[0-9]/,
   };
 
   const [errors, setErrors] = useState({});
@@ -34,7 +33,7 @@ const MyData = ({ user,onBack }) => {
 
   const handleSave = (field) => {
     const isValid = expressions[field].test(formData[field]);
-    
+
     if (isValid) {
       // Aquí puedes realizar cualquier acción que necesites con el dato guardado en formData[field]
       console.log(`Dato ${field} guardado:`, formData[field]);
@@ -155,12 +154,12 @@ const MyData = ({ user,onBack }) => {
             DNI/Passport:
             <input
               type="text"
-              name="dniPassport"
-              value={formData.dniPassport}
+              name="dniPasaport"
+              value={formData.dniPasaport}
               onChange={handleChange}
             />
-            <button onClick={() => handleSave("dniPassport")}>Guardar</button>
-            {errors.dniPassport && <p>{errors.dniPassport}</p>}
+            <button onClick={() => handleSave("dniPasaport")}>Guardar</button>
+            {errors.dniPasaport && <p>{errors.dniPasaport}</p>}
           </label>
         </div>
       </div>

@@ -15,8 +15,9 @@ const Book = ({ books }) => {
   const user = useSelector((state) => state.access);
   const userDat = useSelector((state) => state.userDetail);
 
-  useEffect(() => {
-    dispatch(getUserById(user.ref));
+  useEffect(() => { 
+    if(user.ref !== "") {
+    dispatch(getUserById(user.ref));}
   }, [dispatch, user.ref]);
 
   const { id, image, title, author, price } = books;
