@@ -5,6 +5,8 @@ import { getAllBooks,FilterByPriceRange} from "../../redux/actions/actions";
 import Pagination from "../Pagination/Pagination";
 import styles from './Filters.module.css'
 import Books from "../PanelBooks/Books";
+import icon from "./icons/whatsapp.png";
+import Chat from "./Chat";
 
 const Filters = () => {
   const currentBooks = useSelector((state) => state.allBooksCopy);
@@ -20,7 +22,8 @@ const Filters = () => {
   });
   const [priceMax, setPriceMax] = useState("");
   const [priceMin, setPriceMin] = useState("");
-  const [allBooks, setallBooks] = useState([]);
+    const [allBooks, setallBooks] = useState([]);
+    const [isChatOpen, setIsChatOpen] = useState(false);
 
   // Este useEffect se ejecuta cuando se monta el componente para traer data del estado Global
   useEffect(() => {
@@ -190,10 +193,33 @@ alert("No hay libros en ese rango de precio")
       const uniqueLanguage = getUniqueValues(allBooks, "language");
       const uniquePrice = getUniqueValues(allBooks, "price");
 
-      console.log(data);
+    console.log(data);
+    const handleChatOpen = () => {
+        setIsChatOpen(true);
+    };
+
+    const handleChatClose = () => {
+        setIsChatOpen(false);
+    };
+
       
     return (
-      <div className={styles.masterContainer}>
+        <div className={styles.masterContainer}>
+            <div>
+                {
+                    isChatOpen ? <Chat handleChatClose={handleChatClose} /> : null
+                }
+
+                {
+                    isChatOpen ? null :( <button class='Whatsapp' onClick={handleChatOpen} style={{ backgroundColor: 'transparent', border: '1px solid transparent' }}>
+                        <img src={icon} alt='icon de whatsapp' height={'35px'} width={'50px'} />
+                    </button>)
+                }
+               
+               
+                
+
+            </div>
         <div className={styles.container}>
         <div className={styles.filters}>
           <h1 className={styles.filterTitle}>Filters</h1>
@@ -290,8 +316,9 @@ alert("No hay libros en ese rango de precio")
             type="submit"
             placeholder="Filtrar"
             onClick={() => handleFilter()}
-          >Filter price</button>
-        </div>
+                    >Filter price</button>
+                </div>
+              
 
         <div className={styles.bookContainer}>
 
