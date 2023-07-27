@@ -1,13 +1,15 @@
 .container {
     display: flex;
     height: 190px;
-    width: 370px;
+    width: 360px;
     gap: 10px;
     cursor: pointer;
     -moz-osx-font-smoothing: grayscale;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     position: relative; 
-    background-color: rgb(245, 245, 245);
+    padding: 20px;
+    border-radius: 10px;
+    background-color: rgb(236, 236, 236);
 }
 
 .textContainer {
@@ -28,15 +30,17 @@
 
 .image {
     height: 190px;
+    
 }
 .imageSize {
     height: 190px;
     max-width: 130px;
+    border-radius: 10px;
 }
 
 .price {
     font-weight: 800;
     position: absolute; /* Agregamos posicionamiento absoluto */
-    bottom: 0;
+    bottom: 20px;
 }
 

@@ -4,23 +4,21 @@
 
     margin: 0 auto;
     
-     width: 90vw;
+    
      height: fit-content;
      
      
      display: flex;
      flex-wrap: wrap;
      justify-content:center;
-     gap: 40px;
+     gap: 20px;
      
  
  }
  
 
  @media (max-width: 770px) {
-    .title{
-        font-size:2rem;
-    }
+    
 
     .booksContainer {
         position: relative;

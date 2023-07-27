@@ -14,6 +14,7 @@ const SearchBar = () => {
 
 
   const handleChange = (e) => {
+    console.log(e.target.value);
       setSearch({title: e.target.value});
     };
 
@@ -23,9 +24,7 @@ const SearchBar = () => {
     e.preventDefault()
     dispatch(getBooksByTitle(search));
     navigate(`/results/?title=${search.title}`)
-    setSearch({
-      title: ""
-    });;
+    
   };
 
   const handleGenre = (e) => {
