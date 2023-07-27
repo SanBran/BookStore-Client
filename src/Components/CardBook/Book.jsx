@@ -14,6 +14,7 @@ const Book = ({ books, onRemove  }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.access);
   const userDat = useSelector((state) => state.userDetail);
+  const inCart = useSelector((state) => state.cart);
 
 
   //editUser={id,name, birthday, country, phone, phoneCode, gender, dniPasaport, status, rol, photoUser, listWish}
@@ -53,6 +54,7 @@ const Book = ({ books, onRemove  }) => {
       }
     }
   }, [userData.listWish, id, user.state]);
+
   const handleCart = () => {
     if (cart) {
       setCart(false);

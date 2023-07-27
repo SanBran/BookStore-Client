@@ -33,6 +33,8 @@ const EmailVerification = ()=>{
 
 
     },[valtoken, dispatch, navigate]);   
+    return (
+            <div>✅</div>)
 }
 
 export default EmailVerification;
