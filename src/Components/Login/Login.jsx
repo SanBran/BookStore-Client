@@ -1,9 +1,12 @@
-import { useState} from 'react';
+import { useEffect, useState} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import style from './Login.module.css'
 import { useDispatch, useSelector} from 'react-redux';
 import { accessLogIn } from '../../redux/actions/actions';
+//importaciones para login con google
+import GoogleLogin from 'react-google-login';
+import { gapi } from 'gapi-script';
 
 const Login = ({setForm}) => {
   
@@ -46,6 +49,27 @@ const Login = ({setForm}) => {
     }
   }
 
+//-----LOGIN CON GOOGLE
+  const clientID = "637027522589-6jbd17n7qelc1mqtp4c1gl43lvjp57cf.apps.googleusercontent.com";
+  useEffect(()=>{
+    const start =()=> {
+      gapi.auth2.init({
+        clientId: clientID
+      })
+    };
+    gapi.load('client:auth2', start)
+  },[]);
+
+  const responseGoogle = (response) => {
+    // Aquí obtienes la respuesta de Google con la información del usuario logueado.
+    console.log(response);
+  };
+
+  const onFailure = (error) => {
+    // Si ocurre algún error durante el inicio de sesión.
+    console.log(error);
+  };
+
   return ( 
     <form className={style.fromContainer} >
       <div className={style.inputsContainer}>
@@ -71,7 +95,13 @@ const Login = ({setForm}) => {
           <span className={style.dividerSpan}>Or</span>
           <div className={style.line}></div>
         </div>
-        <button className={style.googleBtn} type='submit'> Sign in with Google </button>
+        <GoogleLogin
+          clientId={clientID}
+          buttonText="Sign in with Google"
+          onSuccess={responseGoogle}
+          onFailure={onFailure}
+          cookiePolicy={'single_host_policy'}/>
+        {/* <button className={style.googleBtn} type='submit'> Sign in with Google </button> */}
       </div>
     </form>
   )
