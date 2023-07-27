@@ -601,6 +601,48 @@ export function accessLogIn({ email, password }) {
       throw Error(error.response.data.text);
     }
   };
+};
+
+export function accessGoogle({email, name, imageUrl, googleId}, token) {
+    return async function (dispatch) {
+        try {
+            const findUser = await axios.post(`http://localhost:8000/findUser/${email}`);
+
+            //console.log(findUser.data);
+
+            return dispatch({
+                type: ACCESS,
+                payload: { state: true, ref: findUser.data.detail.id },
+            })
+        } catch (error) {
+            //throw Error(error.response.data.text);
+            //console.log(error);
+            //console.log(error.response.data.text);
+            if(error.response.status === 400  && error.response.data.text === 'No users found'){
+                try {
+                    const userDataSignUp = {
+                        name, 
+                        email, 
+                        password: "password",
+                        phoneCode: "00",
+                        phone: "0000000",
+                        country: "null",
+                        birthday: "null",                    
+                    };
+                    const newUser = await axios.post(`http://localhost:8000/newUser`, userDataSignUp);
+                    //console.log(newUser);
+
+                    return dispatch({
+                        type: ACCESS,
+                        payload: { state: true, ref: newUser.data.detail.id },
+                    })        
+                } catch (error) {
+                    throw Error(error.response.data.text);
+                }
+            }
+            else throw Error(error.response.data.text);
+        }
+    }
 }
 
 export function accessUser(bool, ref) {

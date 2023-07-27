@@ -12,6 +12,9 @@ const EmailVerification = ()=>{
     // Obtenemos el valor de la variable 'valtoken'
     const valtoken = urlParams.get('valtoken').substring(1);
     const action = urlParams.get('valtoken')[0];
+
+    console.log(valtoken);
+    console.log(action);
     
     useEffect(()=>{
         switch(action){
@@ -22,6 +25,7 @@ const EmailVerification = ()=>{
                 };
                 validateEmail();
             };
+            break;
             case '4':{
                 const validatePassword = async()=>{
                     await dispatch(redirectToken(valtoken))
@@ -29,6 +33,7 @@ const EmailVerification = ()=>{
                 };
                 validatePassword();                
             }
+            break;
         }
 
 
