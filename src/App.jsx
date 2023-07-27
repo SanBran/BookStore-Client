@@ -15,6 +15,7 @@ import NotFound from "./Views/Not Found/NotFound";
 import EmailVerification from "./Views/EmailVerification";
 
 import { useSelector } from "react-redux";
+import Cart from "./Views/Cart.jsx/Cart";
 
 
 
@@ -25,14 +26,14 @@ function App() {
   return (
     <>
 
-    {showOverlayPerfile && <Profile />}
-    <div >
-      
-    {location.pathname !== "/profile" && location.pathname !== "/access" && location.pathname !== "/Results" ? (
-        <Navbar  />
-      ) : (
-        <></>
-      )}
+      {showOverlayPerfile && <Profile />}
+      <div >
+
+        {location.pathname !== "/profile" && location.pathname !== "/access" && location.pathname !== "/Results" ? (
+          <Navbar />
+        ) : (
+          <></>
+        )}
 
         <Routes>
           <Route path="/" element={<Home />} />
@@ -54,7 +55,7 @@ function App() {
           <Route path="/Results" element={<Results />} />
 
           <Route path="/access/validate" element={<EmailVerification />} />
-
+          <Route path="/cart" element={<Cart />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

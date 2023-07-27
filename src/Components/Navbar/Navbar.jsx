@@ -11,7 +11,6 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const showOverlayPerfile = useSelector((state) => state.overlayProfile);
   const access = useSelector((state) => state.access.state);
-  
   const handleOverlayToggle = () => {
     if (access) {
       dispatch(overlayProfile(showOverlayPerfile));
@@ -26,6 +25,7 @@ const Navbar = () => {
         <Link to="/">
           <h1 className={styles.logo}>Book Store</h1>
         </Link>
+        <button onClick={() => navigate(-1)}>Atrás</button>
       </div>
       <div className={styles.search}>
         <SearchBar />

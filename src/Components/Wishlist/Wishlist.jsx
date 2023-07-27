@@ -8,7 +8,7 @@ import styles from "./Wishlist.module.css";
 
 function Wishlist() {
 
-  const listWish2= [{
+  const listWish2 = [{
     "id": "6608837f-2e33-4089-aafe-d72fb77b9923",
     "title": "Abeloff. Oncología clínica",
     "author": "John E. Niederhuber, James O. Armitage, James H Doroshow, Michael B. Kastan, Joel E. Tepper",
@@ -74,7 +74,7 @@ function Wishlist() {
     "payId": null,
     "comments": []
   },];
-    
+
   return (
     <div className={styles.booksContainer}>
       <h2 className={styles.title}>Wishlist</h2>
