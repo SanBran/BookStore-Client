@@ -3,7 +3,7 @@ import styles from './Pagination.module.css'
 import { selectFilterPage } from '../../redux/actions/actions'
 import { useDispatch } from 'react-redux'
 
-function PaginationSearch({numBooks, setCurrentPage, currentPage, active, setActive}) {
+function PaginationSearch({numBooks, setCurrentPage, currentPage, active, setActive,body}) {
 
   const dispatch = useDispatch()
   const nums = numBooks
@@ -17,7 +17,8 @@ function PaginationSearch({numBooks, setCurrentPage, currentPage, active, setAct
     } 
     
     const getBooks = async (page) => {   
-          dispatch(selectFilterPage(page));
+      console.log(body);
+          dispatch(selectFilterPage(page,body));
               
       }
 

@@ -168,7 +168,7 @@ const reducer = (state = initialState, { type, payload }) => {
     case SELECT_FILTER_PAGE:
       return {
         ...state,
-        allBooksCopy: payload.books,
+        allBooksCopy: payload.book,
       };
     //----------------------------ORDER-------------------
     case ORDER_BY_PRICE: {

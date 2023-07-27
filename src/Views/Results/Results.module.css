@@ -34,10 +34,12 @@
 }
 
 .bookContainer{
-    position: relative;
-    z-index: 0;
-    left: 10vw;
-    
+    position: fixed;
+    overflow: scroll;
+    width: 87.6vw;
+    height: 90vh;
+    z-index: 0; 
+    left: 12vw;
 }
 
 .noResults{

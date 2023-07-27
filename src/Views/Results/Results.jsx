@@ -1,43 +1,46 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import { getAllBooks,FilterByGender,FilterByAuthor,FilterByPrice,FilterByEditorial,FilterByLanguage,FilterByPages ,FilterByPublishedDate,FilterByCountry,FilterByPriceRange} from "../../redux/actions/actions";
 import PaginationSearch from "../../Components/Pagination/PaginationSearch";
+import { getBooksByTitle } from "../../redux/actions/actions";
 import styles from './Results.module.css'
 import Books from "../../Components/PanelBooks/Books";
 
 const Results = () => {
+  const location = useLocation()
+  const searchParams = new URLSearchParams(location.search);
+  const origin = searchParams.get("title");
+  const [search, setSearch] = useState({
+    title: origin
+  });
+  // codigo para borrar params al recargar pagina
+  useEffect(() => {
+
+    dispatch(getBooksByTitle(search));
+  }, []);
+  
+ 
   const currentBooks = useSelector((state) => state.allBooksCopy);
   const totalPages = useSelector((state) => state.booksObject)
   const dispatch = useDispatch();
   const [data, setData] = useState({
-    gender: "",
-    editorial: "",
-    publishedDate: "",
-    country: "",
-    language: "",
-    pages: "",
-    price: "",
+    title: origin
   });
+  
   const [priceMax, setPriceMax] = useState("");
   const [priceMin, setPriceMin] = useState("");
   const [allBooks, setallBooks] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [active, setActive] = useState(1);
 
-  // Este useEffect se ejecuta cuando se monta el componente para traer data del estado Global
-  useEffect(() => {
-    dispatch(getAllBooks());
-  }, [dispatch]);
-
   // este useEfect se ejecuta para llenar el estado local
   useEffect(() => {
-    currentBooks?
-    setallBooks(currentBooks):
-    setallBooks([])
+    currentBooks
+    ? setallBooks(currentBooks)
+    : setallBooks([])
   }, [currentBooks]);
-
-//  console.log(currentBooks);
 
   const handlePriceMin = (event) => {
     event.preventDefault();
@@ -75,81 +78,29 @@ alert("No hay libros en ese rango de precio")
 
   const handleData = (event) => {
     const { name, value } = event.target;
+    console.log(name, value);
     setData({
       ...data,
       [name]: value,
     });
-
+    console.log(data);
     
   };
 
   const handleFilterData = async (event) => {
-    const sendBody = {};
-
-    if (data.gender) {
-      sendBody.gender = data.gender;
-      const filteredBooks = allBooks.filter(
-        (Book) => Book.gender === data.gender
-      );
-     // setallBooks(filteredBooks);
-      dispatch(FilterByGender(filteredBooks));
-     
-
-
-      
-    }
-
-    if (data.editorial) {
-      sendBody.editorial = data.editorial;
-      const filteredBooks = allBooks.filter(
-        (Book) => Book.editorial === data.editorial
-      );
-      dispatch(FilterByEditorial(filteredBooks));
-    }
-    if (data.publishedDate) {
-      sendBody.publishedDate = data.publishedDate;
-      const filteredBooks = allBooks.filter(
-        (Book) => Book.publishedDate === data.publishedDate
-      );
-      dispatch(FilterByPublishedDate(filteredBooks));
-    }
-    if (data.country) {
-      sendBody.country = data.country;
-      const filteredBooks = allBooks.filter(
-        (Book) => Book.country === data.country
-      );
-      dispatch(FilterByCountry(filteredBooks));
-    }
-    if (data.language) {
-      sendBody.language = data.language;
-      const filteredBooks = allBooks.filter(
-        (Book) => Book.language === data.language
-      );
-      dispatch(FilterByLanguage(filteredBooks));
-    }
-    if (data.pages) {
-      sendBody.pages = data.pages;
-      const filteredBooks = allBooks.filter(
-        (Book) => Book.pages === data.pages
-      );
-      dispatch(FilterByPages(filteredBooks));
-    }
-
+    console.log(data);
+    dispatch(getBooksByTitle(data))
    
     };
 
-     const handleCleanFilter = () => {
-      setData({
-        gender: "",
-        editorial: "",
-        publishedDate: "",
-        country: "",
-        language: "",
-        price: "",
+  const handleCleanFilter = () => {
+       setData({
+        title: origin
       });
       setPriceMin("");
     setPriceMax("");
-    setallBooks(currentBooks);
+    dispatch(getBooksByTitle(search));
+    
       }
 
       const getUniqueValues = (data, key) => {
@@ -171,7 +122,7 @@ alert("No hay libros en ese rango de precio")
       const uniqueLanguage = getUniqueValues(allBooks, "language");
       const uniquePrice = getUniqueValues(allBooks, "price");
 
-      // console.log(data);
+      
       
     return (
       <div className={styles.masterContainer}>
@@ -278,14 +229,15 @@ alert("No hay libros en ese rango de precio")
 
           {currentBooks === undefined ? <h2 className={styles.noResults}>No results</h2>: <Books currentBooks={allBooks}/>}
           
-        </div>
-        </div>
-        {/* {currentBooks?.length == 0 || totalPages === 1 ? null: <PaginationSearch
+         <PaginationSearch
           numBooks={totalPages}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           active={active}
-          setActive={setActive}/>} */}
+          setActive={setActive}
+          body={data}/>
+        </div>
+        </div>
         
       </div>
     );
