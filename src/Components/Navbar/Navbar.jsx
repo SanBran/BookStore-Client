@@ -4,6 +4,8 @@ import SearchBar from "../SearchBar/SearchBar";
 import { overlayProfile } from "../../redux/actions/actions";
 import { useDispatch, useSelector } from "react-redux";
 import profileLogo from "../../sources/profile-user.png";
+import Cart from "../../Views/Cart.jsx/Cart";
+import { useState } from "react";
 
 const Navbar = () => {
   //const [overlayPerfile,setOverlayPerfile] = useState(false);
@@ -20,6 +22,17 @@ const Navbar = () => {
       navigate("/access");
     }
   };
+
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
   return (
     <nav className={styles.container}>
       <div>
@@ -31,6 +44,19 @@ const Navbar = () => {
       <div className={styles.search}>
         <SearchBar />
       </div>
+      {access ? (
+        <div className={styles.crearEsteEstilo}>
+          <div>
+            <button onClick={openModal}>🛒</button>
+            <Cart
+              isOpen={modalIsOpen}
+              onRequestClose={closeModal}
+            />
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
       <div className={styles.profile}>
         <img
           className={styles.profile}

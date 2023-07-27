@@ -671,20 +671,26 @@ export function postUser(userData) {
   };
 }
 
-export function activateUser(dataToken) {
+export function activateUser(token) {
   return async function (dispatch) {
     try {
-      const response = await axios.post(
-        `http://localhost:8000/activateUser/`,
-        dataToken
-      );
-      return dispatch({
-        type: ACTIVATE_USER,
-        payload: response.data,
-      });
+        const userData = {
+            id: "1",
+            data1: token,
+            data2: "",
+        }; 
+        //console.log(userData);   
+        const response = await axios.post(
+            `http://localhost:8000/activateUser/`,
+            userData
+        );
+        return dispatch({
+            type: ACTIVATE_USER,
+            payload: response.data,
+        });
     } catch (error) {
-      console.log(error);
-      throw Error(error.message);
+        //console.log(error);
+        throw Error(error.message);
     }
   };
 }
