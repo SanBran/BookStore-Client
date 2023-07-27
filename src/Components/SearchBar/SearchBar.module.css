@@ -3,10 +3,10 @@
 }
 
 .bar{
-    width: 40vw;
+    width: 30vw;
     height: 45px;
     border: none;
-    border-radius:0 50px 50px 0 ;
+    border-radius:0 0 0 0 ;
     padding: 10px;
     color: rgb(68, 68, 68);
     background-color: rgb(255, 255, 255);
@@ -23,4 +23,16 @@
     
     border-radius:50px 0 0 50px ;
     color: black;
+}
+
+.genre{
+
+    padding: 0;
+    padding-right: 20px;
+    background-color: rgb(255, 255, 255);
+    font-size:large;
+    font-weight:500;
+    
+    border-radius: 0 50px 50px 0 ;
+    color: rgb(109, 109, 109);
 }

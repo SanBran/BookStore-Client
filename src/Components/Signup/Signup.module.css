@@ -4,6 +4,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    color: black;
 }
 
 .inputsContainer{
@@ -22,6 +23,8 @@
 
     font-size: 16px;
     font-weight: 100;
+
+    color: black;
     
     border: 1px solid #B6B6B6;
 

@@ -1,22 +1,15 @@
 import React from 'react'
 import styles from './Pagination.module.css'
-import { selectPage } from '../../redux/actions/actions'
+import { selectFilterPage } from '../../redux/actions/actions'
 import { useDispatch } from 'react-redux'
 
-function Pagination({numBooks, setCurrentPage, currentPage, active, setActive,filter}) {
-
+function PaginationSearch({numBooks, setCurrentPage, currentPage, active, setActive,body}) {
 
   const dispatch = useDispatch()
-  let nums = 0
+  const nums = numBooks
   const pageNumbers = []
-  
-  if (filter) {
-    nums = numBooks
-  }else {
-    nums = Math.ceil(numBooks/12) 
-  }
 
-   
+   console.log(nums);
     
     for (let i = 1; i <= nums; i++) {
       pageNumbers.push(i)
@@ -24,7 +17,8 @@ function Pagination({numBooks, setCurrentPage, currentPage, active, setActive,fi
     } 
     
     const getBooks = async (page) => {   
-          dispatch(selectPage(page));
+      console.log(body);
+          dispatch(selectFilterPage(page,body));
               
       }
 
@@ -88,6 +82,6 @@ function Pagination({numBooks, setCurrentPage, currentPage, active, setActive,fi
         );
 }
 
-export default Pagination
+export default PaginationSearch
 
 
