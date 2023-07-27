@@ -20,7 +20,6 @@ import { useSelector } from "react-redux";
 function App() {
   const showOverlayPerfile = useSelector(state => state.overlayProfile);
   const location = useLocation()
-  const searchParams = new URLSearchParams(location.search);
 
   return (
     <>
@@ -28,7 +27,7 @@ function App() {
     {showOverlayPerfile && <Profile />}
     <div >
       
-    {location.pathname !== "/profile" && location.pathname !== "/access" && (location.pathname !== "/results") ? (
+    {location.pathname !== "/profile" && location.pathname !== "/access" && location.pathname !== "/Results" ? (
         <Navbar  />
       ) : (
         <></>
@@ -51,7 +50,7 @@ function App() {
 
           <Route path="/Filters" element={<Filters />} />
 
-          <Route path="/results" element={<Results />} />
+          <Route path="/Results" element={<Results />} />
 
           <Route path="/access/validate" element={<EmailVerification />} />
 
