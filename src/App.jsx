@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./Views/Home/Home";
 import BooksDetail from "./Views/BooksDetail/BooksDetail";
 import "./App.css";
@@ -19,6 +19,7 @@ import { useSelector } from "react-redux";
 
 function App() {
   const showOverlayPerfile = useSelector(state => state.overlayProfile);
+  const location = useLocation()
 
   return (
     <>
@@ -26,12 +27,11 @@ function App() {
     {showOverlayPerfile && <Profile />}
     <div >
       
-    {location.pathname !== "/profile" && location.pathname !== "/access" && location.pathname !== "/Results" ? (
+    {location.pathname !== "/profile" && location.pathname !== "/access" && location.pathname !== "/results/:title" ? (
         <Navbar  />
       ) : (
         <></>
       )}
-
 
         <Routes>
           <Route path="/" element={<Home />} />
@@ -50,14 +50,14 @@ function App() {
 
           <Route path="/Filters" element={<Filters />} />
 
-          <Route path="/Results" element={<Results />} />
+          <Route path="/results" element={<Results />} />
 
           <Route path="/access/validate" element={<EmailVerification />} />
 
         </Routes>
       </div>
     </>
-  )
+  );
 }
 
 export default App;   

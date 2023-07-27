@@ -2,33 +2,33 @@
 import { useEffect, useState } from "react";
 import Books from "../../Components/PanelBooks/Books";
 import Slide from "../../Components/Slide/Slide";
-import { getAllBooks, listWish } from "../../redux/actions/actions";
+import { getAllBooks, getUserById} from "../../redux/actions/actions";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./Home.module.css";
-import Wishlist from "../../Components/Wishlist/Wishlist";
 import Pagination from "../../Components/Pagination/Pagination";
 //import Profile from "../../Views/Profile/Profile";
 
 const Home = () => {
   const dispatch = useDispatch();
   const allBooks = useSelector((state) => state.allBooks);
-  const showListWishlist = useSelector((state) => state.showListwish);
-  const userId = useSelector((state) => state.access);
+  const totalPages = useSelector((state)=> state.booksObject)
+  const user = useSelector((state) => state.access);
+
+
+ 
 
   const [currentPage, setCurrentPage] = useState(1);
   const [active, setActive] = useState(1);
 
   useEffect(() => {
     dispatch(getAllBooks());
-    dispatch(listWish(false));
-    console.log(userId ? userId : "no esta logeado");
-  }, [dispatch,userId]);
+  }, [dispatch]);
 
-  const booksPerPage = 12; // Cards por página
-  const paginationSize = 7; // paginas visibles en paginación
-  const lastCountryIndex = currentPage * booksPerPage;
-  const firstCountryIndex = lastCountryIndex - booksPerPage;
-  const currentBooks =!allBooks.error && allBooks.slice(firstCountryIndex, lastCountryIndex);
+  useEffect(() => {
+    if (user.ref !== "") {
+      dispatch(getUserById(user.ref));
+    }
+  }, [dispatch, user.ref]);
 
   return (
     <div className={styles.container}>
@@ -37,22 +37,17 @@ const Home = () => {
       </div>
       <h2 className={styles.title}>New Arrivals</h2>
       <div>
-        {showListWishlist ? (
-          <Wishlist />
-        ) : (
-          <Books currentBooks={currentBooks} />
-        )}
+        <Books currentBooks={allBooks} />
       </div>
       <div className={styles.paginationContainer}>
         <Pagination
-          numBooks={allBooks.length}
-          booksPerPage={booksPerPage}
-          paginationSize={paginationSize}
+          numBooks={totalPages}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           active={active}
-
-          setActive={setActive}/>
+          setActive={setActive}
+          filter={false}/>
+          
       </div>
     </div>
   );

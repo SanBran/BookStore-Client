@@ -1,5 +1,7 @@
 import {
+  ADD_FAVORITE,
   ACTIVATE_USER,
+  ACCESS,
   GET_ALL_BOOKS,
   GET_BOOK_BY_AUTHOR,
   GET_BOOK_BY_ID,
@@ -17,6 +19,7 @@ import {
   FILTER_BY_GENRER,
   FILTER_BY_LANGUAJE,
   SELECT_PAGE,
+  SELECT_FILTER_PAGE,
   ORDER_BY_PRICE,
   ORDER_BY_PUBLISHED_DATE,
   ORDER_BY_TITLE,
@@ -39,17 +42,23 @@ import {
   FILTER_BY_PUBLISHED_DATE,
   FILTER_BY_COUNTRY,
   RESET_BOOKS_BY_AUTHOR,
-  FILTER_BY_PriceRange
-
+  FILTER_BY_PriceRange,
+  ADD_CART,
+  REMOVE_CART,
+  PASSWORD_REQUEST,
+  PASSWORD_CHANGE,
+  REDIRECT_TOKEN,
 } from "../actions/types";
 
 let initialState = {
-
+  access: { state: false, ref: "" },
   allBooks: [],
-  book: [],
-  bookByName: []
-  ,
   allBooksCopy: [],
+  booksObject: {},
+  book: [],
+  bookByName: [],
+  cart: [],
+  filteredBooks: [],
   details: [],
   booksByAuthor: [],
   comments: [],
@@ -60,22 +69,26 @@ let initialState = {
   userDetail: [],
   overlayProfile: false,
   showListwish: false,
+  token: "",
 };
 
 // !Tener el cuenta reducir el reducer en varias partes.
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
     //-----------------------------BOOK----------------------------------
+
     case GET_ALL_BOOKS:
       return {
         ...state,
         allBooks: payload.books,
-        allBooksCopy: payload.books,
+        allBookCopy: payload.books,
+        booksObject: payload.totalPages,
       };
     case GET_BOOKS_BY_TITLE:
       return {
         ...state,
-        allBooksCopy: payload,
+        allBooksCopy: payload.book,
+        booksObject: payload.totalPages,
       };
     case GET_BOOK_BY_AUTHOR:
       return {
@@ -150,8 +163,12 @@ const reducer = (state = initialState, { type, payload }) => {
     case SELECT_PAGE:
       return {
         ...state,
-        allBooks: payload,
-        allBooksCopy: payload,
+        allBooks: payload.books,
+      };
+    case SELECT_FILTER_PAGE:
+      return {
+        ...state,
+        allBooksCopy: payload.books,
       };
     //----------------------------ORDER-------------------
     case ORDER_BY_PRICE: {
@@ -243,7 +260,6 @@ const reducer = (state = initialState, { type, payload }) => {
       };
     }
 
-
     //----------------------------BACKEND FILTERS-------------------
 
     case FILTER_BY_GENDER:
@@ -274,14 +290,13 @@ const reducer = (state = initialState, { type, payload }) => {
       if (payload === "") {
         return {
           ...state,
-          allBookCopy: state.allBooks,
+          allBooksCopy: state.allBooks,
         };
       }
       return {
         ...state,
         allBooksCopy: payload,
       };
-
 
     case FILTER_BY_LANGUAGE:
       if (payload === "") {
@@ -323,13 +338,27 @@ const reducer = (state = initialState, { type, payload }) => {
           ...state,
           allBooksCopy: state.allBooks,
         };
-      } return {
+      }
+      return {
         ...state,
         allBooksCopy: payload,
       };
-
     //----------------------------mercadoPago----------------
     // revisar mercadoPago no estoy seguro como funciona
+    case ADD_CART:
+      console.log(state.cart);
+
+      return {
+        ...state,
+        cart: [...state.cart, payload],
+      };
+    case REMOVE_CART:
+      console.log(state.cart);
+      let filter = state.cart.filter((book) => book.id !== payload);
+      return {
+        ...state,
+        cart: filter,
+      };
     case GET_FAILURE:
       return {
         ...state,
@@ -398,6 +427,11 @@ const reducer = (state = initialState, { type, payload }) => {
         comments: state.comments.filter((comment) => comment.id !== payload),
       };
     //-----------------------------------------USER--------------------------------
+    case ADD_FAVORITE:
+      return {
+        ...state,
+        userDetail: payload,
+      };
     case GET_USERS:
       return {
         ...state,
@@ -416,14 +450,12 @@ const reducer = (state = initialState, { type, payload }) => {
     case ACTIVATE_USER:
       return {
         ...state,
-        users: [...state.users, payload]
-      }
+        //por el momento no guarda nada en el estado global
+      };
     case UPDATE_USER:
       return {
         ...state,
-        users: state.users.map((user) =>
-          user.id === payload.id ? payload : user
-        ),
+        userDetail: payload,
       };
     case OVERLAY_PROFILE:
       return {
@@ -435,9 +467,32 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         showListwish: payload,
       };
+    case ACCESS:
+      return {
+        ...state,
+        access: payload,
+      };
+
+    case PASSWORD_REQUEST:
+      return {
+        ...state,
+        //SIN RESPUESTA AL ESTADO
+      };
+
+    case PASSWORD_CHANGE:
+      return {
+        ...state,
+        token: "",
+      };
+
+    case REDIRECT_TOKEN:
+      return {
+        ...state,
+        token: payload,
+      };
+
     default:
       return { ...state };
   }
 };
-console.log('reducer reparado');
 export default reducer;

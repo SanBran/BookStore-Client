@@ -34,6 +34,7 @@ export const FILTER_BY_LANGUAJE = "FILTER_BY_LANGUAJE";
 
 //PAGINATION
 export const SELECT_PAGE = "SELECT_PAGE";
+export const SELECT_FILTER_PAGE = "SELECT_FILTER_PAGE";
 
 //ORDER
 export const ORDER_BY_PRICE = "ORDER_BY_PRICE";
@@ -47,18 +48,23 @@ export const GET_COMMENTS = "GET_COMMENTS";
 export const UPDATE_COMMENT_BY_ID = "UPDATE_COMMENT_BY_ID";
 export const DELETE_COMMENT_BY_ID = "DELETE_COMMENT_BY_ID";
 
+//CART
+export const REMOVE_CART = "REMOVE_CART";
+export const ADD_CART = "ADD_CART";
+
 //USERS
 export const ACCESS = "ACCESS";
 export const OVERLAY_PROFILE = "OVERLAY_PROFILE";
 export const SHOW_LISTWISH = "SHOW_LISTWISH";
-
+export const ADD_FAVORITE = "ADD_FAVORITE";
 export const GET_USERS = "GET_USER";
 export const GET_USER_BY_ID = "GET_USER_BY_ID";
 export const POST_USER = "POST_USER";
 export const UPDATE_USER = "UPDATE_USER";
-
 export const ACTIVATE_USER = "ACTIVATE_USER";
-
+export const PASSWORD_REQUEST = "PASSWORD_REQUEST";
+export const PASSWORD_CHANGE = "PASSWORD_CHANGE";
+export const REDIRECT_TOKEN = "REDIRECT_TOKEN";
 
 //BACKEND FILTERS
 export const FILTER_BY_PRICE = "FILTER_BY_PRICE";
@@ -70,5 +76,3 @@ export const FILTER_BY_NUM_PAGES = "FILTER_BY_NUM_PAGES";
 export const FILTER_BY_PUBLISHED_DATE = "FILTER_BY_PUBLISHED_DATE";
 export const FILTER_BY_COUNTRY = "FILTER_BY_COUNTRY";
 export const FILTER_BY_PriceRange = "FILTER_BY_PriceRange";
-
-

@@ -1,8 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllBooks,FilterByPriceRange} from "../../redux/actions/actions";
-import Pagination from "../Pagination/Pagination";
+import { getAllBooks,FilterByGender,FilterByAuthor,FilterByPrice,FilterByEditorial,FilterByLanguage,FilterByPages ,FilterByPublishedDate,FilterByCountry,FilterByPriceRange} from "../../redux/actions/actions";
+import PaginationSearch from "../Pagination/PaginationSearch";
 import styles from './Filters.module.css'
 import Books from "../PanelBooks/Books";
 import icon from "./icons/whatsapp.png";
@@ -10,6 +10,7 @@ import Chat from "./Chat";
 
 const Filters = () => {
   const currentBooks = useSelector((state) => state.allBooksCopy);
+  const totalPages = useSelector((state) => state.booksObject)
   const dispatch = useDispatch();
   const [data, setData] = useState({
     gender: "",
@@ -22,8 +23,10 @@ const Filters = () => {
   });
   const [priceMax, setPriceMax] = useState("");
   const [priceMin, setPriceMin] = useState("");
-    const [allBooks, setallBooks] = useState([]);
-    const [isChatOpen, setIsChatOpen] = useState(false);
+  const [allBooks, setallBooks] = useState([]);
+  const [isChatOpen, setIsChatOpen] = useState(false)
+  const [currentPage, setCurrentPage] = useState(1);
+  const [active, setActive] = useState(1);
 
   // Este useEffect se ejecuta cuando se monta el componente para traer data del estado Global
   useEffect(() => {
@@ -32,10 +35,13 @@ const Filters = () => {
 
   // este useEfect se ejecuta para llenar el estado local
   useEffect(() => {
-    setallBooks(currentBooks);
+    currentBooks?
+    setallBooks(currentBooks):
+    setallBooks([])
   }, [currentBooks]);
 
-  console.log(currentBooks);
+//  console.log(currentBooks);
+
   const handlePriceMin = (event) => {
     event.preventDefault();
     const priceRange = event.target.value;
@@ -81,82 +87,57 @@ alert("No hay libros en ese rango de precio")
   };
 
   const handleFilterData = async (event) => {
-    if (
-      !data.gender &&
-      !data.editorial &&
-      !data.publishedDate &&
-      !data.country &&
-      !data.language &&
-      !data.pages &&
-      !data.price
-    ) {
-      setallBooks(currentBooks);
-      return;
-    }
-
     const sendBody = {};
 
     if (data.gender) {
       sendBody.gender = data.gender;
-    }
-    if (data.editorial) {
-      sendBody.editorial = data.editorial;
-    }
-    if (data.publishedDate) {
-      sendBody.publishedDate = data.publishedDate;
-    }
-    if (data.country) {
-      sendBody.country = data.country;
-    }
-    if (data.language) {
-      sendBody.language = data.language;
-    }
-    if (data.pages) {
-      sendBody.pages = data.pages;
-    }
-
-    if (data.gender) {
       const filteredBooks = allBooks.filter(
         (Book) => Book.gender === data.gender
       );
-     setallBooks(filteredBooks);
+     // setallBooks(filteredBooks);
+      dispatch(FilterByGender(filteredBooks));
+     
+
+
       
     }
 
     if (data.editorial) {
+      sendBody.editorial = data.editorial;
       const filteredBooks = allBooks.filter(
         (Book) => Book.editorial === data.editorial
       );
-      setallBooks(filteredBooks);
+      dispatch(FilterByEditorial(filteredBooks));
     }
     if (data.publishedDate) {
+      sendBody.publishedDate = data.publishedDate;
       const filteredBooks = allBooks.filter(
         (Book) => Book.publishedDate === data.publishedDate
       );
-      setallBooks(filteredBooks);
+      dispatch(FilterByPublishedDate(filteredBooks));
     }
     if (data.country) {
+      sendBody.country = data.country;
       const filteredBooks = allBooks.filter(
         (Book) => Book.country === data.country
       );
-      setallBooks(filteredBooks);
+      dispatch(FilterByCountry(filteredBooks));
     }
     if (data.language) {
+      sendBody.language = data.language;
       const filteredBooks = allBooks.filter(
         (Book) => Book.language === data.language
       );
-      setallBooks(filteredBooks);
+      dispatch(FilterByLanguage(filteredBooks));
     }
     if (data.pages) {
+      sendBody.pages = data.pages;
       const filteredBooks = allBooks.filter(
         (Book) => Book.pages === data.pages
       );
-      setallBooks(filteredBooks);
+      dispatch(FilterByPages(filteredBooks));
     }
 
-    if (!data.gender && !data.editorial && !data.publishedDate && !data.country && !data.language && !data.pages && !data.price) {
-      setallBooks(currentBooks);
-    }
    
     };
 
@@ -193,7 +174,8 @@ alert("No hay libros en ese rango de precio")
       const uniqueLanguage = getUniqueValues(allBooks, "language");
       const uniquePrice = getUniqueValues(allBooks, "price");
 
-    console.log(data);
+
+   
     const handleChatOpen = () => {
         setIsChatOpen(true);
     };
@@ -201,6 +183,7 @@ alert("No hay libros en ese rango de precio")
     const handleChatClose = () => {
         setIsChatOpen(false);
     };
+
 
       
     return (
@@ -322,11 +305,17 @@ alert("No hay libros en ese rango de precio")
 
         <div className={styles.bookContainer}>
 
-          {currentBooks.length == 0? <h2 className={styles.noResults}>No results</h2>: <Books currentBooks={allBooks}/>}
+          {currentBooks === undefined ? <h2 className={styles.noResults}>No results</h2>: <Books currentBooks={allBooks}/>}
           
         </div>
         </div>
-        <Pagination/>
+        {/* {currentBooks?.length == 0 || totalPages === 1 ? null: <PaginationSearch
+          numBooks={totalPages}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          active={active}
+          setActive={setActive}/>} */}
+        
       </div>
     );
   };

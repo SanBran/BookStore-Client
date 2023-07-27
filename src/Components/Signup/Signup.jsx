@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import countriesData from "./data/countries.json";
 import { postUser } from "../../redux/actions/actions";
+import { expresions } from "../../utils/regex";
 
 import style from './Signup.module.css';
 
 const SignUp = ({ setForm }) => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [errors, setErrors] = useState({
@@ -15,7 +15,7 @@ const SignUp = ({ setForm }) => {
     email: "",
     password: "",
     confirmPassword: "",
-    dniPassport: "",
+    dniPasaport: "",
     phoneCode: "",
     phone: "",
     country: "",
@@ -27,23 +27,15 @@ const SignUp = ({ setForm }) => {
     email: "",
     password: "",
     confirmPassword: "",
-    dniPassport: "",
+    dniPasaport: "",
     phoneCode: "",
     phone: "",
     country: "",
     birthday: "",
     gender: "",
   });
-  console.log(signUpInfo);
-  //-----------VALIDACIONES DEL FORMULARIO
-  const expresions = {
-    name: /^[a-zA-Z]+( [a-zA-Z]+)+$/,
-    email: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-    password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&#.])[A-Za-z\d$@$!%*?&#.]{8,15}$/, //contrasena debe tener entre 8-15 caract., minus, mayus, num y caract especial [$@$!%*?&#.] cualquier a de los que estan dentro de los corchetes
-    phoneCode: /^(?:\+)?[1-9]{1,3}$/,
-    phone: /^[0-9]{6,15}$/,
-    birthday: /^(?:19[5-9]\d|20[0-1]\d)(\/|-)(0[1-9]|1[0-2])(\/|-)([0-2][0-9]|3[0-1])$/
-  }
+  
+//-----------VALIDACIONES DEL FORMULARIO
   const validateInputs = (state, property) => {
     switch (property) {
       case 'confirmPassword': {
@@ -56,14 +48,14 @@ const SignUp = ({ setForm }) => {
         else setErrors({ ...errors, [property]: '' })
       }
         break;
-      case 'dniPassport': {
-        if (state.dniPassport === "") setErrors({ ...errors, [property]: 'Enter your identity document' })
+      case 'dniPasaport': {
+        if (state.dniPasaport === "") setErrors({ ...errors, [property]: 'Enter your identity document' })
         else setErrors({ ...errors, [property]: '' })
       }
         break;
     }
 
-    if (property === 'dniPassport' || property === 'confirmPassword' || property === 'country' || property === 'gender') return;
+    if (property === 'dniPasaport' || property === 'confirmPassword' || property === 'country' || property === 'gender') return;
 
     if (!expresions[property].test(state[property])) {
       switch (property) {
@@ -98,7 +90,7 @@ const SignUp = ({ setForm }) => {
     }
 
   }
-  //------------FIN DE LAS VALIDACIONES de inputs
+//-----------FIN DE LAS VALIDACIONES de inputs
 
   const handleSignUpChanges = (event) => {
     const property = event.target.name;
@@ -130,41 +122,31 @@ const SignUp = ({ setForm }) => {
       if (property === 'gender') continue;
       if (errors[property].length) return false;
     }
-
-
     return true
   }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     validateSubmit();
-
     if(validateSubmit()){
-      try {
-        //console.log('entro a crear usuario');
-        await dispatch(postUser(signUpInfo))
-        //console.log('se debio haber creado');
-        setSignUpInfo({
-          name: "",
-          email: "",
-          password: "",
-          confirmPassword: "",
-          dniPassport: "",
-          phoneCode: "",
-          phone: "",
-          country: "",
-          birthday: "",
-          gender: "",
-        })
-        setForm('login')
-      } catch (error) {
-        console.log(error.message);
-        setErrors({...errors, email: 'This email is already registered'})
-      }
-
+      //console.log('entro a crear usuario');
+      await dispatch(postUser(signUpInfo));
+      //console.log('se debio haber creado');
+      setSignUpInfo({
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        dniPasaport: "",
+        phoneCode: "",
+        phone: "",
+        country: "",
+        birthday: "",
+        gender: "",
+      });
+      setForm('login');
     }
   };
-
 
   return (
     <form className={style.formContainer} onSubmit={handleSubmit}>
@@ -214,15 +196,15 @@ const SignUp = ({ setForm }) => {
         {errors.confirmPassword.length ? <p className={style.textError}>{errors.confirmPassword}</p> : <></>}
 
         <input
-          className={errors.dniPassport.length ? (`${style.input} ${style.error}`) : style.input}
-          name="dniPassport"
+          className={errors.dniPasaport.length ? (`${style.input} ${style.error}`) : style.input}
+          name="dniPasaport"
           onChange={handleSignUpChanges}
-          value={signUpInfo.dniPassport}
+          value={signUpInfo.dniPasaport}
           type="text"
           placeholder="DNI / passport"
           required
         />
-        {errors.dniPassport.length ? <p className={style.textError}>{errors.dniPassport}</p> : <></>}
+        {errors.dniPasaport.length ? <p className={style.textError}>{errors.dniPasaport}</p> : <></>}
 
         <div className={style.phoneInputs}>
           <input
