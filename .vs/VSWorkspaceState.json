@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\src",
+    "\\src\\Components",
+    "\\src\\Components\\Filters"
   ],
-  "SelectedNode": "\\C:\\Users\\Dany\\Desktop\\Front-3.0",
+  "SelectedNode": "\\src\\Components\\Filters\\Demo.jsx",
   "PreviewInSolutionExplorer": false
 }
