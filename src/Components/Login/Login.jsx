@@ -38,6 +38,7 @@ const Login = ({setForm}) => {
     setLogInfo({...logInfo, [property]: value})
   }
 
+//LOGIN DESDE EL FORMULARIO
   const handlerLogIn = async(event)=>{
     event.preventDefault();
     try {
@@ -62,7 +63,13 @@ const Login = ({setForm}) => {
 
   const responseGoogle = (response) => {
     // Aquí obtienes la respuesta de Google con la información del usuario logueado.
-    console.log(response);
+    const email = response.profileObj.email;
+    const name = response.profileObj.name;
+    const profileImg = response.profileObj.imageUrl;
+    const googleId = response.profileObj.googleId;
+    const token = response.accessToken;
+    console.log('token:',token);
+    console.log(response.profileObj);
   };
 
   const onFailure = (error) => {
