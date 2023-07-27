@@ -14,8 +14,9 @@ import Results from "./Views/Results/Results";
 import EmailVerification from "./Views/EmailVerification";
 
 import { useSelector } from "react-redux";
-
-
+import Cart from "./Views/Cart.jsx/Cart";
+import { PaymentDetails } from "./Views/Cart.jsx/PaymentDetails/PaymentDetails";
+import SucessfulPay from "./Views/Cart.jsx/SuccesfulPay/SucessfulPay";
 
 function App() {
   const showOverlayPerfile = useSelector(state => state.overlayProfile);
@@ -27,7 +28,7 @@ function App() {
     {showOverlayPerfile && <Profile />}
     <div >
       
-    {location.pathname !== "/profile" && location.pathname !== "/access" && location.pathname !== "/Results" ? (
+    {location.pathname !== "/profile" && location.pathname !== "/access" && (location.pathname !== "/results") ? (
         <Navbar  />
       ) : (
         <></>
@@ -54,10 +55,15 @@ function App() {
 
           <Route path="/access/validate" element={<EmailVerification />} />
 
+          <Route path="/cart" element={<Cart />} />
+
+          <Route path="/payment" element={<PaymentDetails />} />
+
+          <Route path="/payment/sucessfulpay" element={<SucessfulPay />} />
         </Routes>
       </div>
     </>
   );
 }
 
-export default App;   
+export default App;

@@ -27,6 +27,8 @@ const EmailVerification = ()=>{
         if(valtokenPass) validatePassword();
 
     },[valtoken, dispatch, navigate]);   
+    return (
+            <div>✅</div>)
 }
 
 export default EmailVerification;
