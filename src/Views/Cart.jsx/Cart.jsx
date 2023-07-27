@@ -1,41 +1,26 @@
 import Stripe from "stripe"
 import axios from "axios";
+import { useEffect, useState } from "react";
 
-
-
-
-//({ items, email, idBook, user, userId })
-// const lineItems = items.map((item) => ({
-//     price_data: {
-//       product_data: {
-//             name: item.name,	  
-//       },
-//       currency: item.typeMoney,
-//       unit_amount: item.price,
-
-
-//     },
-//       quantity: item.quantity,
 
 const stripe = new Stripe('sk_test_51NXqBWJvp7x1gGxjTsCAhgScRFFvesnqbhSCoQh5TaTKIplC1acinnXfRefCDS0FvadXBW9cx5l9pjDtdRTd7GFx008SkUSzUD')
 console.log(stripe);
 const customer = await stripe.customers.create({
-    email: 'customer@example.com',
+    email: 'custoasasdasdasdasdasdasddasdmer@example.com',
 });
 
-
-console.log(customer);
-
-
-
 const Cart = () => {
+    const [payLink, setPayLink] = useState('')
     const payCart = async (data) => {
-        await axios.post('http://localhost:8000/create-checkout-session', data)
-            .then(response => console.log(response))
-            .catch(error => console.log(error))
+        try {
+            const response = await axios.post('http://localhost:8000/create-checkout-session', data)
+            const paymentLink = response.data.url
+            setPayLink(paymentLink)
+            window.open(paymentLink, '_blank')
+        } catch (error) {
+            console.log('Error', error);
+        }
     }
-
-
 
     const data = {
         "items": [{
@@ -58,5 +43,4 @@ const Cart = () => {
         </>
     )
 }
-
 export default Cart
