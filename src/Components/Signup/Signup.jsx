@@ -15,7 +15,7 @@ const SignUp = ({ setForm }) => {
     email: "",
     password: "",
     confirmPassword: "",
-    dniPasaport: "",
+    // dniPasaport: "",
     phoneCode: "",
     phone: "",
     country: "",
@@ -27,7 +27,7 @@ const SignUp = ({ setForm }) => {
     email: "",
     password: "",
     confirmPassword: "",
-    dniPasaport: "",
+    // dniPasaport: "",
     phoneCode: "",
     phone: "",
     country: "",
@@ -48,14 +48,16 @@ const SignUp = ({ setForm }) => {
         else setErrors({ ...errors, [property]: '' })
       }
         break;
-      case 'dniPasaport': {
-        if (state.dniPasaport === "") setErrors({ ...errors, [property]: 'Enter your identity document' })
-        else setErrors({ ...errors, [property]: '' })
-      }
-        break;
+      // case 'dniPasaport': {
+      //   if (state.dniPasaport === "") setErrors({ ...errors, [property]: 'Enter your identity document' })
+      //   else setErrors({ ...errors, [property]: '' })
+      // }
+      //   break;
     }
 
-    if (property === 'dniPasaport' || property === 'confirmPassword' || property === 'country' || property === 'gender') return;
+    if (
+      // property === 'dniPasaport' || 
+      property === 'confirmPassword' || property === 'country' || property === 'gender') return;
 
     if (!expresions[property].test(state[property])) {
       switch (property) {
@@ -127,24 +129,25 @@ const SignUp = ({ setForm }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    validateSubmit();
     if(validateSubmit()){
-      //console.log('entro a crear usuario');
-      await dispatch(postUser(signUpInfo));
-      //console.log('se debio haber creado');
-      setSignUpInfo({
-        name: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-        dniPasaport: "",
-        phoneCode: "",
-        phone: "",
-        country: "",
-        birthday: "",
-        gender: "",
-      });
-      setForm('login');
+      try {
+        await dispatch(postUser(signUpInfo));
+        setSignUpInfo({
+          name: "",
+          email: "",
+          password: "",
+          confirmPassword: "",
+          // dniPasaport: "",
+          phoneCode: "",
+          phone: "",
+          country: "",
+          birthday: "",
+          gender: "",
+        });
+        setForm('login');
+      } catch (error) {
+        if(error.message === 'User ready exists') setErrors({ ...errors, email: 'User ready exists' })
+      }
     }
   };
 
@@ -195,7 +198,7 @@ const SignUp = ({ setForm }) => {
         />
         {errors.confirmPassword.length ? <p className={style.textError}>{errors.confirmPassword}</p> : <></>}
 
-        <input
+        {/* <input
           className={errors.dniPasaport.length ? (`${style.input} ${style.error}`) : style.input}
           name="dniPasaport"
           onChange={handleSignUpChanges}
@@ -204,7 +207,7 @@ const SignUp = ({ setForm }) => {
           placeholder="DNI / passport"
           required
         />
-        {errors.dniPasaport.length ? <p className={style.textError}>{errors.dniPasaport}</p> : <></>}
+        {errors.dniPasaport.length ? <p className={style.textError}>{errors.dniPasaport}</p> : <></>} */}
 
         <div className={style.phoneInputs}>
           <input

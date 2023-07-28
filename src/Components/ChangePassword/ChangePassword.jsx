@@ -90,7 +90,7 @@ const ChangePassword = ({form, setForm})=>{
             })
             setSendPass(true)
         } catch (error) {
-            console.log(error);
+            //console.log(error);
             setErrors({...errors, password:error.message})
         }
     }
@@ -100,10 +100,37 @@ const ChangePassword = ({form, setForm})=>{
             <div className={style.backLogIn}>
                 <Link onClick={BackLogIn}>{`<`} Back to Log in</Link>
             </div>
+{/* --------Formulario para Solicitar cambio de contrasena */}
+            {form === 'requestChangePass' && 
+                (<>
+                    {sendEmail
+                    ?(<h5 className={style.message}>Check your email to change the password</h5>)
+                    :(<>
+                    <div className={style.titleContainer}>
+                        <h1 className={style.title}>Request password change</h1>
+                    </div>
+                    
+                    <div className={style.inputsContainer}>
+                        <input className={errors.email.length ? (`${style.input} ${style.error}`) : style.input} 
+                        type='text' 
+                        placeholder='Email address' 
+                        name='email' 
+                        value={userData.email} onChange={handleChanges} />
+                        {errors.email.length ? <p className={style.textError}>{errors.email}</p> : <></>}
+                    </div>
+
+                    <div className={style.buttonContainer}>
+                        <button className={style.submitBtn} onClick={handleSubmitRequest}>Send request</button>
+                    </div>
+                    </>)
+                    }
+                </>)
+            }
+{/* --------Formulario para Cambiar la contrasena */}
             { form === 'changePassword' &&
                 (<>
                     {sendPass
-                    ?(<h5 className={style.message}>Se cambio la contrasena exitosamente</h5>)
+                    ?(<h5 className={style.message}>Password changed successfully</h5>)
                     :(<>
                         <div className={style.titleContainer}>
                             <h1 className={style.title}>CHANGE PASSWORD</h1>
@@ -137,31 +164,6 @@ const ChangePassword = ({form, setForm})=>{
                         </div>
                     </>)
                     
-                    }
-                </>)
-            }
-            {form === 'requestChangePass' && 
-                (<>
-                    {sendEmail
-                    ?(<h5 className={style.message}>Revisa tu mail para cambiar la contrasena</h5>)
-                    :(<>
-                    <div className={style.titleContainer}>
-                        <h1 className={style.title}>Request password change</h1>
-                    </div>
-                    
-                    <div className={style.inputsContainer}>
-                        <input className={errors.email.length ? (`${style.input} ${style.error}`) : style.input} 
-                        type='text' 
-                        placeholder='Email address' 
-                        name='email' 
-                        value={userData.email} onChange={handleChanges} />
-                        {errors.email.length ? <p className={style.textError}>{errors.email}</p> : <></>}
-
-                    </div>
-                    <div className={style.buttonContainer}>
-                        <button className={style.submitBtn} onClick={handleSubmitRequest}>Send request</button>
-                    </div>
-                    </>)
                     }
                 </>)
             }

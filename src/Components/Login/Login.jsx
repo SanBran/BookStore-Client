@@ -5,6 +5,7 @@ import style from './Login.module.css'
 import { useDispatch, useSelector} from 'react-redux';
 import { accessLogIn } from '../../redux/actions/actions';
 //importaciones para login con google
+import { accessGoogle } from '../../redux/actions/actions';
 import GoogleLogin from 'react-google-login';
 import { gapi } from 'gapi-script';
 
@@ -38,6 +39,7 @@ const Login = ({setForm}) => {
     setLogInfo({...logInfo, [property]: value})
   }
 
+//LOGIN DESDE EL FORMULARIO
   const handlerLogIn = async(event)=>{
     event.preventDefault();
     try {
@@ -60,9 +62,18 @@ const Login = ({setForm}) => {
     gapi.load('client:auth2', start)
   },[]);
 
-  const responseGoogle = (response) => {
+  const responseGoogle = async(response) => {
     // Aquí obtienes la respuesta de Google con la información del usuario logueado.
-    console.log(response);
+    // const email = response.profileObj.email;
+    // const name = response.profileObj.name;
+    // const profileImg = response.profileObj.imageUrl;
+    // const googleId = response.profileObj.googleId;
+    const user = response.profileObj
+    const token = response.accessToken;
+    //console.log('token:',token);
+    //console.log(response.profileObj);
+    await dispatch(accessGoogle(user, token))
+    navigate('/')
   };
 
   const onFailure = (error) => {
