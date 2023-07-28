@@ -15,6 +15,7 @@ const Access = () => {
     useEffect(()=>{
         const urlParams = new URLSearchParams(window.location.search);
         if(urlParams.get('changePass') && setForm('changePassword'));
+        if(urlParams.get('requestChangePass') && setForm('requestChangePass'));
 
     },[])
     
