@@ -61,6 +61,9 @@ import delete_icon from "../../assets/icons/delete_icon.svg";
 const Cart = ({ isOpen, onRequestClose }) => {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const genericCover =
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhRKhJb1aLmjwGX_ox0TA6eTxCv_5g3Nlr6w&usqp=CAU";
+
   
   const modalStyles = {
     overlay: {
@@ -90,7 +93,7 @@ const totalPrice = cart.reduce((total, book) => total + book.price, 0);
                 <Link className={styles.bookLink} to={`/detail/${book.id}`}>
                   <img
                     className={styles.bookImage}
-                    src={book.image}
+                    src={book.image !== "Image not Available" ? book.image : genericCover}
                     alt={`${book.title}`}
                   />
                 </Link>
