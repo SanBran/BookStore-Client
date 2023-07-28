@@ -270,7 +270,7 @@ const SignUp = ({ setForm }) => {
           <option value="female">Female</option>
           <option value="binary">Binary</option>
           <option value="notBinary">Not-Binary</option>
-          <option value="none">None</option>
+          <option value="none">Other</option>
         </select>
 
       </div>
