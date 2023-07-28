@@ -14,6 +14,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const showOverlayPerfile = useSelector((state) => state.overlayProfile);
   const access = useSelector((state) => state.access.state);
+  const cart = useSelector((state) => state.cart);
 
   const handleOverlayToggle = () => {
     if (access) {
@@ -52,6 +53,9 @@ const Navbar = () => {
               isOpen={modalIsOpen}
               onRequestClose={closeModal}
             />
+            {(cart && cart.length !== 0)
+            ?(<div className={styles.cartCounter}>{cart.length}</div>)
+            :(<></>)}
         </div>
       ) : (
         <></>
