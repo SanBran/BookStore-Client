@@ -129,24 +129,25 @@ const SignUp = ({ setForm }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    validateSubmit();
     if(validateSubmit()){
-      //console.log('entro a crear usuario');
-      await dispatch(postUser(signUpInfo));
-      //console.log('se debio haber creado');
-      setSignUpInfo({
-        name: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-        // dniPasaport: "",
-        phoneCode: "",
-        phone: "",
-        country: "",
-        birthday: "",
-        gender: "",
-      });
-      setForm('login');
+      try {
+        await dispatch(postUser(signUpInfo));
+        setSignUpInfo({
+          name: "",
+          email: "",
+          password: "",
+          confirmPassword: "",
+          // dniPasaport: "",
+          phoneCode: "",
+          phone: "",
+          country: "",
+          birthday: "",
+          gender: "",
+        });
+        setForm('login');
+      } catch (error) {
+        if(error.message === 'User ready exists') setErrors({ ...errors, email: 'User ready exists' })
+      }
     }
   };
 

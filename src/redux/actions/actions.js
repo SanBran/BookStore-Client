@@ -627,7 +627,8 @@ export function accessGoogle({email, name, imageUrl, googleId}, token) {
                         phoneCode: "00",
                         phone: "0000000",
                         country: "null",
-                        birthday: "null",                    
+                        birthday: "null",  
+                        photoUser: imageUrl,                  
                     };
                     const newUser = await axios.post(`http://localhost:8000/newUser`, userDataSignUp);
                     //console.log(newUser);
@@ -701,14 +702,14 @@ export function postUser(userData) {
         `http://localhost:8000/newUser`,
         userData
       );
-      console.log(userData);
+      //console.log(userData);
       return dispatch({
         type: POST_USER,
         payload: response.data,
       });
     } catch (error) {
-      console.log("entro aca");
-      throw Error(error.message);
+      //console.log(error.response? error.response : error.message);
+      throw Error(error.response? error.response.data.text : error.message);
     }
   };
 }
