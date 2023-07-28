@@ -4,6 +4,10 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styles from "./Cart.module.css";
 
+//importando icon del boton cerrar
+import close_button from "../../assets/icons/close_button.svg"
+
+
 
 const Cart = ({ isOpen, onRequestClose }) => {
   const cart = useSelector((state) => state.cart);
@@ -11,30 +15,33 @@ const Cart = ({ isOpen, onRequestClose }) => {
   const modalStyles = {
     overlay: {
       backgroundColor: "transparent", // Fondo translúcido oscuro detrás del modal
+      zIndex: 100,
     },
-    content: {
-      width: "25%", // Ajusta el tamaño
-      height: "445px",
-      margin: "0 auto", // Centra el modal horizontalmente
-      top: "50%",
-      left: "50%",
-      transform: "translate(-50%, -50%)", // Centra el modal verticalmente
-    },
+  //   content: {
+  //     width: "25%", // Ajusta el tamaño
+  //     height: "445px",
+  //     margin: "0 auto", // Centra el modal horizontalmente
+  //     top: "50%",
+  //     left: "50%",
+  //     transform: "translate(-50%, -50%)", // Centra el modal verticalmente
+  //   },
   };
 
 const totalPrice = cart.reduce((total, book) => total + book.price, 0);
   
   return (
-    <Modal isOpen={isOpen} onRequestClose={onRequestClose} style={modalStyles}>
+    <Modal style={modalStyles} className={styles.modal} isOpen={isOpen} onRequestClose={onRequestClose} >
       <div>
         <div className={styles.titleContainer}>
-          <h3>Your Cart</h3>
-          <button className={styles.buttonClose} onClick={onRequestClose}>
+          <img className={styles.buttonClose} src={close_button} onClick={onRequestClose} alt='x' />
+          <h3 className={styles.title}>Your Cart</h3>
+
+          {/* <button className={styles.buttonClose} onClick={onRequestClose}>
             X
-          </button>
+          </button> */}
         </div>
 
-        <hr></hr>
+        {/* <hr></hr> */}
         <div className={styles.cartContainer}>
           {cart.length !== 0 ? (
             cart.map((book) => (
@@ -57,15 +64,17 @@ const totalPrice = cart.reduce((total, book) => total + book.price, 0);
               </div>
             ))
           ) : (
-            <p>Empty Cart</p>
+            <p className={styles.empty}>Empty Cart</p>
           )}
         </div>
-        <hr></hr>
-        <h4>{cart.length} books</h4>
-        <h4>${totalPrice}</h4>
+        {/* <hr></hr> */}
+        <div className={styles.infoContainer}>
+          <h4 className={styles.title}>{cart.length} books</h4>
+          <h4 className={styles.price}>${totalPrice}</h4>
+        </div>
 
         <Link to={`/payment`}>
-          <button onClick={onRequestClose}>Buy Now</button>
+          <button className={styles.buyBtn} onClick={onRequestClose} >Buy Now</button>
         </Link>
 
         

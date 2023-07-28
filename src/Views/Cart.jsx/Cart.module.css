@@ -1,4 +1,4 @@
-.container {
+/* .container {
     display: flex;
     height: 100px;
     width: 200px;
@@ -10,22 +10,22 @@
     padding: 20px;
     border-radius: 10px;
     background-color: rgb(236, 236, 236);
-}
-.titleContainer{
+} */
+/* .titleContainer{
     display: flex;
-}
-.buttonClose{
+} */
+/* .buttonClose{
     display: flex;
     align-items: center;
     justify-content: center;
     height: 30px;
     width: 20px;
-}
-.cartContainer {
+} */
+/* .cartContainer {
     max-height: 300px; /* Establece una altura máxima para el contenedor */
-    overflow-y: auto; /* Habilita el scrollbar vertical */
-  }
-.textContainer {
+    /* overflow-y: auto; Habilita el scrollbar vertical */
+
+/* .textContainer {
     text-align: start;
     color: black;
 }
@@ -54,5 +54,89 @@
 .price {
     font-weight: 700;
     position: absolute; /* Agregamos posicionamiento absoluto */
-    bottom: 20px;
+    /* bottom: 20px; */
+
+
+/* ----------------Estilo boton de cerrar x */
+.buttonClose{
+    width: 20px;
+    position: absolute;
+    top: 15px;
+    right: 30px;
+    display: flex;
+
+    cursor: pointer;
+}
+
+.modal{
+    width: 350px;
+    height: 100vh;
+    position: absolute;
+    right: 0;
+    padding: 0 20px;
+    background-color: white;
+    z-index:11;
+}
+
+.titleContainer{
+    border-bottom: 1px solid #dadada;
+    box-shadow: 0px 11px 20px -15px rgb(0 0 0 / 16%);
+}
+.title{
+    margin: 10px 0;
+    font-size: 20px;
+    font-weight: normal;
+    color: black;
+}
+
+
+
+.cartContainer{
+    height: 380px;
+    border-bottom: 1px solid #dadada;
+    box-shadow: 0px 11px 20px -15px rgb(0 0 0 / 16%);
+    overflow: auto;
+
+}
+
+.empty{
+    margin-top: 150px;
+    font-size: 15px;
+    font-weight: lighter;
+    color: black;
+}
+
+
+.infoContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.price{
+    margin: 0;
+    font-size: 25px;
+    font-weight: 500;
+    color: #FA9D1B;
+}
+
+.buyBtn{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    border-radius: 0;
+    border: none;
+    background-color: #FA9D1B;
+    cursor:pointer;
+
+    color: #F5F5F5;
+    font-weight: bolder;
+    font-size: 18px;
+}
+.buyBtn:hover{
+    background-color: #fda52a;
+}
+.buyBtn:focus-visible, .buyBtn:focus{
+    outline: 0;
 }
