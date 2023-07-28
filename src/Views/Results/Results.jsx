@@ -16,10 +16,7 @@ const Results = () => {
     title: origin
   });
   // codigo para borrar params al recargar pagina
-  useEffect(() => {
 
-    dispatch(getBooksByTitle(search));
-  }, []);
   
  
   const currentBooks = useSelector((state) => state.allBooksCopy);
