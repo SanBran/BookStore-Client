@@ -68,6 +68,7 @@
     cursor: pointer;
 }
 
+/* algunos estilos para el modal */
 .modal{
     width: 350px;
     height: 100vh;
@@ -75,9 +76,13 @@
     right: 0;
     padding: 0 20px;
     background-color: white;
-    z-index:11;
+    box-shadow: -8px 0px 20px 4px rgb(0 0 0 / 11%);
+}
+.modal:focus-visible{
+    outline: 0;
 }
 
+/* header del carrito */
 .titleContainer{
     border-bottom: 1px solid #dadada;
     box-shadow: 0px 11px 20px -15px rgb(0 0 0 / 16%);
@@ -90,27 +95,52 @@
 }
 
 
-
+/* items del carrito */
 .cartContainer{
-    height: 380px;
+    height: 370px;
     border-bottom: 1px solid #dadada;
     box-shadow: 0px 11px 20px -15px rgb(0 0 0 / 16%);
     overflow: auto;
-
 }
-
 .empty{
     margin-top: 150px;
     font-size: 15px;
     font-weight: lighter;
     color: black;
 }
+.bookContainer{
+    width: 90%;
+    display: flex;
+    margin-top: 30px;
+    height: fit-content;
+}
+.bookImage{
+    width: 90px;
+}
+.textContainer{
+    width: 230px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0 20px;
+    font-size: 15px;
+    font-weight: bold;
+}
+.bookPrice{
+    color: #7B7B7B;
+}
+.deleteBtn{
+    width: 15px;
+    cursor: pointer;
+}
 
 
+/* cantidad de libros y precio total */
 .infoContainer{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin: 10px 0;
 }
 .price{
     margin: 0;
@@ -119,6 +149,7 @@
     color: #FA9D1B;
 }
 
+/* boton de comprar */
 .buyBtn{
     width: 100%;
     display: flex;
