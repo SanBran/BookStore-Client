@@ -50,6 +50,7 @@ import {
   PASSWORD_REQUEST,
   PASSWORD_CHANGE,
   REDIRECT_TOKEN,
+  GET_GENRES,
 } from "./types";
 
 export const DETAIL_BOOK_BY_ID = "DETAIL_BOOK_BY_ID";
@@ -717,23 +718,23 @@ export function postUser(userData) {
 export function activateUser(token) {
   return async function (dispatch) {
     try {
-        const userData = {
-            id: "1",
-            data1: token,
-            data2: "",
-        }; 
-        //console.log(userData);   
-        const response = await axios.post(
-            `http://localhost:8000/activateUser/`,
-            userData
-        );
-        return dispatch({
-            type: ACTIVATE_USER,
-            payload: response.data,
-        });
+      const userData = {
+        id: "1",
+        data1: token,
+        data2: "",
+      };
+      //console.log(userData);
+      const response = await axios.post(
+        `http://localhost:8000/activateUser/`,
+        userData
+      );
+      return dispatch({
+        type: ACTIVATE_USER,
+        payload: response.data,
+      });
     } catch (error) {
-        //console.log(error);
-        throw Error(error.message);
+      //console.log(error);
+      throw Error(error.message);
     }
   };
 }
@@ -809,6 +810,27 @@ export function passwordChange(token, password) {
     } catch (error) {
       console.log(error);
       throw Error(error.response ? error.response.data.text : error.message);
+    }
+  };
+}
+
+export function getGenres() {
+  const genre = {
+    type: "CATEGORIES",
+  };
+  return async function (dispatch) {
+    try {
+      const response = await axios.post(
+        `http://localhost:8000/findSetting`,
+        genre
+      );
+
+      return dispatch({
+        type: GET_GENRES,
+        payload: response.data.detail.settingFind,
+      });
+    } catch (error) {
+      throw Error(error.message);
     }
   };
 }

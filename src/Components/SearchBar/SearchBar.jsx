@@ -1,27 +1,32 @@
 //import React from "react";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { getBooksByTitle } from "../../redux/actions/actions";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getBooksByTitle, getGenres } from "../../redux/actions/actions";
 import styles from './SearchBar.module.css'
 import { useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
   const dispatch = useDispatch();
+  const genres = useSelector((state)=> state.genres)
   const [search, setSearch] = useState({
-    title:""
   });
   const navigate = useNavigate()
 
+  useEffect(() => {
+    dispatch(getGenres())
+  }, []);
 
   const handleChange = (e) => {
     console.log(e.target.value);
-      setSearch({title: e.target.value});
+      setSearch({...search,
+        title: e.target.value});
     };
 
     
 
   const handleSearch = (e) => {
     e.preventDefault()
+    console.log(search);
     dispatch(getBooksByTitle(search));
     navigate(`/results/?title=${search.title}`)
     
@@ -29,7 +34,12 @@ const SearchBar = () => {
 
   const handleGenre = (e) => {
     e.preventDefault()
-    
+    console.log(e.target.value);
+    if (e.target.value === "all genres") {
+      
+    }else 
+      setSearch({...search,
+        gender: e.target.value});
   };
 
   const handleKeyPress = (e) => {
@@ -38,11 +48,23 @@ const SearchBar = () => {
     }
   };
 
+  const getUniqueValues = (genres) => {
+    const uniqueValuesSet = new Set();
+  
+    genres?.forEach((item) => {
+      if (item.nameType) {
+        uniqueValuesSet.add(item.nameType);
+      }
+    });
+  
+    return Array.from(uniqueValuesSet);
+  };
 
+  const uniqueGenders = getUniqueValues(genres);
   
   return (
     <nav className={styles.container}>
-      {search.title === "" ? (
+      {search.title === undefined && search.gender === undefined ?  (
         <button onClick={handleSearch} className={styles.icon} disabled>⌕</button>
       ) : (
         <button onClick={handleSearch} className={styles.icon}>⌕</button>
@@ -57,7 +79,16 @@ const SearchBar = () => {
         onKeyPress={handleKeyPress} 
         className={styles.bar}
       />
-      <button onClick={handleGenre} className={styles.genre}>⌵ all genres</button>
+      <select className={styles.genres} onChange={handleGenre} defaultValue="all genres" name="genres">
+            <option defaultValue value="all genres">
+              all genres
+            </option>
+            {uniqueGenders?.map((genre) => {
+              return <option key={genre} value={genre}>
+              {genre}
+            </option>
+            })}
+          </select>
     </nav>
   );
 };

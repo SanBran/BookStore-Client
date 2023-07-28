@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import Books from "../../Components/PanelBooks/Books";
 import Slide from "../../Components/Slide/Slide";
-import { getAllBooks, getUserById} from "../../redux/actions/actions";
+import { getAllBooks, getUserById, getGenres} from "../../redux/actions/actions";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./Home.module.css";
 import Pagination from "../../Components/Pagination/Pagination";
@@ -22,6 +22,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getAllBooks());
+    dispatch(getGenres())
   }, [dispatch]);
 
   useEffect(() => {

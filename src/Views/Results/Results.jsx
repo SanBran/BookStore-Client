@@ -192,13 +192,13 @@ alert("No hay libros en ese rango de precio")
             })}
           </select>
           <button
-            className={styles.btnFilter}
+            className={styles.btn}
             type="submit"
             placeholder="Filtrar"
             onClick={() => handleFilterData()}
           >Apply</button>
           <button
-            className={styles.btnCleanFilter}
+            className={styles.btn}
             type="reset"
             placeholder="Limpiar Filters"
             onClick={() => handleCleanFilter()}
@@ -218,7 +218,7 @@ alert("No hay libros en ese rango de precio")
             onChange={handlePriceMax}
           />
           <button
-            className={styles.btnRangePrice}
+            className={styles.btn}
             type="submit"
             placeholder="Filtrar"
             onClick={() => handleFilter()}

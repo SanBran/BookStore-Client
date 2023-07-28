@@ -48,6 +48,7 @@ import {
   PASSWORD_REQUEST,
   PASSWORD_CHANGE,
   REDIRECT_TOKEN,
+  GET_GENRES,
 } from "../actions/types";
 
 let initialState = {
@@ -55,6 +56,7 @@ let initialState = {
   allBooks: [],
   allBooksCopy: [],
   booksObject: {},
+  genres: [],
   book: [],
   bookByName: [],
   cart: [],
@@ -261,6 +263,12 @@ const reducer = (state = initialState, { type, payload }) => {
     }
 
     //----------------------------BACKEND FILTERS-------------------
+
+    case GET_GENRES:
+      return {
+        ...state,
+        genres: payload,
+      };
 
     case FILTER_BY_GENDER:
       if (payload === "") {
