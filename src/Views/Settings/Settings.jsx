@@ -23,7 +23,7 @@ function Settings() {
       </div>
       <div>
         {currentView === "data" && <MyData user={user}onBack={handleBack} />}
-        {currentView === "security" && <Security onBack={handleBack} />}
+        {currentView === "security" && <Security user={user} onBack={handleBack} />}
         {currentView !== "data" && currentView !== "security" && (
           <button onClick={() => setCurrentView("data")}>My Data</button>
         )}
