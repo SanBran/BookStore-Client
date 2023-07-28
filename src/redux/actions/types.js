@@ -76,3 +76,6 @@ export const FILTER_BY_NUM_PAGES = "FILTER_BY_NUM_PAGES";
 export const FILTER_BY_PUBLISHED_DATE = "FILTER_BY_PUBLISHED_DATE";
 export const FILTER_BY_COUNTRY = "FILTER_BY_COUNTRY";
 export const FILTER_BY_PriceRange = "FILTER_BY_PriceRange";
+
+//GENRES
+export const GET_GENRES = "GET_GENRES";
