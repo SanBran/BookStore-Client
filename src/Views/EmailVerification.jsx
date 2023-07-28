@@ -8,29 +8,22 @@ const EmailVerification = ()=>{
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const urlParams = new URLSearchParams(window.location.search);
-    
-    // Obtenemos el valor de la variable 'valtoken'
-    const valtoken = urlParams.get('valtoken');
-    const valtokenPass = urlParams.get('valtokenPass');
-    
+//--Obtenemos el valor de la variable 'valtoken'
+    const valtoken = urlParams.get('valtoken').substring(1);
+    const action = urlParams.get('valtoken')[0];
     useEffect(()=>{
-        const validateEmail = async()=>{
-            await dispatch(activateUser(valtoken))
-            return navigate('/access')
-        };
-        if(valtoken) validateEmail();
-
-        const validatePassword = async()=>{
-            await dispatch(redirectToken(valtokenPass))
-            return navigate(`/access?changePass=${valtokenPass}`)
-        };
-        if(valtokenPass) validatePassword();
-
+        switch(action){
+            case '1': return async()=>{
+                await dispatch(activateUser(valtoken))
+                return navigate('/access')
+            };
+            case '2': return async()=>{
+                await dispatch(redirectToken(valtoken))
+                return navigate(`/access?changePass=true`)
+            };
+        }
     },[valtoken, dispatch, navigate]);   
-    return (
-            <div>✅</div>)
 }
-
 export default EmailVerification;
 
 

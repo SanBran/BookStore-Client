@@ -9,7 +9,6 @@ function PaginationSearch({numBooks, setCurrentPage, currentPage, active, setAct
   const nums = numBooks
   const pageNumbers = []
 
-   console.log(nums);
     
     for (let i = 1; i <= nums; i++) {
       pageNumbers.push(i)

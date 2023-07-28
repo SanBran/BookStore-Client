@@ -10,7 +10,7 @@ import History from "./Components/History/History";
 import Settings from "./Views/Settings/Settings";
 import Filters from "./Components/Filters/Filters";
 import Results from "./Views/Results/Results";
-import NotFound from "./Views/Not Found/NotFound";
+import NotFound from "./Views/NotFound/NotFound";
 
 import EmailVerification from "./Views/EmailVerification";
 

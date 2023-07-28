@@ -1,8 +1,11 @@
 //import React from 'react';
+import fav1 from '../../sources/fav1.png'
+import fav2 from '../../sources/fav2.png'
 import { Link } from "react-router-dom";
 import styles from "./Book.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   addCart,
   addFavorite,
@@ -10,11 +13,14 @@ import {
   removeCart,
 } from "../../redux/actions/actions";
 
+
 const Book = ({ books, onRemove  }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.access);
   const userDat = useSelector((state) => state.userDetail);
   const inCart = useSelector((state) => state.cart);
+
+  const navigate = useNavigate()
 
 
   //editUser={id,name, birthday, country, phone, phoneCode, gender, dniPasaport, status, rol, photoUser, listWish}
@@ -64,34 +70,41 @@ const Book = ({ books, onRemove  }) => {
       dispatch(addCart(books));
     }
   };
+  
+  const handleToLog = () => {
+navigate('/access')  }
 
   return (
     <div className={styles.container}>
       {user.state ? (
         isFav ? (
           <button onClick={handleWishlist} className={styles.boton}>
-            🧡
+            <img src={fav2} alt="" />
           </button>
         ) : (
           <button onClick={handleWishlist} className={styles.boton}>
-            🤍
+            <img src={fav1} alt="" />
           </button>
         )
-      ) : (
-        <></>
+      ) : (        
+          <button onClick={handleToLog} className={styles.boton}>
+            <img src={fav1} alt="" />
+          </button>
       )}
       {user.state ? (
         cart ? (
-          <button onClick={handleCart} className={styles.boton2}>
-            🛒
+          <button onClick={handleCart} className={styles.boton2s}>
+            ✔
           </button>
         ) : (
           <button onClick={handleCart} className={styles.boton2}>
-            🛍️
+            Add to cart
           </button>
         )
       ) : (
-        <></>
+        <button onClick={handleToLog} className={styles.boton2}>
+            Add to cart
+          </button>
       )}
       <Link className={styles.image} to={`/detail/${id}`}>
         <img

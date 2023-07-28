@@ -1,7 +1,7 @@
 //import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { accessUser, getUserById, listWish } from "../../redux/actions/actions";
+import { accessUser, getUserById} from "../../redux/actions/actions";
 import { overlayProfile } from "../../redux/actions/actions";
 import styles from "./Profile.module.css";
 import { useEffect } from "react";
@@ -10,7 +10,6 @@ import { useEffect } from "react";
 const Profile = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const showlistWish = useSelector((state) => state.showListwish);
   const showOverlayPerfile = useSelector((state) => state.overlayProfile);
   const userId = useSelector((state) => state.access.ref);
   const user = useSelector((state) => state.userDetail);
@@ -18,10 +17,6 @@ const Profile = () => {
   useEffect(() => {
     dispatch(getUserById(userId));
   }, [dispatch, userId]);
-
-  const handleOverlayToggle = () => {
-    dispatch(listWish(!showlistWish));
-  };
 
   const handleCloseOverlayToggle = () => {
     dispatch(overlayProfile(showOverlayPerfile));

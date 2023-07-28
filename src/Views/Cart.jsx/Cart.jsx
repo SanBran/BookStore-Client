@@ -45,8 +45,9 @@
 // }
 // export default Cart
 import React, { useEffect, useState } from "react";
+//import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styles from "./Cart.module.css";
 
@@ -81,39 +82,11 @@ const Cart = ({ isOpen, onRequestClose }) => {
                     </button>
                 </div>
 
-                <hr></hr>
-                <div className={styles.cartContainer}>
-                    {cart.length !== 0 ? (
-                        cart.map((book) => (
-                            <div key={book.id} className={styles.container}>
-                                <Link className={styles.image} to={`/detail/${book.id}`}>
-                                    <img
-                                        className={styles.imageSize}
-                                        src={book.image}
-                                        alt={`${book.title}`}
-                                    />
-                                </Link>
-                                <div className={styles.textContainer}>
-                                    <div className={styles.title}>{book.title}</div>
-                                    {book.price && book.price ? (
-                                        <div className={styles.price}>${book.price}</div>
-                                    ) : (
-                                        <div className={styles.price}>Free</div>
-                                    )}
-                                </div>
-                            </div>
-                        ))
-                    ) : (
-                        <p>Empty Cart</p>
-                    )}
-                </div>
-                <hr></hr>
-                <h4>{cart.length} books</h4>
-                <h4>${totalPrice}</h4>
-
                 <Link to={`/payment`}>
                     <button onClick={onRequestClose}>Buy Now</button>
                 </Link>
+
+
             </div>
         </Modal>
     );

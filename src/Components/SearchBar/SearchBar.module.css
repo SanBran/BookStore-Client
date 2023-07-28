@@ -1,5 +1,6 @@
 .container{
     display: flex;
+    margin-right: 5vw;
 }
 
 .bar{
@@ -25,14 +26,15 @@
     color: black;
 }
 
-.genre{
+.genres{
 
     padding: 0;
-    padding-right: 20px;
     background-color: rgb(255, 255, 255);
-    font-size:large;
+    text-align: end;
+    font-weight: 400;
     font-weight:500;
-    
+    border: none;
     border-radius: 0 50px 50px 0 ;
     color: rgb(109, 109, 109);
 }
+

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap');
+
 .container{
     position: relative;
     display: flex;
@@ -74,6 +76,7 @@
 }
 
 .title{
+    font-family: 'Montserrat', sans-serif;
     font-size:xx-large;
     text-align: start;
     margin: 0;
@@ -82,6 +85,7 @@
 }
 
 .author{
+    font-family: 'Montserrat', sans-serif;
     font-size: large;
     font-weight: 200;
     margin: 0;

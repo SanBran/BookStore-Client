@@ -25,6 +25,10 @@
     cursor: pointer;
 }
 
+.cartIcon{
+    margin-top: 15px;
+    cursor: pointer;
+}
 
 @media (max-width: 1020px) {
     .logo{
