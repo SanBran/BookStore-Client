@@ -26,7 +26,7 @@ const EmailVerification = ()=>{
                 validateEmail();
             };
             break;
-            case '4':{
+            case '2':{
                 const validatePassword = async()=>{
                     await dispatch(redirectToken(valtoken))
                     return navigate(`/access?changePass=true`)
@@ -38,8 +38,6 @@ const EmailVerification = ()=>{
 
 
     },[valtoken, dispatch, navigate]);   
-    return (
-            <div>✅</div>)
 }
 
 export default EmailVerification;
