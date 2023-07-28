@@ -10,6 +10,7 @@ import History from "./Components/History/History";
 import Settings from "./Views/Settings/Settings";
 import Filters from "./Components/Filters/Filters";
 import Results from "./Views/Results/Results";
+import NotFound from "./Views/NotFound/NotFound";
 
 import EmailVerification from "./Views/EmailVerification";
 
@@ -60,6 +61,8 @@ function App() {
           <Route path="/payment" element={<PaymentDetails />} />
 
           <Route path="/payment/sucessfulpay" element={<SucessfulPay />} />
+
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </>
