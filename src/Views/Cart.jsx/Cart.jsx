@@ -53,6 +53,7 @@ import styles from "./Cart.module.css";
 
 const Cart = ({ isOpen, onRequestClose }) => {
     const cart = useSelector((state) => state.cart);
+    console.log(cart);
 
     const modalStyles = {
         overlay: {

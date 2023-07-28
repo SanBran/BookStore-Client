@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import { useState } from 'react';
-=======
-import { useEffect, useState} from 'react';
->>>>>>> 1c06bae7a0f659c2101ed0fc689b82cd28f7ecb9
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import style from './Login.module.css'
@@ -53,19 +49,16 @@ const Login = ({ setForm }) => {
     }
   }
 
-<<<<<<< HEAD
-  return (
-=======
-//-----LOGIN CON GOOGLE
+  //-----LOGIN CON GOOGLE
   const clientID = "637027522589-6jbd17n7qelc1mqtp4c1gl43lvjp57cf.apps.googleusercontent.com";
-  useEffect(()=>{
-    const start =()=> {
+  useEffect(() => {
+    const start = () => {
       gapi.auth2.init({
         clientId: clientID
       })
     };
     gapi.load('client:auth2', start)
-  },[]);
+  }, []);
 
   const responseGoogle = (response) => {
     // Aquí obtienes la respuesta de Google con la información del usuario logueado.
@@ -77,8 +70,7 @@ const Login = ({ setForm }) => {
     console.log(error);
   };
 
-  return ( 
->>>>>>> 1c06bae7a0f659c2101ed0fc689b82cd28f7ecb9
+  return (
     <form className={style.fromContainer} >
       <div className={style.inputsContainer}>
         {error.length ? (<p className={style.textError}>{error}</p>) : (<></>)}
@@ -108,7 +100,7 @@ const Login = ({ setForm }) => {
           buttonText="Sign in with Google"
           onSuccess={responseGoogle}
           onFailure={onFailure}
-          cookiePolicy={'single_host_policy'}/>
+          cookiePolicy={'single_host_policy'} />
         {/* <button className={style.googleBtn} type='submit'> Sign in with Google </button> */}
       </div>
     </form>
