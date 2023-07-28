@@ -1,7 +1,8 @@
-import React from "react";
+//import React from "react";
 import { useSelector } from "react-redux";
 import styles from "./PaymentDetails.module.css";
 import { Link } from "react-router-dom";
+import MercadoPago from "../../../Components/MercadoPago/MercadoPago";
 
 export const PaymentDetails = () => {
   const cart = useSelector((state) => state.cart);
@@ -24,6 +25,7 @@ const totalPrice = cart.reduce((total, book) => total + book.price, 0);
       </div>
       <div>
         <h3>Payment method</h3>
+        <MercadoPago cart={cart} userInfo={user}/>
         <button>Mercado Pago</button>
         <button>Stripe</button>
       </div>

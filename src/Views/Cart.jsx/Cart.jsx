@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+//import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styles from "./Cart.module.css";
 
@@ -67,6 +67,8 @@ const totalPrice = cart.reduce((total, book) => total + book.price, 0);
         <Link to={`/payment`}>
           <button onClick={onRequestClose}>Buy Now</button>
         </Link>
+
+        
       </div>
     </Modal>
   );
