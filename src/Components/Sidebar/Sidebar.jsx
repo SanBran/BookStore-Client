@@ -11,8 +11,6 @@ import popular2 from '../../sources/popular2.png'
 
 function Sidebar({scrollToNewArraivals, scrollToPopular, scrollToFree,select}) {
   
-
-  
     const scrollToTop = () => {
       window.scrollTo({
         top: 0,
