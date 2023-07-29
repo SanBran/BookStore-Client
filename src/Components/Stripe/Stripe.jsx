@@ -6,7 +6,7 @@ const Stripe = ({ cart, userInfo ,styles}) => {
     return {
       idBook: books.id,
       name: books.title,
-      price: parseIntc(books.price),
+      price: parseInt(books.price),
       quantity: 1,
       typeMoney: books.currency || "MXN",
       //description: "Ok, aquí va una descripcion breve: Pásate a Premium",
