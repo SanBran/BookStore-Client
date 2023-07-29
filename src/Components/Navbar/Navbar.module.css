@@ -19,16 +19,56 @@
     font-size:3rem;
     padding-left: 5vw;
 }
+.Nologo{
+    color:#fa9d1b00;
+    cursor:default;
+    margin: 0;
+    font-size:3rem;
+    padding-left: 5vw;
+}
 
 .profile{
     height: 50px;
     cursor: pointer;
 }
 
+<<<<<<< Updated upstream
 .cartIcon{
     margin-top: 15px;
     cursor: pointer;
 }
+.cartCounter{
+    position: absolute;
+    top: 40px;
+    margin: 0;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    background-color: white;
+    color: #FA9D1B;
+    font-size: 13px;
+    text-align: center;
+    font-weight: bolder;
+}
+=======
+.containerNologo{
+    position: absolute;
+    z-index: 10;
+    height:90px;
+    top: 0;
+    left: -70px;
+    
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    width: 95vw;
+    gap: 30px;
+}
+
+>>>>>>> Stashed changes
 
 @media (max-width: 1020px) {
     .logo{

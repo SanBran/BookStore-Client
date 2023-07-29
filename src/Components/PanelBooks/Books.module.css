@@ -1,17 +1,15 @@
 .booksContainer {
     position: relative;
-    top: 20px;
+    top: 1px;
 
     margin: 0 auto;
     
-    
      height: fit-content;
+     width: 85vw;
      
-     
-     display: flex;
-     flex-wrap: wrap;
+    display: grid;
+    grid-template-columns:1fr 1fr 1fr;
      justify-content:center;
-     gap: 20px;
      
  
  }

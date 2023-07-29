@@ -1,58 +1,114 @@
-.container {
-    display: flex;
-    height: 100px;
-    width: 200px;
-    gap: 10px;
-    cursor: pointer;
-    -moz-osx-font-smoothing: grayscale;
-    margin-bottom: 20px;
-    position: relative; 
-    padding: 20px;
-    border-radius: 10px;
-    background-color: rgb(236, 236, 236);
-}
-.titleContainer{
-    display: flex;
-}
+/* ----------------Estilo boton de cerrar x */
 .buttonClose{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 30px;
     width: 20px;
+    position: absolute;
+    top: 15px;
+    right: 30px;
+    display: flex;
+
+    cursor: pointer;
 }
-.cartContainer {
-    max-height: 300px; /* Establece una altura máxima para el contenedor */
-    overflow-y: auto; /* Habilita el scrollbar vertical */
-  }
-.textContainer {
-    text-align: start;
+
+/* algunos estilos para el modal */
+.modal{
+    width: 350px;
+    height: 100vh;
+    position: absolute;
+    right: 0;
+    padding: 0 20px;
+    background-color: white;
+    box-shadow: -8px 0px 20px 4px rgb(0 0 0 / 11%);
+}
+.modal:focus-visible{
+    outline: 0;
+}
+
+/* header del carrito */
+.titleContainer{
+    border-bottom: 1px solid #dadada;
+    box-shadow: 0px 11px 20px -15px rgb(0 0 0 / 16%);
+}
+.title{
+    margin: 10px 0;
+    font-size: 20px;
+    font-weight: normal;
     color: black;
 }
 
-.title {
+
+/* items del carrito */
+.cartContainer{
+    height: 370px;
+    border-bottom: 1px solid #dadada;
+    box-shadow: 0px 11px 20px -15px rgb(0 0 0 / 16%);
+    overflow: auto;
+}
+.empty{
+    margin-top: 150px;
+    font-size: 15px;
+    font-weight: lighter;
+    color: black;
+}
+.bookContainer{
+    width: 90%;
+    display: flex;
+    margin-top: 30px;
+    height: fit-content;
+}
+.bookImage{
+    width: 90px;
+}
+.textContainer{
+    width: 230px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0 20px;
+    font-size: 15px;
+    font-weight: bold;
+}
+.bookPrice{
+    color: #7B7B7B;
+}
+.deleteBtn{
+    width: 15px;
+    cursor: pointer;
+}
+
+
+/* cantidad de libros y precio total */
+.infoContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+}
+.price{
+    margin: 0;
+    font-size: 25px;
     font-weight: 500;
-    font-size: medium;
-    top: 10px;
+    color: #FA9D1B;
 }
 
-.author {
-    font-size: medium;
-    color:grey
-}
+/* boton de comprar */
+.buyBtn{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    border-radius: 0;
+    border: none;
+    background-color: #FA9D1B;
+    cursor:pointer;
 
-.image {
-    height: 100px;
-    
+    color: #F5F5F5;
+    font-weight: bolder;
+    font-size: 18px;
 }
-.imageSize {
-    height: 100px;
-    max-width: 80px;
-    border-radius: 10px;
+.buyBtn:hover{
+    background-color: #fda52a;
 }
-
-.price {
-    font-weight: 700;
-    position: absolute; /* Agregamos posicionamiento absoluto */
-    bottom: 20px;
+.buyBtn:focus-visible, .buyBtn:focus{
+    outline: 0;
 }

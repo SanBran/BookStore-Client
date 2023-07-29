@@ -31,7 +31,7 @@ const Profile = () => {
   //! si esta en true cuando vuelve al wishlist pasa a false y no se muestra
   return (
     <div className={styles.overlay}>
-      <div onClick={handleCloseOverlayToggle}>
+      <div className={styles.close} onClick={handleCloseOverlayToggle}>
         <div className={styles.overlayContent}>
           <div>
             <img src={user.photoUser} width="70" height="70" />

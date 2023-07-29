@@ -47,45 +47,80 @@
 import React, { useEffect, useState } from "react";
 //import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styles from "./Cart.module.css";
+import { removeCart } from "../../redux/actions/actions";
+
+//importando icon del boton cerrar
+import close_button from "../../assets/icons/close_button.svg";
+import delete_icon from "../../assets/icons/delete_icon.svg";
+
 
 
 const Cart = ({ isOpen, onRequestClose }) => {
-    const cart = useSelector((state) => state.cart);
-    console.log(cart);
+  const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  const genericCover =
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhRKhJb1aLmjwGX_ox0TA6eTxCv_5g3Nlr6w&usqp=CAU";
 
-    const modalStyles = {
-        overlay: {
-            backgroundColor: "transparent", // Fondo translúcido oscuro detrás del modal
-        },
-        content: {
-            width: "25%", // Ajusta el tamaño
-            height: "445px",
-            margin: "0 auto", // Centra el modal horizontalmente
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)", // Centra el modal verticalmente
-        },
-    };
+  
+  const modalStyles = {
+    overlay: {
+      backgroundColor: "transparent", // Fondo translúcido oscuro detrás del modal
+      zIndex: 100,
+    },
+  };
 
-    const totalPrice = cart.reduce((total, book) => total + book.price, 0);
+  const handleCart = (id)=>{
+    dispatch(removeCart(id))
+  }
 
-    return (
-        <Modal isOpen={isOpen} onRequestClose={onRequestClose} style={modalStyles}>
-            <div>
-                <div className={styles.titleContainer}>
-                    <h3>Your Cart</h3>
-                    <button className={styles.buttonClose} onClick={onRequestClose}>
-                        X
-                    </button>
-                </div>
+const totalPrice = cart.reduce((total, book) => total + book.price, 0);
+  
+  return (
+    <Modal style={modalStyles} className={styles.modal} isOpen={isOpen} onRequestClose={onRequestClose} >
+      <div>
+        <div className={styles.titleContainer}>
+          <img className={styles.buttonClose} src={close_button} onClick={onRequestClose} alt='x' />
+          <h3 className={styles.title}>Your Cart</h3>
+        </div>
 
-                <Link to={`/payment`}>
-                    <button onClick={onRequestClose}>Buy Now</button>
+        <div className={styles.cartContainer}>
+          {cart.length !== 0 ? (
+            cart.map((book) => (
+              <div key={book.id} className={styles.bookContainer}>
+                <Link className={styles.bookLink} to={`/detail/${book.id}`}>
+                  <img
+                    className={styles.bookImage}
+                    src={book.image !== "Image not Available" ? book.image : genericCover}
+                    alt={`${book.title}`}
+                  />
                 </Link>
+                <div className={styles.textContainer}>
+                  <div className={styles.bookTitle}>{book.title}</div>
+                  {book.price && book.price ? (
+                    <div className={styles.bookPrice}>$ {book.price}</div>
+                    ) : (
+                      <div className={styles.bookPrice}>Free</div>
+                      )}
+                </div>
+                
+                <img className={styles.deleteBtn} src={delete_icon} alt="x"  onClick={()=>{handleCart(book.id)}}/>
+              </div>
+            ))
+          ) : (
+            <p className={styles.empty}>Empty Cart</p>
+          )}
+        </div>
+        <div className={styles.infoContainer}>
+          <h4 className={styles.title}>{cart.length} books</h4>
+          <h4 className={styles.price}>${totalPrice}</h4>
+        </div>
 
+        <Link to={`/payment`}>
+          <button className={styles.buyBtn} onClick={onRequestClose} >Buy Now</button>
+        </Link>
 
             </div>
         </Modal>

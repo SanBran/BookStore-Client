@@ -1,9 +1,9 @@
 import React from 'react'
-import styles from './PaginationSearch.module.css'
-import { selectFilterPage } from '../../redux/actions/actions'
+import styles from './PaginationPrice.module.css'
+import { selectPricePage } from '../../redux/actions/actions'
 import { useDispatch } from 'react-redux'
 
-function PaginationSearch({numBooks, setCurrentPage, currentPage, active, setActive,body}) {
+function PaginationPrice({numBooks, setCurrentPage, currentPage, active, setActive,body}) {
 
   const dispatch = useDispatch()
   const nums = numBooks
@@ -17,7 +17,7 @@ function PaginationSearch({numBooks, setCurrentPage, currentPage, active, setAct
     
     const getBooks = async (page) => {   
       console.log(body);
-          dispatch(selectFilterPage(page,body));
+          dispatch(selectPricePage(page,body));
               
       }
 
@@ -55,7 +55,6 @@ function PaginationSearch({numBooks, setCurrentPage, currentPage, active, setAct
               key={index}
               onClick={() => specificPage(page)}
             >
-              {page}
             </div>
           ));
         };
@@ -81,6 +80,6 @@ function PaginationSearch({numBooks, setCurrentPage, currentPage, active, setAct
         );
 }
 
-export default PaginationSearch
+export default PaginationPrice
 
 

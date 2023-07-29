@@ -4,13 +4,14 @@
     position: relative;
     display: flex;
     flex-direction: row;
+    width: 96.4vw;
     height: 60vh;
     max-height: 600px;
 }
 
 .bookContainer{
     display: flex;
-    width: 100vw;
+    width: 96.4vw;
     overflow: hidden;
     align-items: center;
     justify-content: center;

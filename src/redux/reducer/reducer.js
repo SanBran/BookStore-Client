@@ -6,6 +6,7 @@ import {
   GET_BOOK_BY_AUTHOR,
   GET_BOOK_BY_ID,
   GET_BOOKS_BY_TITLE,
+  GET_BOOKS_BY_PRICE,
   POST_BOOK,
   UPDATE_BOOK_BY_ID,
   DELETE_BOOK_BY_ID,
@@ -20,6 +21,7 @@ import {
   FILTER_BY_LANGUAJE,
   SELECT_PAGE,
   SELECT_FILTER_PAGE,
+  SELECT_PRICE_PAGE,
   ORDER_BY_PRICE,
   ORDER_BY_PUBLISHED_DATE,
   ORDER_BY_TITLE,
@@ -56,6 +58,8 @@ let initialState = {
   allBooks: [],
   allBooksCopy: [],
   booksObject: {},
+  allBooksPrice: [],
+  priceBooksObject: {},
   genres: [],
   book: [],
   bookByName: [],
@@ -91,6 +95,12 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         allBooksCopy: payload.book,
         booksObject: payload.totalPages,
+      };
+    case GET_BOOKS_BY_PRICE:
+      return {
+        ...state,
+        allBooksPrice: payload.book,
+        priceBooksObject: payload.totalPages,
       };
     case GET_BOOK_BY_AUTHOR:
       return {
@@ -171,6 +181,11 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         allBooksCopy: payload.book,
+      };
+    case SELECT_PRICE_PAGE:
+      return {
+        ...state,
+        allBooksPrice: payload.book,
       };
     //----------------------------ORDER-------------------
     case ORDER_BY_PRICE: {
@@ -361,8 +376,8 @@ const reducer = (state = initialState, { type, payload }) => {
         cart: [...state.cart, payload],
       };
     case REMOVE_CART:
-      console.log(state.cart);
-      let filter = state.cart.filter((book) => book.id !== payload);
+      console.log(state.cart)
+      let filter = state.cart.filter((book) => book.id !== payload)
       return {
         ...state,
         cart: filter,

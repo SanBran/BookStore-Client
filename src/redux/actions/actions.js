@@ -5,6 +5,7 @@ import {
   GET_BOOK_BY_AUTHOR,
   GET_BOOK_BY_ID,
   GET_BOOKS_BY_TITLE,
+  GET_BOOKS_BY_PRICE,
   POST_BOOK,
   UPDATE_BOOK_BY_ID,
   DELETE_BOOK_BY_ID,
@@ -19,6 +20,7 @@ import {
   FILTER_BY_LANGUAJE,
   SELECT_PAGE,
   SELECT_FILTER_PAGE,
+  SELECT_PRICE_PAGE,
   ORDER_BY_PRICE,
   ORDER_BY_PUBLISHED_DATE,
   ORDER_BY_TITLE,
@@ -231,6 +233,23 @@ export function getBooksByTitle(title) {
   };
 }
 
+export function getBooksByPrice(price) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.post(
+        `http://localhost:8000/getBooks`,
+        price
+      );
+      return dispatch({
+        type: GET_BOOKS_BY_PRICE,
+        payload: response.data,
+      });
+    } catch (error) {
+      throw Error(error.message);
+    }
+  };
+}
+
 // --------------Backend Super Filters ----------------
 export function FilterByGender(gender) {
   return {
@@ -384,6 +403,24 @@ export function selectFilterPage(page, search) {
       console.log(response.data);
       return dispatch({
         type: SELECT_FILTER_PAGE,
+        payload: response.data,
+      });
+    } catch (error) {
+      throw Error(error.message);
+    }
+  };
+}
+export function selectPricePage(page, search) {
+  console.log(page, search);
+  return async function (dispatch) {
+    try {
+      const response = await axios.post(
+        `http://localhost:8000/getBooks?page=${page}`,
+        search
+      );
+      console.log(response.data);
+      return dispatch({
+        type: SELECT_PRICE_PAGE,
         payload: response.data,
       });
     } catch (error) {
@@ -624,24 +661,29 @@ export function accessLogIn({ email, password }) {
       throw Error(error.response.data.text);
     }
   };
-};
+}
 
 export function accessGoogle({ email, name, imageUrl, googleId }, token) {
   return async function (dispatch) {
     try {
-      const findUser = await axios.post(`http://localhost:8000/findUser/${email}`);
+      const findUser = await axios.post(
+        `http://localhost:8000/findUser/${email}`
+      );
 
       //console.log(findUser.data);
 
       return dispatch({
         type: ACCESS,
         payload: { state: true, ref: findUser.data.detail.id },
-      })
+      });
     } catch (error) {
       //throw Error(error.response.data.text);
       //console.log(error);
       //console.log(error.response.data.text);
-      if (error.response.status === 400 && error.response.data.text === 'No users found') {
+      if (
+        error.response.status === 400 &&
+        error.response.data.text === "No users found"
+      ) {
         try {
           const userDataSignUp = {
             name,
@@ -653,20 +695,22 @@ export function accessGoogle({ email, name, imageUrl, googleId }, token) {
             birthday: "null",
             photoUser: imageUrl,
           };
-          const newUser = await axios.post(`http://localhost:8000/newUser`, userDataSignUp);
+          const newUser = await axios.post(
+            `http://localhost:8000/newUser`,
+            userDataSignUp
+          );
           //console.log(newUser);
 
           return dispatch({
             type: ACCESS,
             payload: { state: true, ref: newUser.data.detail.id },
-          })
+          });
         } catch (error) {
           throw Error(error.response.data.text);
         }
-      }
-      else throw Error(error.response.data.text);
+      } else throw Error(error.response.data.text);
     }
-  }
+  };
 }
 
 export function accessUser(bool, ref) {
