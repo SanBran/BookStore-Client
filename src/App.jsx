@@ -19,63 +19,64 @@ import Cart from "./Views/Cart.jsx/Cart";
 import { PaymentDetails } from "./Views/Cart.jsx/PaymentDetails/PaymentDetails";
 import SucessfulPay from "./Views/Cart.jsx/SuccesfulPay/SucessfulPay";
 
+//pasos para el deploy
+import axios from "axios";
+import { useEffect, useState } from "react";
+//-------local
+//axios.defaults.baseURL = "http://localhost:8000/"
+//-------deployado
+axios.defaults.baseURL = "https://bookstorepf-production.up.railway.app";
+
+
 function App() {
   const showOverlayPerfile = useSelector(state => state.overlayProfile);
-  const location = useLocation()
+  const location = useLocation();
+
+  const [server, setServer] = useState(true);
+
+  useEffect(()=>{
+    return async()=>{
+      try {
+        await axios.post('/getBooks');
+      } catch (error) {
+        setServer(false);
+      }
+    }
+  },[])
+
 
   return (
     <>
+      {!server
+      ?(<NotFound />)
+      :(<>
+        {showOverlayPerfile && <Profile />}
+        <div >
+          {location.pathname !== "/profile" && location.pathname !== "/access" && (location.pathname !== "/results") 
+          ? (<Navbar />) 
+          :(<></>)
+          }
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/access" element={<Access />} />
+            <Route path="/detail/:id" element={<BooksDetail />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/wishlist" element={<Wishlist />} />
+            <Route path="/history" element={<History />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/Filters" element={<Filters />} />
+            <Route path="/Results" element={<Results />} />
+            <Route path="/access/validate" element={<EmailVerification />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/payment" element={<PaymentDetails />} />
+            <Route path="/payment/sucessfulpay" element={<SucessfulPay />} />
 
-<<<<<<< Updated upstream
-      {showOverlayPerfile && <Profile />}
-      <div >
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
+      </>)
+      }
 
-        {location.pathname !== "/profile" && location.pathname !== "/access" && (location.pathname !== "/results") ? (
-          <Navbar />
-        ) : (
-          <></>
-        )}
-=======
-    {showOverlayPerfile && <Profile />}
-    <div >
-      
-    {location.pathname !== "/profile" && location.pathname !== "/access" && (location.pathname !== "/") ? (
-        <Navbar  />
-      ) : (
-        <></>
-      )}
->>>>>>> Stashed changes
-
-        <Routes>
-          <Route path="/" element={<Home />} />
-
-          <Route path="/access" element={<Access />} />
-
-          <Route path="/detail/:id" element={<BooksDetail />} />
-
-          <Route path="/profile" element={<Profile />} />
-
-          <Route path="/wishlist" element={<Wishlist />} />
-
-          <Route path="/history" element={<History />} />
-
-          <Route path="/settings" element={<Settings />} />
-
-          <Route path="/Filters" element={<Filters />} />
-
-          <Route path="/Results" element={<Results />} />
-
-          <Route path="/access/validate" element={<EmailVerification />} />
-
-          <Route path="/cart" element={<Cart />} />
-
-          <Route path="/payment" element={<PaymentDetails />} />
-
-          <Route path="/payment/sucessfulpay" element={<SucessfulPay />} />
-
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </div>
     </>
   );
 }
