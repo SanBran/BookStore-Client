@@ -369,15 +369,14 @@ const reducer = (state = initialState, { type, payload }) => {
     //----------------------------mercadoPago----------------
     // revisar mercadoPago no estoy seguro como funciona
     case ADD_CART:
-      console.log(state.cart);
-
+      console.log('hola soy el cart', state.cart);
       return {
         ...state,
         cart: [...state.cart, payload],
       };
     case REMOVE_CART:
-      console.log(state.cart);
-      let filter = state.cart.filter((book) => book.id !== payload);
+      console.log(state.cart)
+      let filter = state.cart.filter((book) => book.id !== payload)
       return {
         ...state,
         cart: filter,
