@@ -8,19 +8,18 @@
     align-items:center;
     justify-content: center;
 
-    padding: 100px;
 }
 
 .page {
     font-family: "Poppins", sans-serif;
     font-size: large;
     background-color: #ffffff;
-    border-radius: 0.2rem;
+    border-radius: 20rem;
     border:solid grey 1px;
     color: #000000;
     align-items: center;
-    height: 38px;
-    width: 38px;
+    height: 5px;
+    width: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -34,11 +33,11 @@
     font-family: "Poppins", sans-serif;
     font-size: large;
     background-color: #FA9D1B;
-    border-radius: 0.2rem;
+    border-radius: 20rem;
     border:solid grey 1px;
     color: #ffffff;
-    height: 38px;
-    width: 38px;
+    height: 8px;
+    width: 8px;
     display: flex;
     justify-content: center;
     align-items: center;

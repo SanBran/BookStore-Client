@@ -20,8 +20,10 @@ const Results = () => {
   const totalPages = useSelector((state) => state.booksObject)
   const dispatch = useDispatch();
   const [data, setData] = useState({
-    title: origin
+   
   });
+
+  console.log(currentBooks);
   
   const [priceMax, setPriceMax] = useState("");
   const [priceMin, setPriceMin] = useState("");
@@ -229,7 +231,7 @@ alert("No hay libros en ese rango de precio")
           setCurrentPage={setCurrentPage}
           active={active}
           setActive={setActive}
-          body={data}/>
+          body={search}/>
         </div>
         </div>
         

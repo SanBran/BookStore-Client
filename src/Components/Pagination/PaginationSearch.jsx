@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './Pagination.module.css'
+import styles from './PaginationSearch.module.css'
 import { selectFilterPage } from '../../redux/actions/actions'
 import { useDispatch } from 'react-redux'
 
@@ -7,7 +7,7 @@ function PaginationSearch({numBooks, setCurrentPage, currentPage, active, setAct
 
   const dispatch = useDispatch()
   const nums = numBooks
-  const pageNumbers = []
+  const pageNumbers = [] 
 
     
     for (let i = 1; i <= nums; i++) {

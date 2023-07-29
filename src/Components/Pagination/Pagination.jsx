@@ -9,11 +9,10 @@ function Pagination({numBooks, setCurrentPage, currentPage, active, setActive,fi
   const dispatch = useDispatch()
   let nums = 0
   const pageNumbers = []
-  
   if (filter) {
     nums = numBooks
   }else {
-    nums = Math.ceil(numBooks/12) 
+    nums = Math.ceil(numBooks/9) 
   }
 
    
@@ -62,7 +61,6 @@ function Pagination({numBooks, setCurrentPage, currentPage, active, setActive,fi
               key={index}
               onClick={() => specificPage(page)}
             >
-              {page}
             </div>
           ));
         };

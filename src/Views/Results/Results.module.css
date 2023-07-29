@@ -46,6 +46,7 @@
 
 .filterTitle{
     color: black;
+    font-family: 'Montserrat', sans-serif;
     position: relative;
     font-size:xx-large;
 
@@ -62,7 +63,7 @@
 
 .noResults{
     color: black;
-    margin-left: 35vw;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .btn{
