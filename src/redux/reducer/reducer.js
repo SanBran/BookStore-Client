@@ -87,7 +87,7 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         allBooks: payload.books,
-        allBookCopy: payload.books,
+        allBooksCopy: payload.books,
         booksObject: payload.totalPages,
       };
     case GET_BOOKS_BY_TITLE:

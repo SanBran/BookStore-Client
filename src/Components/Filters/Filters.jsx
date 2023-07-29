@@ -29,10 +29,10 @@ const Filters = () => {
   const [active, setActive] = useState(1);
 
   // Este useEffect se ejecuta cuando se monta el componente para traer data del estado Global
-  useEffect(() => {
+   useEffect(() => {
     dispatch(getAllBooks());
   }, [dispatch]);
-
+ 
   // este useEfect se ejecuta para llenar el estado local
   useEffect(() => {
     currentBooks?

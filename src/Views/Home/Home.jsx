@@ -58,6 +58,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getAllBooks());
+ 
     dispatch(getGenres())
   }, [dispatch]);
 

@@ -38,7 +38,7 @@ const Book = ({ books, onRemove  }) => {
     if (isFav) {
       setIsFav(false);
       list = userData.listWish.filter((idF) => idF !== id);
-      onRemove(books.id);
+      onRemove(id);
 
     } else {
       setIsFav(true);
