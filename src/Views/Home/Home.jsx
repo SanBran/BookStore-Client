@@ -71,7 +71,7 @@ const Home = () => {
     <div  className={styles.container}>
       <NavbarNoLogo/>
       <div className={styles.sidebar}>
-        <Sidebar 
+        <Sidebar     
         scrollToNewArraivals={scrollToNewArraivals} 
         scrollToPopular={scrollToPopular} 
         scrollToFree={scrollToFree}
