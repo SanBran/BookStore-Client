@@ -19,13 +19,15 @@ import Cart from "./Views/Cart.jsx/Cart";
 import { PaymentDetails } from "./Views/Cart.jsx/PaymentDetails/PaymentDetails";
 import SucessfulPay from "./Views/Cart.jsx/SuccesfulPay/SucessfulPay";
 
+//import { GoogleOAuthProvider } from '@react-oauth/google';
+
 //pasos para el deploy
 import axios from "axios";
 import { useEffect, useState } from "react";
 //-------local
-//axios.defaults.baseURL = "http://localhost:8000/"
+axios.defaults.baseURL = "http://localhost:8000/"
 //-------deployado
-axios.defaults.baseURL = "https://bookstorepf-production.up.railway.app";
+//axios.defaults.baseURL = "https://bookstorepf-production.up.railway.app";
 
 
 function App() {
