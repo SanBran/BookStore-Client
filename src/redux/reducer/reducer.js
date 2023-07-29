@@ -370,7 +370,6 @@ const reducer = (state = initialState, { type, payload }) => {
     // revisar mercadoPago no estoy seguro como funciona
     case ADD_CART:
       console.log('hola soy el cart', state.cart);
-
       return {
         ...state,
         cart: [...state.cart, payload],

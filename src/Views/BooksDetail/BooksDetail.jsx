@@ -100,7 +100,7 @@ const BooksDetail = () => {
               <p>${book.price}</p>
               <p>PDF format</p>
               <a href="#">BUY NOW</a>
-              <button onClick={() => { addCart(book), console.log(cart); }}>ADD TO CART</button>
+              <button onClick={() => addCart(book)}>ADD TO CART</button>
             </div>
           </div>
         </div>
@@ -122,13 +122,13 @@ const BooksDetail = () => {
               <p>{showDescription && book.sinopsis}</p>
             ) : (
               <div>
+                <h3>Language: <span className="spanClean">{book.language}</span></h3>
+                <h3>Published date: <span className="spanClean">{book.publishedDate}</span></h3>
+                <h3>Editorial :<span className="spanClean">{book.editorial}</span></h3>
                 <h3>Gender:</h3>
                 {processedGender?.map((gender, index) => (
                   <p key={index}>{gender}</p>
                 ))}
-                <h3>Language: <span>{book.language}</span></h3>
-                <h3>Published date: <span>{book.publishedDate}</span></h3>
-                <h3>Editorial :<span>{book.editorial}</span></h3>
               </div>
             )}
           </div>
