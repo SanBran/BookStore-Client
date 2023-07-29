@@ -1,12 +1,15 @@
 /* eslint-disable no-useless-escape */
-import { detailBookById, getBooksByAuthor, resetBooksByAuthor } from "../../redux/actions/actions"
+import { detailBookById, getBooksByAuthor } from "../../redux/actions/actions"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import styles from './BooksDetail.module.css'
 import parseAuthors from "../../utils/parseAuthors"
 import removeDuplicateBooks from "../../utils/removeDuplicateBooks"
-import { Link } from "react-router-dom"
+// import { Link } from "react-router-dom"
+import { addCart } from "../../redux/actions/actions"
+
+
 
 const BooksDetail = () => {
   let processedAuthor = []
@@ -34,16 +37,22 @@ const BooksDetail = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
   console.log(id)
-  useEffect(() => {
-    dispatch(resetBooksByAuthor())
-  }, [dispatch, id])
 
 
   useEffect(() => {
     dispatch(detailBookById(id))
   }, [dispatch, id])
 
+
+
   const book = useSelector(state => state.details)
+  const cart = useSelector(state => state.cart)
+
+
+  useEffect(() => {
+    console.log('cart updated: ', cart);
+  }, [cart])
+
 
   useEffect(() => {
     const authorsArray = parseAuthors(book.author)
@@ -76,70 +85,72 @@ const BooksDetail = () => {
   }
 
   return (
-    <div className={darkMode ? 'dark' : 'light'}>
+    <div className={`${styles.container} ${darkMode ? styles.dark : styles.light}`}>
       <button onClick={toggleDarkMode}>Cambiar modo</button>
-      {book
-        ?
-        <>
-
-          <div>
-            {<img src={book.image} alt={book.title} />}
-            {<h2>{book.title}</h2>}
+      <>
+        <div className={styles.bookInfo}>
+          <img src={book.image} alt={book.title} />
+          <div className={styles.bookDetails}>
+            <h2>{book.title}</h2>
             <h3>Author</h3>
-            {processedAuthor?.map((author, index) => { return <p key={index}>{author}</p> })}
-            <div>
+            {processedAuthor?.map((author, index) => (
+              <p key={index}>{author}</p>
+            ))}
+            <div className={styles.priceAndActions}>
+              <p>${book.price}</p>
+              <p>PDF format</p>
+              <a href="#">BUY NOW</a>
+              <button onClick={() => { addCart(book), console.log(cart); }}>ADD TO CART</button>
+            </div>
+          </div>
+        </div>
+        <button
+          className={showDescription ? styles.activeButton : ''}
+          onClick={() => setShowDescription(true)}
+        >
+          Description
+        </button>
+        <button
+          className={!showDescription ? styles.activeButton : ''}
+          onClick={() => setShowDescription(false)}
+        >
+          Details
+        </button>
+        <div className={styles.descriptionContainer}>
+          <div className={styles.description}>
+            {showDescription ? (
+              <p>{showDescription && book.sinopsis}</p>
+            ) : (
               <div>
-                <p>${book.price}</p>
-                <p>PDF format</p>
-                <a href="">BUY NOW</a>
-                <button>ADD TO CART</button>
+                <h3>Gender:</h3>
+                {processedGender?.map((gender, index) => (
+                  <p key={index}>{gender}</p>
+                ))}
+                <h3>Language: <span>{book.language}</span></h3>
+                <h3>Published date: <span>{book.publishedDate}</span></h3>
+                <h3>Editorial :<span>{book.editorial}</span></h3>
               </div>
-            </div>
-            <button onClick={() => setShowDescription(true)}>Description</button>
-
-            <button onClick={() => setShowDescription(false)}>Details</button>
-
-            <div>
-              {showDescription ?
-                <div>
-                  <p>{showDescription && book.sinopsis}</p>
-                </div>
-                :
-                <div>
-                  <h3>Gender:</h3>
-                  {processedGender?.map((gender, index) => <p key={index}>{gender}</p>)}
-                  <h3>Language:</h3>
-                  <p>{book.language}</p>
-                  <h3>Published date:</h3>
-                  <p>{book.publishedDate}</p>
-                  <h3>Editorial:</h3>
-                  <p>{book.editorial}</p>
-                </div>
-              }
-            </div>
-
+            )}
           </div>
-          <div>
-            {authors ? authors?.map(book => {
-              <h1>LIBROS DE LOS AUTORES</h1>
-              return <Link onClick={() => window.scrollTo(0, 0)} key={book.id} to={`/detail/${book.id}`}>
-                <div >
-                  <img src={book.image} alt={book.title} />
-                  <h4>{book.title}</h4>
-
-                </div>
-              </Link>
-            }
-
-            ) : <h3>No books relationed with Author</h3>}
-          </div>
-        </>
-        :
-        <h3>No detail for this book.</h3>
-      }
+        </div>
+      </>
     </div>
-  )
+  );
 }
+{/* <div>
+    {authors ? authors?.map(book => {
+      <h1>LIBROS DE LOS AUTORES</h1>
+      return <Link onClick={() => window.scrollTo(0, 0)} key={book.id} to={`/detail/${book.id}`}>
+        <div >
+          <img src={book.image} alt={book.title} />
+          <h4>{book.title}</h4>
+
+        </div>
+      </Link>
+    }
+
+    ) : <h3>No books relationed with Author</h3>}
+  </div> */}
 
 export default BooksDetail
 

@@ -354,7 +354,7 @@ const reducer = (state = initialState, { type, payload }) => {
     //----------------------------mercadoPago----------------
     // revisar mercadoPago no estoy seguro como funciona
     case ADD_CART:
-      console.log(state.cart);
+      console.log('hola soy el cart', state.cart);
 
       return {
         ...state,

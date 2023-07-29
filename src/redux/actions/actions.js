@@ -88,19 +88,41 @@ export function getAllBooks() {
   };
 }
 
+// export function detailBookById(id) {
+//   return async function (dispatch) {
+//     try {
+//       const response = await axios.post(
+//         `http://localhost:8000/bookDetail/${id}`
+//       );
+//       const data = response.data;
+//       return dispatch({ type: GET_BOOK_BY_ID, payload: data });
+//     } catch (error) {
+//       throw Error(error.message);
+//     }
+//   };
+// }
 export function detailBookById(id) {
   return async function (dispatch) {
     try {
-      const response = await axios.post(
-        `http://localhost:8000/bookDetail/${id}`
-      );
+      const response = await axios.post(`http://localhost:8000/bookDetail/${id}`);
       const data = response.data;
-      return dispatch({ type: GET_BOOK_BY_ID, payload: data });
+      console.log(data);
+      if (data) {
+        // Book found, dispatch the book data to the store
+        return dispatch({ type: GET_BOOK_BY_ID, payload: data });
+      } else {
+        // Book not found, return null or handle the case as needed
+        return null;
+      }
     } catch (error) {
+      // Handle other errors (e.g., network issues, server errors)
       throw Error(error.message);
     }
   };
 }
+
+
+
 export function getBooksByAuthor(author) {
   return async function (dispatch) {
     try {
@@ -604,47 +626,47 @@ export function accessLogIn({ email, password }) {
   };
 };
 
-export function accessGoogle({email, name, imageUrl, googleId}, token) {
-    return async function (dispatch) {
+export function accessGoogle({ email, name, imageUrl, googleId }, token) {
+  return async function (dispatch) {
+    try {
+      const findUser = await axios.post(`http://localhost:8000/findUser/${email}`);
+
+      //console.log(findUser.data);
+
+      return dispatch({
+        type: ACCESS,
+        payload: { state: true, ref: findUser.data.detail.id },
+      })
+    } catch (error) {
+      //throw Error(error.response.data.text);
+      //console.log(error);
+      //console.log(error.response.data.text);
+      if (error.response.status === 400 && error.response.data.text === 'No users found') {
         try {
-            const findUser = await axios.post(`http://localhost:8000/findUser/${email}`);
+          const userDataSignUp = {
+            name,
+            email,
+            password: "password",
+            phoneCode: "00",
+            phone: "0000000",
+            country: "null",
+            birthday: "null",
+            photoUser: imageUrl,
+          };
+          const newUser = await axios.post(`http://localhost:8000/newUser`, userDataSignUp);
+          //console.log(newUser);
 
-            //console.log(findUser.data);
-
-            return dispatch({
-                type: ACCESS,
-                payload: { state: true, ref: findUser.data.detail.id },
-            })
+          return dispatch({
+            type: ACCESS,
+            payload: { state: true, ref: newUser.data.detail.id },
+          })
         } catch (error) {
-            //throw Error(error.response.data.text);
-            //console.log(error);
-            //console.log(error.response.data.text);
-            if(error.response.status === 400  && error.response.data.text === 'No users found'){
-                try {
-                    const userDataSignUp = {
-                        name, 
-                        email, 
-                        password: "password",
-                        phoneCode: "00",
-                        phone: "0000000",
-                        country: "null",
-                        birthday: "null",  
-                        photoUser: imageUrl,                  
-                    };
-                    const newUser = await axios.post(`http://localhost:8000/newUser`, userDataSignUp);
-                    //console.log(newUser);
-
-                    return dispatch({
-                        type: ACCESS,
-                        payload: { state: true, ref: newUser.data.detail.id },
-                    })        
-                } catch (error) {
-                    throw Error(error.response.data.text);
-                }
-            }
-            else throw Error(error.response.data.text);
+          throw Error(error.response.data.text);
         }
+      }
+      else throw Error(error.response.data.text);
     }
+  }
 }
 
 export function accessUser(bool, ref) {
@@ -710,7 +732,7 @@ export function postUser(userData) {
       });
     } catch (error) {
       //console.log(error.response? error.response : error.message);
-      throw Error(error.response? error.response.data.text : error.message);
+      throw Error(error.response ? error.response.data.text : error.message);
     }
   };
 }
