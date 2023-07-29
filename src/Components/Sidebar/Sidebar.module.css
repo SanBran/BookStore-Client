@@ -1,0 +1,51 @@
+.container{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(247, 247, 247);
+    width: 70px;
+    height: 100vh;
+    z-index: 999;
+    box-shadow: 5px 8px 5px rgba(0, 0, 0, 0.096);
+}
+
+.buttons{
+    position: relative;
+    top: 100px;
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+}
+
+
+
+.btnlogo{
+    position: relative;
+    background: none;
+    width: 63px;
+    top: 25px;
+    left: -5px;
+}
+
+.logo{
+    position: relative;
+    width: 63px
+}
+
+.openButton {
+    position: absolute;
+    top: 55vh;
+    left: 70px;
+    border-radius: 0 50px 50px 0 ;
+    padding: 20px;
+    padding-right: 10px;
+    padding-left: 1px;
+    text-align: end;
+    font-size: x-large;
+    background-color:rgb(247, 247, 247);
+    color: black;
+    box-shadow: 5px 8px 5px rgba(0, 0, 0, 0.096);
+
+}

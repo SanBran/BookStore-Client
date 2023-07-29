@@ -1,0 +1,42 @@
+.title{
+    position: relative;
+    color: #FA9D1B;
+    padding-left: 5vw;
+    text-align: start;
+    width: 80vw;
+}
+
+.containerrr{
+    position: relative;
+    left: 70px;
+    width: 95.5vw;
+    
+    
+    
+}
+.sidebar{
+    position: relative;
+    left: -70px;
+}
+
+.slide{
+    width: 96vw; 
+}
+
+.books{
+    width: 96vw;
+}
+.paginationContainer{
+    width: 96vw;
+}
+
+
+@media (max-width: 768px) {
+    .title {
+        top: 10vh;
+        text-align: center;
+    }
+  
+    
+  }
+
