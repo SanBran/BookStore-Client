@@ -26,25 +26,14 @@ function App() {
   return (
     <>
 
-<<<<<<< Updated upstream
       {showOverlayPerfile && <Profile />}
       <div >
 
-        {location.pathname !== "/profile" && location.pathname !== "/access" && (location.pathname !== "/results") ? (
+        {location.pathname !== "/profile" && location.pathname !== "/access" && (location.pathname !== "/") ? (
           <Navbar />
         ) : (
           <></>
         )}
-=======
-    {showOverlayPerfile && <Profile />}
-    <div >
-      
-    {location.pathname !== "/profile" && location.pathname !== "/access" && (location.pathname !== "/") ? (
-        <Navbar  />
-      ) : (
-        <></>
-      )}
->>>>>>> Stashed changes
 
         <Routes>
           <Route path="/" element={<Home />} />

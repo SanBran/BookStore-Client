@@ -1,6 +1,108 @@
-h3,
-h2,
-h4,
-p {
-    color: black
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    padding-top: 6rem;
+}
+
+.dark {
+    background-color: #333;
+    color: #fff;
+}
+
+.light {
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.bookInfo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.bookInfo img {
+    max-width: 200px;
+}
+
+.bookDetails h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.bookDetails h3 {
+    font-size: 18px;
+}
+
+.priceAndActions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.priceAndActions p {
+    font-size: 16px;
+}
+
+.priceAndActions a,
+.priceAndActions button {
+    padding: 10px 20px;
+    background-color: #ffcd29;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    font-size: 16px;
+    width: 50%;
+}
+
+.priceAndActions a:hover,
+.priceAndActions button:hover {
+    background-color: #dfa811;
+}
+
+.descriptionContainer {
+    margin-top: 20px;
+    display: flex;
+}
+
+.activeButton {
+    background-color: #dfa811;
+    color: #fff;
+}
+
+.activeButton:hover {
+    background-color: #dfa811;
+}
+
+
+.description {
+    flex: 1;
+}
+
+.description p {
+    font-size: 16px;
+}
+
+.description h3 {
+    font-size: 18px;
+}
+
+.container button {
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    background-color: #ffcd29;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.container button:hover {
+    background-color: #dfa811;
 }

@@ -90,19 +90,41 @@ export function getAllBooks() {
   };
 }
 
+// export function detailBookById(id) {
+//   return async function (dispatch) {
+//     try {
+//       const response = await axios.post(
+//         `http://localhost:8000/bookDetail/${id}`
+//       );
+//       const data = response.data;
+//       return dispatch({ type: GET_BOOK_BY_ID, payload: data });
+//     } catch (error) {
+//       throw Error(error.message);
+//     }
+//   };
+// }
 export function detailBookById(id) {
   return async function (dispatch) {
     try {
-      const response = await axios.post(
-        `http://localhost:8000/bookDetail/${id}`
-      );
+      const response = await axios.post(`http://localhost:8000/bookDetail/${id}`);
       const data = response.data;
-      return dispatch({ type: GET_BOOK_BY_ID, payload: data });
+      console.log(data);
+      if (data) {
+        // Book found, dispatch the book data to the store
+        return dispatch({ type: GET_BOOK_BY_ID, payload: data });
+      } else {
+        // Book not found, return null or handle the case as needed
+        return null;
+      }
     } catch (error) {
+      // Handle other errors (e.g., network issues, server errors)
       throw Error(error.message);
     }
   };
 }
+
+
+
 export function getBooksByAuthor(author) {
   return async function (dispatch) {
     try {
