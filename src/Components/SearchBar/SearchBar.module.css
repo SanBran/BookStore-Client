@@ -1,6 +1,6 @@
 .container{
     display: flex;
-    margin-right: 5vw;
+    margin-left: -50px;
 }
 
 .bar{
@@ -31,6 +31,7 @@
     padding: 0;
     background-color: rgb(255, 255, 255);
     text-align: end;
+    
     font-weight: 400;
     font-weight:500;
     border: none;

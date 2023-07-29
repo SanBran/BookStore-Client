@@ -9,6 +9,7 @@ const SearchBar = () => {
   const dispatch = useDispatch();
   const genres = useSelector((state)=> state.genres)
   const [search, setSearch] = useState({
+    title: ""
   });
   const navigate = useNavigate()
 
@@ -26,6 +27,7 @@ const SearchBar = () => {
 
   const handleSearch = (e) => {
     e.preventDefault()
+
     console.log(search);
     dispatch(getBooksByTitle(search));
     navigate(`/results/?title=${search.title}`)
@@ -36,7 +38,8 @@ const SearchBar = () => {
     e.preventDefault()
     console.log(e.target.value);
     if (e.target.value === "all genres") {
-      
+      setSearch({});
+      console.log(search);
     }else 
       setSearch({...search,
         gender: e.target.value});
@@ -64,11 +67,9 @@ const SearchBar = () => {
   
   return (
     <nav className={styles.container}>
-      {search.title === undefined && search.gender === undefined ?  (
-        <button onClick={handleSearch} className={styles.icon} disabled>⌕</button>
-      ) : (
-        <button onClick={handleSearch} className={styles.icon}>⌕</button>
-      )}
+      
+        <button onClick={handleSearch} className={styles.icon} >⌕</button>
+      
 
       <input
         name="searchBar"

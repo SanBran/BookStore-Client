@@ -3,8 +3,34 @@
     color: #FA9D1B;
     padding-left: 5vw;
     text-align: start;
-    width: 95vw;
+    width: 80vw;
+    margin-top: 50px;
 }
+
+.container{
+    position: relative;
+    left: 70px;
+    width: 95.5vw;
+    padding-bottom: 500px
+    
+    
+}
+.sidebar{
+    position: relative;
+    left: -70px;
+}
+
+.slide{
+    width: 96vw; 
+}
+
+.books{
+    width: 96vw;
+}
+.paginationContainer{
+    width: 96vw;
+}
+
 
 @media (max-width: 768px) {
     .title {

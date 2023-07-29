@@ -3,7 +3,7 @@
 .container {
     display: flex;
     height: 190px;
-    width: 370px;
+    width: 25vw;
     gap: 10px;
     cursor: pointer;
     -moz-osx-font-smoothing: grayscale;
@@ -45,7 +45,7 @@
 
 .price {
     font-weight: 800;
-    position: absolute; /* Agregamos posicionamiento absoluto */
+    position: absolute;
     bottom: 20px;
 }
 
@@ -53,6 +53,7 @@
     position: absolute;
     background: none;
     color: #FA9D1B;
+    left: 25px;
     bottom: 20px;
 
 }
@@ -63,6 +64,7 @@
     border-radius: 10px;
     font-size: medium;
     padding: 10px;
+    padding-inline: 30px;
     bottom: 20px;
     right: 20px;
 
