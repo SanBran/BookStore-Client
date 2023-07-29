@@ -1,22 +1,22 @@
 import axios from "axios";
 
-const MercadoPago = ({ cart, userInfo ,styles}) => {
+const Stripe = ({ cart, userInfo ,styles}) => {
   //esto para el carrito
   const cartInfo = cart?.map((books) => {
     return {
-      IdBook: books.id,
-      nombre: books.title,
-      precio: books.price,
-      cantidad: 1,
+      idBook: books.id,
+      name: books.title,
+      price: parseInt(books.price),
+      quantity: 1,
       typeMoney: books.currency || "MXN",
-      description: "Ok, aquí va una descripcion breve: Pásate a Premium",
+      //description: "Ok, aquí va una descripcion breve: Pásate a Premium",
     };
   });
   console.log(cartInfo);
   // Esto de aquí será para el user
   const userData = {
     userId: userInfo.id,
-    name: userInfo.name,
+    user: userInfo.name,
     email: userInfo.email,
   };
 
@@ -25,40 +25,38 @@ const MercadoPago = ({ cart, userInfo ,styles}) => {
   //Some practice
   const attemptObject = {
     userId: userData.userId,
-    IdBook: cartInfo[0].IdBook,
-    name: userData.name,
+    idBook: cartInfo[0].idBook,
+    user: userData.name,
     email: userData.email,
 
-    carrito: cartInfo,
+    items: cartInfo,
   };
-  const handlePaymentMErcadoPago = async () => {
+  const handlePaymentStripe = async () => {
     try {
       console.log(attemptObject);
       const response = await axios.post(
-        "https://bookstorepf-production.up.railway.app/mercadoPago",
+        "https://bookstorepf-production.up.railway.app/create-checkout-session",
         attemptObject
       );
       const sureThing = response.data;
-      console.log(sureThing.linkPago);
-      window.location.href = sureThing.linkPago;
-      if (Object.keys(sureThing).length > 0 || sureThing.length > 0)
-        return { ...sureThing };
+      console.log(sureThing.url);
+     window.location.href = sureThing.url;
     } catch (error) {
-      console.log(error.message);
-      throw Error(error.message);
+      console.log(error);
+      throw new Error(error.message);
     }
   };
 
   return (
     <div>
       <button
-        onClick={handlePaymentMErcadoPago}
+        onClick={handlePaymentStripe}
         className={styles.Back}
       >
-        MercadoPago
+        Stripe
       </button>
     </div>
   );
 };
 
-export default MercadoPago;
+export default Stripe;
