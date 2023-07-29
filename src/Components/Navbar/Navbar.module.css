@@ -25,6 +25,26 @@
     cursor: pointer;
 }
 
+.cartIcon{
+    margin-top: 15px;
+    cursor: pointer;
+}
+.cartCounter{
+    position: absolute;
+    top: 40px;
+    margin: 0;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    background-color: white;
+    color: #FA9D1B;
+    font-size: 13px;
+    text-align: center;
+    font-weight: bolder;
+}
 
 @media (max-width: 1020px) {
     .logo{

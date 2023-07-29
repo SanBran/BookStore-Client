@@ -15,7 +15,6 @@ const Results = () => {
   const [search, setSearch] = useState({
     title: origin
   });
-  
  
   const currentBooks = useSelector((state) => state.allBooksCopy);
   const totalPages = useSelector((state) => state.booksObject)

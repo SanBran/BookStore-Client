@@ -26,7 +26,6 @@ const totalPrice = cart.reduce((total, book) => total + book.price, 0);
       <div>
         <h3>Payment method</h3>
         <MercadoPago cart={cart} userInfo={user}/>
-        <button>Mercado Pago</button>
         <button>Stripe</button>
       </div>
       <div>
