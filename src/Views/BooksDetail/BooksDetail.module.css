@@ -12,7 +12,7 @@
 
     transition: all 0.3s ease-in-out;
 }
-
+/* ---boton mode */
 .mode{
     width: 200px;
 }
@@ -26,6 +26,7 @@
     color: #333;
 }
 
+/* ------informacion de libro */
 .bookInfo {
     display: flex;
     align-items: center;
@@ -90,22 +91,7 @@
     color: #9C9C9C ;
 }
 
-
-
-
-/* .priceAndActions a,
-.priceAndActions button {
-    padding: 10px 20px;
-    background-color: #ffcd29;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-decoration: none;
-    text-align: center;
-    font-size: 16px;
-    width: 50%;
-} */
+/* -----estilos de boton comprar */
 .buyBtn{
     display: flex;
     justify-content: center;
@@ -126,6 +112,7 @@
     outline: 0;
 }
 
+/* -----estilos de boton carrito */
 .cartBtn{
     display: flex;
     justify-content: center;
@@ -154,54 +141,6 @@
 
     color: #F5F5F5;
 }
-
-/* .priceAndActions a:hover,
-.priceAndActions button:hover {
-    background-color: #dfa811;
-} */
-
-/* .descriptionContainer {
-    margin-top: 20px;
-    display: flex;
-} */
-
-/* .activeButton {
-    background-color: #dfa811;
-    color: #fff;
-}
-
-.activeButton:hover {
-    background-color: #dfa811;
-} */
-
-
-/* .description {
-    flex: 1;
-}
-
-.description p {
-    font-size: 16px;
-}
-
-.description h3 {
-    font-size: 18px;
-} */
-
-/* .container button {
-    margin-bottom: 10px;
-    padding: 10px 20px;
-    background-color: #ffcd29;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.container button:hover {
-    background-color: #dfa811;
-} */
-
 
 /* ----------------Estilo del switch  */
 .descriptionContainer{
@@ -244,6 +183,8 @@
     color: #FA9D1B;
 }
 
+
+/* -----Estilos en la descripcion y detalles */
 .textContainer{
     margin: 30px 0;    
 }
@@ -253,7 +194,6 @@
     font-size: 14px;
 
 }
-
 .details{
     text-align: start;
 }
