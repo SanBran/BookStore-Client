@@ -9,9 +9,18 @@ import removeDuplicateBooks from "../../utils/removeDuplicateBooks"
 // import { Link } from "react-router-dom"
 import { addCart } from "../../redux/actions/actions"
 
+//-----icons
+import instagram_icon from '../../assets/icons/instagram_icon.png';
+import facebook_icon from '../../assets/icons/facebook_icon.png';
+import share_icon from '../../assets/icons/share_icon.svg';
+
 
 
 const BooksDetail = () => {
+  const genericCover =
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhRKhJb1aLmjwGX_ox0TA6eTxCv_5g3Nlr6w&usqp=CAU";
+
+
   let processedAuthor = []
   let processedGender = []
 
@@ -47,7 +56,6 @@ const BooksDetail = () => {
 
   const book = useSelector(state => state.details)
   const cart = useSelector(state => state.cart)
-
 
   useEffect(() => {
     console.log('cart updated: ', cart);
@@ -86,49 +94,76 @@ const BooksDetail = () => {
 
   return (
     <div className={`${styles.container} ${darkMode ? styles.dark : styles.light}`}>
-      <button onClick={toggleDarkMode}>Cambiar modo</button>
+      <button className={styles.mode} onClick={toggleDarkMode}>Cambiar modo</button>
       <>
         <div className={styles.bookInfo}>
-          <img src={book.image} alt={book.title} />
+          <img className={styles.bookImg} src={book.image !== "Image not Available" ? book.image : genericCover} alt={book.title} />
           <div className={styles.bookDetails}>
-            <h2>{book.title}</h2>
-            <h3>Author</h3>
-            {processedAuthor?.map((author, index) => (
-              <p key={index}>{author}</p>
-            ))}
-            <div className={styles.priceAndActions}>
-              <p>${book.price}</p>
-              <p>PDF format</p>
-              <a href="#">BUY NOW</a>
-              <button onClick={() => addCart(book)}>ADD TO CART</button>
+            <h2 className={styles.title}>{book.title}</h2>
+            <div className={styles.authorContainer}>
+              <p className={styles.author}>by</p>
+              {processedAuthor?.map((author, index) => (
+                <p className={styles.author} key={index}>{author}</p>
+              ))}
+            </div>
+            <div className={styles.share}>
+              <img className={styles.shareIcon} src={facebook_icon} alt="facebook" />
+              <img className={styles.shareIcon} src={instagram_icon} alt="instagram" />
+              <img className={styles.shareIcon} src={share_icon} alt="share" />
             </div>
           </div>
+            <div className={styles.priceAndActions}>
+              <p className={styles.price}>{book.price !== 0 ? `$ ${book.price}` : "Free"}</p>
+              <p className={styles.format}>PDF format</p>
+              <button className={styles.buyBtn}>BUY NOW</button>
+              <button className={styles.cartBtn} onClick={() => {addCart(book)}}>ADD TO CART</button>
+            </div>
         </div>
-        <button
-          className={showDescription ? styles.activeButton : ''}
-          onClick={() => setShowDescription(true)}
-        >
-          Description
-        </button>
-        <button
-          className={!showDescription ? styles.activeButton : ''}
-          onClick={() => setShowDescription(false)}
-        >
-          Details
-        </button>
         <div className={styles.descriptionContainer}>
-          <div className={styles.description}>
+
+          <div className={styles.switchContainer}>
+              <div 
+              className={showDescription ? styles.switchFocus : styles.switch}
+              onClick={() => setShowDescription(true)}
+              >
+                  <h1 className={styles.switchTitle}>Description</h1>
+              </div>
+              <div 
+              className={!showDescription ? styles.switchFocus : styles.switch}
+              onClick={()=>setShowDescription(false)}
+              >
+                  <h1 className={styles.switchTitle}>Details</h1>
+              </div>
+          </div>
+
+          <div className={styles.textContainer}>
             {showDescription ? (
-              <p>{showDescription && book.sinopsis}</p>
+              <p className={styles.description}>{showDescription && book.sinopsis}</p>
             ) : (
-              <div>
-                <h3>Language: <span className="spanClean">{book.language}</span></h3>
-                <h3>Published date: <span className="spanClean">{book.publishedDate}</span></h3>
-                <h3>Editorial :<span className="spanClean">{book.editorial}</span></h3>
-                <h3>Gender:</h3>
-                {processedGender?.map((gender, index) => (
-                  <p key={index}>{gender}</p>
-                ))}
+              <div className={styles.details}>
+                <div className={styles.detailTextContaiter}>
+                  <h3 className={styles.titleDetail}>Language</h3>
+                  <h3 className={styles.textDetail}>{book.language}</h3>
+                </div>
+
+                <div className={styles.detailTextContaiter}>
+                  <h3 className={styles.titleDetail}>Published date</h3>
+                  <h3 className={styles.textDetail}>{book.publishedDate}</h3>
+                </div>
+
+                <div className={styles.detailTextContaiter}>
+                  <h3 className={styles.titleDetail}>Editorial</h3>
+                  <h3 className={styles.textDetail}>{book.editorial}</h3>
+                </div>
+
+                <div className={styles.detailTextContaiter}>
+                  <h3 className={styles.titleDetail}>Gender</h3>
+                  <h3 className={styles.textDetail}>
+                    {processedGender?.map((gender, index) => (
+                    <span key={index}>{gender}</span>
+                    ))}
+                  </h3>
+                </div>
               </div>
             )}
           </div>

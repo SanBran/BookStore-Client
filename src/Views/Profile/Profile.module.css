@@ -11,7 +11,7 @@
   width: 20%;
   /* Abarca un 20% de la pantalla */
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  /* background-color: rgba(0, 0, 0, 0.5); */
   /* Fondo semi-transparente para el overlay */
   z-index: 9999;
   /* Asegura que el overlay esté en la parte superior */
@@ -25,25 +25,71 @@
   width: 78%;
   /* Abarca un 20% de la pantalla */
   height: 100%;
-  z-index: 9999;
-}
+  z-index: 9999;}
 
 .overlayContent {
   position: fixed;
   top: 0;
   right: 0;
-  width: 20%;
+  width: 200px;
   /* Abarca un 20% de la pantalla */
   height: 100%;
   background-color: #fff;
   /* Color de fondo del contenido del overlay */
-  padding: 20px;
   border-radius: 0;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: -7px 1px 20px 2px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
 }
 
-.Logout {
-  bottom: 0;
+.profileContainer{
+  width: 100%;
+  border-bottom: 1px solid #D9D9D9 ;
+  padding: 20px 0;
+}
+.profileImg{
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+}
+.userName{
+  padding: 0 20px;
+  text-align: center;
+  color: black;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+}
+.userEmail{
+  color: #B9B9B9;
+  font-size: 12px;
+  font-weight: normal;
+  margin: 0;
+}
 
+.navItem{
+  display: flex;
+  align-items: center;
+  margin: 30px 0 30px 25px;
+  color: black;
+  text-transform: none;
+}
+.navItem img{
+  margin-right: 10px;
+}
+.navItem:hover{
+  color: #FA9D1B;
+}
+
+.Logout {
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.LogoutTitle{
+  margin: -4px 15px 0 0;
+  color: #B9B9B9;
+  font-size: 22px;
+  font-weight: 400;
 }
