@@ -49,6 +49,8 @@ import {
   ADD_CART,
   REMOVE_CART,
   ADD_FAVORITE,
+  SEND_FAVORITE,
+  REMOVE_FAVORITE,
   PASSWORD_REQUEST,
   PASSWORD_CHANGE,
   REDIRECT_TOKEN,
@@ -59,7 +61,19 @@ export const DETAIL_BOOK_BY_ID = "DETAIL_BOOK_BY_ID";
 export const BOOK_BY_NAME = "BOOK_BY_NAME";
 
 //--------------BOOKS----------
-export function addFavorite(userData) {
+export function addFavorite(bookId) {
+  return {
+    type: ADD_FAVORITE,
+    payload: bookId,
+  };
+}
+export function removeFavorite(bookId) {
+  return {
+    type: REMOVE_FAVORITE,
+    payload: bookId,
+  };
+}
+export function sendFavorite(userData) {
   return async function (dispatch) {
     try {
       const response = await axios.put(
@@ -67,8 +81,8 @@ export function addFavorite(userData) {
         userData
       );
       return dispatch({
-        type: ADD_FAVORITE,
-        payload: response.data,
+        type: SEND_FAVORITE,
+        payload: response.data.detail,
       });
     } catch (error) {
       throw Error(error.message);
@@ -816,6 +830,7 @@ export function updateUser(userData) {
         `/updUser`,
         userData
       );
+      console.log(response.data);
       return dispatch({
         type: UPDATE_USER,
         payload: response.data,

@@ -1,6 +1,6 @@
 //import React from 'react';
-import fav1 from '../../sources/fav1.png'
-import fav2 from '../../sources/fav2.png'
+import fav1 from "../../sources/fav1.png";
+import fav2 from "../../sources/fav2.png";
 import { Link } from "react-router-dom";
 import styles from "./Book.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,57 +9,50 @@ import { useNavigate } from "react-router-dom";
 import {
   addCart,
   addFavorite,
-  getUserById,
   removeCart,
+  removeFavorite,
+  sendFavorite,
 } from "../../redux/actions/actions";
 
-
-const Book = ({ books, onRemove  }) => {
+const Book = ({ books }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.access);
-  const userDat = useSelector((state) => state.userDetail);
+  const userInfo = useSelector((state) => state.userDetail);
   const inCart = useSelector((state) => state.cart);
+  const favorite = useSelector((state) => state.wishlist);
 
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
 
   //editUser={id,name, birthday, country, phone, phoneCode, gender, dniPasaport, status, rol, photoUser, listWish}
 
   const { id, image, title, author, price } = books;
-  const [userData, setUserData] = useState(userDat);
   const [isFav, setIsFav] = useState(false);
   const [cart, setCart] = useState(false);
 
   const genericCover =
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhRKhJb1aLmjwGX_ox0TA6eTxCv_5g3Nlr6w&usqp=CAU";
 
-  const handleWishlist = async () => {
-    let list;
-    if (isFav) {
-      setIsFav(false);
-      list = userData.listWish.filter((idF) => idF !== id);
-      onRemove(id);
-
-    } else {
-      setIsFav(true);
-      userData.listWish ? (list = [...userData.listWish, id]) : (list = [id]);
-    }
-    sendData(list);
-  };
-  const sendData = (list) => {
-    userData.listWish = list;
-    dispatch(addFavorite(userData));
-    console.log(userData.listWish);
-  };
-  useEffect(() => {
+  const handleWishlist = () => {
     if (user.state) {
-      if (userData.listWish && userData.listWish.includes(id)) {
-        setIsFav(true);
-      } else {
+      if (isFav) {
         setIsFav(false);
+        dispatch(removeFavorite(books.id));
+      } else {
+        setIsFav(true);
+        dispatch(addFavorite(books.id));
       }
+      sendData(favorite);
     }
-  }, [userData.listWish, id, user.state]);
+  };
+  const sendData = (favorite) => {
+    console.log("existe: ", userInfo);
+    // Creamos una copia del objeto userData y modificamos su propiedad listWish
+    const updatedUserData = { ...userInfo };
+    // Modificamos la propiedad listWish de la copia con el nuevo valor
+    updatedUserData.listWish = favorite;
+    dispatch(sendFavorite(updatedUserData));
+    console.log("User: ", updatedUserData);
+  };
 
   const handleCart = () => {
     if (cart) {
@@ -70,9 +63,19 @@ const Book = ({ books, onRemove  }) => {
       dispatch(addCart(books));
     }
   };
-  
+
   const handleToLog = () => {
-navigate('/access')  }
+    navigate("/access");
+  };
+  useEffect(() => {
+    if (user.state) {
+      if (userInfo.listWish && userInfo.listWish.includes(id)) {
+        setIsFav(true);
+      } else {
+        setIsFav(false);
+      }
+    }
+  }, [userInfo.listWish, id, user.state]);
 
   return (
     <div className={styles.container}>
@@ -86,10 +89,10 @@ navigate('/access')  }
             <img src={fav1} alt="" />
           </button>
         )
-      ) : (        
-          <button onClick={handleToLog} className={styles.boton}>
-            <img src={fav1} alt="" />
-          </button>
+      ) : (
+        <button onClick={handleToLog} className={styles.boton}>
+          <img src={fav1} alt="" />
+        </button>
       )}
       {user.state ? (
         cart ? (
@@ -103,8 +106,8 @@ navigate('/access')  }
         )
       ) : (
         <button onClick={handleToLog} className={styles.boton2}>
-            Add to cart
-          </button>
+          Add to cart
+        </button>
       )}
       <Link className={styles.image} to={`/detail/${id}`}>
         <img
