@@ -1,18 +1,28 @@
 .container {
-    max-width: 900px;
+    width: 100%;
+    /* max-width: 900px; */
     margin: 0 auto;
     padding: 20px;
     font-family: Arial, sans-serif;
     padding-top: 6rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    transition: all 0.3s ease-in-out;
 }
 
+.mode{
+    width: 200px;
+}
 .dark {
     background-color: #333;
     color: #fff;
 }
 
 .light {
-    background-color: #f9f9f9;
+    background-color: white;
     color: #333;
 }
 
@@ -20,33 +30,70 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    align-items: flex-start;
     gap: 20px;
 }
 
-.bookInfo img {
-    max-width: 200px;
+.bookImg{
+    width: 250px;
+    height: 350px;
 }
 
-.bookDetails h2 {
-    margin: 0;
-    font-size: 24px;
-}
-
-.bookDetails h3 {
-    font-size: 18px;
-}
-
-.priceAndActions {
+.bookDetails{
+    width: 30%;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    align-items: flex-start;
 }
-
-.priceAndActions p {
+.title {
+    margin: 0;
+    text-align: initial;
+    font-size: 28px;
+}
+.authorContainer {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-weight: lighter;
     font-size: 16px;
 }
+.author{
+    margin: 0;
+}
+.share{
+    margin-top: 50px;
+}
+.shareIcon{
+    height: 20px;
+    margin-right: 10px;
+}
 
-.priceAndActions a,
+.priceAndActions{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 35px 0;
+    
+    border-radius: 20px;
+    box-shadow: 0px 5px 5px 2px rgb(0 0 0 / 26%);
+}
+.price{
+    font-size: 36px;
+    font-weight: normal;
+    margin: 0;
+}
+.format{
+    margin: 0;
+    font-size: 13px;
+    color: #9C9C9C ;
+}
+
+
+
+
+/* .priceAndActions a,
 .priceAndActions button {
     padding: 10px 20px;
     background-color: #ffcd29;
@@ -58,29 +105,77 @@
     text-align: center;
     font-size: 16px;
     width: 50%;
+} */
+.buyBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 200px;
+    border-radius: 0;
+    border: none;
+    background-color: #FA9D1B;
+    margin-top: 20px;
+
+    color: #F5F5F5;
+    font-weight: bolder;
+    font-size: 18px;
+    cursor: pointer;
+}
+.buyBtn:focus-visible, .buyBtn:focus{
+    outline: 0;
 }
 
-.priceAndActions a:hover,
+.cartBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25px;
+    width: 200px;
+    border-radius: 0;
+    border: solid 2px #FA9D1B;
+    background: none;
+    margin: 15px 0;
+
+    color: #FA9D1B;
+    font-weight: normal;
+    font-size: 13px;
+    cursor: pointer;
+
+    transition: all 0.3s ease-in-out;
+}
+.cartBtn:focus:focus-visible, .cartBtn:focus:focus{
+    outline: 0;
+}
+.cartBtn:focus, .cartBtn:hover{
+    border-radius: 0;
+    border: none;
+    background-color: #FA9D1B;
+
+    color: #F5F5F5;
+}
+
+/* .priceAndActions a:hover,
 .priceAndActions button:hover {
     background-color: #dfa811;
-}
+} */
 
-.descriptionContainer {
+/* .descriptionContainer {
     margin-top: 20px;
     display: flex;
-}
+} */
 
-.activeButton {
+/* .activeButton {
     background-color: #dfa811;
     color: #fff;
 }
 
 .activeButton:hover {
     background-color: #dfa811;
-}
+} */
 
 
-.description {
+/* .description {
     flex: 1;
 }
 
@@ -90,9 +185,9 @@
 
 .description h3 {
     font-size: 18px;
-}
+} */
 
-.container button {
+/* .container button {
     margin-bottom: 10px;
     padding: 10px 20px;
     background-color: #ffcd29;
@@ -105,4 +200,80 @@
 
 .container button:hover {
     background-color: #dfa811;
+} */
+
+
+/* ----------------Estilo del switch  */
+.descriptionContainer{
+    width: 69%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: -80px;
 }
+.switchContainer{
+    width: 100%;
+    margin: 30px 0 10px 0;
+    display: flex;
+    justify-content: center;
+    font-size: 7px;
+}
+.switch {
+    margin: 0;
+    border-bottom: 2px solid #FA9D1B;
+    color:black;
+}
+.switchFocus{
+    color: #FA9D1B;
+    font-weight: bold;
+    border-top: 3px solid #FA9D1B;
+    border-right: 3px solid #FA9D1B;
+    border-left: 3px solid #FA9D1B;
+}
+.switchTitle{
+    margin: 0;
+    padding: 10px 50px 10px 20px;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: lighter;
+    text-transform: uppercase;
+    
+    cursor: pointer;
+}
+.switchTitle:hover{
+    color: #FA9D1B;
+}
+
+.textContainer{
+    margin: 30px 0;    
+}
+.description{
+    text-align: start;
+    width: 580px;
+    font-size: 14px;
+
+}
+
+.details{
+    text-align: start;
+}
+.detailTextContaiter{
+    margin: 0;
+    margin-top: 10px;
+    width: 580px;
+
+    border-bottom: 1px solid #D5D5D5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+}
+.titleDetail{
+    margin: 0;
+    font-weight: bold;
+}
+.textDetail{
+    margin: 0;
+    font-weight: lighter;
+}
+
