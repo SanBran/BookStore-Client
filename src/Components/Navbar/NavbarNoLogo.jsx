@@ -46,7 +46,7 @@ const Navbar = () => {
       {access ? (
         <div className={styles.crearEsteEstilo}>
           <div>
-            <button onClick={openModal}>🛒</button>
+            <button className={styles.noquieroesteboton} onClick={openModal}></button>
             <Cart
               isOpen={modalIsOpen}
               onRequestClose={closeModal}
