@@ -87,3 +87,13 @@
     
   }
 
+
+/* -----esto no va despues, borrar */
+.noquieroesteboton{
+    background: none;
+    width: 50px;
+    height: 50px;
+}
+.noquieroesteboton:focus, .noquieroesteboton:focus-visible{
+    outline: 0;
+}
