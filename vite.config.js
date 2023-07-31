@@ -7,4 +7,5 @@ export default defineConfig({
   server: {
     port: 3000, // Cambia este valor al puerto 3000
   },
+  rewrites: [{ source: "/(.*)", destination: "/" }],
 });
