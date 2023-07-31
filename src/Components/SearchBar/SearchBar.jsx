@@ -25,11 +25,11 @@ const SearchBar = () => {
 
     
 
-  const handleSearch = (e) => {
+  const handleSearch = async (e) => {
     e.preventDefault()
 
     console.log(search);
-    dispatch(getBooksByTitle(search));
+    await dispatch(getBooksByTitle(search));
     navigate(`/results/?title=${search.title}`)
     
   };
