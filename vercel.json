@@ -2,11 +2,11 @@
     "routes": [
       {
         "src": "/",
-        "dest": "../src/Views/Home/Home.jsx"
+        "dest": "./src/Views/Home/Home.jsx"
       },
       {
         "src": "/access",
-        "dest": "../src/Views/Access/Access.jsx"
+        "dest": "./src/Views/Access/Access.jsx"
       }
 
     ]
