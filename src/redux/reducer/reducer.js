@@ -1,5 +1,7 @@
 import {
   ADD_FAVORITE,
+  REMOVE_FAVORITE,
+  SEND_FAVORITE,
   ACTIVATE_USER,
   ACCESS,
   GET_ALL_BOOKS,
@@ -64,6 +66,7 @@ let initialState = {
   book: [],
   bookByName: [],
   cart: [],
+  wishlist: [],
   filteredBooks: [],
   details: [],
   booksByAuthor: [],
@@ -73,6 +76,7 @@ let initialState = {
   error: null,
   users: [],
   userDetail: [],
+  userDetailFav: [],
   overlayProfile: false,
   showListwish: false,
   token: "",
@@ -80,6 +84,7 @@ let initialState = {
 
 // !Tener el cuenta reducir el reducer en varias partes.
 const reducer = (state = initialState, { type, payload }) => {
+  let filter
   switch (type) {
     //-----------------------------BOOK----------------------------------
 
@@ -87,7 +92,7 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         allBooks: payload.books,
-        allBookCopy: payload.books,
+        allBooksCopy: payload.books,
         booksObject: payload.totalPages,
       };
     case GET_BOOKS_BY_TITLE:
@@ -369,15 +374,14 @@ const reducer = (state = initialState, { type, payload }) => {
     //----------------------------mercadoPago----------------
     // revisar mercadoPago no estoy seguro como funciona
     case ADD_CART:
-      console.log(state.cart);
-
+      console.log('hola soy el cart', state.cart);
       return {
         ...state,
         cart: [...state.cart, payload],
       };
     case REMOVE_CART:
-      console.log(state.cart);
-      let filter = state.cart.filter((book) => book.id !== payload);
+      console.log(state.cart)
+      filter = state.cart.filter((book) => book.id !== payload)
       return {
         ...state,
         cart: filter,
@@ -450,10 +454,25 @@ const reducer = (state = initialState, { type, payload }) => {
         comments: state.comments.filter((comment) => comment.id !== payload),
       };
     //-----------------------------------------USER--------------------------------
+    
     case ADD_FAVORITE:
+      console.log('Favoritos:', state.wishlist);
       return {
         ...state,
-        userDetail: payload,
+        wishlist: [...state.wishlist, payload],
+      };
+    case REMOVE_FAVORITE:
+      console.log('Favoritos:', state.wishlist);
+      filter = state.wishlist.filter((bookId) => bookId !== payload)
+      return {
+        ...state,
+        wishlist: filter
+      };
+    case SEND_FAVORITE:
+      console.log('Favoritos:', state.wishlist);
+      return {
+        ...state,
+        userDetailFav: payload,
       };
     case GET_USERS:
       return {

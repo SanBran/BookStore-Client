@@ -21,12 +21,22 @@
 
 
 
+
 .btnlogo{
     position: relative;
     background: none;
     width: 63px;
     top: 25px;
     left: -5px;
+}
+
+.btnlogo:focus-visible, 
+.btnlogo:focus, 
+.buttons:focus-visible,
+.new:focus-visible,
+.logo:focus-visible,
+.openButton:focus {
+    outline: 0;
 }
 
 .logo{

@@ -2,7 +2,9 @@
 import { useSelector } from "react-redux";
 import styles from "./PaymentDetails.module.css";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import MercadoPago from "../../../Components/MercadoPago/MercadoPago";
+import Stripe from "../../../Components/Stripe/Stripe";
 
 export const PaymentDetails = () => {
   const cart = useSelector((state) => state.cart);
@@ -12,26 +14,27 @@ export const PaymentDetails = () => {
 const totalPrice = cart.reduce((total, book) => total + book.price, 0);
   return (
     <div className={styles.container}>
-      <div>
+      <div> 
         <Link to={`/`}>
-          <button>Back</button>
+          <button  className={styles.Back}>Back</button>
         </Link>
       </div>
       <div>
         <h3>
-          You will receive the downloadale file at the following email address.
+        Thank you for your purchase! You will receive the downloadable file at the following email address:
         </h3>
         <h3>{user.email}</h3>
+        <h3>Choose your preferred payment method:</h3>
       </div>
-      <div>
-        <h3>Payment method</h3>
-        <MercadoPago cart={cart} userInfo={user}/>
-        <button>Stripe</button>
+      <div className={styles.btns}>
+       
+        <MercadoPago cart={cart} userInfo={user} styles={styles} />
+        <Stripe cart={cart} userInfo={user} styles={styles} />
       </div>
       <div>
         <div>
-          <h4>{cart.length} books</h4>
-          <h4>${totalPrice}</h4>
+        <h4>You have purchased {cart.length} books</h4>
+          <h4>Total Price: ${totalPrice}</h4>
         </div>
         <hr></hr>
       </div>

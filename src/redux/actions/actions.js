@@ -49,6 +49,8 @@ import {
   ADD_CART,
   REMOVE_CART,
   ADD_FAVORITE,
+  SEND_FAVORITE,
+  REMOVE_FAVORITE,
   PASSWORD_REQUEST,
   PASSWORD_CHANGE,
   REDIRECT_TOKEN,
@@ -59,16 +61,28 @@ export const DETAIL_BOOK_BY_ID = "DETAIL_BOOK_BY_ID";
 export const BOOK_BY_NAME = "BOOK_BY_NAME";
 
 //--------------BOOKS----------
-export function addFavorite(userData) {
+export function addFavorite(bookId) {
+  return {
+    type: ADD_FAVORITE,
+    payload: bookId,
+  };
+}
+export function removeFavorite(bookId) {
+  return {
+    type: REMOVE_FAVORITE,
+    payload: bookId,
+  };
+}
+export function sendFavorite(userData) {
   return async function (dispatch) {
     try {
       const response = await axios.put(
-        `http://localhost:8000/updUser`,
+        `/updUser`,
         userData
       );
       return dispatch({
-        type: ADD_FAVORITE,
-        payload: response.data,
+        type: SEND_FAVORITE,
+        payload: response.data.detail,
       });
     } catch (error) {
       throw Error(error.message);
@@ -79,7 +93,7 @@ export function addFavorite(userData) {
 export function getAllBooks() {
   return async function (dispatch) {
     try {
-      const response = await axios.post("http://localhost:8000/getBooks");
+      const response = await axios.post("/getBooks");
       return dispatch({
         type: GET_ALL_BOOKS,
         payload: response.data,
@@ -90,19 +104,43 @@ export function getAllBooks() {
   };
 }
 
+// export function detailBookById(id) {
+//   return async function (dispatch) {
+//     try {
+//       const response = await axios.post(
+//         `http://localhost:8000/bookDetail/${id}`
+//       );
+//       const data = response.data;
+//       return dispatch({ type: GET_BOOK_BY_ID, payload: data });
+//     } catch (error) {
+//       throw Error(error.message);
+//     }
+//   };
+// }
 export function detailBookById(id) {
   return async function (dispatch) {
     try {
       const response = await axios.post(
-        `http://localhost:8000/bookDetail/${id}`
+        `/bookDetail/${id}`
       );
       const data = response.data;
-      return dispatch({ type: GET_BOOK_BY_ID, payload: data });
+      console.log(data);
+      if (data) {
+        // Book found, dispatch the book data to the store
+        return dispatch({ type: GET_BOOK_BY_ID, payload: data });
+      } else {
+        // Book not found, return null or handle the case as needed
+        return null;
+      }
     } catch (error) {
+      // Handle other errors (e.g., network issues, server errors)
       throw Error(error.message);
     }
   };
 }
+
+
+
 export function getBooksByAuthor(author) {
   return async function (dispatch) {
     try {
@@ -111,7 +149,7 @@ export function getBooksByAuthor(author) {
       }
       console.log(author);
       const response = await axios.post(
-        `http://localhost:8000/getBooks?author=${author}`
+        `/getBooks?author=${author}`
       );
       return dispatch({
         type: GET_BOOK_BY_AUTHOR,
@@ -149,7 +187,7 @@ export function getByGenrer(gender) {
     try {
       //console.log(gender);
       const response = await axios.post(
-        `http://localhost:8000/getBooks?gender=${gender}`
+        `/getBooks?gender=${gender}`
       );
       return dispatch({
         type: FILTER_BY_GENRER,
@@ -165,7 +203,7 @@ export function getByLanguaje(languaje) {
     try {
       //console.log(languaje);
       const response = await axios.post(
-        `http://localhost:8000/getBooks?languaje=${languaje}`
+        `/getBooks?languaje=${languaje}`
       );
       return dispatch({
         type: FILTER_BY_LANGUAJE,
@@ -181,7 +219,7 @@ export function getByPublishedDate(publishedDate) {
     try {
       //console.log(publishedDate);
       const response = await axios.post(
-        `http://localhost:8000/getBooks?publishedDate=${publishedDate}`
+        `/getBooks?publishedDate=${publishedDate}`
       );
       return dispatch({
         type: FILTER_BY_PUBLISHED_DATE,
@@ -197,7 +235,7 @@ export function getBooksByTitle(title) {
   return async function (dispatch) {
     try {
       const response = await axios.post(
-        `http://localhost:8000/getBooks`,
+        `/getBooks`,
         title
       );
 
@@ -215,7 +253,7 @@ export function getBooksByPrice(price) {
   return async function (dispatch) {
     try {
       const response = await axios.post(
-        `http://localhost:8000/getBooks`,
+        `/getBooks`,
         price
       );
       return dispatch({
@@ -297,7 +335,7 @@ export function getBooksById(id) {
     try {
       //console.log(title);
       const response = await axios.post(
-        `http://localhost:8000/bookDetail/${id}`
+        `/bookDetail/${id}`
       );
       return dispatch({
         type: GET_BOOK_BY_ID,
@@ -312,7 +350,7 @@ export function postBook(book) {
   return async function (dispatch) {
     try {
       //console.log(title);
-      const response = await axios.post(`http://localhost:8000/postBook`, book);
+      const response = await axios.post(`/postBook`, book);
       return dispatch({
         type: POST_BOOK,
         payload: response.data,
@@ -327,7 +365,7 @@ export function updateBooksById(id) {
     try {
       //console.log(title);
       const response = await axios.put(
-        `http://localhost:8000/updateBook/${id}`
+        `/updateBook/${id}`
       );
       return dispatch({
         type: UPDATE_BOOK_BY_ID,
@@ -343,7 +381,7 @@ export function deleteBooksById(id) {
     try {
       //console.log(title);
       const response = await axios.delete(
-        `http://localhost:8000/deleteBook/${id}`
+        `/deleteBook/${id}`
       );
       return dispatch({
         type: DELETE_BOOK_BY_ID,
@@ -359,7 +397,7 @@ export function selectPage(page) {
   return async function (dispatch) {
     try {
       const response = await axios.post(
-        `http://localhost:8000/getBooks?page=${page}`
+        `/getBooks?page=${page}`
       );
       return dispatch({
         type: SELECT_PAGE,
@@ -375,7 +413,7 @@ export function selectFilterPage(page, search) {
   return async function (dispatch) {
     try {
       const response = await axios.post(
-        `http://localhost:8000/getBooks?page=${page}`,
+        `/getBooks?page=${page}`,
         search
       );
       console.log(response.data);
@@ -393,7 +431,7 @@ export function selectPricePage(page, search) {
   return async function (dispatch) {
     try {
       const response = await axios.post(
-        `http://localhost:8000/getBooks?page=${page}`,
+        `/getBooks?page=${page}`,
         search
       );
       console.log(response.data);
@@ -423,7 +461,7 @@ export function getMercadoPagoFailure() {
   return async function (dispatch) {
     try {
       //console.log(author);
-      const response = await axios.get(`http://localhost:8000/failure`);
+      const response = await axios.get(`/failure`);
       return dispatch({
         type: GET_FAILURE,
         payload: response.data,
@@ -437,7 +475,7 @@ export function getMercadoPagoSucces() {
   return async function (dispatch) {
     try {
       //console.log(author);
-      const response = await axios.get(`http://localhost:8000/succes`);
+      const response = await axios.get(`/succes`);
       return dispatch({
         type: GET_SUCCESS,
         payload: response.data,
@@ -451,7 +489,7 @@ export function getMercadoPagoPending() {
   return async function (dispatch) {
     try {
       //console.log(author);
-      const response = await axios.get(`http://localhost:8000/pending`);
+      const response = await axios.get(`/pending`);
       return dispatch({
         type: GET_PENDING,
         payload: response.data,
@@ -468,7 +506,7 @@ export function postMercadoPago(buyerData) {
       // buyerData={name,email,IdBook,carrito,typeMoney,userId}
       //carrito=[{nombre,unit_price,quantity},...]
       const response = await axios.post(
-        `http://localhost:8000/mercadoPago`,
+        `/mercadoPago`,
         buyerData
       );
       return dispatch({
@@ -484,7 +522,7 @@ export function postWebhookPago(payment) {
   return async function (dispatch) {
     try {
       const response = await axios.post(
-        `http://localhost:8000/webhook-pago?payment=${payment}`
+        `/webhook-pago?payment=${payment}`
       );
       return dispatch({
         type: POST_WEBHOOK_PAGO,
@@ -501,7 +539,7 @@ export function postEmail(dataEmail) {
   return async function (dispatch) {
     try {
       const response = await axios.post(
-        `http://localhost:8000/sendEmail`,
+        `/sendEmail`,
         dataEmail
       );
       return dispatch({
@@ -519,7 +557,7 @@ export function postSmsWhatsapp(dataSms) {
   return async function (dispatch) {
     try {
       const response = await axios.post(
-        `http://localhost:8000/SMS-Whatsapp`,
+        `/SMS-Whatsapp`,
         dataSms
       );
       return dispatch({
@@ -555,7 +593,7 @@ export function orderByPublishedDate(order) {
 export function getComents() {
   return async function (dispatch) {
     try {
-      const response = await axios.get(`http://localhost:8000/getComments`);
+      const response = await axios.get(`/getComments`);
       return dispatch({
         type: GET_COMMENTS,
         payload: response.data,
@@ -571,7 +609,7 @@ export function postComment(comment) {
     try {
       //console.log(comment);
       const response = await axios.post(
-        `http://localhost:8000/postComment`,
+        `/postComment`,
         comment
       );
       return dispatch({
@@ -589,7 +627,7 @@ export function updateCommentById({ id, rating, comment }) {
     try {
       //console.log(id, rating, comment);
       const response = await axios.put(
-        `http://localhost:8000/updateComment/${id}`,
+        `/updateComment/${id}`,
         rating,
         comment
       );
@@ -607,7 +645,7 @@ export function deleteCommentById(id) {
     try {
       //console.log(id);
       const response = await axios.delete(
-        `http://localhost:8000/deleteComment/${id}`
+        `/deleteComment/${id}`
       );
       return dispatch({
         type: DELETE_COMMENT_BY_ID,
@@ -628,7 +666,7 @@ export function accessLogIn({ email, password }) {
         data2: password,
       };
       const response = await axios.post(
-        `http://localhost:8000/activateUser/`,
+        `/activateUser/`,
         userData
       );
       return dispatch({
@@ -645,7 +683,7 @@ export function accessGoogle({ email, name, imageUrl, googleId }, token) {
   return async function (dispatch) {
     try {
       const findUser = await axios.post(
-        `http://localhost:8000/findUser/${email}`
+        `/findUser/${email}`
       );
 
       //console.log(findUser.data);
@@ -674,7 +712,7 @@ export function accessGoogle({ email, name, imageUrl, googleId }, token) {
             photoUser: imageUrl,
           };
           const newUser = await axios.post(
-            `http://localhost:8000/newUser`,
+            `/newUser`,
             userDataSignUp
           );
           //console.log(newUser);
@@ -713,7 +751,7 @@ export function listWish(bool) {
 export function getUsers() {
   return async function (dispatch) {
     try {
-      const response = await axios.post(`http://localhost:8000/findUser`);
+      const response = await axios.post(`/findUser`);
       console.log(response.data.detail);
       return dispatch({
         type: GET_USERS,
@@ -728,7 +766,7 @@ export function getUserById(id) {
   return async function (dispatch) {
     try {
       //console.log(title);
-      const response = await axios.post(`http://localhost:8000/findUser/${id}`);
+      const response = await axios.post(`/findUser/${id}`);
       return dispatch({
         type: GET_USER_BY_ID,
         payload: response.data,
@@ -744,7 +782,7 @@ export function postUser(userData) {
     try {
       //console.log(userData);
       const response = await axios.post(
-        `http://localhost:8000/newUser`,
+        `/newUser`,
         userData
       );
       //console.log(userData);
@@ -769,7 +807,7 @@ export function activateUser(token) {
       };
       //console.log(userData);
       const response = await axios.post(
-        `http://localhost:8000/activateUser/`,
+        `/activateUser/`,
         userData
       );
       return dispatch({
@@ -789,9 +827,10 @@ export function updateUser(userData) {
     try {
       //console.log(userData);
       const response = await axios.put(
-        `http://localhost:8000/updUser`,
+        `/updUser`,
         userData
       );
+      console.log(response.data);
       return dispatch({
         type: UPDATE_USER,
         payload: response.data,
@@ -820,7 +859,7 @@ export function passwordRequest(email) {
 
       console.log(userData);
       const response = await axios.post(
-        `http://localhost:8000/activateUser/`,
+        `/activateUser/`,
         userData
       );
       return dispatch({
@@ -844,7 +883,7 @@ export function passwordChange(token, password) {
       };
 
       const response = await axios.post(
-        `http://localhost:8000/activateUser/`,
+        `/activateUser/`,
         changeData
       );
       return dispatch({
@@ -865,7 +904,7 @@ export function getGenres() {
   return async function (dispatch) {
     try {
       const response = await axios.post(
-        `http://localhost:8000/findSetting`,
+        `/findSetting`,
         genre
       );
 

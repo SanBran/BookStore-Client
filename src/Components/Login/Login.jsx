@@ -6,8 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { accessLogIn } from '../../redux/actions/actions';
 //importaciones para login con google
 import { accessGoogle } from '../../redux/actions/actions';
-import GoogleLogin from 'react-google-login';
-import { gapi } from 'gapi-script';
+//import GoogleLogin from 'react-google-login';
+import { GoogleLogin } from "@react-oauth/google";
+//import { gapi } from 'gapi-script';
 
 const Login = ({ setForm }) => {
 
@@ -39,7 +40,7 @@ const Login = ({ setForm }) => {
     setLogInfo({ ...logInfo, [property]: value })
   }
 
-  //LOGIN DESDE EL FORMULARIO
+//-----LOGIN DESDE EL FORMULARIO
   const handlerLogIn = async (event) => {
     event.preventDefault();
     try {
@@ -51,29 +52,28 @@ const Login = ({ setForm }) => {
     }
   }
 
-  //-----LOGIN CON GOOGLE
-  const clientID = "637027522589-6jbd17n7qelc1mqtp4c1gl43lvjp57cf.apps.googleusercontent.com";
-  useEffect(() => {
-    const start = () => {
-      gapi.auth2.init({
-        clientId: clientID
-      })
-    };
-    gapi.load('client:auth2', start)
-  }, []);
+//-----LOGIN CON GOOGLE
+  //const clientID = "637027522589-6jbd17n7qelc1mqtp4c1gl43lvjp57cf.apps.googleusercontent.com";
+  const clientID = "637027522589-j7nin8g8gico6g5hsfkkg98u2r4gfbj6.apps.googleusercontent.com";
+  // useEffect(() => {
+  //   const start = () => {
+  //     gapi.auth2.init({
+  //       clientId: clientID
+  //     })
+  //   };
+  //   gapi.load('client:auth2', start)
+  // }, []);
 
   const responseGoogle = async (response) => {
-    // Aquí obtienes la respuesta de Google con la información del usuario logueado.
-    // const email = response.profileObj.email;
-    // const name = response.profileObj.name;
-    // const profileImg = response.profileObj.imageUrl;
-    // const googleId = response.profileObj.googleId;
-    const user = response.profileObj
-    const token = response.accessToken;
+    console.log(response);    
+    //const user = response.profileObj
+    //const token = response.accessToken;
+
     //console.log('token:',token);
     //console.log(response.profileObj);
-    await dispatch(accessGoogle(user, token))
-    navigate('/')
+
+    //await dispatch(accessGoogle(user, token))
+    //navigate('/')
   };
 
   const onFailure = (error) => {
@@ -111,8 +111,8 @@ const Login = ({ setForm }) => {
           buttonText="Sign in with Google"
           onSuccess={responseGoogle}
           onFailure={onFailure}
-          cookiePolicy={'single_host_policy'} />
-        {/* <button className={style.googleBtn} type='submit'> Sign in with Google </button> */}
+          // cookiePolicy={'single_host_policy'} 
+        />
       </div>
     </form>
   )
