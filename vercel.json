@@ -1,9 +1,4 @@
 {
-  "version": 2,
-  "name": "book-store-client",
-  "builds": [
-      { "use": "@vercel/static-build", "src": "package.json"}
-  ],  
     "rewrites": [{ "source": "/(.*)", "destination": "/" }]
   
 }
