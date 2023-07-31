@@ -1,5 +1,13 @@
 {
-    "rewrites": [
-        { "source": "/(.*)", "destination": "/App.jsx" }
+    "routes": [
+      {
+        "src": "/",
+        "dest": "../src/Views/Home/Home.jsx"
+      },
+      {
+        "src": "/access",
+        "dest": "../src/Views/Access/Access.jsx"
+      }
+
     ]
 }
