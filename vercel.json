@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "name": "BookStore-Client",
+  "name": "book-store-Client",
   "builds": [
       { "use": "@vercel/static-build", "src": "package.json"}
   ],
