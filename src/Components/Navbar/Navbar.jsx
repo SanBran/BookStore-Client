@@ -25,6 +25,12 @@ const Navbar = () => {
     }
   };
 
+  const handleBack = () => {
+    navigate(-1)
+    window.scrollTo(0, 0)
+  }
+
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const openModal = () => {
@@ -41,21 +47,21 @@ const Navbar = () => {
         <Link to="/">
           <h1 className={styles.logo}>Book Store</h1>
         </Link>
-        <button onClick={() => navigate(-1)}>Atrás</button>
+        <button onClick={handleBack}>Atrás</button>
       </div>
       <div className={styles.search}>
         <SearchBar />
       </div>
       {access ? (
         <div className={styles.cartContainer}>
-            <img className={styles.cartIcon} src={cart_icon} alt="🛒" onClick={openModal}/>
-            <Cart
-              isOpen={modalIsOpen}
-              onRequestClose={closeModal}
-            />
-            {(cart && cart.length !== 0)
-            ?(<div className={styles.cartCounter}>{cart.length}</div>)
-            :(<></>)}
+          <img className={styles.cartIcon} src={cart_icon} alt="🛒" onClick={openModal} />
+          <Cart
+            isOpen={modalIsOpen}
+            onRequestClose={closeModal}
+          />
+          {(cart && cart.length !== 0)
+            ? (<div className={styles.cartCounter}>{cart.length}</div>)
+            : (<></>)}
         </div>
       ) : (
         <></>
