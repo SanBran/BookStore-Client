@@ -15,7 +15,9 @@ const EmailVerification = ()=>{
         switch(action){
             case '1': return async()=>{
                 await dispatch(activateUser(valtoken))
-                return navigate('/access')
+                navigate('/access')
+                return
+                
             };
             case '2': return async()=>{
                 await dispatch(redirectToken(valtoken))
