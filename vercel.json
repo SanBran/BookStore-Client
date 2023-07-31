@@ -1,13 +1,21 @@
 {
-    "routes": [
+  "version": 2,
+  "name": "BookStore-Client",
+  "builds": [
+      { "use": "@vercel/static-build", "src": "package.json"}
+  ],
+  "routes": [
       {
-        "src": "/",
-        "dest": "./src/Views/Home/Home.jsx"
+          "src": "(.*).js",
+          "dest": "/$1.js"            
       },
       {
-        "src": "/access",
-        "dest": "./src/Views/Access/Access.jsx"
+          "src": "(.*).json",
+          "dest": "/$1.json"            
+      },
+      {
+          "src": "/.*",
+          "dest": "index.html"
       }
-
-    ]
+  ]
 }
