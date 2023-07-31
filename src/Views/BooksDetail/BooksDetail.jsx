@@ -25,15 +25,18 @@ const BooksDetail = () => {
 
   const [darkMode, setDarkMode] = useState(false)
 
-  useEffect(() => {
-    const isDarkModePreferred = JSON.parse(localStorage.getItem('darkMode')) || false;
-    setDarkMode(isDarkModePreferred)
-    localStorage.setItem('darkMode', JSON.stringify(darkMode));
-  }, [darkMode])
-
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
   };
+
+  useEffect(() => {
+    const isDarkModePreferred = JSON.parse(localStorage.getItem('darkMode')) || false;
+    setDarkMode(isDarkModePreferred)
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('darkMode', JSON.stringify(darkMode));
+  }, [darkMode])
 
   const [showDescription, setShowDescription] = useState(true)
 
@@ -175,9 +178,9 @@ const BooksDetail = () => {
         </div>
       </>
       <div>
-        {autores ? (
+        {autores && autores.length !== 0 ? (
           <>
-            <h4>LIBROS DE LOS AUTORES</h4>
+            <h3>Books narrated by the author</h3>
             {autores[0]?.book?.map((book) => (
               <Link onClick={() => window.scrollTo(0, 0)} key={book.id} to={`/detail/${book.id}`}>
                 <div>
