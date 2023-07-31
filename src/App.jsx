@@ -54,7 +54,7 @@ function App() {
       :(<>
         {showOverlayPerfile && <Profile />}
         <div >
-          {location.pathname !== "/profile" && location.pathname !== "/access" && (location.pathname !== "/results") && (location.pathname !== "/")
+          {location.pathname !== "/profile" && location.pathname !== "/access" && (location.pathname !== "/results") 
           ? (<Navbar />) 
           :(<></>)
           }
