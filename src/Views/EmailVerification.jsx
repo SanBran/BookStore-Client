@@ -15,8 +15,8 @@ const EmailVerification = ()=>{
         switch(action){
             case '1': return async()=>{
                 await dispatch(activateUser(valtoken))
-                redirect('/access')
-                
+                window.location.href = "https://book-store-client-coral.vercel.app/access/";
+                return
             };
             case '2': return async()=>{
                 await dispatch(redirectToken(valtoken))
