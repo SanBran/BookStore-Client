@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { useDispatch } from "react-redux";
 import { activateUser } from "../redux/actions/actions"; 
 import { redirectToken } from "../redux/actions/actions";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 
 const EmailVerification = ()=>{
     const dispatch = useDispatch();
@@ -15,8 +15,7 @@ const EmailVerification = ()=>{
         switch(action){
             case '1': return async()=>{
                 await dispatch(activateUser(valtoken))
-                navigate('/access')
-                return
+                redirect('/access')
                 
             };
             case '2': return async()=>{
