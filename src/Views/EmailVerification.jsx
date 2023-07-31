@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { useDispatch } from "react-redux";
 import { activateUser } from "../redux/actions/actions"; 
 import { redirectToken } from "../redux/actions/actions";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const EmailVerification = ()=>{
     const dispatch = useDispatch();
@@ -15,15 +15,15 @@ const EmailVerification = ()=>{
         switch(action){
             case '1': return async()=>{
                 await dispatch(activateUser(valtoken))
-                window.location.href = "https://book-store-client-coral.vercel.app/access/";
-                return
+                return navigate('/access')
+                
             };
             case '2': return async()=>{
                 await dispatch(redirectToken(valtoken))
                 return navigate(`/access?changePass=true`)
             };
         }
-    },[valtoken, dispatch, navigate]);   
+    },[]);   
 }
 export default EmailVerification;
 
