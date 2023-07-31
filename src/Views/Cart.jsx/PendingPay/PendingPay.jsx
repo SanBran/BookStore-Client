@@ -1,7 +1,7 @@
 
 import { Link } from "react-router-dom";
 
-const SucessfulPay = () => {
+const PendingPay = () => {
   return (
     <div>
       <div>
@@ -9,10 +9,10 @@ const SucessfulPay = () => {
           <button>Back to Home</button>
         </Link>
       </div>
-      <h1>Succesful Purchase</h1>
-      <h4>Go to your purchases to download the book</h4>
+      <h1>Pending payment</h1>
+      <h4>Be attentive to the email to verify the result of the payment</h4>
     </div>
   );
 };
 
-export default SucessfulPay;
+export default PendingPay;

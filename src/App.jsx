@@ -24,6 +24,8 @@ import SucessfulPay from "./Views/Cart.jsx/SuccesfulPay/SucessfulPay";
 //pasos para el deploy
 import axios from "axios";
 import { useEffect, useState } from "react";
+import PendingPay from "./Views/Cart.jsx/PendingPay/PendingPay";
+import FailurePay from "./Views/Cart.jsx/FailurePay/FailurePay";
 //-------local
 //axios.defaults.baseURL = "http://localhost:8000/"
 //-------deployado
@@ -72,6 +74,8 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/payment" element={<PaymentDetails />} />
             <Route path="/payment/sucessfulpay" element={<SucessfulPay />} />
+            <Route path="/payment/pendingpay" element={<PendingPay />} />
+            <Route path="/payment/failurepay" element={<FailurePay />} />
 
             <Route path="*" element={<NotFound />} />
           </Routes>
