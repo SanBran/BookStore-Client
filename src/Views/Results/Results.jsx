@@ -90,9 +90,7 @@ alert("No hay libros en ese rango de precio")
     };
 
   const handleCleanFilter = () => {
-       setData({
-        title: origin
-      });
+       
       setPriceMin("");
     setPriceMax("");
     dispatch(getBooksByTitle(search));

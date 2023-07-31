@@ -38,7 +38,9 @@ const SearchBar = () => {
     e.preventDefault()
     console.log(e.target.value);
     if (e.target.value === "all genres") {
-      setSearch({});
+      setSearch({
+        title: ""
+      });
       console.log(search);
     }else 
       setSearch({...search,
