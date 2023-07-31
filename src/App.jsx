@@ -68,7 +68,7 @@ function App() {
             <Route path="/settings" element={<Settings />} />
             <Route path="/Filters" element={<Filters />} />
             <Route path="/Results" element={<Results />} />
-            <Route path="/access/validate" element={<EmailVerification />} />
+            <Route path="/access/validate:valtoken" element={<EmailVerification />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/payment" element={<PaymentDetails />} />
             <Route path="/payment/sucessfulpay" element={<SucessfulPay />} />
