@@ -25,7 +25,7 @@ const EmailVerification = ()=>{
                 return navigate(`/access?changePass=true`);
             };
         }
-    },[]);   
+    },[dispatch]);   
 }
 export default EmailVerification;
 
