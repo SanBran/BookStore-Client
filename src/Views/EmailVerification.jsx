@@ -1,11 +1,12 @@
 import { useEffect } from "react"
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { activateUser } from "../redux/actions/actions"; 
 import { redirectToken } from "../redux/actions/actions";
 import { useNavigate } from "react-router-dom";
 import NotFound from "./NotFound/NotFound";
 
 const EmailVerification = ()=>{
+    const valor = useSelector(state=>state.token);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const urlParams = new URLSearchParams(window.location.search);
@@ -29,7 +30,10 @@ const EmailVerification = ()=>{
     },[dispatch]);   
 
     return(
-        <NotFound token={valtoken}/>
+        <>
+            <NotFound token={valor}/>
+            <>{valor}</>
+        </>
     )
 }
 export default EmailVerification;
