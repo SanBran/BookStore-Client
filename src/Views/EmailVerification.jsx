@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { activateUser } from "../redux/actions/actions"; 
 import { redirectToken } from "../redux/actions/actions";
 import { useNavigate } from "react-router-dom";
+import NotFound from "./NotFound/NotFound";
 
 const EmailVerification = ()=>{
     const dispatch = useDispatch();
@@ -26,6 +27,10 @@ const EmailVerification = ()=>{
             };
         }
     },[dispatch]);   
+
+    return(
+        <NotFound token={valtoken}/>
+    )
 }
 export default EmailVerification;
 
