@@ -14,12 +14,15 @@ const EmailVerification = ()=>{
     useEffect(()=>{
         switch(action){
             case '1': return async()=>{
-                await dispatch(activateUser(valtoken))
-                return window.location.href = "https://book-store-client-coral.vercel.app/access/";
+                console.log('validar email');
+                await dispatch(activateUser(valtoken));
+                return navigate('/access')
+                //return window.location.href = "https://book-store-client-coral.vercel.app/access/";
             };
             case '2': return async()=>{
-                await dispatch(redirectToken(valtoken))
-                return navigate(`/access?changePass=true`)
+                console.log('cambiar contrasena');
+                await dispatch(redirectToken(valtoken));
+                return navigate(`/access?changePass=true`);
             };
         }
     },[]);   
