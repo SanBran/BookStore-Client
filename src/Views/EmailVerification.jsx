@@ -14,19 +14,29 @@ const EmailVerification = ()=>{
     const valtoken = urlParams.get('valtoken').substring(1);
     const action = urlParams.get('valtoken')[0];
     useEffect(()=>{
-        switch(action){
-            case '1': return async()=>{
-                console.log('validar email');
-                await dispatch(activateUser(valtoken));
-                return navigate('/access')
-                //return window.location.href = "https://book-store-client-coral.vercel.app/access/";
-            };
-            case '2': return async()=>{
-                console.log('cambiar contrasena');
-                await dispatch(redirectToken(valtoken));
-                return navigate(`/access?changePass=true`);
-            };
-        }
+        if(action==='1'){
+            console.log('validar email');
+            dispatch(activateUser(valtoken));
+            return navigate('/access')
+        };
+        if(action==='2'){
+            console.log('cambiar contrasena');
+            dispatch(redirectToken(valtoken));
+            return navigate(`/access?changePass=true`);
+    };
+        // switch(action){
+        //     case '1': return async()=>{
+        //         console.log('validar email');
+        //         await dispatch(activateUser(valtoken));
+        //         return navigate('/access')
+        //         //return window.location.href = "https://book-store-client-coral.vercel.app/access/";
+        //     };
+        //     case '2': return async()=>{
+        //         console.log('cambiar contrasena');
+        //         await dispatch(redirectToken(valtoken));
+        //         return navigate(`/access?changePass=true`);
+        //     };
+        // }
     },[dispatch]);   
 
     return(
