@@ -4,11 +4,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import style from './Login.module.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { accessLogIn } from '../../redux/actions/actions';
+
 //importaciones para login con google
 import { accessGoogle } from '../../redux/actions/actions';
-//import GoogleLogin from 'react-google-login';
 import { GoogleLogin } from "@react-oauth/google";
-//import { gapi } from 'gapi-script';
+import jwt_decode from "jwt-decode";
 
 const Login = ({ setForm }) => {
 
@@ -53,31 +53,20 @@ const Login = ({ setForm }) => {
   }
 
 //-----LOGIN CON GOOGLE
-  //const clientID = "637027522589-6jbd17n7qelc1mqtp4c1gl43lvjp57cf.apps.googleusercontent.com";
-  const clientID = "637027522589-j7nin8g8gico6g5hsfkkg98u2r4gfbj6.apps.googleusercontent.com";
-  // useEffect(() => {
-  //   const start = () => {
-  //     gapi.auth2.init({
-  //       clientId: clientID
-  //     })
-  //   };
-  //   gapi.load('client:auth2', start)
-  // }, []);
+//---Pasar a un .env del front
+//---------clientID para usar en el localhost:3000
+//const clientID = "637027522589-6jbd17n7qelc1mqtp4c1gl43lvjp57cf.apps.googleusercontent.com";
+//---------clientID para usar en el https://book-store-client-coral.vercel.app/
+const clientID = "637027522589-j7nin8g8gico6g5hsfkkg98u2r4gfbj6.apps.googleusercontent.com";
+
 
   const responseGoogle = async (response) => {
-    console.log(response);    
-    //const user = response.profileObj
-    //const token = response.accessToken;
-
-    //console.log('token:',token);
-    //console.log(response.profileObj);
-
-    //await dispatch(accessGoogle(user, token))
-    //navigate('/')
+    const user = jwt_decode(response.credential);
+    await dispatch(accessGoogle(user))
+    navigate('/')
   };
 
   const onFailure = (error) => {
-    // Si ocurre algún error durante el inicio de sesión.
     console.log(error);
   };
 

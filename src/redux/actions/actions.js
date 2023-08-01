@@ -679,7 +679,8 @@ export function accessLogIn({ email, password }) {
   };
 }
 
-export function accessGoogle({ email, name, imageUrl, googleId }, token) {
+//el argumento sub es el "userId" de google
+export function accessGoogle({ email, name, picture, sub }, token) {
   return async function (dispatch) {
     try {
       const findUser = await axios.post(
@@ -709,7 +710,7 @@ export function accessGoogle({ email, name, imageUrl, googleId }, token) {
             phone: "0000000",
             country: "null",
             birthday: "null",
-            photoUser: imageUrl,
+            photoUser: picture,
           };
           const newUser = await axios.post(
             `/newUser`,
