@@ -1,0 +1,99 @@
+.successMessage{
+    width: 100%;
+    background-color: #96ff81;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 15px 0;
+
+    transition: all 0.3s ease-in-out;
+}
+
+
+.formContainer{
+    width: 81%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 30px;
+
+    color: black;
+}
+
+.inputContainer{
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.input{
+    width: 400px;
+    height: 30px;
+    padding-left: 20px;
+    margin-right: 60px;
+    border: 1px solid #B6B6B6;
+    background: none;
+
+    font-size: 16px;
+    font-weight: 100;
+    color: black;
+    
+}
+.select{
+    width: 423px !important;
+}
+.error{
+    border: 1px solid red !important;
+}
+/* -------Estilos para los inputs de phone number */
+.phoneInputs{
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+.codeInput{
+    width: 15% !important;
+    margin-right: 10px !important;
+}
+.phoneInput{
+    width: 85% !important;
+}
+
+/* --------Estilo para el texto de errores */
+.textError{
+    width: 100%;
+    margin: 0;
+    margin-left: 125px;
+    text-align: start;
+    color: rgb(241, 57, 57);
+    font-size: 12px;
+    
+}
+
+/* //-------estilos del boton */
+.saveBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    margin-top: 40px;
+    padding: 0 40px;
+    border-radius: 0;
+    border: none;
+    background-color: #FA9D1B;
+
+    color: #F5F5F5;
+    font-weight: bolder;
+    font-size: 18px;
+
+    cursor: pointer;
+}
+.saveBtn:focus-visible, .saveBtn:focus{
+    outline: 0;
+}
