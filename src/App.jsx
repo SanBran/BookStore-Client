@@ -73,6 +73,7 @@ function App() {
             <Route path="/access/validate" element={<EmailVerification />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/payment" element={<PaymentDetails />} />
+            <Route path="/payment/:id" element={<PaymentDetails />} />
             <Route path="/payment/sucessfulpay" element={<SucessfulPay />} />
             <Route path="/payment/pendingpay" element={<PendingPay />} />
             <Route path="/payment/failurepay" element={<FailurePay />} />
