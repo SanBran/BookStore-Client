@@ -1,12 +1,9 @@
-/* eslint-disable no-useless-escape */
-import { detailBookById, getBooksByAuthor } from "../../redux/actions/actions"
+import { detailBookById, getBooksByAuthor, addCart, removeCart } from "../../redux/actions/actions"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { Link, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import styles from './BooksDetail.module.css'
 import parseAuthors from "../../utils/parseAuthors"
-// import { Link } from "react-router-dom"
-import { addCart } from "../../redux/actions/actions"
 import axios from "axios"
 
 
@@ -16,6 +13,16 @@ import facebook_icon from '../../assets/icons/facebook_icon.png';
 import share_icon from '../../assets/icons/share_icon.svg';
 
 const BooksDetail = () => {
+  const navigate = useNavigate();
+  const user = useSelector(state=>state.access);
+  const cart = useSelector(state=>state.cart);
+  const [inCart, setIncart] = useState(false);
+
+  useEffect(()=>{
+    const find = cart.find(item=>item?.id === book.id);
+    find && setIncart(true);
+  },[])
+
   const genericCover =
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhRKhJb1aLmjwGX_ox0TA6eTxCv_5g3Nlr6w&usqp=CAU";
 
@@ -47,40 +54,8 @@ const BooksDetail = () => {
     dispatch(detailBookById(id))
   }, [dispatch, id])
 
-
-
   const book = useSelector(state => state.details)
-
   const [autores, setAutores] = useState([])
-  console.log('estos son los autores', autores);
-  console.log(book);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const authorsArray = parseAuthors(book.author);
-      console.log('los autores maricoo', authorsArray);
-      const promisesArray = authorsArray.map(async (author) => {
-        if (author === "Author not Available") {
-          return null
-        } else {
-          const response = await axios.post('https://bookstorepf-production.up.railway.app/getBooks', { "author": author });
-          return response.data;
-        }
-      });
-
-      try {
-        const responseDataArray = await Promise.all(promisesArray);
-        const filteredDataArray = responseDataArray.filter(data => data !== null);
-        setAutores(filteredDataArray);
-      } catch (error) {
-        console.error('Error al obtener los datos:', error);
-      }
-    }
-
-    fetchData();
-  }, [book.author]);
-
-
 
   if (book.author) {
     const cleanedAuthor = book.author.replace(/[\{\}\"\\]/g, "");
@@ -97,6 +72,23 @@ const BooksDetail = () => {
       processedGender = cleanedGender.split(",").map(gender => gender.trim());
     } else {
       processedGender = [cleanedGender.trim()];
+    }
+  }
+
+  const handleToLog = () => {
+    navigate("/access");
+  };
+  const handlerCart = (book)=>{
+    if(user.state){
+      if(!inCart) {
+        dispatch(addCart(book));
+        setIncart(true);
+      } else{
+        dispatch(removeCart(book.id));
+        setIncart(false);
+      }
+    }else{
+      navigate('/access');
     }
   }
 
@@ -123,8 +115,8 @@ const BooksDetail = () => {
           <div className={styles.priceAndActions}>
             <p className={styles.price}>{book.price !== 0 ? `$ ${book.price}` : "Free"}</p>
             <p className={styles.format}>PDF format</p>
-            <button className={styles.buyBtn}>BUY NOW</button>
-            <button className={styles.cartBtn} onClick={() => { addCart(book) }}>ADD TO CART</button>
+            <button className={styles.buyBtn} onClick={()=>{navigate(`/payment/${book.id}`)}}>BUY NOW</button>
+            <button className={styles.cartBtn} onClick={()=>{handlerCart(book)}}>{inCart ? "REMOVE FROM CART":"ADD TO CART"}</button>
           </div>
         </div>
         <div className={styles.descriptionContainer}>

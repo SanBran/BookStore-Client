@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Login from "../../Components/Login/Login";
 import SignUp from "../../Components/Signup/Signup";
 import ChangePassword from "../../Components/ChangePassword/ChangePassword";
@@ -9,6 +9,7 @@ import style from "./Access.module.css"
 import close_button from "../../assets/icons/close_button.svg"
 
 const Access = () => { 
+    const navigate = useNavigate();
     
     const [form, setForm] = useState('login');
     
@@ -38,9 +39,8 @@ const Access = () => {
 {/* ------------vista de los componentes login y signup */}
                 {(form === 'login' || form === 'signup') &&
                 (<>
-                    <Link to="/">
-                        <img className={style.buttonClose} src={close_button} alt='x' />
-                    </Link>
+                    <img className={style.buttonClose} src={close_button} alt='x' 
+                    onClick={()=>{navigate(-1)}}/>
                     <div className={style.switchForms}>
                         <div 
                         className={form === 'login' ? style.switchFocus : style.switch}
