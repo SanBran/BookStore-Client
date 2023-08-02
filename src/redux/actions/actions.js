@@ -822,19 +822,16 @@ export function activateUser(token) {
   };
 }
 
-//editUser={id,name, birthday, country, phone, phoneCode, gender, dniPasaport, status, rol, photoUser, listWish}
 export function updateUser(userData) {
   return async function (dispatch) {
     try {
-      //console.log(userData);
       const response = await axios.put(
-        `/updUser`,
+        `/updUser/`,
         userData
       );
-      console.log(response.data);
       return dispatch({
         type: UPDATE_USER,
-        payload: response.data,
+        payload: response.data.detail,
       });
     } catch (error) {
       throw Error(error.message);
