@@ -15,8 +15,92 @@
      
  
  }
- .title{
+ .title2{
     color: #FA9D1B;
     text-align: start;
     width: 100%;
  }
+ @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+.container {
+    display: flex;
+    height: 190px;
+    width: 25vw;
+    gap: 10px;
+    cursor: pointer;
+    -moz-osx-font-smoothing: grayscale;
+    margin-bottom: 20px;
+    position: relative; 
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.096);
+}
+
+.textContainer {
+    text-align: start;
+    color: black;
+}
+
+.title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: larger;
+    
+}
+
+.author {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: small;
+    color:grey
+}
+
+.image {
+    height: 190px;
+    
+}
+.imageSize {
+    height: 195px;
+    max-width: 135px;
+    border-radius: 10px;
+}
+
+.price {
+    font-weight: 800;
+    position: absolute;
+    bottom: 20px;
+}
+
+.boton{
+    position: absolute;
+    background: none;
+    color: #FA9D1B;
+    left: 25px;
+    bottom: 20px;
+
+}
+
+.boton2{
+    position: absolute;
+    background-color: #FA9D1B;
+    border-radius: 10px;
+    font-size: medium;
+    padding: 10px;
+    padding-inline: 30px;
+    bottom: 20px;
+    right: 20px;
+
+}
+.boton2s{
+    position: absolute;
+    color: #FA9D1B;
+    background: none;
+    border: solid #FA9D1B;
+    border-radius: 50px;
+    height: 40px;
+    width: 40px;
+    font-size: x-large;
+    bottom: 20px;
+    right: 20px;
+
+}

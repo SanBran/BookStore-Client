@@ -1,7 +1,7 @@
 //import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { accessUser, getUserById} from "../../redux/actions/actions";
+import { accessUser, getPayments, getUserById} from "../../redux/actions/actions";
 import { overlayProfile } from "../../redux/actions/actions";
 import styles from "./Profile.module.css";
 import { useEffect } from "react";
@@ -23,6 +23,7 @@ const Profile = () => {
 
   useEffect(() => {
     dispatch(getUserById(userId));
+    dispatch(getPayments(userId));
   }, [dispatch, userId]);
 
   const handleCloseOverlayToggle = () => {
