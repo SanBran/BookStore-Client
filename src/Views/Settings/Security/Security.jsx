@@ -1,7 +1,7 @@
 //import React from "react";
 import { useNavigate } from "react-router-dom";
 
-function Security({ onBack }) {
+function Security() {
   const navigate = useNavigate();
 
 
@@ -12,10 +12,6 @@ const onChange = ()=> {
 
   return (
     <div>
-    
-      <h2>Security</h2>
-      <button onClick={onBack}>Back</button>
-      <br />
       <button onClick={onChange}>Cambiar contraseña</button>
     </div>
   );

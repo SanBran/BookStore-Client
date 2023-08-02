@@ -13,11 +13,7 @@ import edit_icon from '../../assets/icons/edit_icon.svg';
 function Settings() {
   const user = useSelector((state) => state.userDetail);
 
-  const [currentView, setCurrentView] = useState("data"); // Estado para controlar qué componente mostrar
-  const handleBack = () => {
-    setCurrentView(); // Ocultamos el menú para volver al componente anterior
-  };
-  //userData={name, birthday, country, phone, phoneCode, gender,  dniPasaport, status, rol, photoUser,email, password, listWish}
+  const [currentView, setCurrentView] = useState("data"); 
 
   return (
     <div className={styles.container}>
@@ -48,8 +44,8 @@ function Settings() {
           </div>
 
           <div className={styles.form}>
-            {currentView === "data" && <MyData user={user}onBack={handleBack} />}
-            {currentView === "security" && <Security user={user} onBack={handleBack} />}
+            {currentView === "data" && <MyData/>}
+            {currentView === "security" && <Security/>}
           </div>
 
         </div>
