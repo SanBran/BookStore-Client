@@ -1,37 +1,33 @@
 import { useEffect, useState } from "react";
 import styles from "./MyData.module.css";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { expresions } from "../../../utils/regex";
-import countriesData from '../../../Components/Signup/data/countries.json'
+import countriesData from '../../../Components/Signup/data/countries.json';
+import { updateUser } from "../../../redux/actions/actions";
 
 const MyData = () => {
-  //const user = useSelector((state) => state.userDetail);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.userDetail);
 
-  const user ={
-    birthday:"1999-03-05",
-    confirmPassword: "Sasha44.",
-    country:"Argentina",
-    dniPasaport:"1234567",
-    email:"sas@gmail.com",
-    gender:"female",
-    name:"Sasha Camargo",
-    password:"Sasha44.",
-    phone:"1123895328",
-    phoneCode:"+54"
-  }
-
-  const [formData, setFormData] = useState(user);
+  const [formData, setFormData] = useState({
+    id: user.id,
+    name: user.name,
+    dniPasaport: user.dniPasaport,
+    phoneCode: user.phoneCode,
+    phone: user.phone,
+    country: user.country,
+    birthday: user.birthday,
+    gender: user.gender,
+  });
   const [errors, setErrors] = useState({
     name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
     dniPasaport: "",
     phoneCode: "",
     phone: "",
     country: "",
     birthday: "",
+    gender: "",
   })
   const [successMessage, setSuccessMessage] = useState("");
 
@@ -119,69 +115,14 @@ const handleChange = (event) => {
   validateInputs({ ...formData, [property]: value }, property)
 };
 
-//------------VALIDACION DEL SUBMIT
-  const validateSubmit = () => {
-    for (const property in formData) {
-      if (property === 'gender') continue;
-      if (!formData[property].length) {
-        setErrors({ ...errors, [property]: 'Incomplete' });
-        return false
-      }
-    }
-    for (const property in errors) {
-      if (property === 'gender') continue;
-      if (errors[property].length) return false;
-    }
-    return true
-  };
-
-
-  // const handleChange = (event) => {
-  //   const { name, value } = event.target;
-  //   setFormData((prevData) => ({ ...prevData, [name]: value }));
-  // };
-
-  // const handleSave = (field) => {
-  //   const isValid = expresions[field].test(formData[field]);
-
-  //   if (isValid) {
-  //     setSuccessMessage(`¡Dato ${field} guardado con éxito!`);
-  //     sendData();
-  //     setErrors((prevErrors) => ({ ...prevErrors, [field]: "" }));
-  //   } else {
-  //     const errorMessage = `Invalid data ${field}: ${formData[field]}`;
-  //     console.log(errorMessage);
-  //     setErrors((prevErrors) => ({ ...prevErrors, [field]: errorMessage }));
-  //   }
-  // };
-
   const handleSave = async (event) => {
     event.preventDefault();
-    if(validateSubmit()){
-      try {
-        await sendData;
-        setSuccessMessage(`¡Changes saved successfully!`);
-      } catch (error) {
-        console.error("Error sending data:", error);
-      }
+    try {
+      await dispatch(updateUser(formData));
+      setSuccessMessage(`¡Changes saved successfully!`);
+    } catch (error) {
+      console.error("Error sending data:", error);
     }
-  };
-
-
-  const sendData = () => {
-    console.log('datos guardados');
-    //------implementar esto con redux
-
-    // axios
-    //   .put(`http://localhost:8000/updUser`, formData)
-    //   .then((response) => {
-    //     // mensaje de exito
-    //     console.log(response.data);
-    //   })
-    //   .catch((error) => {
-    //     // mensaje de error
-    //     console.error("Error al enviar los datos:", error);
-    //   });
   };
 
   return (
