@@ -115,7 +115,7 @@ const BooksDetail = () => {
           <div className={styles.priceAndActions}>
             <p className={styles.price}>{book.price !== 0 ? `$ ${book.price}` : "Free"}</p>
             <p className={styles.format}>PDF format</p>
-            <button className={styles.buyBtn}>BUY NOW</button>
+            <button className={styles.buyBtn} onClick={()=>{navigate(`/payment/${book.id}`)}}>BUY NOW</button>
             <button className={styles.cartBtn} onClick={()=>{handlerCart(book)}}>{inCart ? "REMOVE FROM CART":"ADD TO CART"}</button>
           </div>
         </div>
