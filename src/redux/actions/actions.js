@@ -49,7 +49,6 @@ import {
   ADD_CART,
   REMOVE_CART,
   ADD_FAVORITE,
-  SEND_FAVORITE,
   REMOVE_FAVORITE,
   PASSWORD_REQUEST,
   PASSWORD_CHANGE,
@@ -62,27 +61,41 @@ export const DETAIL_BOOK_BY_ID = "DETAIL_BOOK_BY_ID";
 export const BOOK_BY_NAME = "BOOK_BY_NAME";
 
 //--------------BOOKS----------
-export function addFavorite(bookId) {
-  return {
-    type: ADD_FAVORITE,
-    payload: bookId,
-  };
-}
-export function removeFavorite(bookId) {
-  return {
-    type: REMOVE_FAVORITE,
-    payload: bookId,
-  };
-}
-export function sendFavorite(userData) {
+
+export function addFavorite(userId, userFav, bookId ) {
+  const data = {
+    id: userId,
+    listWish: [...userFav, bookId]
+  }
   return async function (dispatch) {
     try {
       const response = await axios.put(
         `/updUser`,
-        userData
+        data
       );
       return dispatch({
-        type: SEND_FAVORITE,
+        type: ADD_FAVORITE,
+        payload: response.data.detail,
+      });
+    } catch (error) {
+      throw Error(error.message);
+    }
+  };
+}
+export function removeFavorite(userId, userFav, bookId ) {
+  const filter = userFav.filter(id => id !== bookId)
+  const data = {
+    id: userId,
+    listWish: filter
+  }
+  return async function (dispatch) {
+    try {
+      const response = await axios.put(
+        `/updUser`,
+        data
+      );
+      return dispatch({
+        type: REMOVE_FAVORITE,
         payload: response.data.detail,
       });
     } catch (error) {

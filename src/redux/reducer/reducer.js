@@ -1,7 +1,6 @@
 import {
   ADD_FAVORITE,
   REMOVE_FAVORITE,
-  SEND_FAVORITE,
   ACTIVATE_USER,
   ACCESS,
   GET_ALL_BOOKS,
@@ -376,13 +375,11 @@ const reducer = (state = initialState, { type, payload }) => {
     //----------------------------mercadoPago----------------
     // revisar mercadoPago no estoy seguro como funciona
     case ADD_CART:
-      console.log('hola soy el cart', state.cart);
       return {
         ...state,
         cart: [...state.cart, payload],
       };
     case REMOVE_CART:
-      console.log(state.cart)
       filter = state.cart.filter((book) => book.id !== payload)
       return {
         ...state,
@@ -463,24 +460,26 @@ const reducer = (state = initialState, { type, payload }) => {
       };
     //-----------------------------------------USER--------------------------------
 
-    case ADD_FAVORITE:
-      console.log('Favoritos:', state.wishlist);
+    case ADD_CART:
       return {
         ...state,
-        wishlist: [...state.wishlist, payload],
+        cart: [...state.cart, payload],
+      };
+    case REMOVE_CART:
+      filter = state.cart.filter((book) => book.id !== payload)
+      return {
+        ...state,
+        cart: filter,
+      };
+    case ADD_FAVORITE:
+      return {
+        ...state,
+        userDetail: payload,
       };
     case REMOVE_FAVORITE:
-      console.log('Favoritos:', state.wishlist);
-      filter = state.wishlist.filter((bookId) => bookId !== payload)
       return {
         ...state,
-        wishlist: filter
-      };
-    case SEND_FAVORITE:
-      console.log('Favoritos:', state.wishlist);
-      return {
-        ...state,
-        userDetailFav: payload,
+        userDetail: payload,
       };
     case GET_USERS:
       return {
