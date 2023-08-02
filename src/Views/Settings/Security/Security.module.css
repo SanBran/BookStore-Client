@@ -1,0 +1,27 @@
+.container{
+    margin-top: 40px;
+}
+
+.btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    background-color: white;
+    
+    padding: 15px 40px;
+    
+    font-size: 20px;
+    color: black;
+    
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.btn:hover{
+    border: 2px solid #FA9D1B;
+}
+
+.img{
+    width: 15px;
+    margin-left: 15px;
+}
