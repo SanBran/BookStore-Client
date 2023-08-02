@@ -53,6 +53,7 @@ import {
   PASSWORD_CHANGE,
   REDIRECT_TOKEN,
   GET_GENRES,
+  GET_PAYMENTS
 } from "../actions/types";
 
 let initialState = {
@@ -72,6 +73,7 @@ let initialState = {
   booksByAuthor: [],
   comments: [],
   paymentStatus: null,
+  payments: [],
   response: {},
   error: null,
   users: [],
@@ -404,6 +406,12 @@ const reducer = (state = initialState, { type, payload }) => {
         paymentStatus: payload,
         error: null,
       };
+    case GET_PAYMENTS:
+      return {
+        ...state,
+        payments: payload,
+        error: null,
+      };
     case POST_MERCADOPAGO:
       return {
         ...state,
@@ -454,7 +462,7 @@ const reducer = (state = initialState, { type, payload }) => {
         comments: state.comments.filter((comment) => comment.id !== payload),
       };
     //-----------------------------------------USER--------------------------------
-    
+
     case ADD_FAVORITE:
       console.log('Favoritos:', state.wishlist);
       return {

@@ -18,6 +18,7 @@ export const POST_WEBHOOK_PAGO = "POST_WEBHOOK_PAGO";
 export const GET_FAILURE = "GET_FAILURE";
 export const GET_PENDING = "GET_PENDING";
 export const GET_SUCCESS = "GET_SUCCESS";
+export const GET_PAYMENTS = "GET_PAYMENTS";
 
 //whatsapp
 export const POST_SMS_WHATSAPP = "POST_SMS_WHATSAPP";

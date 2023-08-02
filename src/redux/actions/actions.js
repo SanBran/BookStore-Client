@@ -55,6 +55,7 @@ import {
   PASSWORD_CHANGE,
   REDIRECT_TOKEN,
   GET_GENRES,
+  GET_PAYMENTS
 } from "./types";
 
 export const DETAIL_BOOK_BY_ID = "DETAIL_BOOK_BY_ID";
@@ -533,6 +534,22 @@ export function postWebhookPago(payment) {
     }
   };
 }
+export function getPayments(id) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(`/read-pays/${id}`);
+      return dispatch({
+        type: GET_PAYMENTS,
+        payload: response.data,
+      });
+    } catch (error) {
+      throw Error(error.message);
+    }
+  };
+}
+
+
+
 //--------------------EMAIL------------------------
 // dataEmail= {mensaje,email, subject, name}
 export function postEmail(dataEmail) {
