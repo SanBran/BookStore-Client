@@ -51,7 +51,7 @@ const Book = ({ books }) => {
   };
 
   useEffect(() => {
-    if (userInfo.listWish.length && userInfo.listWish.includes(id)) {
+    if (userInfo.listWish && userInfo.listWish.includes(id)) {
       setIsFav(true);
     } else {
       setIsFav(false);
