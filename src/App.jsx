@@ -28,7 +28,6 @@ import axios from "axios";
 //-------local
 //axios.defaults.baseURL = "http://localhost:8000/"
 //-------deployado
-
 axios.defaults.baseURL = "https://bookstorepf-production.up.railway.app";
 
 //-------Manejando cookies para mantener sesiones
@@ -45,9 +44,9 @@ function App() {
 
   const dispatch = useDispatch();
   useEffect(()=>{
-    const token = Cookies.get('valToken');
-    const email = Cookies.get('email');
     return async() => {
+      const token = await Cookies.get('valToken');
+      const email = await Cookies.get('email');
       if(token && email) {
         const user = await dispatch(validateSession(email, token));
         await dispatch(accessUser(true, user.id));
