@@ -501,18 +501,6 @@ const reducer = (state = initialState, { type, payload }) => {
     //-----------------------------------------USER--------------------------------
 
     case ADD_FAVORITE:
-      console.log("Favoritos:", state.wishlist);
-      return {
-        ...state,
-        cart: [...state.cart, payload],
-      };
-    case REMOVE_CART:
-      filter = state.cart.filter((book) => book.id !== payload);
-      return {
-        ...state,
-        cart: filter,
-      };
-    case ADD_FAVORITE:
       return {
         ...state,
         userDetail: payload,
