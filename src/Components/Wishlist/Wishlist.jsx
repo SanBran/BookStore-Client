@@ -1,38 +1,48 @@
 //import React from 'react'
 
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Book from "../CardBook/Book";
 import styles from "./Wishlist.module.css";
 import { useEffect, useState } from "react";
-import { getBooksById, getUserById } from "../../redux/actions/actions";
+import axios from "axios";
 
 function Wishlist() {
-  const dispatch = useDispatch();
-  const userInfo = useSelector((state) => state.userDetailFav);
+  const userInfo = useSelector((state) => state.userDetail);
 
   const [books, setBooks] = useState([]);
-
+  console.log("libros Id: ",userInfo.listWish)
+  
   useEffect(() => {
     const getBooks = async () => {
       if (!userInfo.listWish || userInfo.listWish.length === 0) {
         return [];
       }
-      const promises = userInfo.listWish.map((id) => dispatch(getBooksById(id)));
-      const resolvedBooks = await Promise.all(promises);
-      const validBooks = resolvedBooks.filter((book) => book !== null);
-      setBooks(validBooks);
+      try {
+        const response = await axios.post(
+          `bookDetail`,
+          {
+            "ids": userInfo.listWish
+          }
+        );
+        const data = response.data;
+        return data; // Devuelve directamente los datos obtenidos
+      } catch (error) {
+        throw new Error(error.message);
+      }
     };
 
-    getBooks();
-  }, [userInfo.listWish, dispatch]);
-
+    // Invoca la función asincrónica y actualiza el estado de libros
+    getBooks()
+      .then((data) => setBooks(data))
+      .catch((error) => console.error(error));
+  }, [userInfo]);
  
-  console.log(books)
+  console.log("libros: ",books)
   return (
     <div className={styles.booksContainer}>
       <h2 className={styles.title}>Wishlist</h2>
       {books.map((book) => (
-        <Book key={(book.payload.id+2)} books={book.payload} />
+        <Book key={(book.id+2)} books={book} />
       ))}
     </div>
   );
