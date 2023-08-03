@@ -18,11 +18,3 @@ return(
 }
 
 export default Books;
-
-/* {
-   "title": "El candidato de Dios",
-    "author": [
-      "Luis G. Basurto"
-    ],
-    "image": "http://books.google.com/books/content?id=vQHmAAAAMAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
-  } */

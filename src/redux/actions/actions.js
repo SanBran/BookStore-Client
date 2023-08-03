@@ -12,11 +12,6 @@ import {
   POST_BOOK,
   UPDATE_BOOK_BY_ID,
   DELETE_BOOK_BY_ID,
-  GET_FAILURE,
-  GET_PENDING,
-  GET_SUCCESS,
-  POST_MERCADOPAGO,
-  POST_WEBHOOK_PAGO,
   POST_EMAIL,
   POST_SMS_WHATSAPP,
   FILTER_BY_GENRER,
@@ -418,7 +413,7 @@ export function selectPricePage(page, search) {
     }
   };
 }
-//------------------MERCADOPAGO-------------------------------
+//------------------PAYMENTS-------------------------------
 export function addCart(book) {
   return {
     type: ADD_CART,
@@ -429,77 +424,6 @@ export function removeCart(bookId) {
   return {
     type: REMOVE_CART,
     payload: bookId,
-  };
-}
-export function getMercadoPagoFailure() {
-  return async function (dispatch) {
-    try {
-      //console.log(author);
-      const response = await axios.get(`/failure`);
-      return dispatch({
-        type: GET_FAILURE,
-        payload: response.data,
-      });
-    } catch (error) {
-      throw Error(error.message);
-    }
-  };
-}
-export function getMercadoPagoSucces() {
-  return async function (dispatch) {
-    try {
-      //console.log(author);
-      const response = await axios.get(`/succes`);
-      return dispatch({
-        type: GET_SUCCESS,
-        payload: response.data,
-      });
-    } catch (error) {
-      throw Error(error.message);
-    }
-  };
-}
-export function getMercadoPagoPending() {
-  return async function (dispatch) {
-    try {
-      //console.log(author);
-      const response = await axios.get(`/pending`);
-      return dispatch({
-        type: GET_PENDING,
-        payload: response.data,
-      });
-    } catch (error) {
-      throw Error(error.message);
-    }
-  };
-}
-export function postMercadoPago(buyerData) {
-  return async function (dispatch) {
-    try {
-      //console.log(buyerData);
-      // buyerData={name,email,IdBook,carrito,typeMoney,userId}
-      //carrito=[{nombre,unit_price,quantity},...]
-      const response = await axios.post(`/mercadoPago`, buyerData);
-      return dispatch({
-        type: POST_MERCADOPAGO,
-        payload: response.data,
-      });
-    } catch (error) {
-      throw Error(error.message);
-    }
-  };
-}
-export function postWebhookPago(payment) {
-  return async function (dispatch) {
-    try {
-      const response = await axios.post(`/webhook-pago?payment=${payment}`);
-      return dispatch({
-        type: POST_WEBHOOK_PAGO,
-        payload: response.data,
-      });
-    } catch (error) {
-      throw Error(error.message);
-    }
   };
 }
 export function getPayments(id) {
