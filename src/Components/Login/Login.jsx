@@ -20,11 +20,11 @@ const Login = ({ setForm }) => {
 
   const [error, setError] = useState("")
   //estado local para saber cuando el usurio presiono la opcion de <Remember me>
-  const [rememberMe, setRememberMe] = useState(false);
+  // const [rememberMe, setRememberMe] = useState(false);
 
-  const handlerRemeberMe = (event) => {
-    setRememberMe(event.target.checked)
-  }
+  // const handlerRemeberMe = (event) => {
+  //   setRememberMe(event.target.checked)
+  // }
 
   //-------SOLICITUD CAMBIO DE CONTRASENA
   const handleForgotPass = (event) => {
@@ -67,13 +67,19 @@ const Login = ({ setForm }) => {
 //---------clientID para usar en el https://book-store-client-coral.vercel.app/
 const clientID = "637027522589-j7nin8g8gico6g5hsfkkg98u2r4gfbj6.apps.googleusercontent.com";
 
+const responseGoogle = async (response) => {
+  const user = jwt_decode(response.credential);
+  try {
+    const token = await dispatch(accessGoogle(user));
+    setError("");
+    Cookies.set('valToken', token);
+    Cookies.set('email', user.email);
 
-  const responseGoogle = async (response) => {
-    const user = jwt_decode(response.credential);
-    await dispatch(accessGoogle(user))
-    navigate('/')
-  };
-
+    navigate('/');
+  } catch (error) {
+    setError(error.message)
+  }
+  }
   const onFailure = (error) => {
     console.log(error);
   };
@@ -87,10 +93,10 @@ const clientID = "637027522589-j7nin8g8gico6g5hsfkkg98u2r4gfbj6.apps.googleuserc
       </div>
 
       <div className={style.otherStuffContainer}>
-        <div className={style.rememberMe}>
+        {/* <div className={style.rememberMe}>
           <input className={style.checkBox} type="checkbox" id="toggle-btn" onChange={handlerRemeberMe} />
           <label className={style.checkBoxLabel} htmlFor="toggle-btn">Remember me</label>
-        </div>
+        </div> */}
         <Link onClick={handleForgotPass} className={style.linkForgotPass}>
           Forgotten password?
         </Link>
@@ -103,13 +109,14 @@ const clientID = "637027522589-j7nin8g8gico6g5hsfkkg98u2r4gfbj6.apps.googleuserc
           <span className={style.dividerSpan}>Or</span>
           <div className={style.line}></div>
         </div>
-        <GoogleLogin
-          clientId={clientID}
-          buttonText="Sign in with Google"
-          onSuccess={responseGoogle}
-          onFailure={onFailure}
-          // cookiePolicy={'single_host_policy'} 
-        />
+        <div className={style.googleContainer}>
+          <GoogleLogin
+            clientId={clientID}
+            buttonText="Sign in with Google"
+            onSuccess={responseGoogle}
+            onFailure={onFailure}
+          />
+        </div>
       </div>
     </form>
   )
