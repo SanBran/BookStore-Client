@@ -26,6 +26,15 @@ const Results = () => {
   const [data, setData] = useState({
     title: origin
   });
+  
+let filterGenre = document.getElementById('genre');
+let filterEditorial = document.getElementById('editorial');
+let filterPublish = document.getElementById('publish');
+let filterCountry = document.getElementById('country');
+let filterLanguage = document.getElementById('language');
+
+	
+
 
   useEffect(() => {
     dispatch(getGenres())
@@ -82,25 +91,66 @@ alert("No hay libros en ese rango de precio")
   
    } 
 
-  const handleData = async(event) => {
+  const handleData = (event) => {
     const { name, value } = event.target;
+    if (name === "country" && value === "") {
+      delete search.country
+      console.log("1",search);
+    }
+    if (name === "language" && value === "") {
+      
+     delete search.language
+     console.log("2",search);
+     
+    }
     console.log(name, value);
-    await setSearch({
+     setSearch({
       ...search,
       [name]: value,
     });
     
   };
 
+  const handleDeleteCountry = async () => {
+    const updatedSearch = { ...search };
+    delete updatedSearch.country;
+    setSearch(updatedSearch);
+  };
+
+  const handleDeleteLanguage = async () => {
+    const updatedSearch = { ...search };
+    delete updatedSearch.language;
+    setSearch(updatedSearch);
+  };
+
   useEffect(() => {
-    dispatch(getBooksByTitle(search));
-    console.log(search);
+    const fetchData = async () => {
+      // Esperar a que se complete el delete antes de realizar la búsqueda
+      if (search.country === "") {
+        await handleDeleteCountry();
+      }
+      if (search.language === "") {
+        await handleDeleteLanguage();
+      }
+
+      dispatch(getBooksByTitle(search));
+      console.log(search);
+    };
+
+    fetchData();
   }, [search, dispatch]);
 
   const handleCleanFilter = () => {
-       
+    filterGenre.selectedIndex = 0;
+    filterEditorial.selectedIndex = 0;
+    filterCountry.selectedIndex = 0;
+    filterPublish.selectedIndex = 0;
+    filterLanguage.selectedIndex = 0;
       setPriceMin("");
     setPriceMax("");
+    setSearch({
+      title:origin
+    })
     dispatch(getBooksByTitle(data));
     
   }
@@ -125,7 +175,7 @@ alert("No hay libros en ese rango de precio")
         <div className={styles.filters}>
           <h1 className={styles.filterTitle}>Filters</h1>
 
-          <select onChange={handleData} defaultValue="Gender" name="gender">
+          <select onChange={handleData} defaultValue="Gender" id="genre" name="gender">
             <option defaultValue value="">
               Genre
             </option>
@@ -135,7 +185,7 @@ alert("No hay libros en ese rango de precio")
             </option>
             })}
           </select>
-          <select onChange={handleData} defaultValue="Editorial" name="editorial">
+          <select onChange={handleData} defaultValue="Editorial" id="editorial" name="editorial">
             <option defaultValue value="">
               Editorial
             </option>
@@ -145,7 +195,7 @@ alert("No hay libros en ese rango de precio")
             </option>
             })}
           </select>
-          <select onChange={handleData} defaultValue="Published Date" name="publishedDate">
+          <select onChange={handleData} defaultValue="Published Date" id="publish" name="publishedDate">
             <option defaultValue value="">
               Published-Date
             </option>
@@ -155,7 +205,7 @@ alert("No hay libros en ese rango de precio")
             </option>
             })}
           </select>
-          <select onChange={handleData} defaultValue="Country" name="country">
+          <select onChange={handleData} defaultValue="Country" id="country" name="country">
             <option defaultValue value="">
               Country
             </option>
@@ -165,7 +215,7 @@ alert("No hay libros en ese rango de precio")
             </option>
             })}
           </select>
-          <select onChange={handleData} defaultValue="Language" name="language">
+          <select onChange={handleData} defaultValue="Language" id="language" name="language">
             <option defaultValue value="">
               Language
             </option>
