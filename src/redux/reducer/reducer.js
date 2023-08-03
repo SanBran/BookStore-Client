@@ -410,21 +410,14 @@ const reducer = (state = initialState, { type, payload }) => {
     //----------------------------mercadoPago----------------
     // revisar mercadoPago no estoy seguro como funciona
     case ADD_CART:
-<<<<<<< Updated upstream
-=======
       console.log("hola soy el cart", state.cart);
->>>>>>> Stashed changes
       return {
         ...state,
         cart: [...state.cart, payload],
       };
     case REMOVE_CART:
-<<<<<<< Updated upstream
-      filter = state.cart.filter((book) => book.id !== payload)
-=======
       console.log(state.cart);
       filter = state.cart.filter((book) => book.id !== payload);
->>>>>>> Stashed changes
       return {
         ...state,
         cart: filter,
@@ -504,18 +497,14 @@ const reducer = (state = initialState, { type, payload }) => {
       };
     //-----------------------------------------USER--------------------------------
 
-<<<<<<< Updated upstream
-    case ADD_CART:
-=======
     case ADD_FAVORITE:
       console.log("Favoritos:", state.wishlist);
->>>>>>> Stashed changes
       return {
         ...state,
         cart: [...state.cart, payload],
       };
     case REMOVE_CART:
-      filter = state.cart.filter((book) => book.id !== payload)
+      filter = state.cart.filter((book) => book.id !== payload);
       return {
         ...state,
         cart: filter,
@@ -526,11 +515,6 @@ const reducer = (state = initialState, { type, payload }) => {
         userDetail: payload,
       };
     case REMOVE_FAVORITE:
-<<<<<<< Updated upstream
-      return {
-        ...state,
-        userDetail: payload,
-=======
       console.log("Favoritos:", state.wishlist);
       filter = state.wishlist.filter((bookId) => bookId !== payload);
       return {
@@ -542,7 +526,6 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         userDetailFav: payload,
->>>>>>> Stashed changes
       };
     case GET_USERS:
       return {
