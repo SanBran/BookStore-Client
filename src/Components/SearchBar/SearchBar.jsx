@@ -11,6 +11,8 @@ const SearchBar = () => {
   const [search, setSearch] = useState({
     title: ""
   });
+
+  
   const navigate = useNavigate()
 
   useEffect(() => {
