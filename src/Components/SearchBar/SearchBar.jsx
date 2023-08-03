@@ -18,7 +18,6 @@ const SearchBar = () => {
   }, []);
 
   const handleChange = (e) => {
-    console.log(e.target.value);
       setSearch({...search,
         title: e.target.value});
     };
@@ -28,7 +27,7 @@ const SearchBar = () => {
   const handleSearch = async (e) => {
     e.preventDefault()
 
-    console.log(search);
+   
     await dispatch(getBooksByTitle(search));
     navigate(`/results/?title=${search.title}`)
     

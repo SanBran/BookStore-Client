@@ -2,9 +2,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { getAllBooks,FilterByGender,FilterByAuthor,FilterByPrice,FilterByEditorial,FilterByLanguage,FilterByPages ,FilterByPublishedDate,FilterByCountry,FilterByPriceRange} from "../../redux/actions/actions";
+import { getBooksByTitle,FilterByPriceRange, getGenres,getEditorials,getAuthors,getCountries,getLanguages,getPublishedDates} from "../../redux/actions/actions";
 import PaginationSearch from "../../Components/Pagination/PaginationSearch";
-import { getBooksByTitle } from "../../redux/actions/actions";
 import styles from './Results.module.css'
 import Books from "../../Components/PanelBooks/Books";
 
@@ -18,12 +17,23 @@ const Results = () => {
  
   const currentBooks = useSelector((state) => state.allBooksCopy);
   const totalPages = useSelector((state) => state.booksObject)
+  const genres = useSelector((state)=> state.genres)
+  const editorials = useSelector((state)=> state.editorials)
+  const countries = useSelector((state)=> state.countries)
+  const languages = useSelector((state)=> state.languages)
+  const publishedDates = useSelector((state)=> state.publishedDates)
   const dispatch = useDispatch();
   const [data, setData] = useState({
-   
+    title: origin
   });
 
-  console.log(currentBooks);
+  useEffect(() => {
+    dispatch(getGenres())
+    dispatch(getEditorials())
+    dispatch(getPublishedDates())
+    dispatch(getCountries())
+    dispatch(getLanguages())
+  }, []);
   
   const [priceMax, setPriceMax] = useState("");
   const [priceMin, setPriceMin] = useState("");
@@ -72,50 +82,41 @@ alert("No hay libros en ese rango de precio")
   
    } 
 
-  const handleData = (event) => {
+  const handleData = async(event) => {
     const { name, value } = event.target;
     console.log(name, value);
-    setData({
-      ...data,
+    await setSearch({
+      ...search,
       [name]: value,
     });
-    console.log(data);
     
   };
 
-  const handleFilterData = async (event) => {
-    console.log(data);
-    dispatch(getBooksByTitle(data))
-   
-    };
+  useEffect(() => {
+    dispatch(getBooksByTitle(search));
+    console.log(search);
+  }, [search, dispatch]);
 
   const handleCleanFilter = () => {
        
       setPriceMin("");
     setPriceMax("");
-    dispatch(getBooksByTitle(search));
+    dispatch(getBooksByTitle(data));
     
-      }
+  }
 
-      const getUniqueValues = (data, key) => {
-        const uniqueValuesSet = new Set();
+      const uniqueGenres = []
+      const uniqueEditorial = []
+      const uniquePublishedDate = []
+      const uniqueCountry = []
+      const uniqueLanguage = []
+
+      genres?.map((genre) => uniqueGenres.includes(genre.nameType)? null : uniqueGenres.push(genre.nameType) )
+      editorials?.map((editorial) => uniqueEditorial.includes(editorial.nameType)? null : uniqueEditorial.push(editorial.nameType) )
+      publishedDates?.map((publishedDate) => uniquePublishedDate.includes(publishedDate.nameType)? null : uniquePublishedDate.push(publishedDate.nameType) )
+      countries?.map((country) => uniqueCountry.includes(country.nameType)? null : uniqueCountry.push(country.nameType) )
+      languages?.map((languages) => uniqueLanguage.includes(languages.nameType)? null : uniqueLanguage.push(languages.nameType) )
       
-        data?.forEach((item) => {
-          if (item[key]) {
-            uniqueValuesSet.add(item[key]);
-          }
-        });
-      
-        return Array.from(uniqueValuesSet);
-      };
-
-      const uniqueGenders = getUniqueValues(allBooks, "gender");
-      const uniqueEditorial = getUniqueValues(allBooks, "editorial");
-      const uniquePublishedDate = getUniqueValues(allBooks, "publishedDate");
-      const uniqueCountry = getUniqueValues(allBooks, "country");
-      const uniqueLanguage = getUniqueValues(allBooks, "language");
-      const uniquePrice = getUniqueValues(allBooks, "price");
-
       
       
     return (
@@ -128,7 +129,7 @@ alert("No hay libros en ese rango de precio")
             <option defaultValue value="">
               Genre
             </option>
-            {uniqueGenders?.map((genre) => {
+            {uniqueGenres?.map((genre) => {
               return <option key={genre} value={genre}>
               {genre}
             </option>
@@ -175,22 +176,6 @@ alert("No hay libros en ese rango de precio")
             })}
           </select>
           
-          <select onChange={handleData} defaultValue="Price" name="price">
-            <option defaultValue value="">
-              Price
-            </option>
-            {uniquePrice?.map((price) => {
-              return <option key={price} value={price}>
-              {price}
-            </option>
-            })}
-          </select>
-          <button
-            className={styles.btn}
-            type="submit"
-            placeholder="Filtrar"
-            onClick={() => handleFilterData()}
-          >Apply</button>
           <button
             className={styles.btn}
             type="reset"
