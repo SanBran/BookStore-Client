@@ -67,21 +67,14 @@ export const BOOK_BY_NAME = "BOOK_BY_NAME";
 
 //--------------BOOKS----------
 
-export function addFavorite(userId, userFav, bookId ) {
+export function addFavorite(userId, userFav, bookId) {
   const data = {
     id: userId,
-    listWish: [...userFav, bookId]
-  }
+    listWish: [...userFav, bookId],
+  };
   return async function (dispatch) {
     try {
-<<<<<<< Updated upstream
-      const response = await axios.put(
-        `/updUser`,
-        data
-      );
-=======
       const response = await axios.put(`/updUser`, userData);
->>>>>>> Stashed changes
       return dispatch({
         type: ADD_FAVORITE,
         payload: response.data.detail,
@@ -91,18 +84,15 @@ export function addFavorite(userId, userFav, bookId ) {
     }
   };
 }
-export function removeFavorite(userId, userFav, bookId ) {
-  const filter = userFav.filter(id => id !== bookId)
+export function removeFavorite(userId, userFav, bookId) {
+  const filter = userFav.filter((id) => id !== bookId);
   const data = {
     id: userId,
-    listWish: filter
-  }
+    listWish: filter,
+  };
   return async function (dispatch) {
     try {
-      const response = await axios.put(
-        `/updUser`,
-        data
-      );
+      const response = await axios.put(`/updUser`, data);
       return dispatch({
         type: REMOVE_FAVORITE,
         payload: response.data.detail,
