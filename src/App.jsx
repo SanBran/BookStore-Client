@@ -28,6 +28,7 @@ import axios from "axios";
 //-------local
 //axios.defaults.baseURL = "http://localhost:8000/"
 //-------deployado
+
 axios.defaults.baseURL = "https://bookstorepf-production.up.railway.app";
 
 //-------Manejando cookies para mantener sesiones
