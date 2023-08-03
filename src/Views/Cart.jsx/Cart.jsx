@@ -45,6 +45,7 @@
 // }
 // export default Cart
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 //import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
@@ -58,8 +59,11 @@ import delete_icon from "../../assets/icons/delete_icon.svg";
 
 
 
+
+
 const Cart = ({ isOpen, onRequestClose }) => {
   const cart = useSelector((state) => state.cart);
+  const user = useSelector((state) => state.userDetail);
   const dispatch = useDispatch();
   const genericCover =
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhRKhJb1aLmjwGX_ox0TA6eTxCv_5g3Nlr6w&usqp=CAU";
@@ -75,9 +79,64 @@ const Cart = ({ isOpen, onRequestClose }) => {
   const handleCart = (id)=>{
     dispatch(removeCart(id))
   }
+{/*
+const dataPay = {
+	ip: "Stripe Default",
+	orderNumber: "Stripe Default",
+	metodo: "Stripe Aprovado",
+	currentOperation: "Stripe Default",
+	net_received_amount: session.amount_total,
+	amount: '00.00',
+	paymentStatus:"Pending",
+	email:email,
+	order:idBook,
+	name:user,
+	idpay:session.id,
+	total_paid_amount:session.amount_total,
+	operationType:session.currency,
+	orderType:session.mode,
+	data_aprove:session.payment_status,
+	pqyment_method_option: session.payment_method_options,
+	userId: userId,
+	bookId: idBook,
+	bookIds: session.metadata.idBooks.split(","),
+	bookTitle: lineItems?.map((item) => item.price_data.product_data.name),
+	quantity: lineItems?.map((item) => item.quantity),
+	price: lineItems?.map((item) => item.price_data.unit_amount),
+    typeMoney: lineItems?.map((item) => item.price_data.currency),
 
+	
+	}
+*/}
 const totalPrice = cart.reduce((total, book) => total + book.price, 0);
-  
+
+  const datapay = {
+
+    email: user.email,
+    name: user.name,
+    bookIds: cart.map((book) => book.id),
+    bookTitle: cart.map((book) => book.title),
+    quantity: 1,
+    price: cart.map((book) => book.price),
+    typeMoney: cart.map((book) => "ARG"),
+    totalPrice: totalPrice,
+    total_paid_amount:totalPrice
+  }
+  console.log(cart)
+  console.log('Soy el mamalon de los datos',datapay)
+  const handlerfreebooks = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/freeBooks",
+        datapay
+      );
+      const sureThing = response.data;
+      console.log(sureThing);
+    } catch (error) {
+      console.log(error);
+      throw new Error(error.message);
+    }
+  }
   return (
     <Modal style={modalStyles} className={styles.modal} isOpen={isOpen} onRequestClose={onRequestClose} >
       <div>
@@ -117,11 +176,19 @@ const totalPrice = cart.reduce((total, book) => total + book.price, 0);
           <h4 className={styles.title}>{cart.length} books</h4>
           <h4 className={styles.price}>${totalPrice}</h4>
         </div>
-
+        {
+        totalPrice !== 0 ?(
         <Link to={`/payment`}>
           <button className={styles.buyBtn} onClick={onRequestClose} >Buy Now</button>
         </Link>
-
+        ):
+        (
+        <Link to={`/freeBookacquisition`}>
+          <button className={styles.buyBtn} onClick={handlerfreebooks} >Buy Now</button>
+            
+        </Link>
+        )
+        }
             </div>
         </Modal>
     );
