@@ -120,19 +120,6 @@ export function getAllBooks() {
   };
 }
 
-// export function detailBookById(id) {
-//   return async function (dispatch) {
-//     try {
-//       const response = await axios.post(
-//         `http://localhost:8000/bookDetail/${id}`
-//       );
-//       const data = response.data;
-//       return dispatch({ type: GET_BOOK_BY_ID, payload: data });
-//     } catch (error) {
-//       throw Error(error.message);
-//     }
-//   };
-// }
 export function detailBookById(id) {
   return async function (dispatch) {
     try {
@@ -698,48 +685,25 @@ export function accessLogIn({ email, password }) {
   };
 }
 
-//el argumento sub es el "userId" de google
-export function accessGoogle({ email, name, picture, sub }, token) {
+export function accessGoogle({ email, name, picture, sub }) {
+//---------------------------------------------------sub es el id de usuario de google
   return async function (dispatch) {
     try {
-      const findUser = await axios.post(`/findUser/${email}`);
-
-      //console.log(findUser.data);
-
-      return dispatch({
+      const userData = {
+        id: "5",
+        data1: email,
+        data2: sub,
+        data3: name,
+        data4: picture
+      };
+      const user = await axios.post('/activateUser/', userData);
+      dispatch({
         type: ACCESS,
-        payload: { state: true, ref: findUser.data.detail.id },
+        payload: { state: true, ref: user.data.detail.newUser ? user.data.detail.newUser.id :user.data.detail.userFind.id },
       });
+      return user.data.detail.tokenJwt;
     } catch (error) {
-      //throw Error(error.response.data.text);
-      //console.log(error);
-      //console.log(error.response.data.text);
-      if (
-        error.response.status === 400 &&
-        error.response.data.text === "No users found"
-      ) {
-        try {
-          const userDataSignUp = {
-            name,
-            email,
-            password: "password",
-            phoneCode: "00",
-            phone: "0000000",
-            country: "null",
-            birthday: "null",
-            photoUser: picture,
-          };
-          const newUser = await axios.post(`/newUser`, userDataSignUp);
-          //console.log(newUser);
-
-          return dispatch({
-            type: ACCESS,
-            payload: { state: true, ref: newUser.data.detail.id },
-          });
-        } catch (error) {
-          throw Error(error.response.data.text);
-        }
-      } else throw Error(error.response.data.text);
+      throw Error(error.response.data.text);
     }
   };
 }
