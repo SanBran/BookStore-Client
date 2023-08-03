@@ -56,7 +56,6 @@ import {
   GET_COUNTRIES,
   GET_LANGUAGES,
   GET_PUBLISHEDDATES,
-  GOOGLE_CONFIRM,
 } from "../actions/types";
 
 let initialState = {

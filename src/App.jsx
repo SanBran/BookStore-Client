@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Cart from "./Views/Cart.jsx/Cart";
 import { PaymentDetails } from "./Views/Cart.jsx/PaymentDetails/PaymentDetails";
 import SucessfulPay from "./Views/Cart.jsx/SuccesfulPay/SucessfulPay";
+import SuccessfulAcquisition from "./Views/Cart.jsx/FreeBooks/Freebooks";
 
 import { useEffect, useState } from "react";
 import PendingPay from "./Views/Cart.jsx/PendingPay/PendingPay";
@@ -93,6 +94,7 @@ function App() {
             <Route path="/payment/sucessfulpay" element={<SucessfulPay />} />
             <Route path="/payment/pendingpay" element={<PendingPay />} />
             <Route path="/payment/failurepay" element={<FailurePay />} />
+            <Route path="/freeBookacquisition" element={<SuccessfulAcquisition />} />
 
             <Route path="*" element={<NotFound />} />
           </Routes>
