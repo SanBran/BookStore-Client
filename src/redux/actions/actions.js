@@ -62,7 +62,8 @@ import {
   GET_EDITORIALS,
   GET_COUNTRIES,
   GET_LANGUAGES,
-  GET_PUBLISHEDDATES,
+  GET_PUBLISHEDDATES
+//  GOOGLE_CONFIRM,
 } from "./types";
 
 export const DETAIL_BOOK_BY_ID = "DETAIL_BOOK_BY_ID";
@@ -636,8 +637,8 @@ export function obtainToken({ email }) {
       return response.data;
     } catch (error) {
       return error.response.data;
-      console.log(error);
-      throw new Error(error.message);
+      //console.log(error);
+      //throw new Error(error.message);
     }
   };
 }

@@ -58,6 +58,7 @@ export const ADD_CART = "ADD_CART";
 //USERS
 export const ACCESS = "ACCESS";
 export const GET_TOKEN= "GET_TOKEN";
+//export const GOOGLE_CONFIRM ="GOOGLE_CONFIRM";
 export const VALIDATE_SESSION = "VALIDATE_SESSION";
 export const OVERLAY_PROFILE = "OVERLAY_PROFILE";
 export const SHOW_LISTWISH = "SHOW_LISTWISH";

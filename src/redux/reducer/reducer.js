@@ -61,6 +61,7 @@ import {
   GET_COUNTRIES,
   GET_LANGUAGES,
   GET_PUBLISHEDDATES,
+  GOOGLE_CONFIRM,
 } from "../actions/types";
 
 let initialState = {
@@ -550,7 +551,11 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         access: payload,
       };
-
+//Esto es para práctica de Google
+//case GOOGLE_CONFIRM:
+//  return{...state, 
+//    //Sin respuesta aparente thanks to searchById
+//  }
     case GET_TOKEN:
       return{
         ...state,
