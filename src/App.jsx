@@ -39,31 +39,32 @@ import { accessUser, validateSession } from "./redux/actions/actions";
 function App() {
   const showOverlayPerfile = useSelector(state => state.overlayProfile);
   const location = useLocation();
+  const dispatch = useDispatch();
 
   const [server, setServer] = useState(true);
 
-  const dispatch = useDispatch();
   useEffect(()=>{
-    return async() => {
-      const token = await Cookies.get('valToken');
-      const email = await Cookies.get('email');
+      const token = Cookies.get('valToken');
+      const email = Cookies.get('email');
+      console.log(token,'\n',email);
       if(token && email) {
-        const user = await dispatch(validateSession(email, token));
-        await dispatch(accessUser(true, user.id));
-        console.log('final del useEffect');
+        (async()=>{
+          const user = await dispatch(validateSession(email, token));
+          console.log(user);
+          await dispatch(accessUser(true, user.id));
+          console.log('final del useEffect');
+        })()
       }
-    }
-  },[]);
-  console.log('fuera del useEffect');
+  },[])
 
   useEffect(()=>{
-    return async()=>{
+    (async()=>{
       try {
         await axios.post('/getBooks');
       } catch (error) {
         setServer(false);
       }
-    }
+    })()
   },[])
 
 
