@@ -19,7 +19,7 @@ function Wishlist() {
       }
       try {
         const response = await axios.post(
-          `bookDetail`,
+          `/bookDetail`,
           {
             "ids": userInfo.listWish
           }
