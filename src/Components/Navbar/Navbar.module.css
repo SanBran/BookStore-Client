@@ -66,6 +66,16 @@
     gap: 30px;
 }
 
+.back{
+    position: relative;
+    font-size: x-large;
+    font-weight: 500;
+    color: black;
+    background: none;
+    top: 2vh;
+    left: -3vw;
+}
+
 
 @media (max-width: 1020px) {
     .logo{

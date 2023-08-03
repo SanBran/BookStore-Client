@@ -64,14 +64,14 @@
     border-radius: 10px;
     font-size: medium;
     padding: 10px;
-    padding-inline: 30px;
+    padding-inline: 20px;
     bottom: 20px;
-    right: 20px;
+    right: 15px;
 
 }
 .boton2s{
     position: absolute;
-    color: #FA9D1B;
+    color: rgb(0, 0, 0);
     background: none;
     border: solid #FA9D1B;
     border-radius: 50px;
