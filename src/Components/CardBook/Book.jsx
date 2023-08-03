@@ -51,12 +51,12 @@ const Book = ({ books }) => {
   };
 
   useEffect(() => {
-    if (user.state && userInfo.length && userInfo.listWish.length && userInfo.listWish.find(item=>item.id === id)) {
+    if (userInfo.listWish.length && userInfo.listWish.includes(id)) {
       setIsFav(true);
     } else {
       setIsFav(false);
     }
-  }, [user.state.ref]);
+  }, [userInfo.listWish,id]);
 
   return (
     <div className={styles.container}>
