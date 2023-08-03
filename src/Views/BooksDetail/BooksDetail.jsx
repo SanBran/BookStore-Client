@@ -1,11 +1,10 @@
 /* eslint-disable no-useless-escape */
-import { detailBookById, getBooksByAuthor } from "../../redux/actions/actions"
+import { detailBookById } from "../../redux/actions/actions"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link, useParams } from "react-router-dom"
 import styles from './BooksDetail.module.css'
 import parseAuthors from "../../utils/parseAuthors"
-// import { Link } from "react-router-dom"
 import { addCart } from "../../redux/actions/actions"
 import axios from "axios"
 
@@ -14,6 +13,7 @@ import axios from "axios"
 import instagram_icon from '../../assets/icons/instagram_icon.png';
 import facebook_icon from '../../assets/icons/facebook_icon.png';
 import share_icon from '../../assets/icons/share_icon.svg';
+import Comments from "../../Components/Comments/Comments"
 
 const BooksDetail = () => {
   const genericCover =
@@ -194,7 +194,7 @@ const BooksDetail = () => {
           <h3>No books related with Author</h3>
         )}
       </div>
-
+      <Comments />
     </div>
   );
 }

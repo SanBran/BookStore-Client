@@ -454,7 +454,7 @@ const reducer = (state = initialState, { type, payload }) => {
         comments: state.comments.filter((comment) => comment.id !== payload),
       };
     //-----------------------------------------USER--------------------------------
-    
+
     case ADD_FAVORITE:
       console.log('Favoritos:', state.wishlist);
       return {
