@@ -14,22 +14,26 @@ import NotFound from "./Views/NotFound/NotFound";
 
 import EmailVerification from "./Views/EmailVerification";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Cart from "./Views/Cart.jsx/Cart";
 import { PaymentDetails } from "./Views/Cart.jsx/PaymentDetails/PaymentDetails";
 import SucessfulPay from "./Views/Cart.jsx/SuccesfulPay/SucessfulPay";
 
-//import { GoogleOAuthProvider } from '@react-oauth/google';
-
-//pasos para el deploy
-import axios from "axios";
 import { useEffect, useState } from "react";
 import PendingPay from "./Views/Cart.jsx/PendingPay/PendingPay";
 import FailurePay from "./Views/Cart.jsx/FailurePay/FailurePay";
+
+//pasos para el deploy
+import axios from "axios";
 //-------local
 //axios.defaults.baseURL = "http://localhost:8000/"
 //-------deployado
 axios.defaults.baseURL = "https://bookstorepf-production.up.railway.app";
+
+//-------Manejando cookies para mantener sesiones
+import Cookies from 'js-cookie';
+import { accessUser, validateSession } from "./redux/actions/actions";
+
 
 
 function App() {
@@ -37,6 +41,18 @@ function App() {
   const location = useLocation();
 
   const [server, setServer] = useState(true);
+
+  const dispatch = useDispatch();
+  useEffect(()=>{
+    const token = Cookies.get('valToken');
+    const email = Cookies.get('email');
+    return async() => {
+      if(token && email) {
+        const user = await dispatch(validateSession(email, token));
+        await dispatch(accessUser(true, user.id));
+      }
+    }
+  },[])
 
   useEffect(()=>{
     return async()=>{
