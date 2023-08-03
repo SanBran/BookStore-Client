@@ -1,6 +1,9 @@
 import axios from "axios";
 //Aquí los action Types
 import {
+  GET_TOKEN,
+  VALIDATE_SESSION,
+  LOG_OUT,
   GET_ALL_BOOKS,
   GET_BOOK_BY_AUTHOR,
   GET_BOOK_BY_ID,
@@ -634,6 +637,54 @@ export function deleteCommentById(id) {
   };
 }
 //-------------------------USER-----------------------
+export function obtainToken({email}){
+  return async function(dispatch){
+    try{
+      const theData = {
+        id: "6",
+        data1: email
+      }
+      const response = await axios.post(
+        "/activateUser/",
+        theData
+      );
+      dispatch({type: GET_TOKEN, payload: response.data})
+      return response.data;
+    }catch(error){
+      return error.response.data;
+      console.log(error);
+      throw new Error(error.message);
+    }
+  }
+};
+export function validateSession(email, token){
+  return async function(dispatch){
+    try{
+      const theData = {
+        id: "7",
+        data1: email,
+        data2: token
+      }
+      const response = await axios.post(
+        "/activateUser/",
+        theData
+      );
+      dispatch({type: VALIDATE_SESSION, payload: response.data})
+      return response.data.detail.userValidate.findUser[0];
+    }catch(error){
+      //return error.response.data;
+      console.log(error);
+      throw new Error(error.message);
+    }
+  }
+};
+
+export function logOut(){
+  return {
+    type: LOG_OUT,
+    payload: [],
+  };
+}
 export function accessLogIn({ email, password }) {
   return async function (dispatch) {
     try {

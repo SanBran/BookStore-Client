@@ -5,7 +5,7 @@ import { store } from './redux/store/store'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App.jsx'
 import './index.css'
-import Modal from 'react-modal'
+import Modal from 'react-modal';
 
 import { GoogleOAuthProvider } from '@react-oauth/google';
 //---------clientID para usar en el localhost:3000

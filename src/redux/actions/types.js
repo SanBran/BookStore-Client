@@ -57,6 +57,8 @@ export const ADD_CART = "ADD_CART";
 
 //USERS
 export const ACCESS = "ACCESS";
+export const GET_TOKEN= "GET_TOKEN";
+export const VALIDATE_SESSION = "VALIDATE_SESSION";
 export const OVERLAY_PROFILE = "OVERLAY_PROFILE";
 export const SHOW_LISTWISH = "SHOW_LISTWISH";
 export const ADD_FAVORITE = "ADD_FAVORITE";
@@ -69,6 +71,7 @@ export const ACTIVATE_USER = "ACTIVATE_USER";
 export const PASSWORD_REQUEST = "PASSWORD_REQUEST";
 export const PASSWORD_CHANGE = "PASSWORD_CHANGE";
 export const REDIRECT_TOKEN = "REDIRECT_TOKEN";
+export const LOG_OUT = "LOG_OUT"
 
 //BACKEND FILTERS
 export const FILTER_BY_PRICE = "FILTER_BY_PRICE";

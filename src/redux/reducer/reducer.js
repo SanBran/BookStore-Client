@@ -1,4 +1,7 @@
 import {
+  GET_TOKEN,
+  VALIDATE_SESSION,
+  LOG_OUT,
   ADD_FAVORITE,
   REMOVE_FAVORITE,
   ACTIVATE_USER,
@@ -561,6 +564,24 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         access: payload,
       };
+
+    case GET_TOKEN:
+      return{
+        ...state,
+        //sin respuesta al estado
+      };
+    
+    case VALIDATE_SESSION:
+      return{
+        ...state,
+        //sin respuesta al estado
+      }
+    
+    case LOG_OUT:
+      return{
+        ...state,
+        userDetail: payload,
+      }
 
     case PASSWORD_REQUEST:
       return {

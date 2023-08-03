@@ -3,12 +3,15 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import style from './Login.module.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { accessLogIn } from '../../redux/actions/actions';
+import { accessLogIn, obtainToken } from '../../redux/actions/actions';
 
 //importaciones para login con google
 import { accessGoogle } from '../../redux/actions/actions';
 import { GoogleLogin } from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
+
+import Cookies from 'js-cookie';
+
 
 const Login = ({ setForm }) => {
 
@@ -44,9 +47,14 @@ const Login = ({ setForm }) => {
   const handlerLogIn = async (event) => {
     event.preventDefault();
     try {
-      await dispatch(accessLogIn(logInfo))
-      setError("")
-      navigate('/')
+      await dispatch(accessLogIn(logInfo));
+      setError("");
+      const token = await dispatch(obtainToken(logInfo))
+      Cookies.set('valToken', token);
+      Cookies.set('email', logInfo.email);
+      
+
+      navigate('/');
     } catch (error) {
       setError(error.message)
     }
