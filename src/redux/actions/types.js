@@ -83,3 +83,8 @@ export const FILTER_BY_PriceRange = "FILTER_BY_PriceRange";
 
 //GENRES
 export const GET_GENRES = "GET_GENRES";
+export const GET_AUTHORS = "GET_AUTHORS";
+export const GET_EDITORIALS = "GET_EDITORIALS";
+export const GET_COUNTRIES = "GET_COUNTRIES";
+export const GET_LANGUAGES = "GET_LANGUAGES";
+export const GET_PUBLISHEDDATES = "GET_PUBLISHEDDATES";

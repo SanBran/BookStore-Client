@@ -1,10 +1,27 @@
 .container{
     position: fixed;
+    background: none ;
+    width: 265px;
+    height: 100vh;
+    z-index: 999;
+}
+.containerClose{
+    position: fixed;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: rgb(247, 247, 247);
     width: 70px;
+    height: 100vh;
+    z-index: 999;
+    box-shadow: 5px 8px 5px rgba(0, 0, 0, 0.096);
+}
+.containerOpen{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(247, 247, 247);
+    width: 265px;
     height: 100vh;
     z-index: 999;
     box-shadow: 5px 8px 5px rgba(0, 0, 0, 0.096);
@@ -24,9 +41,52 @@
 
 .btnlogo{
     position: relative;
+    display: flex;
     background: none;
-    width: 63px;
+    justify-content: center;
+    align-items: center;
     top: 25px;
+    left: -5px;
+    font-weight: 400;
+    font-size: x-large;
+    color: black;
+}
+.btnlogoOpen{
+    margin: 0 auto;
+}
+
+.btnlogo1{
+    position: relative;
+    display: flex;
+    background: none;
+    align-items: center;
+    width: 95%;
+    padding-left: 10px;
+    justify-content: space-between;
+    top: 25px;
+    gap: 12px;
+    color: black;
+}
+
+.text{
+    left: 0;
+    font-size: x-large;
+    font-weight: 400;
+    position: relative;
+
+}
+
+.new1{
+    right: 0;
+    height: 30px;
+}
+
+
+.btnlogoOpen{
+    position: relative;
+    background: none;
+    top: 25px; 
+    width: 230px;
     left: -5px;
 }
 
@@ -44,6 +104,11 @@
     width: 63px
 }
 
+.logoCompleto{
+    position: relative;
+    width: 230px
+}
+
 .openButton {
     position: absolute;
     top: 55vh;
@@ -51,6 +116,21 @@
     border-radius: 0 50px 50px 0 ;
     padding: 20px;
     padding-right: 10px;
+    padding-left: 1px;
+    text-align: end;
+    font-size: x-large;
+    background-color:rgb(247, 247, 247);
+    color: black;
+    box-shadow: 5px 8px 5px rgba(0, 0, 0, 0.096);
+
+}
+
+.closeButton {
+    position: absolute;
+    top: 55vh;
+    left: 260px;
+    border-radius: 0 50px 50px 0 ;
+    padding: 20px;
     padding-left: 1px;
     text-align: end;
     font-size: x-large;

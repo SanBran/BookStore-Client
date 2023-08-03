@@ -52,7 +52,12 @@ import {
   PASSWORD_CHANGE,
   REDIRECT_TOKEN,
   GET_GENRES,
-  GET_PAYMENTS
+  GET_PAYMENTS,
+  GET_AUTHORS,
+  GET_EDITORIALS,
+  GET_COUNTRIES,
+  GET_LANGUAGES,
+  GET_PUBLISHEDDATES,
 } from "../actions/types";
 
 let initialState = {
@@ -63,6 +68,11 @@ let initialState = {
   allBooksPrice: [],
   priceBooksObject: {},
   genres: [],
+  authors: [],
+  editorials: [],
+  countries: [],
+  languages: [],
+  publishedDates: [],
   book: [],
   bookByName: [],
   cart: [],
@@ -85,7 +95,7 @@ let initialState = {
 
 // !Tener el cuenta reducir el reducer en varias partes.
 const reducer = (state = initialState, { type, payload }) => {
-  let filter
+  let filter;
   switch (type) {
     //-----------------------------BOOK----------------------------------
 
@@ -290,6 +300,31 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         genres: payload,
       };
+    case GET_AUTHORS:
+      return {
+        ...state,
+        authors: payload,
+      };
+    case GET_EDITORIALS:
+      return {
+        ...state,
+        editorials: payload,
+      };
+    case GET_COUNTRIES:
+      return {
+        ...state,
+        countries: payload,
+      };
+    case GET_LANGUAGES:
+      return {
+        ...state,
+        languages: payload,
+      };
+    case GET_PUBLISHEDDATES:
+      return {
+        ...state,
+        publishedDates: payload,
+      };
 
     case FILTER_BY_GENDER:
       if (payload === "") {
@@ -375,12 +410,14 @@ const reducer = (state = initialState, { type, payload }) => {
     //----------------------------mercadoPago----------------
     // revisar mercadoPago no estoy seguro como funciona
     case ADD_CART:
+      console.log("hola soy el cart", state.cart);
       return {
         ...state,
         cart: [...state.cart, payload],
       };
     case REMOVE_CART:
-      filter = state.cart.filter((book) => book.id !== payload)
+      console.log(state.cart);
+      filter = state.cart.filter((book) => book.id !== payload);
       return {
         ...state,
         cart: filter,
@@ -460,13 +497,14 @@ const reducer = (state = initialState, { type, payload }) => {
       };
     //-----------------------------------------USER--------------------------------
 
-    case ADD_CART:
+    case ADD_FAVORITE:
+      console.log("Favoritos:", state.wishlist);
       return {
         ...state,
         cart: [...state.cart, payload],
       };
     case REMOVE_CART:
-      filter = state.cart.filter((book) => book.id !== payload)
+      filter = state.cart.filter((book) => book.id !== payload);
       return {
         ...state,
         cart: filter,
@@ -477,9 +515,17 @@ const reducer = (state = initialState, { type, payload }) => {
         userDetail: payload,
       };
     case REMOVE_FAVORITE:
+      console.log("Favoritos:", state.wishlist);
+      filter = state.wishlist.filter((bookId) => bookId !== payload);
       return {
         ...state,
-        userDetail: payload,
+        wishlist: filter,
+      };
+    case SEND_FAVORITE:
+      console.log("Favoritos:", state.wishlist);
+      return {
+        ...state,
+        userDetailFav: payload,
       };
     case GET_USERS:
       return {
