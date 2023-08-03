@@ -637,49 +637,43 @@ export function deleteCommentById(id) {
   };
 }
 //-------------------------USER-----------------------
-export function obtainToken({email}){
-  return async function(dispatch){
-    try{
+export function obtainToken({ email }) {
+  return async function (dispatch) {
+    try {
       const theData = {
         id: "6",
-        data1: email
-      }
-      const response = await axios.post(
-        "/activateUser/",
-        theData
-      );
-      dispatch({type: GET_TOKEN, payload: response.data})
+        data1: email,
+      };
+      const response = await axios.post("/activateUser/", theData);
+      dispatch({ type: GET_TOKEN, payload: response.data });
       return response.data;
-    }catch(error){
+    } catch (error) {
       return error.response.data;
       console.log(error);
       throw new Error(error.message);
     }
-  }
-};
-export function validateSession(email, token){
-  return async function(dispatch){
-    try{
+  };
+}
+export function validateSession(email, token) {
+  return async function (dispatch) {
+    try {
       const theData = {
         id: "7",
         data1: email,
-        data2: token
-      }
-      const response = await axios.post(
-        "/activateUser/",
-        theData
-      );
-      dispatch({type: VALIDATE_SESSION, payload: response.data})
+        data2: token,
+      };
+      const response = await axios.post("/activateUser/", theData);
+      dispatch({ type: VALIDATE_SESSION, payload: response.data });
       return response.data.detail.userValidate.findUser[0];
-    }catch(error){
+    } catch (error) {
       //return error.response.data;
       console.log(error);
       throw new Error(error.message);
     }
-  }
-};
+  };
+}
 
-export function logOut(){
+export function logOut() {
   return {
     type: LOG_OUT,
     payload: [],
