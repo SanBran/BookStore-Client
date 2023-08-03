@@ -26,7 +26,7 @@ const Stripe = ({ cart, userInfo ,styles}) => {
   const attemptObject = {
     userId: userData.userId,
     idBook: cartInfo[0].idBook,
-    user: userData.name,
+    user: userData.user,
     email: userData.email,
 
     items: cartInfo,
@@ -35,7 +35,7 @@ const Stripe = ({ cart, userInfo ,styles}) => {
     try {
       console.log(attemptObject);
       const response = await axios.post(
-        "https://bookstorepf-production.up.railway.app/create-checkout-session",
+        "http://localhost:8000/create-checkout-session",
         attemptObject
       );
       const sureThing = response.data;
