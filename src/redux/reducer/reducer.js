@@ -521,12 +521,6 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         wishlist: filter,
       };
-    case SEND_FAVORITE:
-      console.log("Favoritos:", state.wishlist);
-      return {
-        ...state,
-        userDetailFav: payload,
-      };
     case GET_USERS:
       return {
         ...state,
