@@ -518,11 +518,9 @@ const reducer = (state = initialState, { type, payload }) => {
         userDetail: payload,
       };
     case REMOVE_FAVORITE:
-      console.log("Favoritos:", state.wishlist);
-      filter = state.wishlist.filter((bookId) => bookId !== payload);
       return {
         ...state,
-        wishlist: filter,
+        userDetail: payload,
       };
     case GET_USERS:
       return {
