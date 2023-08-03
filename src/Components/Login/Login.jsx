@@ -65,16 +65,20 @@ const Login = ({ setForm }) => {
 //---------clientID para usar en el localhost:3000
 //const clientID = "637027522589-6jbd17n7qelc1mqtp4c1gl43lvjp57cf.apps.googleusercontent.com";
 //---------clientID para usar en el https://book-store-client-coral.vercel.app/
-const clientID = "637027522589-j7nin8g8gico6g5hsfkkg98u2r4gfbj6.apps.googleusercontent.com";
+  const clientID = "637027522589-j7nin8g8gico6g5hsfkkg98u2r4gfbj6.apps.googleusercontent.com";
 
   const responseGoogle = async (response) => {
-    try{
     const user = jwt_decode(response.credential);
-    await dispatch(accessGoogle(user))
-    navigate('/')
-  } catch (error) {
-    setError(error.message)
-  }
+    try {
+      const token = await dispatch(accessGoogle(user));
+      setError("");
+      Cookies.set('valToken', token);
+      Cookies.set('email', user.email);
+
+      navigate('/');
+    } catch (error) {
+      setError(error.message)
+    }
   }
   const onFailure = (error) => {
     console.log(error);

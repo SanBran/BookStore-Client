@@ -44,7 +44,6 @@ function App() {
   const [server, setServer] = useState(true);
 
   useEffect(()=>{
-<<<<<<< Updated upstream
       const token = Cookies.get('valToken');
       const email = Cookies.get('email');
       if(token && email) {
@@ -54,21 +53,6 @@ function App() {
         })()
       }
   },[])
-=======
-    return async() => {
-      const token = await Cookies.get('valToken');
-      const email = await Cookies.get('email');
-      //Esto para google
-      //const idOfGoogle = await Cookies.get('googleId');
-      if(token && email) {
-        const user = await dispatch(validateSession(email, token));
-        await dispatch(accessUser(true, user.id));
-      } //else if (idOfGoogle && email){
-        ////const userByGoogle = await dispatch(googleConfirm(email, idOfGoogle))
-        //}
-    }
-  },[dispatch])
->>>>>>> Stashed changes
 
   useEffect(()=>{
     (async()=>{
