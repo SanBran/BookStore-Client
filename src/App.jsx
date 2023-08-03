@@ -46,13 +46,10 @@ function App() {
   useEffect(()=>{
       const token = Cookies.get('valToken');
       const email = Cookies.get('email');
-      console.log(token,'\n',email);
       if(token && email) {
         (async()=>{
           const user = await dispatch(validateSession(email, token));
-          console.log(user);
           await dispatch(accessUser(true, user.id));
-          console.log('final del useEffect');
         })()
       }
   },[])
