@@ -26,9 +26,9 @@ import FailurePay from "./Views/Cart.jsx/FailurePay/FailurePay";
 //pasos para el deploy
 import axios from "axios";
 //-------local
-axios.defaults.baseURL = "http://localhost:8000/";
+//axios.defaults.baseURL = "http://localhost:8000/";
 //-------deployado
-//axios.defaults.baseURL = "https://bookstorepf-production.up.railway.app";
+axios.defaults.baseURL = "https://bookstorepf-production.up.railway.app";
 
 //-------Manejando cookies para mantener sesiones
 import Cookies from 'js-cookie';
@@ -46,13 +46,10 @@ function App() {
   useEffect(()=>{
       const token = Cookies.get('valToken');
       const email = Cookies.get('email');
-      console.log(token,'\n',email);
       if(token && email) {
         (async()=>{
           const user = await dispatch(validateSession(email, token));
-          console.log(user);
           await dispatch(accessUser(true, user.id));
-          console.log('final del useEffect');
         })()
       }
   },[])
