@@ -74,7 +74,7 @@ export function addFavorite(userId, userFav, bookId) {
   };
   return async function (dispatch) {
     try {
-      const response = await axios.put(`/updUser`, userData);
+      const response = await axios.put(`/updUser`, data);
       return dispatch({
         type: ADD_FAVORITE,
         payload: response.data.detail,
