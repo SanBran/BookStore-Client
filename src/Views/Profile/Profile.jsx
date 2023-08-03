@@ -1,10 +1,13 @@
 //import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { accessUser, getUserById} from "../../redux/actions/actions";
+import { accessUser, getPayments, getUserById, logOut } from "../../redux/actions/actions";
 import { overlayProfile } from "../../redux/actions/actions";
 import styles from "./Profile.module.css";
 import { useEffect } from "react";
+
+import Cookies from 'js-cookie';
+
 
 //-----icons
 import profile_icon from '../../assets/icons/profile.svg';
@@ -23,15 +26,19 @@ const Profile = () => {
 
   useEffect(() => {
     dispatch(getUserById(userId));
+    dispatch(getPayments(userId));
   }, [dispatch, userId]);
 
   const handleCloseOverlayToggle = () => {
     dispatch(overlayProfile(showOverlayPerfile));
-    console.log(showOverlayPerfile);
   };
-  const handleLogOut = () => {
-    dispatch(overlayProfile(showOverlayPerfile));
-    dispatch(accessUser(false, ""));
+  const handleLogOut = async() => {
+    await dispatch(overlayProfile(showOverlayPerfile));
+    await dispatch(accessUser(false, ""));
+    await dispatch(logOut());
+    Cookies.remove('valToken');
+    Cookies.remove('email');
+
     navigate("/");
   };
   //! cuando se entra al wislist desde otro compomente ejemplo histoy, el estado queda sin actualizar

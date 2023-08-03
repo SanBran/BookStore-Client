@@ -47,7 +47,7 @@ const Navbar = () => {
         <Link to="/">
           <h1 className={styles.logo}>Book Store</h1>
         </Link>
-        <button onClick={handleBack}>Atrás</button>
+        <button className={styles.back} onClick={handleBack}>↩</button>
       </div>
       <div className={styles.search}>
         <SearchBar />

@@ -18,6 +18,7 @@ export const POST_WEBHOOK_PAGO = "POST_WEBHOOK_PAGO";
 export const GET_FAILURE = "GET_FAILURE";
 export const GET_PENDING = "GET_PENDING";
 export const GET_SUCCESS = "GET_SUCCESS";
+export const GET_PAYMENTS = "GET_PAYMENTS";
 
 //whatsapp
 export const POST_SMS_WHATSAPP = "POST_SMS_WHATSAPP";
@@ -56,11 +57,12 @@ export const ADD_CART = "ADD_CART";
 
 //USERS
 export const ACCESS = "ACCESS";
+export const GET_TOKEN= "GET_TOKEN";
+export const VALIDATE_SESSION = "VALIDATE_SESSION";
 export const OVERLAY_PROFILE = "OVERLAY_PROFILE";
 export const SHOW_LISTWISH = "SHOW_LISTWISH";
 export const ADD_FAVORITE = "ADD_FAVORITE";
 export const REMOVE_FAVORITE = "REMOVE_FAVORITE";
-export const SEND_FAVORITE = "SEND_FAVORITE";
 export const GET_USERS = "GET_USER";
 export const GET_USER_BY_ID = "GET_USER_BY_ID";
 export const POST_USER = "POST_USER";
@@ -69,6 +71,7 @@ export const ACTIVATE_USER = "ACTIVATE_USER";
 export const PASSWORD_REQUEST = "PASSWORD_REQUEST";
 export const PASSWORD_CHANGE = "PASSWORD_CHANGE";
 export const REDIRECT_TOKEN = "REDIRECT_TOKEN";
+export const LOG_OUT = "LOG_OUT"
 
 //BACKEND FILTERS
 export const FILTER_BY_PRICE = "FILTER_BY_PRICE";
@@ -83,3 +86,8 @@ export const FILTER_BY_PriceRange = "FILTER_BY_PriceRange";
 
 //GENRES
 export const GET_GENRES = "GET_GENRES";
+export const GET_AUTHORS = "GET_AUTHORS";
+export const GET_EDITORIALS = "GET_EDITORIALS";
+export const GET_COUNTRIES = "GET_COUNTRIES";
+export const GET_LANGUAGES = "GET_LANGUAGES";
+export const GET_PUBLISHEDDATES = "GET_PUBLISHEDDATES";

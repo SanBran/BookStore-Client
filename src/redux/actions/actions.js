@@ -1,6 +1,9 @@
 import axios from "axios";
 //Aquí los action Types
 import {
+  GET_TOKEN,
+  VALIDATE_SESSION,
+  LOG_OUT,
   GET_ALL_BOOKS,
   GET_BOOK_BY_AUTHOR,
   GET_BOOK_BY_ID,
@@ -49,39 +52,52 @@ import {
   ADD_CART,
   REMOVE_CART,
   ADD_FAVORITE,
-  SEND_FAVORITE,
   REMOVE_FAVORITE,
   PASSWORD_REQUEST,
   PASSWORD_CHANGE,
   REDIRECT_TOKEN,
   GET_GENRES,
+  GET_PAYMENTS,
+  GET_AUTHORS,
+  GET_EDITORIALS,
+  GET_COUNTRIES,
+  GET_LANGUAGES,
+  GET_PUBLISHEDDATES,
 } from "./types";
 
 export const DETAIL_BOOK_BY_ID = "DETAIL_BOOK_BY_ID";
 export const BOOK_BY_NAME = "BOOK_BY_NAME";
 
 //--------------BOOKS----------
-export function addFavorite(bookId) {
-  return {
-    type: ADD_FAVORITE,
-    payload: bookId,
+
+export function addFavorite(userId, userFav, bookId) {
+  const data = {
+    id: userId,
+    listWish: [...userFav, bookId],
   };
-}
-export function removeFavorite(bookId) {
-  return {
-    type: REMOVE_FAVORITE,
-    payload: bookId,
-  };
-}
-export function sendFavorite(userData) {
   return async function (dispatch) {
     try {
-      const response = await axios.put(
-        `/updUser`,
-        userData
-      );
+      const response = await axios.put(`/updUser`, data);
       return dispatch({
-        type: SEND_FAVORITE,
+        type: ADD_FAVORITE,
+        payload: response.data.detail,
+      });
+    } catch (error) {
+      throw Error(error.message);
+    }
+  };
+}
+export function removeFavorite(userId, userFav, bookId) {
+  const filter = userFav.filter((id) => id !== bookId);
+  const data = {
+    id: userId,
+    listWish: filter,
+  };
+  return async function (dispatch) {
+    try {
+      const response = await axios.put(`/updUser`, data);
+      return dispatch({
+        type: REMOVE_FAVORITE,
         payload: response.data.detail,
       });
     } catch (error) {
@@ -120,9 +136,7 @@ export function getAllBooks() {
 export function detailBookById(id) {
   return async function (dispatch) {
     try {
-      const response = await axios.post(
-        `/bookDetail/${id}`
-      );
+      const response = await axios.post(`/bookDetail/${id}`);
       const data = response.data;
       console.log(data);
       if (data) {
@@ -139,8 +153,6 @@ export function detailBookById(id) {
   };
 }
 
-
-
 export function getBooksByAuthor(author) {
   return async function (dispatch) {
     try {
@@ -148,9 +160,7 @@ export function getBooksByAuthor(author) {
         return;
       }
       console.log(author);
-      const response = await axios.post(
-        `/getBooks?author=${author}`
-      );
+      const response = await axios.post(`/getBooks?author=${author}`);
       return dispatch({
         type: GET_BOOK_BY_AUTHOR,
         payload: response.data,
@@ -186,9 +196,7 @@ export function getByGenrer(gender) {
   return async function (dispatch) {
     try {
       //console.log(gender);
-      const response = await axios.post(
-        `/getBooks?gender=${gender}`
-      );
+      const response = await axios.post(`/getBooks?gender=${gender}`);
       return dispatch({
         type: FILTER_BY_GENRER,
         payload: response.data,
@@ -202,9 +210,7 @@ export function getByLanguaje(languaje) {
   return async function (dispatch) {
     try {
       //console.log(languaje);
-      const response = await axios.post(
-        `/getBooks?languaje=${languaje}`
-      );
+      const response = await axios.post(`/getBooks?languaje=${languaje}`);
       return dispatch({
         type: FILTER_BY_LANGUAJE,
         payload: response.data,
@@ -234,10 +240,7 @@ export function getByPublishedDate(publishedDate) {
 export function getBooksByTitle(title) {
   return async function (dispatch) {
     try {
-      const response = await axios.post(
-        `/getBooks`,
-        title
-      );
+      const response = await axios.post(`/getBooks`, title);
 
       return dispatch({
         type: GET_BOOKS_BY_TITLE,
@@ -252,10 +255,7 @@ export function getBooksByTitle(title) {
 export function getBooksByPrice(price) {
   return async function (dispatch) {
     try {
-      const response = await axios.post(
-        `/getBooks`,
-        price
-      );
+      const response = await axios.post(`/getBooks`, price);
       return dispatch({
         type: GET_BOOKS_BY_PRICE,
         payload: response.data,
@@ -334,9 +334,7 @@ export function getBooksById(id) {
   return async function (dispatch) {
     try {
       //console.log(title);
-      const response = await axios.post(
-        `/bookDetail/${id}`
-      );
+      const response = await axios.post(`/bookDetail/${id}`);
       return dispatch({
         type: GET_BOOK_BY_ID,
         payload: response.data,
@@ -364,9 +362,7 @@ export function updateBooksById(id) {
   return async function (dispatch) {
     try {
       //console.log(title);
-      const response = await axios.put(
-        `/updateBook/${id}`
-      );
+      const response = await axios.put(`/updateBook/${id}`);
       return dispatch({
         type: UPDATE_BOOK_BY_ID,
         payload: response.data,
@@ -380,9 +376,7 @@ export function deleteBooksById(id) {
   return async function (dispatch) {
     try {
       //console.log(title);
-      const response = await axios.delete(
-        `/deleteBook/${id}`
-      );
+      const response = await axios.delete(`/deleteBook/${id}`);
       return dispatch({
         type: DELETE_BOOK_BY_ID,
         payload: response.data,
@@ -396,9 +390,7 @@ export function deleteBooksById(id) {
 export function selectPage(page) {
   return async function (dispatch) {
     try {
-      const response = await axios.post(
-        `/getBooks?page=${page}`
-      );
+      const response = await axios.post(`/getBooks?page=${page}`);
       return dispatch({
         type: SELECT_PAGE,
         payload: response.data,
@@ -412,10 +404,7 @@ export function selectFilterPage(page, search) {
   console.log(page, search);
   return async function (dispatch) {
     try {
-      const response = await axios.post(
-        `/getBooks?page=${page}`,
-        search
-      );
+      const response = await axios.post(`/getBooks?page=${page}`, search);
       console.log(response.data);
       return dispatch({
         type: SELECT_FILTER_PAGE,
@@ -430,10 +419,7 @@ export function selectPricePage(page, search) {
   console.log(page, search);
   return async function (dispatch) {
     try {
-      const response = await axios.post(
-        `/getBooks?page=${page}`,
-        search
-      );
+      const response = await axios.post(`/getBooks?page=${page}`, search);
       console.log(response.data);
       return dispatch({
         type: SELECT_PRICE_PAGE,
@@ -505,10 +491,7 @@ export function postMercadoPago(buyerData) {
       //console.log(buyerData);
       // buyerData={name,email,IdBook,carrito,typeMoney,userId}
       //carrito=[{nombre,unit_price,quantity},...]
-      const response = await axios.post(
-        `/mercadoPago`,
-        buyerData
-      );
+      const response = await axios.post(`/mercadoPago`, buyerData);
       return dispatch({
         type: POST_MERCADOPAGO,
         payload: response.data,
@@ -521,9 +504,7 @@ export function postMercadoPago(buyerData) {
 export function postWebhookPago(payment) {
   return async function (dispatch) {
     try {
-      const response = await axios.post(
-        `/webhook-pago?payment=${payment}`
-      );
+      const response = await axios.post(`/webhook-pago?payment=${payment}`);
       return dispatch({
         type: POST_WEBHOOK_PAGO,
         payload: response.data,
@@ -533,15 +514,26 @@ export function postWebhookPago(payment) {
     }
   };
 }
+export function getPayments(id) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(`/read-pays/${id}`);
+      return dispatch({
+        type: GET_PAYMENTS,
+        payload: response.data,
+      });
+    } catch (error) {
+      throw Error(error.message);
+    }
+  };
+}
+
 //--------------------EMAIL------------------------
 // dataEmail= {mensaje,email, subject, name}
 export function postEmail(dataEmail) {
   return async function (dispatch) {
     try {
-      const response = await axios.post(
-        `/sendEmail`,
-        dataEmail
-      );
+      const response = await axios.post(`/sendEmail`, dataEmail);
       return dispatch({
         type: POST_EMAIL,
         payload: response.data,
@@ -556,10 +548,7 @@ export function postEmail(dataEmail) {
 export function postSmsWhatsapp(dataSms) {
   return async function (dispatch) {
     try {
-      const response = await axios.post(
-        `/SMS-Whatsapp`,
-        dataSms
-      );
+      const response = await axios.post(`/SMS-Whatsapp`, dataSms);
       return dispatch({
         type: POST_SMS_WHATSAPP,
         payload: response.data,
@@ -608,10 +597,7 @@ export function postComment(comment) {
   return async function (dispatch) {
     try {
       //console.log(comment);
-      const response = await axios.post(
-        `/postComment`,
-        comment
-      );
+      const response = await axios.post(`/postComment`, comment);
       return dispatch({
         type: POST_COMMENT,
         payload: response.data,
@@ -626,11 +612,7 @@ export function updateCommentById({ id, rating, comment }) {
   return async function (dispatch) {
     try {
       //console.log(id, rating, comment);
-      const response = await axios.put(
-        `/updateComment/${id}`,
-        rating,
-        comment
-      );
+      const response = await axios.put(`/updateComment/${id}`, rating, comment);
       return dispatch({
         type: UPDATE_COMMENT_BY_ID,
         payload: response.data,
@@ -644,9 +626,7 @@ export function deleteCommentById(id) {
   return async function (dispatch) {
     try {
       //console.log(id);
-      const response = await axios.delete(
-        `/deleteComment/${id}`
-      );
+      const response = await axios.delete(`/deleteComment/${id}`);
       return dispatch({
         type: DELETE_COMMENT_BY_ID,
         payload: response.data,
@@ -657,6 +637,48 @@ export function deleteCommentById(id) {
   };
 }
 //-------------------------USER-----------------------
+export function obtainToken({ email }) {
+  return async function (dispatch) {
+    try {
+      const theData = {
+        id: "6",
+        data1: email,
+      };
+      const response = await axios.post("/activateUser/", theData);
+      dispatch({ type: GET_TOKEN, payload: response.data });
+      return response.data;
+    } catch (error) {
+      return error.response.data;
+      console.log(error);
+      throw new Error(error.message);
+    }
+  };
+}
+export function validateSession(email, token) {
+  return async function (dispatch) {
+    try {
+      const theData = {
+        id: "7",
+        data1: email,
+        data2: token,
+      };
+      const response = await axios.post("/activateUser/", theData);
+      dispatch({ type: VALIDATE_SESSION, payload: response.data });
+      return response.data.detail.userValidate.findUser[0];
+    } catch (error) {
+      //return error.response.data;
+      console.log(error);
+      throw new Error(error.message);
+    }
+  };
+}
+
+export function logOut() {
+  return {
+    type: LOG_OUT,
+    payload: [],
+  };
+}
 export function accessLogIn({ email, password }) {
   return async function (dispatch) {
     try {
@@ -665,10 +687,7 @@ export function accessLogIn({ email, password }) {
         data1: email,
         data2: password,
       };
-      const response = await axios.post(
-        `/activateUser/`,
-        userData
-      );
+      const response = await axios.post(`/activateUser/`, userData);
       return dispatch({
         type: ACCESS,
         payload: { state: true, ref: response.data.detail.id },
@@ -683,9 +702,7 @@ export function accessLogIn({ email, password }) {
 export function accessGoogle({ email, name, picture, sub }, token) {
   return async function (dispatch) {
     try {
-      const findUser = await axios.post(
-        `/findUser/${email}`
-      );
+      const findUser = await axios.post(`/findUser/${email}`);
 
       //console.log(findUser.data);
 
@@ -712,10 +729,7 @@ export function accessGoogle({ email, name, picture, sub }, token) {
             birthday: "null",
             photoUser: picture,
           };
-          const newUser = await axios.post(
-            `/newUser`,
-            userDataSignUp
-          );
+          const newUser = await axios.post(`/newUser`, userDataSignUp);
           //console.log(newUser);
 
           return dispatch({
@@ -782,10 +796,7 @@ export function postUser(userData) {
   return async function (dispatch) {
     try {
       //console.log(userData);
-      const response = await axios.post(
-        `/newUser`,
-        userData
-      );
+      const response = await axios.post(`/newUser`, userData);
       //console.log(userData);
       return dispatch({
         type: POST_USER,
@@ -807,10 +818,7 @@ export function activateUser(token) {
         data2: "",
       };
       //console.log(userData);
-      const response = await axios.post(
-        `/activateUser/`,
-        userData
-      );
+      const response = await axios.post(`/activateUser/`, userData);
       return dispatch({
         type: ACTIVATE_USER,
         payload: response.data,
@@ -822,19 +830,13 @@ export function activateUser(token) {
   };
 }
 
-//editUser={id,name, birthday, country, phone, phoneCode, gender, dniPasaport, status, rol, photoUser, listWish}
 export function updateUser(userData) {
   return async function (dispatch) {
     try {
-      //console.log(userData);
-      const response = await axios.put(
-        `/updUser`,
-        userData
-      );
-      console.log(response.data);
+      const response = await axios.put(`/updUser/`, userData);
       return dispatch({
         type: UPDATE_USER,
-        payload: response.data,
+        payload: response.data.detail,
       });
     } catch (error) {
       throw Error(error.message);
@@ -859,10 +861,7 @@ export function passwordRequest(email) {
       };
 
       console.log(userData);
-      const response = await axios.post(
-        `/activateUser/`,
-        userData
-      );
+      const response = await axios.post(`/activateUser/`, userData);
       return dispatch({
         type: PASSWORD_REQUEST,
         payload: response.data,
@@ -883,10 +882,7 @@ export function passwordChange(token, password) {
         data2: password,
       };
 
-      const response = await axios.post(
-        `/activateUser/`,
-        changeData
-      );
+      const response = await axios.post(`/activateUser/`, changeData);
       return dispatch({
         type: PASSWORD_CHANGE,
         payload: response.data,
@@ -898,19 +894,104 @@ export function passwordChange(token, password) {
   };
 }
 
+///////////////////////////////////////////////////////////
+
 export function getGenres() {
-  const genre = {
+  const search = {
     type: "CATEGORIES",
   };
   return async function (dispatch) {
     try {
-      const response = await axios.post(
-        `/findSetting`,
-        genre
-      );
+      const response = await axios.post(`/findSetting`, search);
 
       return dispatch({
         type: GET_GENRES,
+        payload: response.data.detail.settingFind,
+      });
+    } catch (error) {
+      throw Error(error.message);
+    }
+  };
+}
+
+export function getEditorials() {
+  const search = {
+    type: "PUBLISHER",
+  };
+  return async function (dispatch) {
+    try {
+      const response = await axios.post(`/findSetting`, search);
+
+      return dispatch({
+        type: GET_EDITORIALS,
+        payload: response.data.detail.settingFind,
+      });
+    } catch (error) {
+      throw Error(error.message);
+    }
+  };
+}
+export function getAuthors() {
+  const search = {
+    type: "AUTHORS",
+  };
+  return async function (dispatch) {
+    try {
+      const response = await axios.post(`/findSetting`, search);
+
+      return dispatch({
+        type: GET_AUTHORS,
+        payload: response.data.detail.settingFind,
+      });
+    } catch (error) {
+      throw Error(error.message);
+    }
+  };
+}
+export function getCountries() {
+  const search = {
+    type: "COUNTRY",
+  };
+  return async function (dispatch) {
+    try {
+      const response = await axios.post(`/findSetting`, search);
+
+      return dispatch({
+        type: GET_COUNTRIES,
+        payload: response.data.detail.settingFind,
+      });
+    } catch (error) {
+      throw Error(error.message);
+    }
+  };
+}
+export function getLanguages() {
+  const search = {
+    type: "LANGUAGE",
+  };
+  return async function (dispatch) {
+    try {
+      const response = await axios.post(`/findSetting`, search);
+
+      return dispatch({
+        type: GET_LANGUAGES,
+        payload: response.data.detail.settingFind,
+      });
+    } catch (error) {
+      throw Error(error.message);
+    }
+  };
+}
+export function getPublishedDates() {
+  const search = {
+    type: "PUBLISHEDDATE",
+  };
+  return async function (dispatch) {
+    try {
+      const response = await axios.post(`/findSetting`, search);
+
+      return dispatch({
+        type: GET_PUBLISHEDDATES,
         payload: response.data.detail.settingFind,
       });
     } catch (error) {

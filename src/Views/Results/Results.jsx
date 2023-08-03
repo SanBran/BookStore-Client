@@ -2,9 +2,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { getAllBooks,FilterByGender,FilterByAuthor,FilterByPrice,FilterByEditorial,FilterByLanguage,FilterByPages ,FilterByPublishedDate,FilterByCountry,FilterByPriceRange} from "../../redux/actions/actions";
+import { getBooksByTitle,FilterByPriceRange, getGenres,getEditorials,getAuthors,getCountries,getLanguages,getPublishedDates} from "../../redux/actions/actions";
 import PaginationSearch from "../../Components/Pagination/PaginationSearch";
-import { getBooksByTitle } from "../../redux/actions/actions";
 import styles from './Results.module.css'
 import Books from "../../Components/PanelBooks/Books";
 
@@ -18,12 +17,32 @@ const Results = () => {
  
   const currentBooks = useSelector((state) => state.allBooksCopy);
   const totalPages = useSelector((state) => state.booksObject)
+  const genres = useSelector((state)=> state.genres)
+  const editorials = useSelector((state)=> state.editorials)
+  const countries = useSelector((state)=> state.countries)
+  const languages = useSelector((state)=> state.languages)
+  const publishedDates = useSelector((state)=> state.publishedDates)
   const dispatch = useDispatch();
   const [data, setData] = useState({
-   
+    title: origin
   });
+  
+let filterGenre = document.getElementById('genre');
+let filterEditorial = document.getElementById('editorial');
+let filterPublish = document.getElementById('publish');
+let filterCountry = document.getElementById('country');
+let filterLanguage = document.getElementById('language');
 
-  console.log(currentBooks);
+	
+
+
+  useEffect(() => {
+    dispatch(getGenres())
+    dispatch(getEditorials())
+    dispatch(getPublishedDates())
+    dispatch(getCountries())
+    dispatch(getLanguages())
+  }, []);
   
   const [priceMax, setPriceMax] = useState("");
   const [priceMin, setPriceMin] = useState("");
@@ -74,48 +93,80 @@ alert("No hay libros en ese rango de precio")
 
   const handleData = (event) => {
     const { name, value } = event.target;
+    if (name === "country" && value === "") {
+      delete search.country
+      console.log("1",search);
+    }
+    if (name === "language" && value === "") {
+      
+     delete search.language
+     console.log("2",search);
+     
+    }
     console.log(name, value);
-    setData({
-      ...data,
+     setSearch({
+      ...search,
       [name]: value,
     });
-    console.log(data);
     
   };
 
-  const handleFilterData = async (event) => {
-    console.log(data);
-    dispatch(getBooksByTitle(data))
-   
-    };
+  const handleDeleteCountry = async () => {
+    const updatedSearch = { ...search };
+    delete updatedSearch.country;
+    setSearch(updatedSearch);
+  };
 
-  const handleCleanFilter = () => {
-       
-      setPriceMin("");
-    setPriceMax("");
-    dispatch(getBooksByTitle(search));
-    
+  const handleDeleteLanguage = async () => {
+    const updatedSearch = { ...search };
+    delete updatedSearch.language;
+    setSearch(updatedSearch);
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      // Esperar a que se complete el delete antes de realizar la búsqueda
+      if (search.country === "") {
+        await handleDeleteCountry();
+      }
+      if (search.language === "") {
+        await handleDeleteLanguage();
       }
 
-      const getUniqueValues = (data, key) => {
-        const uniqueValuesSet = new Set();
-      
-        data?.forEach((item) => {
-          if (item[key]) {
-            uniqueValuesSet.add(item[key]);
-          }
-        });
-      
-        return Array.from(uniqueValuesSet);
-      };
+      dispatch(getBooksByTitle(search));
+      console.log(search);
+    };
 
-      const uniqueGenders = getUniqueValues(allBooks, "gender");
-      const uniqueEditorial = getUniqueValues(allBooks, "editorial");
-      const uniquePublishedDate = getUniqueValues(allBooks, "publishedDate");
-      const uniqueCountry = getUniqueValues(allBooks, "country");
-      const uniqueLanguage = getUniqueValues(allBooks, "language");
-      const uniquePrice = getUniqueValues(allBooks, "price");
+    fetchData();
+  }, [search, dispatch]);
 
+  const handleCleanFilter = () => {
+    filterGenre.selectedIndex = 0;
+    filterEditorial.selectedIndex = 0;
+    filterCountry.selectedIndex = 0;
+    filterPublish.selectedIndex = 0;
+    filterLanguage.selectedIndex = 0;
+      setPriceMin("");
+    setPriceMax("");
+    setSearch({
+      title:origin
+    })
+    dispatch(getBooksByTitle(data));
+    
+  }
+
+      const uniqueGenres = []
+      const uniqueEditorial = []
+      const uniquePublishedDate = []
+      const uniqueCountry = []
+      const uniqueLanguage = []
+
+      genres?.map((genre) => uniqueGenres.includes(genre.nameType)? null : uniqueGenres.push(genre.nameType) )
+      editorials?.map((editorial) => uniqueEditorial.includes(editorial.nameType)? null : uniqueEditorial.push(editorial.nameType) )
+      publishedDates?.map((publishedDate) => uniquePublishedDate.includes(publishedDate.nameType)? null : uniquePublishedDate.push(publishedDate.nameType) )
+      countries?.map((country) => uniqueCountry.includes(country.nameType)? null : uniqueCountry.push(country.nameType) )
+      languages?.map((languages) => uniqueLanguage.includes(languages.nameType)? null : uniqueLanguage.push(languages.nameType) )
+      
       
       
     return (
@@ -124,17 +175,17 @@ alert("No hay libros en ese rango de precio")
         <div className={styles.filters}>
           <h1 className={styles.filterTitle}>Filters</h1>
 
-          <select onChange={handleData} defaultValue="Gender" name="gender">
+          <select onChange={handleData} defaultValue="Gender" id="genre" name="gender">
             <option defaultValue value="">
               Genre
             </option>
-            {uniqueGenders?.map((genre) => {
+            {uniqueGenres?.map((genre) => {
               return <option key={genre} value={genre}>
               {genre}
             </option>
             })}
           </select>
-          <select onChange={handleData} defaultValue="Editorial" name="editorial">
+          <select onChange={handleData} defaultValue="Editorial" id="editorial" name="editorial">
             <option defaultValue value="">
               Editorial
             </option>
@@ -144,7 +195,7 @@ alert("No hay libros en ese rango de precio")
             </option>
             })}
           </select>
-          <select onChange={handleData} defaultValue="Published Date" name="publishedDate">
+          <select onChange={handleData} defaultValue="Published Date" id="publish" name="publishedDate">
             <option defaultValue value="">
               Published-Date
             </option>
@@ -154,7 +205,7 @@ alert("No hay libros en ese rango de precio")
             </option>
             })}
           </select>
-          <select onChange={handleData} defaultValue="Country" name="country">
+          <select onChange={handleData} defaultValue="Country" id="country" name="country">
             <option defaultValue value="">
               Country
             </option>
@@ -164,7 +215,7 @@ alert("No hay libros en ese rango de precio")
             </option>
             })}
           </select>
-          <select onChange={handleData} defaultValue="Language" name="language">
+          <select onChange={handleData} defaultValue="Language" id="language" name="language">
             <option defaultValue value="">
               Language
             </option>
@@ -175,22 +226,6 @@ alert("No hay libros en ese rango de precio")
             })}
           </select>
           
-          <select onChange={handleData} defaultValue="Price" name="price">
-            <option defaultValue value="">
-              Price
-            </option>
-            {uniquePrice?.map((price) => {
-              return <option key={price} value={price}>
-              {price}
-            </option>
-            })}
-          </select>
-          <button
-            className={styles.btn}
-            type="submit"
-            placeholder="Filtrar"
-            onClick={() => handleFilterData()}
-          >Apply</button>
           <button
             className={styles.btn}
             type="reset"

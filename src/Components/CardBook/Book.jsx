@@ -1,4 +1,3 @@
-//import React from 'react';
 import fav1 from "../../sources/fav1.png";
 import fav2 from "../../sources/fav2.png";
 import { Link } from "react-router-dom";
@@ -11,47 +10,30 @@ import {
   addFavorite,
   removeCart,
   removeFavorite,
-  sendFavorite,
 } from "../../redux/actions/actions";
 
 const Book = ({ books }) => {
+  const genericCover = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhRKhJb1aLmjwGX_ox0TA6eTxCv_5g3Nlr6w&usqp=CAU";
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const user = useSelector((state) => state.access);
   const userInfo = useSelector((state) => state.userDetail);
-  const inCart = useSelector((state) => state.cart);
-  const favorite = useSelector((state) => state.wishlist);
-
-  const navigate = useNavigate();
-
-  //editUser={id,name, birthday, country, phone, phoneCode, gender, dniPasaport, status, rol, photoUser, listWish}
 
   const { id, image, title, author, price } = books;
   const [isFav, setIsFav] = useState(false);
   const [cart, setCart] = useState(false);
 
-  const genericCover =
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhRKhJb1aLmjwGX_ox0TA6eTxCv_5g3Nlr6w&usqp=CAU";
 
   const handleWishlist = () => {
     if (user.state) {
       if (isFav) {
         setIsFav(false);
-        dispatch(removeFavorite(books.id));
+        dispatch(removeFavorite(user.ref, userInfo.listWish, books.id));
       } else {
         setIsFav(true);
-        dispatch(addFavorite(books.id));
+        dispatch(addFavorite(user.ref, userInfo.listWish, books.id));
       }
-      sendData(favorite);
     }
-  };
-  const sendData = (favorite) => {
-    console.log("existe: ", userInfo);
-    // Creamos una copia del objeto userData y modificamos su propiedad listWish
-    const updatedUserData = { ...userInfo };
-    // Modificamos la propiedad listWish de la copia con el nuevo valor
-    updatedUserData.listWish = favorite;
-    dispatch(sendFavorite(updatedUserData));
-    console.log("User: ", updatedUserData);
   };
 
   const handleCart = () => {
@@ -67,15 +49,14 @@ const Book = ({ books }) => {
   const handleToLog = () => {
     navigate("/access");
   };
+
   useEffect(() => {
-    if (user.state) {
-      if (userInfo.listWish && userInfo.listWish.includes(id)) {
-        setIsFav(true);
-      } else {
-        setIsFav(false);
-      }
+    if (userInfo.listWish && userInfo.listWish.includes(id)) {
+      setIsFav(true);
+    } else {
+      setIsFav(false);
     }
-  }, [userInfo.listWish, id, user.state]);
+  }, [userInfo.listWish,id]);
 
   return (
     <div className={styles.container}>
