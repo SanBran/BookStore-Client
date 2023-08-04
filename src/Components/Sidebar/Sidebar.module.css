@@ -1,3 +1,7 @@
+div, button:focus-visible, button:focus, div button:focus-visible, div button:focus{
+    outline: 0;
+}
+
 .container{
     position: fixed;
     background: none ;
