@@ -45,10 +45,12 @@ const Profile = () => {
   //! si esta en true cuando vuelve al wishlist pasa a false y no se muestra
   return (
     <div className={styles.overlay}>
-      <div className={styles.close} onClick={handleCloseOverlayToggle}>
+      <div className={styles.close} onClick={handleCloseOverlayToggle}></div>
         <div className={styles.overlayContent}>
           <div className={styles.profileContainer}>
-            <img className={styles.profileImg} src={user.photoUser ? user.photoUser : profile_icon} />
+            <div className={styles.profileImg}>
+            <img className={styles.img} src={user.photoUser ? user.photoUser : profile_icon} />
+            </div>
             <h3 className={styles.userName}>{user.name}</h3>
             <h5 className={styles.userEmail}>{user.email}</h5>
           </div>
@@ -80,7 +82,7 @@ const Profile = () => {
             <img src={log_out_icon} alt=">" />
           </div>
         </div>
-      </div>
+      
     </div>
   );
 };

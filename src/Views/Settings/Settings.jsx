@@ -1,9 +1,11 @@
 //import React from "react";
 import styles from "./Settings.module.css";
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import MyData from "./MyData/MyData";
 import Security from "./Security/Security";
+import DragAndDrop from "../../Components/DragAndDrop/DragAndDrop";
+import { useDispatch, useSelector } from "react-redux";
+import { updateUser } from "../../redux/actions/actions";
 
 //----icons
 import profile_icon from '../../assets/icons/profile.svg';
@@ -12,8 +14,20 @@ import edit_icon from '../../assets/icons/edit_icon.svg';
 
 function Settings() {
   const user = useSelector((state) => state.userDetail);
+  const dispatch = useDispatch()
+  
 
-  const [currentView, setCurrentView] = useState("data"); 
+  const [currentView, setCurrentView] = useState("data");
+  const [form, setForm] = useState({
+    id: user.id,
+    photoUser: user.photoUser
+  }) 
+  useEffect(() => {
+    dispatch(updateUser(form));
+  }, [form]);
+
+  
+  
 
   return (
     <div className={styles.container}>
@@ -21,8 +35,11 @@ function Settings() {
         <div className={styles.containerData}>
           <h2 className={styles.title}>Settings</h2>
           <div className={styles.containerImg}>
-            <img className={styles.userImg} src={user.photoUser ? user.photoUser : profile_icon} width="70" height="70" />
             <img className={styles.editImg} src={edit_icon} alt="edit" />
+            <img className={styles.userImg} src={user.photoUser ? user.photoUser : profile_icon}  />
+            <div className={styles.DragAndDrop}>
+            <DragAndDrop user={user}  setForm={setForm} />
+            </div>
           </div>
           <h2 className={styles.name}>{user.name}</h2>
         </div>
