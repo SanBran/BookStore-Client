@@ -35,7 +35,7 @@ const MercadoPago = ({ cart, userInfo ,styles}) => {
     try {
       console.log(attemptObject);
       const response = await axios.post(
-        "https://bookstorepf-production.up.railway.app/mercadoPago",
+        "/mercadoPago",
         attemptObject
       );
       const sureThing = response.data;
