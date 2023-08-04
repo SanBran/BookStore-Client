@@ -14,11 +14,6 @@ import {
   POST_BOOK,
   UPDATE_BOOK_BY_ID,
   DELETE_BOOK_BY_ID,
-  GET_FAILURE,
-  GET_PENDING,
-  GET_SUCCESS,
-  POST_MERCADOPAGO,
-  POST_WEBHOOK_PAGO,
   POST_EMAIL,
   POST_SMS_WHATSAPP,
   FILTER_BY_GENRER,
@@ -79,18 +74,15 @@ let initialState = {
   book: [],
   bookByName: [],
   cart: [],
-  wishlist: [],
   filteredBooks: [],
   details: [],
   booksByAuthor: [],
   comments: [],
-  paymentStatus: null,
   payments: [],
   response: {},
   error: null,
   users: [],
   userDetail: [],
-  userDetailFav: [],
   overlayProfile: false,
   showListwish: false,
   token: "",
@@ -410,7 +402,7 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         allBooksCopy: payload,
       };
-    //----------------------------mercadoPago----------------
+    //----------------------------PAYMENTS----------------
     // revisar mercadoPago no estoy seguro como funciona
     case ADD_CART:
       console.log("hola soy el cart", state.cart);
@@ -425,40 +417,10 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         cart: filter,
       };
-    case GET_FAILURE:
-      return {
-        ...state,
-        paymentStatus: payload,
-        error: null,
-      };
-    case GET_SUCCESS:
-      return {
-        ...state,
-        paymentStatus: payload,
-        error: null,
-      };
-    case GET_PENDING:
-      return {
-        ...state,
-        paymentStatus: payload,
-        error: null,
-      };
     case GET_PAYMENTS:
       return {
         ...state,
         payments: payload,
-        error: null,
-      };
-    case POST_MERCADOPAGO:
-      return {
-        ...state,
-        paymentStatus: payload,
-        error: null,
-      };
-    case POST_WEBHOOK_PAGO:
-      return {
-        ...state,
-        paymentStatus: payload,
         error: null,
       };
     //----------------------------WHATSAPP----------------
@@ -550,7 +512,11 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         access: payload,
       };
-
+//Esto es para práctica de Google
+//case GOOGLE_CONFIRM:
+//  return{...state, 
+//    //Sin respuesta aparente thanks to searchById
+//  }
     case GET_TOKEN:
       return{
         ...state,

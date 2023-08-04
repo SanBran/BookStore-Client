@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Cart from "./Views/Cart.jsx/Cart";
 import { PaymentDetails } from "./Views/Cart.jsx/PaymentDetails/PaymentDetails";
 import SucessfulPay from "./Views/Cart.jsx/SuccesfulPay/SucessfulPay";
+import SuccessfulAcquisition from "./Views/Cart.jsx/FreeBooks/Freebooks";
 
 import { useEffect, useState } from "react";
 import PendingPay from "./Views/Cart.jsx/PendingPay/PendingPay";
@@ -26,9 +27,9 @@ import FailurePay from "./Views/Cart.jsx/FailurePay/FailurePay";
 //pasos para el deploy
 import axios from "axios";
 //-------local
-axios.defaults.baseURL = "http://localhost:8000/";
+//axios.defaults.baseURL = "http://localhost:8000/";
 //-------deployado
-//axios.defaults.baseURL = "https://bookstorepf-production.up.railway.app";
+axios.defaults.baseURL = "https://bookstorepf-production.up.railway.app";
 
 //-------Manejando cookies para mantener sesiones
 import Cookies from 'js-cookie';
@@ -46,13 +47,10 @@ function App() {
   useEffect(() => {
     const token = Cookies.get('valToken');
     const email = Cookies.get('email');
-    console.log(token, '\n', email);
     if (token && email) {
       (async () => {
         const user = await dispatch(validateSession(email, token));
-        console.log(user);
         await dispatch(accessUser(true, user.id));
-        console.log('final del useEffect');
       })()
     }
   }, [])
@@ -96,6 +94,7 @@ function App() {
               <Route path="/payment/sucessfulpay" element={<SucessfulPay />} />
               <Route path="/payment/pendingpay" element={<PendingPay />} />
               <Route path="/payment/failurepay" element={<FailurePay />} />
+              <Route path="/freeBookacquisition" element={<SuccessfulAcquisition />} />
 
               <Route path="*" element={<NotFound />} />
             </Routes>

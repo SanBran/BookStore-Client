@@ -121,7 +121,11 @@ input:focus-visible {
     border-bottom: solid 1px #FA9D1B;
 }
 
-.googleBtn{
+.googleContainer{
+    display: flex;
+    justify-content: center;
+}
+/* .googleBtn{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -145,4 +149,6 @@ input:focus-visible {
     background-color: #FA9D1B;
 
     color: #F5F5F5;
-}
+} */
+
+

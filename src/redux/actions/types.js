@@ -11,13 +11,7 @@ export const UPDATE_BOOK_BY_ID = "UPDATE_BOOK_BY_ID";
 export const DELETE_BOOK_BY_ID = "DELETE_BOOK_BY_ID";
 export const RESET_BOOKS_BY_AUTHOR = "RESET_BOOKS_BY_AUTHOR";
 
-// datos de mercadopago
-//name,email,IdBook,carrito:[{productId,quantity}],typeMoney,userId
-export const POST_MERCADOPAGO = "POST_MERCADOPAGO";
-export const POST_WEBHOOK_PAGO = "POST_WEBHOOK_PAGO";
-export const GET_FAILURE = "GET_FAILURE";
-export const GET_PENDING = "GET_PENDING";
-export const GET_SUCCESS = "GET_SUCCESS";
+// PAYMENTS
 export const GET_PAYMENTS = "GET_PAYMENTS";
 
 //whatsapp
@@ -58,6 +52,7 @@ export const ADD_CART = "ADD_CART";
 //USERS
 export const ACCESS = "ACCESS";
 export const GET_TOKEN= "GET_TOKEN";
+//export const GOOGLE_CONFIRM ="GOOGLE_CONFIRM";
 export const VALIDATE_SESSION = "VALIDATE_SESSION";
 export const OVERLAY_PROFILE = "OVERLAY_PROFILE";
 export const SHOW_LISTWISH = "SHOW_LISTWISH";
