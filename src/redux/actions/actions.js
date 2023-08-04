@@ -558,11 +558,9 @@ export function obtainToken({ email }) {
       };
       const response = await axios.post("/activateUser/", theData);
       dispatch({ type: GET_TOKEN, payload: response.data });
-      return response.data;
+      return response.data.text;
     } catch (error) {
-      return error.response.data;
-      //console.log(error);
-      //throw new Error(error.message);
+      throw new Error(error.message);
     }
   };
 }
