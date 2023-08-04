@@ -7,9 +7,11 @@ import { getComents } from '../../redux/actions/actions'
 
 const Comments = () => {
 
+    const loggedIn = useSelector(state => state.access.state)
+    const state = useSelector(state => state)
+    console.log(state);
     const dispatch = useDispatch()
 
-    const [comment, setComment] = useState([])
 
     const [form, setForm] = useState({
         comment: '',
@@ -18,7 +20,6 @@ const Comments = () => {
         userId: ''
     })
 
-    const loggedIn = useSelector(state => state.access.state)
 
     const handleSubmit = (e) => {
         e.preventDefault()
