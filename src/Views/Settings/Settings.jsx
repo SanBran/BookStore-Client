@@ -35,11 +35,11 @@ function Settings() {
         <div className={styles.containerData}>
           <h2 className={styles.title}>Settings</h2>
           <div className={styles.containerImg}>
-            <img className={styles.editImg} src={edit_icon} alt="edit" />
             <img className={styles.userImg} src={user.photoUser ? user.photoUser : profile_icon}  />
             <div className={styles.DragAndDrop}>
             <DragAndDrop user={user}  setForm={setForm} />
             </div>
+            <img className={styles.editImg} src={edit_icon} alt="edit" />
           </div>
           <h2 className={styles.name}>{user.name}</h2>
         </div>
