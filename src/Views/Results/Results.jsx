@@ -95,12 +95,12 @@ alert("No hay libros en ese rango de precio")
     const { name, value } = event.target;
     if (name === "country" && value === "") {
       delete search.country
-      console.log("1",search);
+      setActive(1)
     }
     if (name === "language" && value === "") {
       
      delete search.language
-     console.log("2",search);
+     setActive(1)
      
     }
     console.log(name, value);
@@ -108,6 +108,7 @@ alert("No hay libros en ese rango de precio")
       ...search,
       [name]: value,
     });
+    setActive(1)
     
   };
 
@@ -134,7 +135,7 @@ alert("No hay libros en ese rango de precio")
       }
 
       dispatch(getBooksByTitle(search));
-      console.log(search);
+      setActive(1)
     };
 
     fetchData();
@@ -151,6 +152,7 @@ alert("No hay libros en ese rango de precio")
     setSearch({
       title:origin
     })
+    setActive(1)
     dispatch(getBooksByTitle(data));
     
   }
