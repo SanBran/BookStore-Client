@@ -4,7 +4,7 @@ import { fileUpload } from '../../utils/fileUpload'
 import { BoxDragAndDrop } from './BoxDragAndDrop';
 import { ImageSelected } from './ImageSelected';
 
-function DragAndDrop({setForm, user}) {
+function DragAndDrop({user, updateImg}) {
 
     const [images, setImages] = useState([]);
     const [urlImage, setUrlImage] = useState('')
@@ -21,12 +21,9 @@ const handleChange = (image) => setImages(image)
 
     if (url) {
         setUrlImage(url);
-        setForm((prevForm) => ({
-          ...prevForm,
-          photoUser: url
-        }));
-        
-        
+
+        updateImg(url);
+                
       } else alert('Error, please try again later. ❌');
       
     
