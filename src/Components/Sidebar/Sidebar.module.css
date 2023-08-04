@@ -1,4 +1,4 @@
-div, button:focus-visible, button:focus, div button:focus-visible, div button:focus{
+div:focus-visible, div:focus, button:focus-visible, button:focus, div button:focus-visible, div button:focus{
     outline: 0;
 }
 
