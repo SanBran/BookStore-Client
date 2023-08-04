@@ -11,15 +11,25 @@ const MyData = () => {
   const user = useSelector((state) => state.userDetail);
 
   const [formData, setFormData] = useState({
-    id: user.id,
-    name: user.name,
-    dniPasaport: user.dniPasaport,
-    phoneCode: user.phoneCode,
-    phone: user.phone,
-    country: user.country,
-    birthday: user.birthday,
-    gender: user.gender,
+    name:'',
+    dniPasaport:'',
+    phoneCode:'',
+    phone:'',
+    country:'',
+    birthday:'',
+    gender:'',
   });
+  useEffect(()=>{
+    setFormData({
+      name: user.name ? user.name : '',
+      dniPasaport: user.dniPasaport ? user.dniPasaport : '',
+      phoneCode: user.phoneCode ? user.phoneCode : '',
+      phone: user.phone ? user.phone : '',
+      country: user.country ? user.country :'',
+      birthday: user.birthday ? user.birthday : '',
+      gender: user.gender ? user.gender : '',
+    });
+  },[user]);
   const [errors, setErrors] = useState({
     name: "",
     dniPasaport: "",
