@@ -38,7 +38,7 @@
 
 /* items del carrito */
 .cartContainer{
-    height: 370px;
+    height: 500px;
     border-bottom: 1px solid #dadada;
     box-shadow: 0px 11px 20px -15px rgb(0 0 0 / 16%);
     overflow: auto;
