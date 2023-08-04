@@ -28,9 +28,17 @@
 }
 
 .profile{
+    display: flex;
+  justify-content: center;
+  overflow: hidden;
     height: 50px;
+    width: 50px;
+    border-radius: 100%;
     cursor: pointer;
 }
+.img{
+    height: 100%;
+  }
 
 .cartIcon{
     margin-top: 15px;

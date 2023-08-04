@@ -15,6 +15,7 @@ const Navbar = () => {
   const showOverlayPerfile = useSelector((state) => state.overlayProfile);
   const access = useSelector((state) => state.access.state);
   const cart = useSelector((state) => state.cart);
+  const user = useSelector((state) => state.userDetail);
 
   const handleOverlayToggle = () => {
     if (access) {
@@ -60,12 +61,8 @@ const Navbar = () => {
         <></>
       )}
       <div className={styles.profile}>
-        <img
-          className={styles.profile}
-          src={profileLogo}
-          alt=""
-          onClick={handleOverlayToggle}
-        />
+      <img className={styles.img} onClick={handleOverlayToggle} src={user.photoUser ? user.photoUser : profileLogo} />
+        
       </div>
     </nav>
   );

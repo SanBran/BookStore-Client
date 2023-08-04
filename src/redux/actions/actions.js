@@ -57,8 +57,8 @@ import {
   GET_EDITORIALS,
   GET_COUNTRIES,
   GET_LANGUAGES,
-  GET_PUBLISHEDDATES
-//  GOOGLE_CONFIRM,
+  GET_PUBLISHEDDATES,
+  //  GOOGLE_CONFIRM,
 } from "./types";
 
 export const DETAIL_BOOK_BY_ID = "DETAIL_BOOK_BY_ID";
@@ -579,7 +579,6 @@ export function validateSession(email, token) {
       return response.data.detail.userValidate.findUser[0];
     } catch (error) {
       //return error.response.data;
-      console.log(error);
       throw new Error(error.message);
     }
   };
@@ -611,7 +610,7 @@ export function accessLogIn({ email, password }) {
 }
 
 export function accessGoogle({ email, name, picture, sub }) {
-//---------------------------------------------------sub es el id de usuario de google
+  //---------------------------------------------------sub es el id de usuario de google
   return async function (dispatch) {
     try {
       const userData = {
@@ -619,12 +618,17 @@ export function accessGoogle({ email, name, picture, sub }) {
         data1: email,
         data2: sub,
         data3: name,
-        data4: picture
+        data4: picture,
       };
-      const user = await axios.post('/activateUser/', userData);
+      const user = await axios.post("/activateUser/", userData);
       dispatch({
         type: ACCESS,
-        payload: { state: true, ref: user.data.detail.newUser ? user.data.detail.newUser.id :user.data.detail.userFind.id },
+        payload: {
+          state: true,
+          ref: user.data.detail.newUser
+            ? user.data.detail.newUser.id
+            : user.data.detail.userFind.id,
+        },
       });
       return user.data.detail.tokenJwt;
     } catch (error) {
