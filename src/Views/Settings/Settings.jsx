@@ -5,7 +5,7 @@ import MyData from "./MyData/MyData";
 import Security from "./Security/Security";
 import DragAndDrop from "../../Components/DragAndDrop/DragAndDrop";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUser } from "../../redux/actions/actions";
+import { logOut, updateUser } from "../../redux/actions/actions";
 
 //----icons
 import profile_icon from '../../assets/icons/profile.svg';
@@ -18,13 +18,12 @@ function Settings() {
   
 
   const [currentView, setCurrentView] = useState("data");
-  const [form, setForm] = useState({
-    id: user.id,
-    photoUser: user.photoUser
-  }) 
-  useEffect(() => {
-    dispatch(updateUser(form));
-  }, [form]);
+  const updateImg = (img)=>{
+    dispatch(updateUser({
+      id: user.id,
+      photoUser: img
+    }));
+  }
 
   
   
@@ -37,7 +36,7 @@ function Settings() {
           <div className={styles.containerImg}>
             <img className={styles.userImg} src={user.photoUser ? user.photoUser : profile_icon}  />
             <div className={styles.DragAndDrop}>
-            <DragAndDrop user={user}  setForm={setForm} />
+            <DragAndDrop user={user} updateImg={updateImg} />
             </div>
             <img className={styles.editImg} src={edit_icon} alt="edit" />
           </div>
