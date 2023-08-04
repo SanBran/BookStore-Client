@@ -47,16 +47,13 @@
 }
 .editImg{
     position: absolute;
-    opacity: 0;
+    opacity: .5;
     width: 40px;
-    padding: 55px;
+    z-index: 0;
     
     transition: all 0.3s ease-in-out;
 }
-.editImg:hover{
-    opacity: 1;
-    
-}
+
 .name{
     width: 80%;
     margin-top: 50px;
@@ -122,3 +119,7 @@
     border-radius: 100%;
     z-index: 999;
 }
+
+.DragAndDrop:hover .editImg {
+    opacity: 1;
+  }
