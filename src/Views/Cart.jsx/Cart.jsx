@@ -122,12 +122,11 @@ const totalPrice = cart.reduce((total, book) => total + book.price, 0);
     totalPrice: totalPrice,
     total_paid_amount:totalPrice
   }
-  console.log(cart)
-  console.log('Soy el mamalon de los datos',datapay)
+ 
   const handlerfreebooks = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:8000/freeBooks",
+        "https://book-store-client-coral.vercel.app/freeBooks",
         datapay
       );
       const sureThing = response.data;
