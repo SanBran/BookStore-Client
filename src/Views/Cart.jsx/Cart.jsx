@@ -111,7 +111,7 @@ const dataPay = {
 const totalPrice = cart.reduce((total, book) => total + book.price, 0);
 
   const datapay = {
-
+    userId: user.id,
     email: user.email,
     name: user.name,
     bookIds: cart.map((book) => book.id),
@@ -121,6 +121,7 @@ const totalPrice = cart.reduce((total, book) => total + book.price, 0);
     typeMoney: cart.map((book) => "ARG"),
     totalPrice: totalPrice,
     total_paid_amount:totalPrice
+    
   }
  
   const handlerfreebooks = async () => {
