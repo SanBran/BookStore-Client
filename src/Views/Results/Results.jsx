@@ -72,23 +72,12 @@ let filterLanguage = document.getElementById('language');
   };
 
   const handleFilter = async (event) => {
-
-    const sendBody = {
+    setCurrentPage(1)
+    setSearch({
+      ...search,
       priceRange: `${priceMin}-${priceMax}`,
-    };
+    });
 
-     const filteredBooks = allBooks.filter((book) => {
-    const bookPrice = parseFloat(book.price);
-    return !isNaN(bookPrice) && bookPrice >= priceMin && bookPrice <= priceMax;
-  });
-
-
-  if(filteredBooks.length === 0){
-alert("No hay libros en ese rango de precio")
-  }
-   dispatch(FilterByPriceRange(filteredBooks));
-    
-  
    } 
 
   const handleData = (event) => {
@@ -135,6 +124,7 @@ alert("No hay libros en ese rango de precio")
       }
 
       dispatch(getBooksByTitle(search));
+      setCurrentPage(1)
       setActive(1)
     };
 
@@ -153,6 +143,7 @@ alert("No hay libros en ese rango de precio")
       title:origin
     })
     setActive(1)
+    setCurrentPage(1)
     dispatch(getBooksByTitle(data));
     
   }
