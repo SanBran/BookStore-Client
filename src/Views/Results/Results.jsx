@@ -77,6 +77,10 @@ let filterLanguage = document.getElementById('language');
       ...search,
       priceRange: `${priceMin}-${priceMax}`,
     });
+    setData({
+      ...data,
+      priceRange: `${priceMin}-${priceMax}`,
+    });
 
    } 
 
