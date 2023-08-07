@@ -523,8 +523,8 @@ export function postComment(comment) {
 export function updateCommentById({ id, rating, comment }) {
   return async function (dispatch) {
     try {
-      //console.log(id, rating, comment);
-      const response = await axios.put(`/updateComment/${id}`, rating, comment);
+      console.log(id, rating, comment, 'desde actions');
+      const response = await axios.put(`/updateComment/${id}`, { rating, comment });
       return dispatch({
         type: UPDATE_COMMENT_BY_ID,
         payload: response.data,

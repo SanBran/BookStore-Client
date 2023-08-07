@@ -44,63 +44,63 @@ function App() {
 
   const [server, setServer] = useState(true);
 
-  useEffect(()=>{
-      const token = Cookies.get('valToken');
-      const email = Cookies.get('email');
-      if(token && email) {
-        (async()=>{
-          const user = await dispatch(validateSession(email, token));
-          await dispatch(accessUser(true, user.id));
-          await dispatch(getUserById(user.id))
-        })()
-      }
-  },[])
+  useEffect(() => {
+    const token = Cookies.get('valToken');
+    const email = Cookies.get('email');
+    if (token && email) {
+      (async () => {
+        const user = await dispatch(validateSession(email, token));
+        await dispatch(accessUser(true, user.id));
+        await dispatch(getUserById(user.id))
+      })()
+    }
+  }, [])
 
-  useEffect(()=>{
-    (async()=>{
+  useEffect(() => {
+    (async () => {
       try {
         await axios.post('/getBooks');
       } catch (error) {
         setServer(false);
       }
     })()
-  },[])
+  }, [])
 
 
   return (
     <>
       {!server
-      ?(<NotFound />)
-      :(<>
-        {showOverlayPerfile && <Profile />}
-        <div >
-          {location.pathname !== "/profile" && location.pathname !== "/access" && (location.pathname !== "/results") && (location.pathname !== "/")
-          ? (<Navbar />) 
-          :(<></>)
-          }
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/access" element={<Access />} />
-            <Route path="/detail/:id" element={<BooksDetail />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/wishlist" element={<Wishlist />} />
-            <Route path="/history" element={<History />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/Filters" element={<Filters />} />
-            <Route path="/Results" element={<Results />} />
-            <Route path="/access/validate" element={<EmailVerification />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/payment" element={<PaymentDetails />} />
-            <Route path="/payment/:id" element={<PaymentDetails />} />
-            <Route path="/payment/sucessfulpay" element={<SucessfulPay />} />
-            <Route path="/payment/pendingpay" element={<PendingPay />} />
-            <Route path="/payment/failurepay" element={<FailurePay />} />
-            <Route path="/freeBookacquisition" element={<SuccessfulAcquisition />} />
+        ? (<NotFound />)
+        : (<>
+          {showOverlayPerfile && <Profile />}
+          <div >
+            {location.pathname !== "/profile" && location.pathname !== "/access" && (location.pathname !== "/results") && (location.pathname !== "/")
+              ? (<Navbar />)
+              : (<></>)
+            }
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/access" element={<Access />} />
+              <Route path="/detail/:id" element={<BooksDetail />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/wishlist" element={<Wishlist />} />
+              <Route path="/history" element={<History />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="/Filters" element={<Filters />} />
+              <Route path="/Results" element={<Results />} />
+              <Route path="/access/validate" element={<EmailVerification />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/payment" element={<PaymentDetails />} />
+              <Route path="/payment/:id" element={<PaymentDetails />} />
+              <Route path="/payment/sucessfulpay" element={<SucessfulPay />} />
+              <Route path="/payment/pendingpay" element={<PendingPay />} />
+              <Route path="/payment/failurepay" element={<FailurePay />} />
+              <Route path="/freeBookacquisition" element={<SuccessfulAcquisition />} />
 
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </div>
-      </>)
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
+        </>)
       }
 
     </>

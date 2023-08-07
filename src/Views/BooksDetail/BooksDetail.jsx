@@ -11,17 +11,18 @@ import axios from "axios"
 import instagram_icon from '../../assets/icons/instagram_icon.png';
 import facebook_icon from '../../assets/icons/facebook_icon.png';
 import share_icon from '../../assets/icons/share_icon.svg';
+import Comments from "../../Components/Comments/Comments"
 
 const BooksDetail = () => {
   const navigate = useNavigate();
-  const user = useSelector(state=>state.access);
-  const cart = useSelector(state=>state.cart);
+  const user = useSelector(state => state.access);
+  const cart = useSelector(state => state.cart);
   const [inCart, setIncart] = useState(false);
 
-  useEffect(()=>{
-    const find = cart.find(item=>item?.id === book.id);
+  useEffect(() => {
+    const find = cart.find(item => item?.id === book.id);
     find && setIncart(true);
-  },[])
+  }, [])
 
   const genericCover =
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhRKhJb1aLmjwGX_ox0TA6eTxCv_5g3Nlr6w&usqp=CAU";
@@ -78,16 +79,16 @@ const BooksDetail = () => {
   const handleToLog = () => {
     navigate("/access");
   };
-  const handlerCart = (book)=>{
-    if(user.state){
-      if(!inCart) {
+  const handlerCart = (book) => {
+    if (user.state) {
+      if (!inCart) {
         dispatch(addCart(book));
         setIncart(true);
-      } else{
+      } else {
         dispatch(removeCart(book.id));
         setIncart(false);
       }
-    }else{
+    } else {
       navigate('/access');
     }
   }
@@ -115,8 +116,8 @@ const BooksDetail = () => {
           <div className={styles.priceAndActions}>
             <p className={styles.price}>{book.price !== 0 ? `$ ${book.price}` : "Free"}</p>
             <p className={styles.format}>PDF format</p>
-            <button className={styles.buyBtn} onClick={()=>{navigate(`/payment/${book.id}`)}}>BUY NOW</button>
-            <button className={styles.cartBtn} onClick={()=>{handlerCart(book)}}>{inCart ? "REMOVE FROM CART":"ADD TO CART"}</button>
+            <button className={styles.buyBtn} onClick={() => { navigate(`/payment/${book.id}`) }}>BUY NOW</button>
+            <button className={styles.cartBtn} onClick={() => { handlerCart(book) }}>{inCart ? "REMOVE FROM CART" : "ADD TO CART"}</button>
           </div>
         </div>
         <div className={styles.descriptionContainer}>
@@ -186,7 +187,7 @@ const BooksDetail = () => {
           <h3>No books related with Author</h3>
         )}
       </div>
-
+      <Comments id={id} book={book} />
     </div>
   );
 }
