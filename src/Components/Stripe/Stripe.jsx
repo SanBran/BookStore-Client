@@ -1,6 +1,7 @@
 import axios from "axios";
+import stripe_icon from '../../assets/icons/stripe_icon.svg'
 
-const Stripe = ({ cart, userInfo ,styles}) => {
+const Stripe = ({ cart, userInfo, styles }) => {
   //esto para el carrito
   const cartInfo = cart?.map((books) => {
     return {
@@ -51,8 +52,9 @@ const Stripe = ({ cart, userInfo ,styles}) => {
     <div>
       <button
         onClick={handlePaymentStripe}
-        className={styles.Back}
+        className={styles.payBtn}
       >
+        <img src={stripe_icon} alt="icon" />
         Stripe
       </button>
     </div>

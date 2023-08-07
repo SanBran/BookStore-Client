@@ -1,6 +1,7 @@
 import axios from "axios";
+import mercado_pago_icon from '../../assets/icons/mercado_pago_icon.svg';
 
-const MercadoPago = ({ cart, userInfo ,styles}) => {
+const MercadoPago = ({ cart, userInfo, styles }) => {
   //esto para el carrito
   const cartInfo = cart?.map((books) => {
     return {
@@ -53,9 +54,10 @@ const MercadoPago = ({ cart, userInfo ,styles}) => {
     <div>
       <button
         onClick={handlePaymentMErcadoPago}
-        className={styles.Back}
+        className={styles.payBtn}
       >
-        MercadoPago
+        <img src={mercado_pago_icon} alt="icon" />
+        Mercado Pago
       </button>
     </div>
   );
