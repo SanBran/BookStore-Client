@@ -11,6 +11,7 @@ import Settings from "./Views/Settings/Settings";
 import Filters from "./Components/Filters/Filters";
 import Results from "./Views/Results/Results";
 import NotFound from "./Views/NotFound/NotFound";
+import AdminDashboard from "./Views/Admin/AdminDashboard";
 
 import EmailVerification from "./Views/EmailVerification";
 
@@ -27,9 +28,9 @@ import FailurePay from "./Views/Cart.jsx/FailurePay/FailurePay";
 //pasos para el deploy
 import axios from "axios";
 //-------local
-//axios.defaults.baseURL = "http://localhost:8000/";
+axios.defaults.baseURL = "http://localhost:8000/";
 //-------deployado
-axios.defaults.baseURL = "https://bookstorepf-production.up.railway.app";
+// axios.defaults.baseURL = "https://bookstorepf-production.up.railway.app";
 
 //-------Manejando cookies para mantener sesiones
 import Cookies from 'js-cookie';
@@ -74,7 +75,7 @@ function App() {
         : (<>
           {showOverlayPerfile && <Profile />}
           <div >
-            {location.pathname !== "/profile" && location.pathname !== "/access" && (location.pathname !== "/results") && (location.pathname !== "/")
+            {location.pathname !== "/admin" && location.pathname !== "/profile" && location.pathname !== "/access" && (location.pathname !== "/results") && (location.pathname !== "/")
               ? (<Navbar />)
               : (<></>)
             }
@@ -96,6 +97,7 @@ function App() {
               <Route path="/payment/pendingpay" element={<PendingPay />} />
               <Route path="/payment/failurepay" element={<FailurePay />} />
               <Route path="/freeBookacquisition" element={<SuccessfulAcquisition />} />
+              <Route path="/admin" element={<AdminDashboard />}/>
 
               <Route path="*" element={<NotFound />} />
             </Routes>
