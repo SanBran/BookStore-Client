@@ -523,8 +523,8 @@ export function postComment(comment) {
 export function updateCommentById({ id, rating, comment }) {
   return async function (dispatch) {
     try {
-      //console.log(id, rating, comment);
-      const response = await axios.put(`/updateComment/${id}`, rating, comment);
+      console.log(id, rating, comment, 'desde actions');
+      const response = await axios.put(`/updateComment/${id}`, { rating, comment });
       return dispatch({
         type: UPDATE_COMMENT_BY_ID,
         payload: response.data,
@@ -558,11 +558,9 @@ export function obtainToken({ email }) {
       };
       const response = await axios.post("/activateUser/", theData);
       dispatch({ type: GET_TOKEN, payload: response.data });
-      return response.data;
+      return response.data.text;
     } catch (error) {
-      return error.response.data;
-      //console.log(error);
-      //throw new Error(error.message);
+      throw new Error(error.message);
     }
   };
 }
@@ -673,7 +671,6 @@ export function getUsers() {
 export function getUserById(id) {
   return async function (dispatch) {
     try {
-      //console.log(title);
       const response = await axios.post(`/findUser/${id}`);
       return dispatch({
         type: GET_USER_BY_ID,
@@ -684,19 +681,15 @@ export function getUserById(id) {
     }
   };
 }
-//userData={name, birthday, country, phone, phoneCode, gender, email, password, dniPasaport, status, rol, photoUser, listWish}
 export function postUser(userData) {
   return async function (dispatch) {
     try {
-      //console.log(userData);
       const response = await axios.post(`/newUser`, userData);
-      //console.log(userData);
       return dispatch({
         type: POST_USER,
         payload: response.data,
       });
     } catch (error) {
-      //console.log(error.response? error.response : error.message);
       throw Error(error.response ? error.response.data.text : error.message);
     }
   };
@@ -710,14 +703,12 @@ export function activateUser(token) {
         data1: token,
         data2: "",
       };
-      //console.log(userData);
       const response = await axios.post(`/activateUser/`, userData);
       return dispatch({
         type: ACTIVATE_USER,
         payload: response.data,
       });
     } catch (error) {
-      //console.log(error);
       throw Error(error.message);
     }
   };
@@ -752,15 +743,12 @@ export function passwordRequest(email) {
         data1: email,
         data2: "",
       };
-
-      console.log(userData);
       const response = await axios.post(`/activateUser/`, userData);
       return dispatch({
         type: PASSWORD_REQUEST,
         payload: response.data,
       });
     } catch (error) {
-      console.log(error);
       throw Error(error.response ? error.response.data.text : error.message);
     }
   };

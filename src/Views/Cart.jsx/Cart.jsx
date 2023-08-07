@@ -111,7 +111,7 @@ const dataPay = {
 const totalPrice = cart.reduce((total, book) => total + book.price, 0);
 
   const datapay = {
-
+    userId: user.id,
     email: user.email,
     name: user.name,
     bookIds: cart.map((book) => book.id),
@@ -121,12 +121,13 @@ const totalPrice = cart.reduce((total, book) => total + book.price, 0);
     typeMoney: cart.map((book) => "ARG"),
     totalPrice: totalPrice,
     total_paid_amount:totalPrice
+    
   }
  
   const handlerfreebooks = async () => {
     try {
       const response = await axios.post(
-        "https://bookstorepf-production.up.railway.app/freeBooks",
+        "/freeBooks",
         datapay
       );
       const sureThing = response.data;

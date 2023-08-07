@@ -22,7 +22,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 90vw;
+  width: 85vw;
   height: 100%;
   z-index: 9999;}
 
@@ -47,16 +47,16 @@
   padding: 20px 0;
 }
 .profileImg{
-  display: flex;
-  justify-content: center;
-  overflow: hidden;
   width: 70px;
   height: 70px;
+  overflow: hidden;
   border-radius: 100%;
   margin: 0 auto;
 }
 .img{
+  width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 .userName{
   padding: 0 20px;

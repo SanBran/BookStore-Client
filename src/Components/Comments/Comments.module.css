@@ -1,3 +1,26 @@
 textarea {
     resize: none;
 }
+
+.commentContainer {
+    display: flex;
+    align-items: center;
+}
+
+.commentText {
+    flex: 1;
+    align-items: start;
+
+}
+
+.starRating {
+    display: flex;
+}
+
+.AiFillStar {
+    color: #FA9D1B;
+}
+
+.AiOutlineStar {
+    color: #453014;
+}

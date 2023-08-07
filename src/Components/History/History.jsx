@@ -1,10 +1,9 @@
 //import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import Book from "../CardBook/Book";
 import styles from "./Histoy.module.css";
 import { useEffect, useState } from "react";
-import { getBooksById } from "../../redux/actions/actions";
 import { Link } from "react-router-dom";
+
 
 function History() {
   const dispatch = useDispatch();
@@ -15,51 +14,53 @@ function History() {
   useEffect(() => {
     console.log("pagos: ", payments);
     const getBooks = async () => {
-      if (!payments || payments.length === 0) {
-        return;
-      }
-      const promises = payments.map((pay) =>
-        pay.bookIds.map((id) => dispatch(getBooksById(id)))
+      const books = payments.flatMap((payment) =>
+        payment.books.map((book) => book)
       );
-      console.log("promesa: ", promises);
-
-      const resolvedBooks = await Promise.all(
-        promises.map(async (promiseGroup) => await Promise.all(promiseGroup))
-      );
-      console.log("promesaResuelta: ", resolvedBooks);
-
-      const validBooks = resolvedBooks.flat().filter((book) => book !== null);
-      setBooks(validBooks);
+      setBooks(books);
     };
-
     getBooks();
   }, [payments, dispatch]);
 
+  const handleDownload = (downloadLink) => {
+    const link = document.createElement("a");
+    link.href = downloadLink;
+    link.download = "fileName" || "archivo"; // Nombre del archivo a descargar
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
   console.log("libros: ", books);
   return (
     <div className={styles.booksContainer}>
       <h2 className={styles.title2}>History </h2>
       {books.map((book) => (
-       <div key={book.payload.id + 5} className={styles.container}>
-       <Link className={styles.image} to={`/detail/${book.payload.id}`}>
-         <img
-           className={styles.imageSize}
-           src={book.payload.image}
-           alt={`${book.payload.title} from ${book.payload.author}`}
-         />
-       </Link>
- 
-       <div className={styles.textContainer}>
-         <div className={styles.title}>{book.payload.title}</div>
-         <div className={styles.author}>{book.payload.author}</div>
-         {book.payload.price && book.payload.price ? (
-           <div className={styles.price}>${book.payload.price}           
-           </div>
-         ) : (
-           <div className={styles.price}>Free</div>
-         )}
-       </div>
-     </div>
+        <div key={book.id + 5} className={styles.container}>
+          <Link className={styles.image} to={`/detail/${book.id}`}>
+            <img
+              className={styles.imageSize}
+              src={book.image}
+              alt={`${book.title} from ${book.author}`}
+            />
+          </Link>
+
+          <div className={styles.textContainer}>
+            <div className={styles.title}>{book.title}</div>
+            <div className={styles.author}>{book.author}</div>
+            {book.price && book.price ? (
+              <div className={styles.price}>${book.price}</div>
+            ) : (
+              <div className={styles.price}>Free</div>
+            )}
+
+            <button
+              className={styles.CREARESTILO}
+              onClick={() => handleDownload(book.pdfLink)}
+            >
+              ⬇️
+            </button>
+          </div>
+        </div>
       ))}
     </div>
   );

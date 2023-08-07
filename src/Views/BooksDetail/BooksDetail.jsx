@@ -187,7 +187,7 @@ const BooksDetail = () => {
           <h3>No books related with Author</h3>
         )}
       </div>
-      <Comments />
+      <Comments id={id} book={book} />
     </div>
   );
 }

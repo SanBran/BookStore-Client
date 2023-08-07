@@ -33,7 +33,7 @@ axios.defaults.baseURL = "https://bookstorepf-production.up.railway.app";
 
 //-------Manejando cookies para mantener sesiones
 import Cookies from 'js-cookie';
-import { accessUser, validateSession } from "./redux/actions/actions";
+import { accessUser, getUserById, validateSession } from "./redux/actions/actions";
 
 
 
@@ -51,6 +51,7 @@ function App() {
       (async () => {
         const user = await dispatch(validateSession(email, token));
         await dispatch(accessUser(true, user.id));
+        await dispatch(getUserById(user.id))
       })()
     }
   }, [])
