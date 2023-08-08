@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import styles from './AdminDashboard.module.css'
 import TabListGeneral from './TabList/TabListGeneral';
 import {
   Card,
