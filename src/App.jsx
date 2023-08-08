@@ -15,6 +15,8 @@ import NotFound from "./Views/NotFound/NotFound";
 import AdminDashboard from "./Views/Admin/AdminDashboard";
 import Footer from "./Components/Footer/Footer";
 
+import CreateBook from "./Components/CreateBook/CreateBook";
+
 import EmailVerification from "./Views/EmailVerification";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -32,9 +34,9 @@ import FailurePay from "./Views/Cart.jsx/FailurePay/FailurePay";
 //pasos para el deploy
 import axios from "axios";
 //-------local
-// axios.defaults.baseURL = "http://localhost:8000/";
+ axios.defaults.baseURL = "http://localhost:8000/";
 //-------deployado
-axios.defaults.baseURL = "https://bookstorepf-production.up.railway.app";
+//axios.defaults.baseURL = "https://bookstorepf-production.up.railway.app";
 
 //-------Manejando cookies para mantener sesiones
 import Cookies from 'js-cookie';
@@ -106,6 +108,10 @@ function App() {
               <Route path="/payment/failurepay" element={token?<FailurePay />:<Access/>} />
               <Route path="/freeBookacquisition" element={token?<SuccessfulAcquisition />:<Access/>} />
               <Route path="/admin" element={token?<AdminDashboard />:<NotFound/>}/>
+
+
+              <Route path="/admin/createBook" element={<CreateBook />}/>
+
 
               <Route path="*" element={<NotFound />} />
             </Routes>
