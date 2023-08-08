@@ -32,6 +32,9 @@ export const PaymentDetails = () => {
   const totalPrice = paymentCart.reduce((total, book) => total + book.price, 0);
 
   return (
+    
+
+    
     <div className={styles.container}>
       
       <div className={styles.backContainer} onClick={()=>{navigate('/')}}>
@@ -50,6 +53,7 @@ export const PaymentDetails = () => {
         <div className={styles.btns}>
           <h3 className={styles.title}>Payment method</h3>
           {/* Solo realizará el pago para el libro con el ID si se proporciona, de lo contrario, usará paymentCart */}
+          
           <MercadoPago 
             styles={styles}
             className={styles.payBtn}
@@ -79,7 +83,7 @@ export const PaymentDetails = () => {
             </>
           )} */}
         </div>
-
+        
         <div className={styles.detailsContainer}>
           <div className={styles.headDetails}>
             <h4 className={styles.nBooks}>{paymentCart.length} books</h4>
@@ -102,6 +106,7 @@ export const PaymentDetails = () => {
         </div>
       </div>
     </div>
-  );
+    
+  )
 };
 
