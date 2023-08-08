@@ -54,7 +54,7 @@ function Slide({ books }) {
                 <div className={styles.textContainer}>
                   <h1 className={styles.title}>{book.title}</h1>
                   <h2 className={styles.author}>{book.author !== 'Author not Available' ? book.author : ''}</h2>
-                  <StarRating />
+                  <StarRating rating={book.comments} />
                 </div>
               </div>
             </div>
