@@ -13,6 +13,7 @@ export const RESET_BOOKS_BY_AUTHOR = "RESET_BOOKS_BY_AUTHOR";
 
 // PAYMENTS
 export const GET_PAYMENTS = "GET_PAYMENTS";
+export const GET_ALL_PAYMENTS = "GET_ALL_PAYMENTS";
 
 //whatsapp
 export const POST_SMS_WHATSAPP = "POST_SMS_WHATSAPP";

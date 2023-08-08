@@ -58,6 +58,7 @@ import {
   GET_COUNTRIES,
   GET_LANGUAGES,
   GET_PUBLISHEDDATES,
+  GET_ALL_PAYMENTS
   //  GOOGLE_CONFIRM,
 } from "./types";
 
@@ -431,6 +432,19 @@ export function getPayments(id) {
       const response = await axios.get(`/read-pays/${id}`);
       return dispatch({
         type: GET_PAYMENTS,
+        payload: response.data,
+      });
+    } catch (error) {
+      throw Error(error.message);
+    }
+  };
+}
+export function getAllPayments() {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(`/read-pays`);
+      return dispatch({
+        type: GET_ALL_PAYMENTS,
         payload: response.data,
       });
     } catch (error) {

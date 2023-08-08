@@ -56,6 +56,7 @@ import {
   GET_COUNTRIES,
   GET_LANGUAGES,
   GET_PUBLISHEDDATES,
+  GET_ALL_PAYMENTS
 } from "../actions/types";
 
 let initialState = {
@@ -79,6 +80,7 @@ let initialState = {
   booksByAuthor: [],
   comments: [],
   payments: [],
+  allPayments: [],
   response: {},
   error: null,
   users: [],
@@ -86,6 +88,7 @@ let initialState = {
   overlayProfile: false,
   showListwish: false,
   token: "",
+  totalUsers:""
 };
 
 // !Tener el cuenta reducir el reducer en varias partes.
@@ -423,6 +426,12 @@ const reducer = (state = initialState, { type, payload }) => {
         payments: payload,
         error: null,
       };
+    case GET_ALL_PAYMENTS:
+      return {
+        ...state,
+        allPayments: payload,
+        error: null,
+      };
     //----------------------------WHATSAPP----------------
     case POST_SMS_WHATSAPP:
       return {
@@ -476,6 +485,7 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         users: payload.detail,
+        totalUsers:payload.detail.totalUsers
       };
     case GET_USER_BY_ID:
       return {
