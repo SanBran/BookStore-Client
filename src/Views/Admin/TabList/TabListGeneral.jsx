@@ -1,11 +1,9 @@
 import {
-  AreaChart,
   BarChart,
   Card,
   Col,
   DonutChart,
   Grid,
-  LineChart,
   Metric,
   TabPanel,
   Text,
@@ -18,7 +16,7 @@ const TabListGeneral = () => {
   const data = useSelector((state) => state.allPayments);
   const totalUser = useSelector((state) => state.totalUsers);
 
-
+  console.log(data)
   // Crear un objeto para almacenar las ventas por mes
   const salesByMonth = {};
   // Crear un objeto para almacenar la cantidad de libros por género
@@ -28,7 +26,7 @@ const TabListGeneral = () => {
   const salesByDayOfWeek = {};
 
   data.forEach((item) => {
-    const paymentDate = item.paymentDate;
+    const paymentDate = item.updatedAt.split("T")[0];
     const totalAmount = item.total_paid_amount;
     // Recorrer los datos y calcular la cantidad de libros por género
 
@@ -45,10 +43,10 @@ const TabListGeneral = () => {
 
     // Recorrer los datos y calcular las ventas por mes
     if (paymentDate) {
-      const dateParts = paymentDate.split("/");
-      const day = parseInt(dateParts[0], 10);
+      const dateParts = paymentDate.split("-");
+      const day = parseInt(dateParts[2], 10);
       const month = parseInt(dateParts[1], 10);
-      const year = parseInt(dateParts[2], 10);
+      const year = parseInt(dateParts[0], 10);
       const date = new Date(year, month - 1, day);
       const dayOfWeek = date.toLocaleDateString("en-US", { weekday: "long" });
 
@@ -61,7 +59,7 @@ const TabListGeneral = () => {
 
     // Recorrer los datos y calcular las ventas por mes
     if (paymentDate) {
-      const [day, month, year] = paymentDate.split("/"); // Dividir la fecha en partes
+      const [day, month, year] = paymentDate.split("-"); // Dividir la fecha en partes
 
       // Crear la clave en el formato "mm/yyyy"
       const monthYearKey = `${month}/${year}`;
@@ -99,7 +97,8 @@ const TabListGeneral = () => {
   const filteredBooksByGender = Object.values(booksByGender).filter(
     (genre) => genre.total > 0
   );
-  
+
+  console.log(salesByDayArray)
   return (
     <TabPanel>
       <Grid numItems={1} numItemsSm={2} numItemsLg={3} className="gap-2">
