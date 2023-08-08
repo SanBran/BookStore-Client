@@ -70,6 +70,7 @@ const Home = () => {
 
   return (
     <div  className={styles.container}>
+      
       <NavbarNoLogo/>
       <div className={styles.sidebar}>
         <Sidebar     

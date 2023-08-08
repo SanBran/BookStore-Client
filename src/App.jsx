@@ -6,6 +6,7 @@ import Access from "./Views/Access/Access";
 import Navbar from "./Components/Navbar/Navbar";
 import Profile from "./Views/Profile/Profile";
 import Wishlist from "./Components/Wishlist/Wishlist";
+import Dashboard from "./Components/Dashboard/Dashboard";
 import History from "./Components/History/History";
 import Settings from "./Views/Settings/Settings";
 import Filters from "./Components/Filters/Filters";

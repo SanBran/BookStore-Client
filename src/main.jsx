@@ -7,6 +7,8 @@ import App from './App.jsx'
 import './index.css'
 import Modal from 'react-modal';
 
+import "@tremor/react"
+
 import { GoogleOAuthProvider } from '@react-oauth/google';
 //---------clientID para usar en el localhost:3000
 // const clientID = "637027522589-6jbd17n7qelc1mqtp4c1gl43lvjp57cf.apps.googleusercontent.com";
