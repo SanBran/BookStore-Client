@@ -1,6 +1,7 @@
 import fav1 from "../../sources/fav1.png";
 import fav2 from "../../sources/fav2.png";
 import { Link } from "react-router-dom";
+import StarRating from "../StarRating/StarRating";
 import styles from "./Book.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -19,7 +20,7 @@ const Book = ({ books }) => {
   const user = useSelector((state) => state.access);
   const userInfo = useSelector((state) => state.userDetail);
 
-  const { id, image, title, author, price } = books;
+  const { id, image, title, author, price, comments } = books;
   const [isFav, setIsFav] = useState(false);
   const [cart, setCart] = useState(false);
 
@@ -101,6 +102,7 @@ const Book = ({ books }) => {
       <div className={styles.textContainer}>
         <div className={styles.title}>{title}</div>
         <div className={styles.author}>{author}</div>
+        <div className={styles.rating}><StarRating rating={comments} /></div>
         {price && price ? (
           <div className={styles.price}>${price}</div>
         ) : (

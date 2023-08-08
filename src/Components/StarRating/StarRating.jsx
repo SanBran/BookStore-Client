@@ -1,23 +1,36 @@
 import React from 'react';
-import styles from './StarRating.module.css'
+import styles from './StarRating.module.css';
 
+const StarRating = ({ rating }) => {
+  let prom = 0;
 
+  if (rating !== undefined) {
+    let total = 0;
+    rating.map((r) => {
+      total += r.rating;
+      return null; // Map function should return a value or null
+    });
 
-const StarRating = () => {
-  
-  return (
-        <div className={styles.container}>
-          <div className={styles.star}>⭐</div>
-          <div className={styles.star}>⭐</div>
-          <div className={styles.star}>⭐</div>
-          <div className={styles.star}>⭐</div>
-          <div className={styles.star}>⭐</div>
+    prom = Math.ceil(total / rating.length);
+  } else {
+    prom = 5;
+  }
+
+  const renderStars = () => {
+    const stars = [];
+
+    for (let i = 1; i <= prom; i++) {
+      stars.push(
+        <div key={i} className={styles.star}>
+          ⭐
         </div>
-      )
+      );
+    }
 
-  
+    return stars;
+  };
 
-  return <div>{renderStars()}</div>;
+  return <div className={styles.container}>{renderStars()}</div>;
 };
 
 export default StarRating;

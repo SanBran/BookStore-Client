@@ -121,7 +121,6 @@ export function detailBookById(id) {
     try {
       const response = await axios.post(`/bookDetail/${id}`);
       const data = response.data;
-      console.log(data);
       if (data) {
         // Book found, dispatch the book data to the store
         return dispatch({ type: GET_BOOK_BY_ID, payload: data });
@@ -523,8 +522,11 @@ export function postComment(comment) {
 export function updateCommentById({ id, rating, comment }) {
   return async function (dispatch) {
     try {
-      console.log(id, rating, comment, 'desde actions');
-      const response = await axios.put(`/updateComment/${id}`, { rating, comment });
+      console.log(id, rating, comment, "desde actions");
+      const response = await axios.put(`/updateComment/${id}`, {
+        rating,
+        comment,
+      });
       return dispatch({
         type: UPDATE_COMMENT_BY_ID,
         payload: response.data,
