@@ -11,7 +11,6 @@ import {
   Text,
   Title,
 } from "@tremor/react";
-import styles from "../AdminDashboard.module.css";
 
 import { useSelector } from "react-redux";
 
