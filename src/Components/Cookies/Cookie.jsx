@@ -12,7 +12,7 @@ export function Cookie() {
       if(token){
     const userToken = token;
 
-    window.localStorage.setItem("token", userToken);
+   
 
     //Esto para devolver a la hora de comprobar sesión, y guardar en cookie claro
     Cookies.set("setToken", userToken);

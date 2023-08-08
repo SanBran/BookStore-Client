@@ -49,6 +49,10 @@ function App() {
 
   const [server, setServer] = useState(true);
 
+  const token = localStorage.getItem('token');
+
+  
+
   useEffect(() => {
     const token = Cookies.get('valToken');
     const email = Cookies.get('email');
@@ -86,22 +90,22 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/access" element={<Access />} />
-              <Route path="/detail/:id" element={<BooksDetail />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/wishlist" element={<Wishlist />} />
-              <Route path="/history" element={<History />} />
-              <Route path="/settings" element={<Settings />} />
+              <Route path="/detail/:id" element={ token? <BooksDetail />:<Access/>} />
+              <Route path="/profile" element={token? <Profile />:<Access/>} />
+              <Route path="/wishlist" element={token? <Wishlist />:<Access/>} />
+              <Route path="/history" element={token? <History />:<Access/>} />
+              <Route path="/settings" element={token? <Settings />:<Access/>} />
               <Route path="/Filters" element={<Filters />} />
               <Route path="/Results" element={<Results />} />
               <Route path="/access/validate" element={<EmailVerification />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/payment" element={<PaymentDetails />} />
-              <Route path="/payment/:id" element={<PaymentDetails />} />
-              <Route path="/payment/sucessfulpay" element={<SucessfulPay />} />
-              <Route path="/payment/pendingpay" element={<PendingPay />} />
-              <Route path="/payment/failurepay" element={<FailurePay />} />
-              <Route path="/freeBookacquisition" element={<SuccessfulAcquisition />} />
-              <Route path="/admin" element={<AdminDashboard />}/>
+              <Route path="/cart" element={token? <Cart />: <Access/>} />
+              <Route path="/payment" element={ token? <PaymentDetails />:<Access/>} />
+              <Route path="/payment/:id" element={token? <PaymentDetails /> : <Access/>} />
+              <Route path="/payment/sucessfulpay" element={token? <SucessfulPay />:<Access/>} />
+              <Route path="/payment/pendingpay" element={token? <PendingPay />:<Access/>} />
+              <Route path="/payment/failurepay" element={token?<FailurePay />:<Access/>} />
+              <Route path="/freeBookacquisition" element={token?<SuccessfulAcquisition />:<Access/>} />
+              <Route path="/admin" element={token?<AdminDashboard />:<NotFound/>}/>
 
               <Route path="*" element={<NotFound />} />
             </Routes>
