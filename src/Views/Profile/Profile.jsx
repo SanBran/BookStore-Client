@@ -36,6 +36,7 @@ const Profile = () => {
     await dispatch(overlayProfile(showOverlayPerfile));
     await dispatch(accessUser(false, ""));
     await dispatch(logOut());
+    localStorage.removeItem("token")
     Cookies.remove('valToken');
     Cookies.remove('email');
 

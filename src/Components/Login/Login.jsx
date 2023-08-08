@@ -14,6 +14,7 @@ import Cookies from 'js-cookie';
 
 
 const Login = ({ setForm }) => {
+ 
 
   const navigate = useNavigate()
   const dispatch = useDispatch();
@@ -50,6 +51,7 @@ const Login = ({ setForm }) => {
       await dispatch(accessLogIn(logInfo));
       setError("");
       const token = await dispatch(obtainToken(logInfo))
+      localStorage.setItem('token', JSON.stringify(token));
       Cookies.set('valToken', token);
       Cookies.set('email', logInfo.email);
       
@@ -83,7 +85,7 @@ const Login = ({ setForm }) => {
   const onFailure = (error) => {
     console.log(error);
   };
-
+   
   return (
     <form className={style.fromContainer} >
       <div className={style.inputsContainer}>
