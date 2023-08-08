@@ -120,7 +120,8 @@ const totalPrice = cart.reduce((total, book) => total + book.price, 0);
     price: cart.map((book) => book.price),
     typeMoney: cart.map((book) => "ARG"),
     totalPrice: totalPrice,
-    total_paid_amount:totalPrice
+    total_paid_amount:totalPrice,
+    pdfLink: cart.map((book) => book.pdfLink),
     
   }
  
