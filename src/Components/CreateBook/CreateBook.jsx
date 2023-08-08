@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
 import styles from './CreateBook.module.css';
 import countriesData from '../Signup/data/countries.json';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import DragAndDrop from '../DragAndDropBook/DragAndDrop';
 import edit_icon from '../../assets/icons/edit_icon.svg';
-import delete_icon from '../../assets/icons/delete_icon.svg';
+//import delete_icon from '../../assets/icons/delete_icon.svg';
 import plus_icon from '../../assets/icons/plus_icon.svg';
+import { postBook } from '../../redux/actions/actions';
 
 const CreateBook = ( ) => {
+    const dispatch = useDispatch();
+
     const genericCover = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhRKhJb1aLmjwGX_ox0TA6eTxCv_5g3Nlr6w&usqp=CAU";
     const genericPDF = "https://www.ingenieria.unam.mx/dcsyhfi/material_didactico/Literatura_Hispanoamericana_Contemporanea/Autores_Q/QUIROGA/gallina.pdf"
 
@@ -15,87 +18,156 @@ const CreateBook = ( ) => {
     const uniqueGenres = [];
     allGenders?.map((gender) => uniqueGenres.includes(gender.nameType)? null : uniqueGenres.push(gender.nameType) );
 
-    // const [formData, setFormData] = useState({
-    //     title: '',
-    //     author: '',
-    //     country: '',
-    //     language: '',
-    //     otherLanguage: '',
-    //     image: genericCover,
-    //     gender:'',
-    //     newGender:'',
-    //     allGenders: [],
-    //     otherGender: '',
-    //     sinopsis: '',
-    //     price: '',
-    //     publishedDate: '',
-    //     pdfLink: '',
-    //     editorial: '',
-    //     numPages: ''
-    // });
     const [formData, setFormData] = useState({
-        title: 'La gallina degollada',
-        author: 'Horacio Quiroga',
-        country: '',
-        language: '',
-        otherLanguage: '',
         image: genericCover,
-        gender:'',
-        newGender:'',
-        allGenders: [],
-        sinopsis: 'Narra la historia del matrimonio Mazzini-Ferraz que parece estar maldito, ya que sus cuatro hijos varones, al llegar al año y medio, sufren convulsiones que los dejan muy disminuidos mentalmente y con una virtualmente nula capacidad de razonar. El quinto hijo, una niña, nace y crece sin mayores problemas y con una capacidad mental normal. Un día los hermanos ven con detenimiento como una gallina es degollada y luego cocinada para la cena. Este hecho, en apariencia simple, desata de manera imprevisible una tragedia. Los hermanos deciden replicar el acto atroz que acaban de presenciar y utilizan a su hermanita para aquello.',
-        price: '100',
-        publishedDate: '1904',
-        pdfLink: genericPDF,
-        editorial: 'Editorial Fuego Azul',
-        numPages: '7'
-    });
-    const [errors, setErrors] = useState({
+        pdfLink: '',
         title: '',
         author: '',
+        editorial: '',
+        price: '',
         country: '',
+        gender:'',
+        newGender:'',
         language: '',
         otherLanguage: '',
-        image: '',
-        gender: [],
-        newGender:'',
         sinopsis: '',
-        price: '',
         publishedDate: '',
+        numPages: ''
+});
+    //-------formulario hardcodeado para pruebas
+    // const [formData, setFormData] = useState({
+    //     image: genericCover,
+    //     pdfLink: genericPDF,
+    //     title: 'La gallina degollada',
+    //     author: 'Horacio Quiroga',
+    //     editorial: 'Editorial Fuego Azul',
+    //     price: '100',
+    //     country: '',
+    //     gender:'',
+    //     newGender:'',
+    //     language: '',
+    //     otherLanguage: '',
+    //     // allGenders: [],
+    //     sinopsis: 'Narra la historia del matrimonio Mazzini-Ferraz que parece estar maldito, ya que sus cuatro hijos varones, al llegar al año y medio, sufren convulsiones que los dejan muy disminuidos mentalmente y con una virtualmente nula capacidad de razonar. El quinto hijo, una niña, nace y crece sin mayores problemas y con una capacidad mental normal. Un día los hermanos ven con detenimiento como una gallina es degollada y luego cocinada para la cena. Este hecho, en apariencia simple, desata de manera imprevisible una tragedia. Los hermanos deciden replicar el acto atroz que acaban de presenciar y utilizan a su hermanita para aquello.',
+    //     publishedDate: '1904',
+    //     numPages: '7'
+    // });
+    const [errors, setErrors] = useState({
+        image: '',
         pdfLink: '',
+        title: '',
+        author: '',
         editorial: '',
+        price: '',
+        country: '',
+        gender: '',
+        language: '',
+        sinopsis: '',
+        publishedDate: '',
         numPages: ''
     })
+
+    //-----------VALIDACIONES DEL FORMULARIO
+  const validateInputs = (state, property) => {
+    if(state[property] !== '' && state[property] !== null && state[property] !== 'none' )setErrors({ ...errors, [property]: '' });
+    else setErrors({ ...errors, [property]: 'Required field' })
+    
+    if(property==='newGender'){
+        if (state.gender ==="other" && state.newGender !== '') setErrors({ ...errors, gender: '' });
+        else setErrors({ ...errors, gender: 'Required field' })
+    }
+    if(property==='otherLanguage'){
+        if (state.language ==="other" && state.otherLanguage !== '') setErrors({ ...errors, language: '' });
+        else setErrors({ ...errors, language: 'Required field' })
+    }
+    
+
+  }
+//-----------FIN DE LAS VALIDACIONES de inputs
+
     const handleChange = (event) => {
         const property = event.target.name;
         const value = event.target.value;
-        //console.log(property, value);
         setFormData({ ...formData, [property]: value });
         
         //--Validar los inputs cuando se hacen cambios
-        //validateInputs({ ...formData, [property]: value }, property)
+        validateInputs({ ...formData, [property]: value }, property)
       };
 
-      const addGender =(event)=>{
-        event.preventDefault();
-        if(formData.gender === 'other' && formData.newGender !=='' && !formData.allGenders.includes(formData.newGender)){
-            setFormData({...formData, allGenders:[...formData.allGenders, formData.newGender], newGender:''});
-        }
-        else if(formData.gender !== '' && formData.gender !=='none' && formData.gender !=='other' && !formData.allGenders.includes(formData.gender)){
-            setFormData({...formData, allGenders:[...formData.allGenders, formData.gender]});
-        }
-    }
-    const removeGender=(index)=>{
-        const deleteGender = [...formData.allGenders];
-        deleteGender.splice(index, 1);
-        setFormData({...formData, allGenders:deleteGender});
-    }
+    //   const addGender =(event)=>{
+    //     event.preventDefault();
+    //     if(formData.gender === 'other' && formData.newGender !=='' && !formData.allGenders.includes(formData.newGender)){
+    //         setFormData({...formData, allGenders:[...formData.allGenders, formData.newGender], newGender:''});
+    //     }
+    //     else if(formData.gender !== '' && formData.gender !=='none' && formData.gender !=='other' && !formData.allGenders.includes(formData.gender)){
+    //         setFormData({...formData, allGenders:[...formData.allGenders, formData.gender]});
+    //     }
+    // }
+    // const removeGender=(index)=>{
+    //     const deleteGender = [...formData.allGenders];
+    //     deleteGender.splice(index, 1);
+    //     setFormData({...formData, allGenders:deleteGender});
+    // }
 
     //----Subir imagen del libro
     const user = useSelector(state=>state.userDetail)
     const updateImg = (img)=>{
         console.log(img); 
         setFormData({...formData, image:img})
+    }
+
+    //------------VALIDACION DEL SUBMIT
+    const validateSubmit = () => {
+        for (const property in formData) {
+        if (property === 'newGender' || property === 'otherLanguage'
+        ) continue;
+        if (!formData[property].length) {
+            setErrors({ ...errors, [property]: 'Incomplete' });
+            return false
+        }
+        }
+
+        if (formData.gender ==="other" && formData.newGender === '') {
+            setErrors({ ...errors, gender: 'Incomplete' });
+            return false
+        }
+        if (formData.language ==="other" && formData.otherLanguage === '') {
+            setErrors({ ...errors, language: 'Incomplete' });
+            return false
+        }
+
+        for (const property in errors) {
+            if (errors[property].length) return false;
+        }
+              return true
+    }
+
+    const handleSubmit=async(event)=>{
+        event.preventDefault();
+        if(validateSubmit()){
+            //console.log(formData);
+            try {
+                await dispatch(postBook(formData));
+                setFormData({
+                    image: genericCover,
+                    pdfLink: '',
+                    title: '',
+                    author: '',
+                    editorial: '',
+                    price: '',
+                    country: '',
+                    gender:'',
+                    newGender:'',
+                    language: '',
+                    otherLanguage: '',
+                    sinopsis: '',
+                    publishedDate: '',
+                    numPages: ''
+                })
+            } catch (error) {
+                console.log(error);
+            }
+        }        
     }
       
 
@@ -110,8 +182,10 @@ const CreateBook = ( ) => {
             </div>
 
             <div className={styles.inputsContainer}>
+            {errors.image.length ? <p className={styles.textError}>An image is required</p> : <></>}
+            
             <label className={styles.label} >
-                <h3><img className={styles.plusIcon} src={plus_icon} alt="+" /> ADD PDF</h3>
+                <h3 className={styles.addPDF}><img className={styles.plusIcon} src={plus_icon} alt="+" /> ADD PDF</h3>
                 <input
                     className={errors.pdfLink.length ? (`${styles.input} ${styles.error}`) : styles.input}
                     name="pdfLink"
@@ -120,6 +194,7 @@ const CreateBook = ( ) => {
                     type="text"
                     placeholder=""
                     required
+                    // readOnly disabled
                 />
             </label>
             {errors.pdfLink.length ? <p className={styles.textError}>{errors.pdfLink}</p> : <></>}
@@ -204,7 +279,7 @@ const CreateBook = ( ) => {
                 </select>
                 {formData.gender === "other"
                 ?(<input
-                    className={errors.newGender.length ? (`${styles.input} ${styles.otherInput} ${styles.error}`) : (`${styles.input} ${styles.otherInput}`)}
+                    className={errors.gender.length ? (`${styles.input} ${styles.otherInput} ${styles.error}`) : (`${styles.input} ${styles.otherInput}`)}
                     name="newGender"
                     onChange={handleChange}
                     value={formData.newGender}
@@ -213,17 +288,18 @@ const CreateBook = ( ) => {
                     required
                 />):(<></>)}
 
-                <button onClick={addGender}>
-                    <img className={styles.plusIcon} src={plus_icon} alt="+" />
-                </button>
-            </label>
 
-            <div className={styles.gendersContainer}>
+                {/* <button onClick={addGender}>
+                    <img className={styles.plusIcon} src={plus_icon} alt="+" />
+                </button> */}
+            </label>
+            {errors.gender.length ? <p className={styles.textError}>{errors.gender}</p> : <></>}
+            {/* <div className={styles.gendersContainer}>
                 {formData.allGenders.map((genderValue, index)=>(<div className={styles.genderContainer} key={genderValue}>
                     {genderValue}
                     <img src={delete_icon} alt='x' onClick={()=>{removeGender(index)}}/>
                 </div>))}
-            </div>
+            </div>*/}
 
             <label className={styles.label}>
                 <select
@@ -239,7 +315,7 @@ const CreateBook = ( ) => {
                 {formData.language === "other"
                 ?(
                     <input
-                        className={errors.otherLanguage.length ? (`${styles.input} ${styles.otherInput} ${styles.error}`) : (`${styles.input} ${styles.otherInput}`)}
+                        className={errors.language.length ? (`${styles.input} ${styles.otherInput} ${styles.error}`) : (`${styles.input} ${styles.otherInput}`)}
                         name="otherLanguage"
                         onChange={handleChange}
                         value={formData.otherLanguage}
@@ -295,7 +371,7 @@ const CreateBook = ( ) => {
 
 
             </div>
-            <button className={styles.createBtn}>CREATE BOOK</button>
+            <button className={styles.createBtn} onClick={handleSubmit}>CREATE BOOK</button>
         </form>
     )
 
