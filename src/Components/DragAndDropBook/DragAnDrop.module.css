@@ -1,0 +1,53 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.module{
+    height: 100%;
+    width: 100%;
+}
+
+.imageContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    height: 450px;
+    width: 350px;
+    object-fit: cover;
+
+    overflow: hidden;
+    background-color: white;
+
+}
+
+.image{
+    height: 100%;
+}
+
+.buttonsContainer{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    bottom:-40px ;
+
+
+}
+
+.button{
+    padding: 10px 0;
+    width: 100px;
+    border: 2px solid #FA9D1B ;
+    cursor: pointer;
+    font-weight: 600;
+
+    transition: all 0.4s ease-in-out;
+}
+.button:hover{
+    background-color: #FA9D1B;
+    color: white;
+
+}

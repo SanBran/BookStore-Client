@@ -1,0 +1,183 @@
+.form{
+    min-width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: black;
+    font-family: 'Montserrat', sans-serif;
+
+}
+
+
+
+/* -----Estilos a la imagen */
+
+.imageContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: -400px;
+}
+.image{
+    height: 450px;
+    width: 350px;
+    object-fit: contain;
+
+    overflow: hidden;
+}
+.DragAndDrop{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 350px;
+    height: 450px;
+    object-fit: cover;
+    
+    z-index: 999;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+    
+}
+.edit{
+    opacity: 0.5;
+    position: absolute;
+    width: 40px;
+    transition: all 0.4s ease-in-out;
+}
+/* .DragAndDrop:hover {
+    background: rgba(0, 0, 0, 0.379);
+} */
+.DragAndDrop:hover .edit {
+    opacity: 1;
+}
+
+
+/* -----Estilos a los inputs */
+.inputsContainer{
+    padding: 30px;
+
+    margin-right: -400px;
+    position: absolute;
+
+    background-color: #aeaeae1a;
+
+    width: 400px;
+    height: 390px;
+    overflow: auto;
+}
+.plusIcon{
+    width: 15px;
+}
+.label{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.label h3{
+    display: flex;
+    align-items: center;
+    text-align:start;
+    font-size: 15px;
+    width: 200px;
+    margin: 10px 0 0 0;
+    font-weight: normal;
+    color: black;
+}
+.label h3 img{
+    margin-right: 10px;
+}
+.label button{
+    display: flex;
+    justify-content: end;
+    padding: 0;
+    align-items: center;
+    background: none;
+    margin: 10px 0 0 10px;
+    cursor: pointer;
+
+}
+.input{
+    width: 95%;
+    height: 30px !important;
+    padding-left: 20px;
+    margin-top: 10px;
+
+    font-family: 'Montserrat', sans-serif;
+
+    font-size: 16px;
+    font-weight: 100;
+    color: black;
+    
+    border: 1px solid #B6B6B6;
+    background: none;
+    /* background-color: white; */
+
+    transition: all 0.3s ease;
+}
+.otherInput{
+    border: none ;
+    border-bottom: 1px solid #B6B6B6;
+}
+.select{
+    width: 100% !important;
+    height: 33px !important;
+}
+.textarea{
+    height: 150px !important;
+    font-family: 'Montserrat', sans-serif;
+}
+.error{
+    border: 1px solid red !important;
+}
+
+
+/* ------Estilos en los generos */
+.gendersContainer{
+    width: 100%;
+}
+.gendersContainer img {
+    width: 10px;
+    cursor: pointer;
+}
+.genderContainer {
+    width: 100%;
+    display: flex;
+    margin-top: 10px;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+    
+    justify-content: space-between;
+    text-align: start;
+
+    transition: all 0.2s ease-in-out;
+}
+.genderContainer:hover{
+    color: #FA9D1B;
+}
+
+/* -----Estilos del boton */
+.createBtn{
+    position: absolute;
+    margin-top: 510px;
+    margin-right: -400px;
+
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 100px;
+    height: 40px;
+    border-radius: 0;
+    border: none;
+    background-color: #FA9D1B;
+
+    color: #F5F5F5;
+    font-weight: bolder;
+    font-size: 18px;
+}
+.createBtn:focus-visible, .createBtn:focus{
+    outline: 0;
+}
