@@ -12,6 +12,7 @@ import Filters from "./Components/Filters/Filters";
 import Results from "./Views/Results/Results";
 import NotFound from "./Views/NotFound/NotFound";
 import AdminDashboard from "./Views/Admin/AdminDashboard";
+import Footer from "./Components/Footer/Footer";
 
 import EmailVerification from "./Views/EmailVerification";
 
@@ -101,6 +102,16 @@ function App() {
 
               <Route path="*" element={<NotFound />} />
             </Routes>
+
+            {(location.pathname === '/' 
+            || location.pathname.startsWith('/wishlist')
+            || location.pathname.startsWith('/history')
+            || location.pathname.startsWith('/settings')
+            || location.pathname.startsWith('/detail'))
+              ? (<Footer />)
+              : (<></>)
+            }
+
           </div>
         </>)
       }
