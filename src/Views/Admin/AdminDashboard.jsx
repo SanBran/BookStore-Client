@@ -2,13 +2,11 @@ import React, { useEffect } from 'react';
 import TabListGeneral from './TabList/TabListGeneral';
 import {
   Card,
-  Metric,
   Tab,
   TabGroup,
   TabList,
   TabPanel,
   TabPanels,
-  Text,
 } from "@tremor/react";
 import { useDispatch } from 'react-redux';
 import { getAllPayments, getUsers } from '../../redux/actions/actions';
@@ -31,13 +29,18 @@ function AdminDashboard() {
           <Tab>General</Tab>
           <Tab>Libros</Tab>
           <Tab>Usuarios</Tab>
+          <Tab>Pagos</Tab>
         </TabList>
         <TabPanels>
           <TabListGeneral />
-           
           <TabPanel>
             <div className="mt-8">
               <h1>libros</h1>
+            </div>
+          </TabPanel>
+          <TabPanel>
+            <div className="mt-8">
+              <h1>usuarios</h1>
             </div>
           </TabPanel>
           <TabPanel>
