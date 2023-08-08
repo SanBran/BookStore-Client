@@ -327,11 +327,26 @@ export function getBooksById(id) {
     }
   };
 }
-export function postBook(book) {
+export function postBook(bookData) {
+  const book = {
+    title: bookData.title,
+    author: bookData.author,
+    country: bookData.country,
+    language: bookData.language === "other" ? bookData.otherLanguage : bookData.language,
+    image: bookData.image,
+    gender: bookData.gender === "other" ? bookData.newGender : bookData.gender,
+    sinopsis: bookData.sinopsis,
+    price: bookData.price,
+    publishedDate: bookData.publishedDate,
+    pdfLink: bookData.pdfLink,
+    editorial: bookData.editorial,
+    numPages: bookData.numPages
+  }
   return async function (dispatch) {
     try {
-      //console.log(title);
+      console.log(book);
       const response = await axios.post(`/postBook`, book);
+      console.log(response.data);
       return dispatch({
         type: POST_BOOK,
         payload: response.data,
