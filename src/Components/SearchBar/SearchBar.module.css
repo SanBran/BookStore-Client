@@ -1,6 +1,9 @@
 .container{
     display: flex;
     margin-left: -50px;
+    border: 1px solid rgb(203, 203, 203);
+    border-radius:50px ;
+
 }
 
 .bar{

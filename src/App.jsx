@@ -14,6 +14,7 @@ import Results from "./Views/Results/Results";
 import NotFound from "./Views/NotFound/NotFound";
 import AdminDashboard from "./Views/Admin/AdminDashboard";
 import Footer from "./Components/Footer/Footer";
+import AboutUs from "./Views/AboutUs/AboutUs";
 
 import CreateBook from "./Components/CreateBook/CreateBook";
 
@@ -34,7 +35,7 @@ import FailurePay from "./Views/Cart.jsx/FailurePay/FailurePay";
 //pasos para el deploy
 import axios from "axios";
 //-------local
- //axios.defaults.baseURL = "http://localhost:8000/";
+//axios.defaults.baseURL = "http://localhost:8000/";
 //-------deployado
 axios.defaults.baseURL = "https://bookstorepf-production.up.railway.app";
 
@@ -85,12 +86,18 @@ function App() {
         : (<>
           {showOverlayPerfile && <Profile />}
           <div >
-            {location.pathname !== "/admin" && location.pathname !== "/profile" && location.pathname !== "/access" && (location.pathname !== "/results") && (location.pathname !== "/")
+            {location.pathname !== "/admin" 
+            && location.pathname !== "/profile" 
+            && location.pathname !== "/access" 
+            && (location.pathname !== "/results") 
+            && !location.pathname.startsWith('/payment')
+            && (location.pathname !== "/")
               ? (<Navbar />)
               : (<></>)
             }
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/about_us" element={<AboutUs />} />
               <Route path="/access" element={<Access />} />
               <Route path="/detail/:id" element={ token? <BooksDetail />:<Access/>} />
               <Route path="/profile" element={token? <Profile />:<Access/>} />
