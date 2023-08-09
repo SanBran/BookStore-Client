@@ -86,7 +86,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/access" element={<Access />} />
-              <Route path="/detail/:id" element={ token? <BooksDetail />:<Access/>} />
+              <Route path="/detail/:id" element={ <BooksDetail />} />
               <Route path="/profile" element={token? <Profile />:<Access/>} />
               <Route path="/wishlist" element={token? <Wishlist />:<Access/>} />
               <Route path="/history" element={token? <History />:<Access/>} />

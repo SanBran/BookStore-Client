@@ -73,6 +73,7 @@ const Login = ({ setForm }) => {
     const user = jwt_decode(response.credential);
     try {
       const token = await dispatch(accessGoogle(user));
+      localStorage.setItem('token', JSON.stringify(token));
       setError("");
       Cookies.set('valToken', token);
       Cookies.set('email', user.email);
