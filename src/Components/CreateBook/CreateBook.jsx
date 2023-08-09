@@ -176,8 +176,6 @@ const CreateBook = ( ) => {
         console.log(errors);
     }      
 }
-
-console.log(formData);
       
     return(
         <form className={styles.form}>
