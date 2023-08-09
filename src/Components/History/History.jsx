@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 
 
 function History() {
+  const genericCover = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhRKhJb1aLmjwGX_ox0TA6eTxCv_5g3Nlr6w&usqp=CAU";
+
   const dispatch = useDispatch();
   const payments = useSelector((state) => state.payments);
 
@@ -34,34 +36,37 @@ function History() {
   return (
     <div className={styles.booksContainer}>
       <h2 className={styles.title2}>History </h2>
-      {books.map((book) => (
-        <div key={book.id + 5} className={styles.container}>
-          <Link className={styles.image} to={`/detail/${book.id}`}>
-            <img
-              className={styles.imageSize}
-              src={book.image}
-              alt={`${book.title} from ${book.author}`}
-            />
-          </Link>
-
-          <div className={styles.textContainer}>
-            <div className={styles.title}>{book.title}</div>
-            <div className={styles.author}>{book.author}</div>
-            {book.price && book.price ? (
-              <div className={styles.price}>${book.price}</div>
-            ) : (
-              <div className={styles.price}>Free</div>
-            )}
-
-            <button
-              className={styles.CREARESTILO}
-              onClick={() => handleDownload(book.pdfLink)}
-            >
-              ⬇️
-            </button>
+      <div className={styles.book}>
+        {books.length
+        ?(<>
+        {books.map((book) => (
+          <div key={book.id + 5} className={styles.container}>
+            <Link className={styles.image} to={`/detail/${book.id}`}>
+              <img
+                className={styles.imageSize}
+                src={book.image !== "Image not Available" ? book.image : genericCover}
+                alt={`${book.title} from ${book.author}`}
+              />
+            </Link>
+            <div className={styles.textContainer}>
+              <div className={styles.title}>{book.title}</div>
+              <div className={styles.author}>{book.author}</div>
+              {book.price && book.price 
+              ?(<div className={styles.price}>${book.price}</div>) 
+              :(<div className={styles.price}>Free</div>)}
+              <button
+                className={styles.downloadBtn}
+                onClick={() => handleDownload(book.pdfLink)}
+              >
+                ⬇️
+              </button>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+        </>)
+        :(<>Empty</>)
+        }
+      </div>
     </div>
   );
 }

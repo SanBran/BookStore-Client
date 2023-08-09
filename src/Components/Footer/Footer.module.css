@@ -7,7 +7,14 @@
     /* background-color: hsl(0, 0%, 69%); */
     width: 100vw;
     color: black;
+    font-family: 'Montserrat', sans-serif;
 }
-.footer h5:hover{
-    color: red;
+.link{
+    color: #FA9D1B;
+    font-weight: 600;
+    padding: 10px 40px;
+    transition: all 0.3s ease;
+}
+.link:hover{
+    color: black;
 }
