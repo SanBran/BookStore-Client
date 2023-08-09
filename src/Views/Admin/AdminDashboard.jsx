@@ -16,12 +16,14 @@ import {
   Text,
 } from "@tremor/react";
 import { useDispatch } from 'react-redux';
-import {getAllPayments, getUsers ,getTableBooks,getTableUsers}  from "../../redux/actions/actions.js";
+import { getAllPayments, getUsers, getTableBooks,getTableUsers  } from '../../redux/actions/actions';
+import logo from '../../sources/logoCompleto.png'
+import styles from './AdminDashboar.module.css'
 import { useNavigate } from 'react-router-dom';
 
 function AdminDashboard() {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getAllPayments());
@@ -67,7 +69,7 @@ function AdminDashboard() {
       </TabGroup>
     </Card>
     </>
-  )
+  );
 }
 
-export default AdminDashboard
+export default AdminDashboard;

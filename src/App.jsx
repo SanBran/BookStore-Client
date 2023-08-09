@@ -42,7 +42,7 @@ import axios from "axios";
 //-------Manejando cookies para mantener sesiones
 import Cookies from 'js-cookie';
 import { accessUser, getUserById, validateSession } from "./redux/actions/actions";
-import { addCart, updateCart } from "./redux/actions/actions";
+import { updateCart } from "./redux/actions/actions";
 
 
 
@@ -106,7 +106,7 @@ function App() {
           <div >
             {location.pathname !== "/admin" 
             && location.pathname !== "/admin/createBook" 
-            && location.pathname !== "/profile" 
+            &&location.pathname !== "/profile" 
             && location.pathname !== "/access" 
             && (location.pathname !== "/results") 
             && !location.pathname.startsWith('/payment')
