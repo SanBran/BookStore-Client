@@ -97,9 +97,7 @@
 .label button{
     display: flex;
     justify-content: flex-end;
-    padding: 0;
     align-items: center;
-    background: none;
     margin: 10px 0 0 10px;
     cursor: pointer;
 

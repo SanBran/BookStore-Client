@@ -1,5 +1,9 @@
 
 .btn{
-    background-color: red;
+    background-color: #FA9D1B;
     color: black;
+}
+
+.link{
+    max-width: 20vw;
 }
