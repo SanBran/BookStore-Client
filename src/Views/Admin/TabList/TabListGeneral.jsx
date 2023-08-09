@@ -2,21 +2,22 @@ import {
   BarChart,
   Card,
   Col,
-  DonutChart,
   Grid,
   Metric,
   TabPanel,
   Text,
   Title,
 } from "@tremor/react";
+import styles from '../AdminDashboar.module.css'
 
 import { useSelector } from "react-redux";
 
 const TabListGeneral = () => {
   const data = useSelector((state) => state.allPayments);
   const totalUser = useSelector((state) => state.totalUsers);
+  const totalBook = useSelector((state) => state.booksObject);
 
-  console.log(data)
+  console.log(data);
   // Crear un objeto para almacenar las ventas por mes
   const salesByMonth = {};
   // Crear un objeto para almacenar la cantidad de libros por género
@@ -25,36 +26,58 @@ const TabListGeneral = () => {
   // Crear un objeto para almacenar las ventas por día de la semana
   const salesByDayOfWeek = {};
 
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  const dayNames = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let totalSell = 0;
   data.forEach((item) => {
     const paymentDate = item.updatedAt.split("T")[0];
-    const totalAmount = item.total_paid_amount;
+    totalSell += item.total_paid_amount;
     // Recorrer los datos y calcular la cantidad de libros por género
 
     item.books.forEach((book) => {
       const gender = book.gender;
       if (gender) {
         if (booksByGender[gender]) {
-          booksByGender[gender].total++;
+          booksByGender[gender].sales++;
         } else {
-          booksByGender[gender] = { gender, total: 1 };
+          booksByGender[gender] = { gender, sales: 1 };
         }
       }
     });
-
-    // Recorrer los datos y calcular las ventas por mes
+    console.log("fecha: ", paymentDate);
+    // Recorrer los datos y calcular las ventas por dia
     if (paymentDate) {
-      const dateParts = paymentDate.split("-");
-      const day = parseInt(dateParts[2], 10);
-      const month = parseInt(dateParts[1], 10);
-      const year = parseInt(dateParts[0], 10);
-      const date = new Date(year, month - 1, day);
-      const dayOfWeek = date.toLocaleDateString("en-US", { weekday: "long" });
+      const paymentDate2 = new Date(paymentDate);
+      const dayOfWeek = paymentDate2.getDay();
 
-      if (salesByDayOfWeek[dayOfWeek]) {
-        salesByDayOfWeek[dayOfWeek].total++;
-      } else {
-        salesByDayOfWeek[dayOfWeek] = { dia: dayOfWeek, total: 1 };
+      const key = `${dayOfWeek}`;
+
+      if (!salesByDayOfWeek[key]) {
+        salesByDayOfWeek[key] = 0;
       }
+
+      salesByDayOfWeek[key] += 1;
     }
 
     // Recorrer los datos y calcular las ventas por mes
@@ -62,105 +85,100 @@ const TabListGeneral = () => {
       const [day, month, year] = paymentDate.split("-"); // Dividir la fecha en partes
 
       // Crear la clave en el formato "mm/yyyy"
-      const monthYearKey = `${month}/${year}`;
+      const key = `${year}-${month}`;
 
-      // Sumar el total al mes correspondiente
-      if (salesByMonth[monthYearKey]) {
-        salesByMonth[monthYearKey] += totalAmount;
-      } else {
-        salesByMonth[monthYearKey] = totalAmount;
+      if (!salesByMonth[key]) {
+        salesByMonth[key] = 0;
       }
+
+      salesByMonth[key] += 1;
     }
   });
-  // Convertir el objeto a un arreglo de objetos en el formato deseado
-  const salesArray = Object.entries(salesByMonth).map(([month, total]) => ({
-    month,
-    total,
-  }));
+  // Construir el arreglo de objetos con el formato deseado
+  const salesArray = Object.entries(salesByMonth).map(([key, value]) => {
+    const [month] = key.split("-");
 
-  // función para obtener el número de mes desde el formato "mm/yyyy"
-  const getMonthNumber = (monthYearKey) => {
-    const [month] = monthYearKey.split("/");
-    return parseInt(month, 10);
-  };
+    return {
+      mes: `${monthNames[Number(month)]}`,
 
-  // Ordenar el arreglo por número de mes
-  salesArray.sort((a, b) => {
-    const monthNumberA = getMonthNumber(a.month);
-    const monthNumberB = getMonthNumber(b.month);
-    return monthNumberA - monthNumberB;
+      sales: value,
+    };
   });
 
   // Obtener los resultados en un array
-  const salesByDayArray = Object.values(salesByDayOfWeek);
+  const salesByDayArray = Object.entries(salesByDayOfWeek).map(
+    ([key, value]) => {
+      return {
+        dia: dayNames[Number(key)],
 
-  const filteredBooksByGender = Object.values(booksByGender).filter(
-    (genre) => genre.total > 0
+        sales: value,
+      };
+    }
   );
 
-  console.log(salesByDayArray)
+  const filteredBooksByGender = Object.values(booksByGender).filter(
+    (genre) => genre.sales > 0
+  );
+
+  console.log("venta por dia", salesByDayArray);
+  console.log("venta por mes", salesArray);
+  console.log("venta por genero", booksByGender);
   return (
     <TabPanel>
-      <Grid numItems={1} numItemsSm={2} numItemsLg={3} className="gap-2">
-        <Col>
+      <Grid numItems={1} numItemsSm={2} numItemsLg={4} className="gap-2">
+        <Col numColSpan={1} numColSpanLg={1}>
+          <Card className="">
+            <Title>Total Users</Title>
+            <Metric>{totalUser}</Metric>
+          </Card>
+        </Col>
+        <Col numColSpan={1} numColSpanLg={1}>
+          <Card className="" decorationColor="amber">
+            <Title>Total Books</Title>
+            <Metric>{totalBook}</Metric>
+          </Card>
+        </Col>
+        <Col numColSpan={1} numColSpanLg={1}>
+          <Card className="" decorationColor="amber">
+            <Title>Total Sold</Title>
+            <Metric>${totalSell}</Metric>
+          </Card>
+        </Col>
+        <Col numColSpan={1} numColSpanLg={3}>
           <Card className="max-w-lg">
             <Title>Sales by gender:</Title>
-            <DonutChart
+            <BarChart
               className="mt-6"
               data={filteredBooksByGender}
-              category="total"
               index="gender"
-              colors={[
-                "slate",
-                "violet",
-                "indigo",
-                "rose",
-                "cyan",
-                "amber",
-                "green",
-                "lime",
-                "orange",
-                "pink",
-                "emerald",
-                "blue",
-                "neutral",
-                "sky",
-                "teal",
-              ]}
+              categories={["sales"]}
+              colors={["orange"]}
+              yAxisWidth={48}
             />
           </Card>
         </Col>
-        <Card>
-          <Text>Total de Usuarios</Text>
-          <Metric>{totalUser}</Metric>
-        </Card>
-        <Card>
-          <Title>Ventas por dia:</Title>
-          <DonutChart
-            className="mt-6"
-            data={salesByDayArray}
-            category="total"
-            index="dia"
-            colors={[
-              "indigo",
-              "rose",
-              "cyan",
-              "amber",
-              "green",
-              "lime",
-              "orange",
-              "pink",
-            ]}
-          />
-        </Card>
-        <Col numColSpan={1} numColSpanLg={2}>
-          <Title>Ventas por mes:</Title>
+        <Col numColSpan={1} numColSpanLg={3}>
+          <Card className="max-w-lg">
+            <Title>Sales by day:</Title>
+            <BarChart
+              className="mt-6"
+              data={salesByDayArray}
+              index="dia"
+              categories={["sales"]}
+              colors={["blue"]}
+              yAxisWidth={40}
+            />
+          </Card>
+        </Col>
+
+        <Col numColSpan={1} numColSpanLg={3}>
+          <Title>Number of sales per month:</Title>
           <BarChart
             className="mt-6"
             data={salesArray}
-            index="month"
-            categories={["total"]}
-            colors={["red", "blue", "green"]}
+            index="mes"
+            categories={["sales"]}
+            colors={["green"]}
             yAxisWidth={48}
           />
         </Col>
