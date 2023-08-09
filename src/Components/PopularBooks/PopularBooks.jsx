@@ -14,7 +14,6 @@ const PopularBooks = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [active, setActive] = useState(1);
  
-  console.log(comments);
   useEffect(() => {
     dispatch(getComents())
   }, []);
