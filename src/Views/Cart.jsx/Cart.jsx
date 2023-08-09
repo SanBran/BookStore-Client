@@ -2,7 +2,6 @@
 // import axios from "axios";
 // import { useEffect, useState } from "react";
 
-
 // const stripe = new Stripe('sk_test_51NXqBWJvp7x1gGxjTsCAhgScRFFvesnqbhSCoQh5TaTKIplC1acinnXfRefCDS0FvadXBW9cx5l9pjDtdRTd7GFx008SkUSzUD')
 // console.log(stripe);
 // const customer = await stripe.customers.create({
@@ -57,18 +56,13 @@ import { removeCart } from "../../redux/actions/actions";
 import close_button from "../../assets/icons/close_button.svg";
 import delete_icon from "../../assets/icons/delete_icon.svg";
 
-
-
-
-
 const Cart = ({ isOpen, onRequestClose }) => {
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.userDetail);
   const dispatch = useDispatch();
   const genericCover =
-  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhRKhJb1aLmjwGX_ox0TA6eTxCv_5g3Nlr6w&usqp=CAU";
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhRKhJb1aLmjwGX_ox0TA6eTxCv_5g3Nlr6w&usqp=CAU";
 
-  
   const modalStyles = {
     overlay: {
       backgroundColor: "transparent", // Fondo translúcido oscuro detrás del modal
@@ -76,10 +70,11 @@ const Cart = ({ isOpen, onRequestClose }) => {
     },
   };
 
-  const handleCart = (id)=>{
-    dispatch(removeCart(id))
-  }
-{/*
+  const handleCart = (id) => {
+    dispatch(removeCart(id));
+  };
+  {
+    /*
 const dataPay = {
 	ip: "Stripe Default",
 	orderNumber: "Stripe Default",
@@ -107,8 +102,9 @@ const dataPay = {
 
 	
 	}
-*/}
-const totalPrice = cart.reduce((total, book) => total + book.price, 0);
+*/
+  }
+  const totalPrice = cart.reduce((total, book) => total + book.price, 0);
 
   const datapay = {
     userId: user.id,
@@ -120,29 +116,36 @@ const totalPrice = cart.reduce((total, book) => total + book.price, 0);
     price: cart.map((book) => book.price),
     typeMoney: cart.map((book) => "ARG"),
     totalPrice: totalPrice,
-    total_paid_amount:totalPrice,
+    total_paid_amount: totalPrice,
     pdfLink: cart.map((book) => book.pdfLink),
-    
-  }
- 
+  };
+
   const handlerfreebooks = async () => {
     try {
-      const response = await axios.post(
-        "/freeBooks",
-        datapay
-      );
+      const response = await axios.post("/freeBooks", datapay);
       const sureThing = response.data;
       console.log(sureThing);
     } catch (error) {
       console.log(error);
       throw new Error(error.message);
     }
-  }
+  };
+  console.log(cart.length);
   return (
-    <Modal style={modalStyles} className={styles.modal} isOpen={isOpen} onRequestClose={onRequestClose} >
+    <Modal
+      style={modalStyles}
+      className={styles.modal}
+      isOpen={isOpen}
+      onRequestClose={onRequestClose}
+    >
       <div>
         <div className={styles.titleContainer}>
-          <img className={styles.buttonClose} src={close_button} onClick={onRequestClose} alt='x' />
+          <img
+            className={styles.buttonClose}
+            src={close_button}
+            onClick={onRequestClose}
+            alt="x"
+          />
           <h3 className={styles.title}>Your Cart</h3>
         </div>
 
@@ -153,7 +156,11 @@ const totalPrice = cart.reduce((total, book) => total + book.price, 0);
                 <Link className={styles.bookLink} to={`/detail/${book.id}`}>
                   <img
                     className={styles.bookImage}
-                    src={book.image !== "Image not Available" ? book.image : genericCover}
+                    src={
+                      book.image !== "Image not Available"
+                        ? book.image
+                        : genericCover
+                    }
                     alt={`${book.title}`}
                   />
                 </Link>
@@ -161,12 +168,19 @@ const totalPrice = cart.reduce((total, book) => total + book.price, 0);
                   <div className={styles.bookTitle}>{book.title}</div>
                   {book.price && book.price ? (
                     <div className={styles.bookPrice}>$ {book.price}</div>
-                    ) : (
-                      <div className={styles.bookPrice}>Free</div>
-                      )}
+                  ) : (
+                    <div className={styles.bookPrice}>Free</div>
+                  )}
                 </div>
-                
-                <img className={styles.deleteBtn} src={delete_icon} alt="x"  onClick={()=>{handleCart(book.id)}}/>
+
+                <img
+                  className={styles.deleteBtn}
+                  src={delete_icon}
+                  alt="x"
+                  onClick={() => {
+                    handleCart(book.id);
+                  }}
+                />
               </div>
             ))
           ) : (
@@ -177,22 +191,34 @@ const totalPrice = cart.reduce((total, book) => total + book.price, 0);
           <h4 className={styles.title}>{cart.length} books</h4>
           <h4 className={styles.price}>${totalPrice}</h4>
         </div>
-        {
-        totalPrice !== 0 ?(
-        <Link to={`/payment`}>
-          <button className={styles.buyBtn} onClick={onRequestClose} >Buy Now</button>
-        </Link>
-        ):
-        (
-        <Link to={`/freeBookacquisition`}>
-          <button className={styles.buyBtn} onClick={handlerfreebooks} >Buy Now</button>
-            
-        </Link>
-        )
-        }
-            </div>
-        </Modal>
-    );
+        {cart.length !== 0 ? (
+          totalPrice !== 0 ? (
+            <Link to={`/payment`}>
+              <button className={styles.buyBtn} onClick={onRequestClose}>
+                Buy Now
+              </button>
+            </Link>
+          ) : (
+            <Link to={`/freeBookacquisition`}>
+              <button className={styles.buyBtn} onClick={handlerfreebooks}>
+                Buy Now
+              </button>
+            </Link>
+          )
+        ) : (
+          <button
+            className={styles.buyBtn}
+            onClick={() => {
+              alert("Cart cannot be empty");
+              onRequestClose();
+            }}
+          >
+            Go to Home  
+          </button>
+        )}
+      </div>
+    </Modal>
+  );
 };
 
 export default Cart;
