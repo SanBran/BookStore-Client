@@ -7,6 +7,7 @@ import edit_icon from '../../assets/icons/edit_icon.svg';
 //import delete_icon from '../../assets/icons/delete_icon.svg';
 import plus_icon from '../../assets/icons/plus_icon.svg';
 import { postBook } from '../../redux/actions/actions';
+import PdfUpload from '../PdfUpload/PdfUpload';
 
 const CreateBook = ( ) => {
     const dispatch = useDispatch();
@@ -170,7 +171,7 @@ const CreateBook = ( ) => {
         }        
     }
       
-
+console.log(formData);
     return(
         <form className={styles.form}>
             <div className={styles.imageContainer}>
@@ -185,7 +186,7 @@ const CreateBook = ( ) => {
             {errors.image.length ? <p className={styles.textError}>An image is required</p> : <></>}
             
             <label className={styles.label} >
-                <h3 className={styles.addPDF}><img className={styles.plusIcon} src={plus_icon} alt="+" /> ADD PDF</h3>
+            <PdfUpload setFormData={setFormData} formData={formData}/>
                 <input
                     className={errors.pdfLink.length ? (`${styles.input} ${styles.error}`) : styles.input}
                     name="pdfLink"
