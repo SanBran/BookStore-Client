@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import TabListGeneral from './TabList/TabListGeneral';
 import BooksTableList from '../../Components/BooksTableList/BooksTableList'
 import UsersTableList from '../../Components/UsersTableList/UsersTableList'
+import styles from './AdminDashboar.module.css'
+import logo from '../../sources/logoCompleto.png'
 
 import {
   Card,
