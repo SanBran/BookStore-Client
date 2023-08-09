@@ -4,20 +4,20 @@ import Cookies from "js-cookie";
 
 export function Cookie() {
   const token = useSelector((state) => state.theToken);
-  const userDetails = useSelector(state=> state.userDetail);
-  const theBanner = useSelector(state=> state.access)
+  const userDetails = useSelector(state => state.userDetail);
+  const theBanner = useSelector(state => state.access)
   const dispatch = useDispatch();
   if (theBanner.state) {
-      dispatch(obtainToken(userDetails.email));
-      if(token){
-    const userToken = token;
+    dispatch(obtainToken(userDetails.email));
+    if (token) {
+      const userToken = token;
 
-   
 
-    //Esto para devolver a la hora de comprobar sesión, y guardar en cookie claro
-    Cookies.set("setToken", userToken);
-    Cookies.set("setEmail", userDetails.email);
-    return 'Cookie exitosa';
-      }
+
+      //Esto para devolver a la hora de comprobar sesión, y guardar en cookie claro
+      Cookies.set("setToken", userToken);
+      Cookies.set("setEmail", userDetails.email);
+      return 'Cookie exitosa';
+    }
   } else return 'Sorry, creo que no hubo un acceso previo';
 }
