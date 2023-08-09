@@ -7,17 +7,20 @@ import edit_icon from '../../assets/icons/edit_icon.svg';
 //import delete_icon from '../../assets/icons/delete_icon.svg';
 import plus_icon from '../../assets/icons/plus_icon.svg';
 import { postBook } from '../../redux/actions/actions';
+import PdfUpload from '../PdfUpload/PdfUpload';
 
 const CreateBook = ( ) => {
     const dispatch = useDispatch();
 
     const genericCover = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhRKhJb1aLmjwGX_ox0TA6eTxCv_5g3Nlr6w&usqp=CAU";
     const genericPDF = "https://www.ingenieria.unam.mx/dcsyhfi/material_didactico/Literatura_Hispanoamericana_Contemporanea/Autores_Q/QUIROGA/gallina.pdf"
+    const cloudinaryUrl = `https://api.cloudinary.com/v1_1/dajn5cfcv/image/upload`;
 
     const allGenders = useSelector(state => state.genres);
     const uniqueGenres = [];
     allGenders?.map((gender) => uniqueGenres.includes(gender.nameType)? null : uniqueGenres.push(gender.nameType) );
 
+    const [pdfFile, setPdfFile] = useState(null);
     const [formData, setFormData] = useState({
         image: genericCover,
         pdfLink: '',
@@ -54,7 +57,6 @@ const CreateBook = ( ) => {
     // });
     const [errors, setErrors] = useState({
         image: '',
-        pdfLink: '',
         title: '',
         author: '',
         editorial: '',
@@ -121,7 +123,10 @@ const CreateBook = ( ) => {
         for (const property in formData) {
         if (property === 'newGender' || property === 'otherLanguage'
         ) continue;
+        if (property === 'pdfLink' 
+        ) continue;
         if (!formData[property].length) {
+            console.log(`error in ${property}`);
             setErrors({ ...errors, [property]: 'Incomplete' });
             return false
         }
@@ -142,12 +147,40 @@ const CreateBook = ( ) => {
               return true
     }
 
-    const handleSubmit=async(event)=>{
+    const form = new FormData();
+    
+    form.append("upload_preset", "ml_default");
+    form.append("file", pdfFile);
+
+  const handleUpload = async () => {
+    try {
+      const res = await fetch(cloudinaryUrl, {
+        method: "POST",
+        body: form,
+        resourceType: 'auto'
+      });
+  
+      if (!res.ok) return null;
+  
+      const data = await res.json();
+      setFormData({
+        ...formData,
+        pdfLink: data.secure_url
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  
+  };
+
+    const handleSubmit =  (event)=>{
         event.preventDefault();
+         handleUpload()
         if(validateSubmit()){
-            //console.log(formData);
             try {
-                await dispatch(postBook(formData));
+                
+                
+             dispatch(postBook(formData));
                 setFormData({
                     image: genericCover,
                     pdfLink: '',
@@ -165,12 +198,12 @@ const CreateBook = ( ) => {
                     numPages: ''
                 })
             } catch (error) {
-                console.log(error);
             }
-        }        
+        }else{
+            console.log(errors);
+        }      
     }
       
-
     return(
         <form className={styles.form}>
             <div className={styles.imageContainer}>
@@ -185,19 +218,9 @@ const CreateBook = ( ) => {
             {errors.image.length ? <p className={styles.textError}>An image is required</p> : <></>}
             
             <label className={styles.label} >
-                <h3 className={styles.addPDF}><img className={styles.plusIcon} src={plus_icon} alt="+" /> ADD PDF</h3>
-                <input
-                    className={errors.pdfLink.length ? (`${styles.input} ${styles.error}`) : styles.input}
-                    name="pdfLink"
-                    onChange={handleChange}
-                    value={formData.pdfLink}
-                    type="text"
-                    placeholder=""
-                    required
-                    // readOnly disabled
-                />
+            <PdfUpload setPdfFile={setPdfFile} pdfFile={pdfFile}/>
+                
             </label>
-            {errors.pdfLink.length ? <p className={styles.textError}>{errors.pdfLink}</p> : <></>}
 
             <label className={styles.label}>
                 <input

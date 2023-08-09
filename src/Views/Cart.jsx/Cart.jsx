@@ -130,7 +130,6 @@ const dataPay = {
       throw new Error(error.message);
     }
   };
-  console.log(cart.length);
   return (
     <Modal
       style={modalStyles}
