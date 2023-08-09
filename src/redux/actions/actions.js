@@ -1,6 +1,7 @@
 import axios from "axios";
 //Aquí los action Types
 import {
+  UPDATE_CART,
   GET_TOKEN,
   VALIDATE_SESSION,
   LOG_OUT,
@@ -433,6 +434,12 @@ export function addCart(book) {
   return {
     type: ADD_CART,
     payload: book,
+  };
+}
+export function updateCart(info) {
+  return {
+    type: UPDATE_CART,
+    payload: info,
   };
 }
 export function removeCart(bookId) {

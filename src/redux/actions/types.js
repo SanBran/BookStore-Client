@@ -49,6 +49,7 @@ export const DELETE_COMMENT_BY_ID = "DELETE_COMMENT_BY_ID";
 //CART
 export const REMOVE_CART = "REMOVE_CART";
 export const ADD_CART = "ADD_CART";
+export const UPDATE_CART = "UPDATE_CART";
 
 //USERS
 export const ACCESS = "ACCESS";

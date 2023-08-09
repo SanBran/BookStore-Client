@@ -13,12 +13,14 @@ import {
   removeFavorite,
 } from "../../redux/actions/actions";
 
+
 const Book = ({ books }) => {
   const genericCover = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhRKhJb1aLmjwGX_ox0TA6eTxCv_5g3Nlr6w&usqp=CAU";
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.access);
   const userInfo = useSelector((state) => state.userDetail);
+  const cartInfo = useSelector((state)=> state.cart);
 
   const { id, image, title, author, price, comments } = books;
   const [isFav, setIsFav] = useState(false);
@@ -58,6 +60,13 @@ const Book = ({ books }) => {
       setIsFav(false);
     }
   }, [userInfo.listWish,id]);
+  useEffect(() => {
+    if (cartInfo && cartInfo.find(item=>item.id === id)) {
+      setCart(true);
+    } else {
+      setCart(false);
+    }
+  }, [cartInfo,id]);
 
   return (
     <div className={styles.container}>
