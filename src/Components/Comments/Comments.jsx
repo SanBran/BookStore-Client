@@ -16,6 +16,10 @@ const Comments = ({ id, book }) => {
 
     const userId = useSelector(state => state.access.ref)
 
+
+    console.log(userId);
+
+
     const dispatch = useDispatch()
 
     const [rating, setRating] = useState(1);
@@ -70,9 +74,6 @@ const Comments = ({ id, book }) => {
         setComments(updatedComments);
     };
 
-
-
-
     const handleDeleteComment = (commentId) => {
         dispatch(deleteCommentById(commentId))
         const updatedComments = comments.filter(comment => comment.id !== commentId);
@@ -82,9 +83,10 @@ const Comments = ({ id, book }) => {
     useEffect(() => {
         setForm(prevForm => ({
             ...prevForm,
+            userId: userId,
             rating: rating,
         }));
-    }, [rating]);
+    }, [rating, userId]);
 
 
     const [form, setForm] = useState({
@@ -98,11 +100,12 @@ const Comments = ({ id, book }) => {
         e.preventDefault()
         if (form.comment.length >= 1) {
             dispatch(postComment(form))
+            console.log(form);
             setShowSpinner(true)
             setTimeout(() => {
                 setShowSpinner(false)
                 window.location.reload()
-            }, 1500)
+            }, 1000)
         }
     }
 

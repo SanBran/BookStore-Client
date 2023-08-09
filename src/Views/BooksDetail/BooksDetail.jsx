@@ -19,7 +19,7 @@ const BooksDetail = () => {
   const user = useSelector(state => state.access);
   const cart = useSelector(state => state.cart);
   const [inCart, setIncart] = useState(false);
-  
+
 
   useEffect(() => {
     const find = cart.find(item => item?.id === book.id);
@@ -94,7 +94,7 @@ const BooksDetail = () => {
       navigate('/access');
     }
   }
- 
+
 
   const datapay = {
     userId: userDetail.id,
@@ -104,10 +104,10 @@ const BooksDetail = () => {
     bookTitle: [book.title],
     quantity: 1,
     price: [book.price],
-    typeMoney:["ARG"],
+    typeMoney: ["ARG"],
     totalPrice: book.price,
-    total_paid_amount:book.price,
-    
+    total_paid_amount: book.price,
+
   }
   console.log(datapay)
   const handlerfreebooks = async () => {
@@ -148,21 +148,21 @@ const BooksDetail = () => {
             <p className={styles.price}>{book.price !== 0 ? `$ ${book.price}` : "Free"}</p>
             <p className={styles.format}>PDF format</p>
             {
-              
-        book.price !== 0 ?(
-        
-          <button className={styles.buyBtn} onClick={() => { navigate(`/payment/${book.id}`) }} >Buy Now</button>
-        
-        ):
-        (
-         <Link to={`/freeBookacquisition`}>
-          <button className={styles.buyBtn} onClick={handlerfreebooks} >Buy Now</button>
-          </Link>
-            
-       
-        )
-        }
-            
+
+              book.price !== 0 ? (
+
+                <button className={styles.buyBtn} onClick={() => { navigate(`/payment/${book.id}`) }} >Buy Now</button>
+
+              ) :
+                (
+                  <Link to={`/freeBookacquisition`}>
+                    <button className={styles.buyBtn} onClick={handlerfreebooks} >Buy Now</button>
+                  </Link>
+
+
+                )
+            }
+
             <button className={styles.cartBtn} onClick={() => { handlerCart(book) }}>{inCart ? "REMOVE FROM CART" : "ADD TO CART"}</button>
           </div>
         </div>
