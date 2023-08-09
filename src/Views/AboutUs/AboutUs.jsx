@@ -20,13 +20,63 @@ import react_logo from '../../assets/gifs/react_logo.png';
 import sequelize_logo from '../../assets/gifs/sequelize_logo.png';
 import sql_logo from '../../assets/gifs/sql_logo.png';
 import ts_logo from '../../assets/gifs/ts_logo.png'
-
+import JoseImage from './Img/Jose.jpeg'
 import styles from './AboutUs.module.css'
-
+import SashaImage from './Img/sasha.jpeg'
+import DanyImage from './Img/dany.jpeg'
+import NazaImage from './Img/naza.jpeg'
+import BranImage from './Img/bran.jpeg'
+import SantiImage from './Img/santi.jpeg'
+import Github from './icon/code.png'
+import Linkedin from './icon/linkedin.png'
 const AboutUs = ()=>{
+    const teamMembers = [
+        { name: 'Jose Fuenmayor', image: JoseImage , github: 'https://github.com/JoseAlbertoFC', linkedin: 'https://www.linkedin.com/in/josealbertofc/'},
+        { name: 'Sasha Camargo', image: SashaImage , github: '', linkedin: ''},
+        { name: 'Danny Ruiz', image: DanyImage  , github: 'https://github.com/JuanDanielRuiz', linkedin: 'https://www.linkedin.com/in/danny-ruiz-9b7a24175/'},
+        { name: 'Nazareno Lujan', image: NazaImage , github: '', linkedin: ''},
+        { name: 'Brandon Galarza', image: BranImage , github: '', linkedin: ''},
+        { name: 'Santiago Soto', image: SantiImage , github: '', linkedin: ''},
+        
+        
+        
+    ];
     return(
         <div className={styles.container}>
-            <div className={styles.names}>
+           
+            
+            {
+                teamMembers.map((member, index) => {
+                    return (
+                
+                        <div key={index} className={styles.card}>
+                              
+                            <img className={styles.img_user} src={member.image} alt="img" />
+                            <img className={`${styles.icon} ${styles.time1}`} src={git} alt="" />
+                            <div className={styles.icons}>
+                            <img className={`${styles.icon} ${styles.time2}`} src={css_logo} alt="" />
+                <img className={`${styles.icon} ${styles.time3}`} src={github_logo} alt="" />
+                <img className={`${styles.icon} ${styles.time4}`} src={js_logo} alt="" />
+                <img className={`${styles.icon} ${styles.time5}`} src={sequelize_logo} alt="" />
+                <img className={`${styles.icon} ${styles.time6}`} src={ts_logo} alt="" />
+                <img className={`${styles.icon} ${styles.time7}`} src={express_logo} alt="" />
+                            </div>
+                <a href={member.github} target="_blank" class={styles.github}>
+                <img src={Github} alt="Imagen" class={styles.image} />
+              
+                </a>
+                <a href={member.linkedin} target="_blank" class={styles.github}>
+                <img src={Linkedin} alt="Imagen" class={styles.image} />
+              
+                </a>
+                
+                            <h1>{member.name}</h1>
+                        </div>
+                    )
+
+                })
+            }
+            {/* <div className={styles.names}>
                 <h1 className={styles.name1}>Alejandro</h1>
                 <h1 className={styles.name1}>Santiago</h1>
                 <h1 className={styles.name1}>Daniel</h1>
@@ -35,8 +85,8 @@ const AboutUs = ()=>{
                 <h1 className={styles.name1}>Sasha</h1>
                 <h1 className={styles.name1}>Brandon</h1>
                 <h1 className={styles.name1}>Nazareno</h1>
-            </div>
-            <img className={styles.gif} src={gif3} alt="" />
+            </div> */}
+            {/* <img className={styles.gif} src={gif3} alt="" />
             <div >
                 <img className={`${styles.icon} ${styles.time1}`} src={git} alt="" />
                 <img className={`${styles.icon} ${styles.time2}`} src={css_logo} alt="" />
@@ -45,7 +95,7 @@ const AboutUs = ()=>{
                 <img className={`${styles.icon} ${styles.time5}`} src={sequelize_logo} alt="" />
                 <img className={`${styles.icon} ${styles.time6}`} src={ts_logo} alt="" />
                 <img className={`${styles.icon} ${styles.time7}`} src={express_logo} alt="" />
-            </div>
+            </div> */}
         </div>
     )
 }
