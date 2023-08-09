@@ -1,6 +1,7 @@
 import fav1 from "../../sources/fav1.png";
 import fav2 from "../../sources/fav2.png";
 import { Link } from "react-router-dom";
+import StarRating from "../StarRating/StarRating";
 import styles from "./Book.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -12,14 +13,16 @@ import {
   removeFavorite,
 } from "../../redux/actions/actions";
 
+
 const Book = ({ books }) => {
   const genericCover = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhRKhJb1aLmjwGX_ox0TA6eTxCv_5g3Nlr6w&usqp=CAU";
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.access);
   const userInfo = useSelector((state) => state.userDetail);
+  const cartInfo = useSelector((state)=> state.cart);
 
-  const { id, image, title, author, price } = books;
+  const { id, image, title, author, price, comments } = books;
   const [isFav, setIsFav] = useState(false);
   const [cart, setCart] = useState(false);
 
@@ -57,6 +60,13 @@ const Book = ({ books }) => {
       setIsFav(false);
     }
   }, [userInfo.listWish,id]);
+  useEffect(() => {
+    if (cartInfo && cartInfo.find(item=>item.id === id)) {
+      setCart(true);
+    } else {
+      setCart(false);
+    }
+  }, [cartInfo,id]);
 
   return (
     <div className={styles.container}>
@@ -101,6 +111,7 @@ const Book = ({ books }) => {
       <div className={styles.textContainer}>
         <div className={styles.title}>{title}</div>
         <div className={styles.author}>{author}</div>
+        <div className={styles.rating}><StarRating rating={comments} /></div>
         {price && price ? (
           <div className={styles.price}>${price}</div>
         ) : (

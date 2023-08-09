@@ -10,6 +10,7 @@ const Stripe = ({ cart, userInfo, styles }) => {
       price: parseInt(books.price),
       quantity: 1,
       typeMoney: books.currency || "MXN",
+      pdfLink: books.pdfLink
       //description: "Ok, aquí va una descripcion breve: Pásate a Premium",
     };
   });

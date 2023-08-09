@@ -1,4 +1,5 @@
 import {
+  UPDATE_CART,
   GET_TOKEN,
   VALIDATE_SESSION,
   LOG_OUT,
@@ -30,6 +31,7 @@ import {
   DELETE_COMMENT_BY_ID,
   GET_USERS,
   GET_USER_BY_ID,
+  DELETE_USERS_BY_ID,
   POST_USER,
   UPDATE_USER,
   OVERLAY_PROFILE,
@@ -56,6 +58,9 @@ import {
   GET_COUNTRIES,
   GET_LANGUAGES,
   GET_PUBLISHEDDATES,
+  GET_ALL_PAYMENTS,
+  GET_TABLEADMIN_BOOKS,
+  GET_TABLEADMIN_USERS
 } from "../actions/types";
 
 let initialState = {
@@ -79,6 +84,7 @@ let initialState = {
   booksByAuthor: [],
   comments: [],
   payments: [],
+  allPayments: [],
   response: {},
   error: null,
   users: [],
@@ -86,6 +92,10 @@ let initialState = {
   overlayProfile: false,
   showListwish: false,
   token: "",
+  totalUsers:"",
+  totalTableUsers:"",
+  tableAdminBooks:[],   // --- GET_TABLEADMIN_BOOKS
+  tableAdminUsers:[], //GET_TABLEADMIN_USERS
 };
 
 // !Tener el cuenta reducir el reducer en varias partes.
@@ -150,6 +160,14 @@ const reducer = (state = initialState, { type, payload }) => {
         allBooks: state.allBooks.filter((book) => book.id !== payload),
         allBooksCopy: [...state.allBooks],
       };
+
+      case DELETE_USERS_BY_ID:
+        return {
+          ...state,
+          allBooks: state.allBooks.filter((book) => book.id !== payload),
+          allBooksCopy: [...state.allBooks],
+        };
+
     //----------------------------FILTERS-------------------
     //case FILTER_BY_GENRER:
     // if (payload === "ALL")
@@ -405,13 +423,16 @@ const reducer = (state = initialState, { type, payload }) => {
     //----------------------------PAYMENTS----------------
     // revisar mercadoPago no estoy seguro como funciona
     case ADD_CART:
-      console.log("hola soy el cart", state.cart);
       return {
         ...state,
         cart: [...state.cart, payload],
       };
+    case UPDATE_CART:
+      return {
+        ...state,
+        cart: payload,
+      };
     case REMOVE_CART:
-      console.log(state.cart);
       filter = state.cart.filter((book) => book.id !== payload);
       return {
         ...state,
@@ -421,6 +442,12 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         payments: payload,
+        error: null,
+      };
+    case GET_ALL_PAYMENTS:
+      return {
+        ...state,
+        allPayments: payload,
         error: null,
       };
     //----------------------------WHATSAPP----------------
@@ -476,6 +503,7 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         users: payload.detail,
+        totalUsers:payload.detail.totalUsers
       };
     case GET_USER_BY_ID:
       return {
@@ -553,6 +581,18 @@ const reducer = (state = initialState, { type, payload }) => {
         token: payload,
       };
 
+      case GET_TABLEADMIN_BOOKS:
+        return {
+          ...state,
+          tableAdminBooks: payload.books,
+        };
+        case GET_TABLEADMIN_USERS:
+          return {
+            ...state,
+            tableAdminUsers: payload.detail,   
+            totalTableUsers:payload.detail.totalUsers
+          };
+  
     default:
       return { ...state };
   }

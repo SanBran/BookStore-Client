@@ -1,27 +1,30 @@
 .booksContainer {
-    position: relative;
-    top: 20px;
+    padding: 100px 0;   
 
-    margin: 0 auto;
-    
-     width: 90vw;
-     height: fit-content;
-     
-     
-     display: flex;
-     flex-wrap: wrap;
-     justify-content:center;
-     gap: 40px;
-     
+    width: 100vw;
+    min-height: 100vh;
  
- }
- .title2{
-    color: #FA9D1B;
-    text-align: start;
-    width: 100%;
- }
- @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    align-items: center;
 
+    font-family: 'Montserrat', sans-serif;     
+}
+.downloadBtn{
+    cursor: pointer;
+}
+.title2{
+    color: #FA9D1B;
+    text-align: center;
+    width: 100%;
+}
+.book{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+}
 .container {
     display: flex;
     height: 190px;

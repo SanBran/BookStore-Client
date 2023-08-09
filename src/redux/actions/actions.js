@@ -1,6 +1,7 @@
 import axios from "axios";
 //Aquí los action Types
 import {
+  UPDATE_CART,
   GET_TOKEN,
   VALIDATE_SESSION,
   LOG_OUT,
@@ -27,6 +28,7 @@ import {
   UPDATE_COMMENT_BY_ID,
   DELETE_COMMENT_BY_ID,
   GET_USERS,
+  DELETE_USERS_BY_ID,
   GET_USER_BY_ID,
   POST_USER,
   UPDATE_USER,
@@ -58,6 +60,9 @@ import {
   GET_COUNTRIES,
   GET_LANGUAGES,
   GET_PUBLISHEDDATES,
+  GET_ALL_PAYMENTS,
+  GET_TABLEADMIN_BOOKS,
+  GET_TABLEADMIN_USERS,
   //  GOOGLE_CONFIRM,
 } from "./types";
 
@@ -121,7 +126,6 @@ export function detailBookById(id) {
     try {
       const response = await axios.post(`/bookDetail/${id}`);
       const data = response.data;
-      console.log(data);
       if (data) {
         // Book found, dispatch the book data to the store
         return dispatch({ type: GET_BOOK_BY_ID, payload: data });
@@ -327,11 +331,26 @@ export function getBooksById(id) {
     }
   };
 }
-export function postBook(book) {
+export function postBook(bookData) {
+  const book = {
+    title: bookData.title,
+    author: bookData.author,
+    country: bookData.country,
+    language: bookData.language === "other" ? bookData.otherLanguage : bookData.language,
+    image: bookData.image,
+    gender: bookData.gender === "other" ? bookData.newGender : bookData.gender,
+    sinopsis: bookData.sinopsis,
+    price: bookData.price,
+    publishedDate: bookData.publishedDate,
+    pdfLink: bookData.pdfLink,
+    editorial: bookData.editorial,
+    numPages: bookData.numPages
+  }
   return async function (dispatch) {
     try {
-      //console.log(title);
+      console.log(book);
       const response = await axios.post(`/postBook`, book);
+      console.log(response.data);
       return dispatch({
         type: POST_BOOK,
         payload: response.data,
@@ -420,6 +439,12 @@ export function addCart(book) {
     payload: book,
   };
 }
+export function updateCart(info) {
+  return {
+    type: UPDATE_CART,
+    payload: info,
+  };
+}
 export function removeCart(bookId) {
   return {
     type: REMOVE_CART,
@@ -432,6 +457,19 @@ export function getPayments(id) {
       const response = await axios.get(`/read-pays/${id}`);
       return dispatch({
         type: GET_PAYMENTS,
+        payload: response.data,
+      });
+    } catch (error) {
+      throw Error(error.message);
+    }
+  };
+}
+export function getAllPayments() {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(`/read-pays`);
+      return dispatch({
+        type: GET_ALL_PAYMENTS,
         payload: response.data,
       });
     } catch (error) {
@@ -523,8 +561,11 @@ export function postComment(comment) {
 export function updateCommentById({ id, rating, comment }) {
   return async function (dispatch) {
     try {
-      console.log(id, rating, comment, 'desde actions');
-      const response = await axios.put(`/updateComment/${id}`, { rating, comment });
+      console.log(id, rating, comment, "desde actions");
+      const response = await axios.put(`/updateComment/${id}`, {
+        rating,
+        comment,
+      });
       return dispatch({
         type: UPDATE_COMMENT_BY_ID,
         payload: response.data,
@@ -658,7 +699,7 @@ export function getUsers() {
   return async function (dispatch) {
     try {
       const response = await axios.post(`/findUser`);
-      console.log(response.data.detail);
+      // console.log("data.detail-->",response.data.detail);
       return dispatch({
         type: GET_USERS,
         payload: response.data,
@@ -874,6 +915,56 @@ export function getPublishedDates() {
       return dispatch({
         type: GET_PUBLISHEDDATES,
         payload: response.data.detail.settingFind,
+      });
+    } catch (error) {
+      throw Error(error.message);
+    }
+  };
+}
+
+export const getTableBooks = () => {
+  return async function (dispatch) {
+    try {
+      // console.log("GET_ALL_BOOKS*********************");
+      const response = await axios.post("/getBooks");
+      // console.log("getTableBooks==>" + response);
+      return dispatch({
+        type: GET_TABLEADMIN_BOOKS,
+        payload: response.data,
+      });
+    } catch (error) {
+      //console.log("error--" + error);
+      throw Error(error.message);
+    }
+  };
+};
+
+
+export const getTableUsers = () => {
+  return async function (dispatch) {
+    try {
+      console.log("GET_TABLEADMIN_USERS*********************");
+      const response = await axios.post(`/findUser`);
+       console.log("getTableUsers==>" + response.data);
+      return dispatch({
+        type: GET_TABLEADMIN_USERS,
+        payload: response.data,
+      });
+    } catch (error) {
+      //console.log("error--" + error);
+      throw Error(error.message);
+    }
+  };
+};
+
+export function deleteUserById(id) {
+  return async function (dispatch) {
+    try {
+      //console.log(title);
+      const response = await axios.delete(`/delUser/${id}`);
+      return dispatch({
+        type:  DELETE_USERS_BY_ID,
+        payload: response.data,
       });
     } catch (error) {
       throw Error(error.message);

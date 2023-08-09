@@ -41,9 +41,16 @@ function Wishlist() {
   return (
     <div className={styles.booksContainer}>
       <h2 className={styles.title}>Wishlist</h2>
-      {books.map((book) => (
-        <Book key={(book.id+2)} books={book} />
-      ))}
+      <div className={styles.book}>
+        {books.length
+        ?(<>
+        {books.map((book) => (
+          <Book key={(book.id+2)} books={book} />
+        ))}
+        </>)
+        :(<>Empty</>)
+        }
+      </div>
     </div>
   );
 }

@@ -6,12 +6,17 @@ import Access from "./Views/Access/Access";
 import Navbar from "./Components/Navbar/Navbar";
 import Profile from "./Views/Profile/Profile";
 import Wishlist from "./Components/Wishlist/Wishlist";
+import Dashboard from "./Components/Dashboard/Dashboard";
 import History from "./Components/History/History";
 import Settings from "./Views/Settings/Settings";
 import Filters from "./Components/Filters/Filters";
 import Results from "./Views/Results/Results";
 import NotFound from "./Views/NotFound/NotFound";
 import AdminDashboard from "./Views/Admin/AdminDashboard";
+import Footer from "./Components/Footer/Footer";
+import AboutUs from "./Views/AboutUs/AboutUs";
+
+import CreateBook from "./Components/CreateBook/CreateBook";
 
 import EmailVerification from "./Views/EmailVerification";
 
@@ -25,29 +30,49 @@ import { useEffect, useState } from "react";
 import PendingPay from "./Views/Cart.jsx/PendingPay/PendingPay";
 import FailurePay from "./Views/Cart.jsx/FailurePay/FailurePay";
 
+
+
 //pasos para el deploy
 import axios from "axios";
 //-------local
-axios.defaults.baseURL = "http://localhost:8000/";
+// axios.defaults.baseURL = "http://localhost:8000/";
 //-------deployado
-// axios.defaults.baseURL = "https://bookstorepf-production.up.railway.app";
+ axios.defaults.baseURL = "https://bookstorepf-production.up.railway.app";
 
 //-------Manejando cookies para mantener sesiones
 import Cookies from 'js-cookie';
 import { accessUser, getUserById, validateSession } from "./redux/actions/actions";
+import { updateCart } from "./redux/actions/actions";
 
 
 
 function App() {
+  const cart = useSelector(state=>state.cart);
   const showOverlayPerfile = useSelector(state => state.overlayProfile);
   const location = useLocation();
   const dispatch = useDispatch();
 
   const [server, setServer] = useState(true);
-
-  const token = localStorage.getItem('token');
-
   
+  const token = localStorage.getItem('token');
+  
+//-------Recordar el Carrito de compras
+  const [next, setNext] = useState(false);
+  useEffect(()=>{
+    const cart = localStorage.getItem('cart');
+    if(cart){
+      const decodedToken = JSON.parse(cart);
+      dispatch(updateCart(decodedToken))
+    }
+    setNext(true);
+  },[])
+  
+  useEffect(()=>{
+    if(next && cart){
+      const jwt = JSON.stringify(cart);
+      localStorage.setItem('cart', jwt);
+    }
+  },[cart])
 
   useEffect(() => {
     const token = Cookies.get('valToken');
@@ -79,12 +104,20 @@ function App() {
         : (<>
           {showOverlayPerfile && <Profile />}
           <div >
-            {location.pathname !== "/admin" && location.pathname !== "/profile" && location.pathname !== "/access" && (location.pathname !== "/results") && (location.pathname !== "/")
+            {location.pathname !== "/admin" 
+            && location.pathname !== "/admin/createBook" 
+            && location.pathname !== "/profile" 
+            && location.pathname !== "/access" 
+            && (location.pathname !== "/results") 
+            && !location.pathname.startsWith('/payment')
+            && !location.pathname.startsWith('/freeBookacquisition')
+            && (location.pathname !== "/")
               ? (<Navbar />)
               : (<></>)
             }
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/about_us" element={<AboutUs />} />
               <Route path="/access" element={<Access />} />
               <Route path="/detail/:id" element={ <BooksDetail />} />
               <Route path="/profile" element={token? <Profile />:<Access/>} />
@@ -103,8 +136,22 @@ function App() {
               <Route path="/freeBookacquisition" element={token?<SuccessfulAcquisition />:<Access/>} />
               <Route path="/admin" element={token?<AdminDashboard />:<NotFound/>}/>
 
+
+              <Route path="/admin/createBook" element={<CreateBook />}/>
+
+
               <Route path="*" element={<NotFound />} />
             </Routes>
+
+            {(location.pathname === '/' 
+            || location.pathname.startsWith('/wishlist')
+            || location.pathname.startsWith('/history')
+            || location.pathname.startsWith('/settings')
+            || location.pathname.startsWith('/detail'))
+              ? (<Footer />)
+              : (<></>)
+            }
+
           </div>
         </>)
       }

@@ -12,6 +12,17 @@ const Access = () => {
     const navigate = useNavigate();
     
     const [form, setForm] = useState('login');
+    const [signUpSuccess, setSignUpSuccess] = useState(false);
+
+    useEffect(() => {
+    // Limpiar el mensaje de éxito después de 3 segundos
+    const timer = setTimeout(() => {
+        setSignUpSuccess(false);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+    }, [signUpSuccess]);
+    
     
     useEffect(()=>{
         const urlParams = new URLSearchParams(window.location.search);
@@ -28,7 +39,9 @@ const Access = () => {
         <>
 
         <div className={style.accessContainer}>
+
             <div className={style.structure}>
+        {signUpSuccess && <p className={style.successMessage}><span className={style.validate}>validate your email</span>User created successfully</p>}
 {/* ------------vista del componente para el cambio de contrasena */}
                 {(form === 'requestChangePass' || form === 'changePassword') && 
                 (<div className={style.changePasswordcontainer}>
@@ -57,7 +70,7 @@ const Access = () => {
                     </div>
                     <div className={form === 'login' ? style.loginContainer : style.singupContainer}>
                         {form === 'login' && (<Login setForm={setForm}/>)}
-                        {form === 'signup' && (<SignUp setForm={setForm}/>)}
+                        {form === 'signup' && (<SignUp setForm={setForm} setSignUpSuccess={setSignUpSuccess}/>)}
                     </div>
                 </>)}
             </div>

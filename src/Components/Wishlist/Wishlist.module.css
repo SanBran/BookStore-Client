@@ -1,22 +1,22 @@
 .booksContainer {
-    position: relative;
-    top: 20px;
-
-    margin: 0 auto;
+    padding: 100px 0;
     
-     width: 90vw;
-     height: fit-content;
-     
-     
-     display: flex;
-     flex-wrap: wrap;
-     justify-content:center;
-     gap: 40px;
-     
- 
- }
- .title{
+    width: 100vw;
+    min-height: 100vh;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    align-items: center;
+}
+.title{
     color: #FA9D1B;
-    text-align: start;
+    text-align: center;
     width: 100%;
- }
+}
+.book{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+}

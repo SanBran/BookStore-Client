@@ -1,0 +1,118 @@
+.container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+
+}
+
+.name1{
+    margin: 0;
+    font-size: 18px;
+    color: black;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: normal;
+    text-align: start;
+
+}
+
+.gif{
+    width: 150px;
+    height: 150px;
+    margin: 20px;
+    object-fit: cover;
+    border-radius: 100%;
+    overflow: hidden;
+    border: 8px solid #ffe08a;
+    z-index: 5;
+}
+
+
+.icon{
+    position: absolute;
+
+    margin-top: -40px;
+    margin-left: -100px;
+    width: 30px;
+    z-index: 1;
+}
+.time1 {
+    animation: animation1 3s infinite; /* Nombre de la animación, duración y repetición infinita */
+}
+.time2 {
+    animation: animation2 4s infinite; /* Nombre de la animación, duración y repetición infinita */
+}
+.time3 {
+    animation: animation3 5s infinite; /* Nombre de la animación, duración y repetición infinita */
+}
+.time4 {
+    animation: animation4 7s infinite; /* Nombre de la animación, duración y repetición infinita */
+}
+.time5 {
+    animation: animation6 3.5s infinite; /* Nombre de la animación, duración y repetición infinita */
+}
+.time6 {
+    animation: animation1 7.5s infinite; /* Nombre de la animación, duración y repetición infinita */
+}
+.time7 {
+    animation: animation4 4.5s infinite; /* Nombre de la animación, duración y repetición infinita */
+}
+
+@keyframes animation1 {
+0%, 100% {
+    opacity: 0;
+    transform: translateY(0) ; /* Posición inicial y final (sin desplazamiento vertical) */
+}
+50% {
+    opacity: 1;
+    transform: translateY(-90px) translateX(-70px) rotate(0); /* Posición máxima hacia arriba */
+}
+}
+@keyframes animation2 {
+0%, 100% {
+    opacity: 0;
+    transform: translateY(0) ; /* Posición inicial y final (sin desplazamiento vertical) */
+}
+50% {
+    opacity: 1;
+    transform: translateY(-80px) translateX(80px) rotate(0); /* Posición máxima hacia arriba */
+}
+}
+@keyframes animation3 {
+0%, 100% {
+    opacity: 0;
+    transform: translateY(0) ; /* Posición inicial y final (sin desplazamiento vertical) */
+}
+50% {
+    opacity: 1;
+    transform: translateY(-100px) translateX(-20px) rotate(0); /* Posición máxima hacia arriba */
+}
+}
+@keyframes animation4 {
+0%, 100% {
+    opacity: 0;
+    transform: translateY(0) ; /* Posición inicial y final (sin desplazamiento vertical) */
+}
+50% {
+    opacity: 1;
+    transform: translateY(-10px) translateX(100px) rotate(0); /* Posición máxima hacia arriba */
+}
+}
+@keyframes animation5 {
+0%, 100% {
+    opacity: 0;
+    transform: translateY(0) ; /* Posición inicial y final (sin desplazamiento vertical) */
+}
+50% {
+    opacity: 1;
+    transform: translateY(-80px) translateX(50px) rotate(0); /* Posición máxima hacia arriba */
+}
+}
+  
+  
+  
+  
+  
+  

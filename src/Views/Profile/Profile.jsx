@@ -1,21 +1,28 @@
 //import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { accessUser, getPayments, getUserById, logOut } from "../../redux/actions/actions";
+import {
+  accessUser,
+  getPayments,
+  getUserById,
+  logOut,
+  updateCart,
+} from "../../redux/actions/actions";
 import { overlayProfile } from "../../redux/actions/actions";
 import styles from "./Profile.module.css";
 import { useEffect } from "react";
 
-import Cookies from 'js-cookie';
-
+import Cookies from "js-cookie";
 
 //-----icons
+
 import profile_icon from '../../assets/icons/profile.svg';
 import log_out_icon from '../../assets/icons/log_out_icon.svg';
 import wishlist_icon from '../../assets/icons/wishlist_fill_icon.svg';
 import purchase_history_icon from '../../assets/icons/purchase_history_icon.svg';
 import settings_icon from '../../assets/icons/settings_icon.svg';
 import settings_admin from '../../assets/icons/admin.png';
+
 
 //userData={name, birthday, country, phone, phoneCode, gender, email, password, dniPasaport, status, rol, photoUser, listWish}
 const Profile = () => {
@@ -33,13 +40,15 @@ const Profile = () => {
   const handleCloseOverlayToggle = () => {
     dispatch(overlayProfile(showOverlayPerfile));
   };
-  const handleLogOut = async() => {
+  const handleLogOut = async () => {
     await dispatch(overlayProfile(showOverlayPerfile));
     await dispatch(accessUser(false, ""));
     await dispatch(logOut());
-    localStorage.removeItem("token")
-    Cookies.remove('valToken');
-    Cookies.remove('email');
+    localStorage.removeItem("token");
+    Cookies.remove("valToken");
+    Cookies.remove("email");
+    localStorage.removeItem("cart");
+    await dispatch(updateCart([]));
 
     navigate("/");
   };
@@ -50,33 +59,44 @@ const Profile = () => {
   return (
     <div className={styles.overlay}>
       <div className={styles.close} onClick={handleCloseOverlayToggle}></div>
-        <div className={styles.overlayContent}>
-          <div className={styles.profileContainer}>
-            <div className={styles.profileImg}>
-            <img className={styles.img} src={user.photoUser ? user.photoUser : profile_icon} />
-            </div>
-            <h3 className={styles.userName}>{user.name}</h3>
-            <h5 className={styles.userEmail}>{user.email}</h5>
+      <div className={styles.overlayContent}>
+        <div className={styles.profileContainer}>
+          <div className={styles.profileImg}>
+            <img
+              className={styles.img}
+              src={user.photoUser ? user.photoUser : profile_icon}
+            />
           </div>
-          <nav className={styles.navContainer}>
+          <h3 className={styles.userName}>{user.name}</h3>
+          <h5 className={styles.userEmail}>{user.email}</h5>
+        </div>
+        <nav className={styles.navContainer}>
+          <div>
+            <Link className={styles.navItem} to="/wishlist">
+              <img src={wishlist_icon} alt="❤️" />
+              Wishlist
+            </Link>
+          </div>
+          <div>
+            <Link className={styles.navItem} to="/history">
+              <img src={purchase_history_icon} alt="📜" />
+              Pucharse History
+            </Link>
+          </div>
+          <div>
+            <Link className={styles.navItem} to="/settings">
+              <img src={settings_icon} alt="⚙️" />
+              Settings
+            </Link>
+          </div>
+          {user.rol === "admin" ? (
             <div>
-              <Link className={styles.navItem} to="/wishlist">
-                <img src={wishlist_icon} alt="❤️" />
-                Wishlist
-              </Link>
-            </div>
-            <div>
-              <Link className={styles.navItem} to="/history">
-                <img src={purchase_history_icon} alt="📜" />
-                Pucharse History
-              </Link>
-            </div>
-            <div>
-              <Link className={styles.navItem} to="/settings">
+              <Link className={styles.navItem} to="/admin">
                 <img src={settings_icon} alt="⚙️" />
-                Settings
+                Dashboard
               </Link>
             </div>
+
             <div>
               {
                 user.rol === "admin" && token ? (
@@ -91,13 +111,19 @@ const Profile = () => {
           </nav>
           <div className={styles.Logout} onClick={handleLogOut}>
             {/* <button type="button">
+          ) : (
+            <></>
+          )}
+        </nav>
+        <div className={styles.Logout} onClick={handleLogOut}>
+          {/* <button type="button">
+
               Log Out
             </button> */}
-            <h3 className={styles.LogoutTitle}>Log Out</h3>
-            <img src={log_out_icon} alt=">" />
-          </div>
+          <h3 className={styles.LogoutTitle}>Log Out</h3>
+          <img src={log_out_icon} alt=">" />
         </div>
-      
+      </div>
     </div>
   );
 };

@@ -1,0 +1,20 @@
+.footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 0;
+    background: linear-gradient(180deg, rgb(255, 255, 255), rgb(218, 218, 218));
+    /* background-color: hsl(0, 0%, 69%); */
+    width: 100vw;
+    color: black;
+    font-family: 'Montserrat', sans-serif;
+}
+.link{
+    color: #FA9D1B;
+    font-weight: 600;
+    padding: 10px 40px;
+    transition: all 0.3s ease;
+}
+.link:hover{
+    color: black;
+}

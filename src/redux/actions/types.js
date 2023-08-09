@@ -13,6 +13,7 @@ export const RESET_BOOKS_BY_AUTHOR = "RESET_BOOKS_BY_AUTHOR";
 
 // PAYMENTS
 export const GET_PAYMENTS = "GET_PAYMENTS";
+export const GET_ALL_PAYMENTS = "GET_ALL_PAYMENTS";
 
 //whatsapp
 export const POST_SMS_WHATSAPP = "POST_SMS_WHATSAPP";
@@ -48,6 +49,7 @@ export const DELETE_COMMENT_BY_ID = "DELETE_COMMENT_BY_ID";
 //CART
 export const REMOVE_CART = "REMOVE_CART";
 export const ADD_CART = "ADD_CART";
+export const UPDATE_CART = "UPDATE_CART";
 
 //USERS
 export const ACCESS = "ACCESS";
@@ -60,6 +62,7 @@ export const ADD_FAVORITE = "ADD_FAVORITE";
 export const REMOVE_FAVORITE = "REMOVE_FAVORITE";
 export const GET_USERS = "GET_USER";
 export const GET_USER_BY_ID = "GET_USER_BY_ID";
+export const DELETE_USERS_BY_ID ="DELETE_USERS_BY_ID";
 export const POST_USER = "POST_USER";
 export const UPDATE_USER = "UPDATE_USER";
 export const ACTIVATE_USER = "ACTIVATE_USER";
@@ -86,3 +89,7 @@ export const GET_EDITORIALS = "GET_EDITORIALS";
 export const GET_COUNTRIES = "GET_COUNTRIES";
 export const GET_LANGUAGES = "GET_LANGUAGES";
 export const GET_PUBLISHEDDATES = "GET_PUBLISHEDDATES";
+
+//ADMIN
+export const GET_TABLEADMIN_BOOKS = "GET_TABLEADMIN_BOOKS";
+export const GET_TABLEADMIN_USERS = "GET_TABLEADMIN_USERS";
