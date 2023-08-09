@@ -100,3 +100,16 @@
   font-size: 22px;
   font-weight: 400;
 }
+
+.admin img{
+  width: 12%;
+  height: 12%;
+  margin-right: 10px;
+}
+.admin{
+  display: flex;
+  align-items: center;
+  margin: 35px 0 30px 25px;
+  color: black;
+  text-transform: none;
+}

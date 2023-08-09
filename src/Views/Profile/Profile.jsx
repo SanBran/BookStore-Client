@@ -15,6 +15,7 @@ import log_out_icon from '../../assets/icons/log_out_icon.svg';
 import wishlist_icon from '../../assets/icons/wishlist_fill_icon.svg';
 import purchase_history_icon from '../../assets/icons/purchase_history_icon.svg';
 import settings_icon from '../../assets/icons/settings_icon.svg';
+import settings_admin from '../../assets/icons/admin.png';
 
 //userData={name, birthday, country, phone, phoneCode, gender, email, password, dniPasaport, status, rol, photoUser, listWish}
 const Profile = () => {
@@ -44,6 +45,8 @@ const Profile = () => {
   };
   //! cuando se entra al wislist desde otro compomente ejemplo histoy, el estado queda sin actualizar
   //! si esta en true cuando vuelve al wishlist pasa a false y no se muestra
+  
+  const token = localStorage.getItem('token');
   return (
     <div className={styles.overlay}>
       <div className={styles.close} onClick={handleCloseOverlayToggle}></div>
@@ -73,6 +76,17 @@ const Profile = () => {
                 <img src={settings_icon} alt="⚙️" />
                 Settings
               </Link>
+            </div>
+            <div>
+              {
+                user.rol === "admin" && token ? (
+                  <Link className={styles.admin} to="/admin">
+                <img src={settings_admin} alt="🔏" />
+                Admin
+              </Link>
+                ):null
+              }
+              
             </div>
           </nav>
           <div className={styles.Logout} onClick={handleLogOut}>
