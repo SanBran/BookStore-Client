@@ -138,11 +138,11 @@ const BooksDetail = () => {
                 <p className={styles.author} key={index}>{author}</p>
               ))}
             </div>
-            <div className={styles.share}>
+            {/* <div className={styles.share}>
               <img className={styles.shareIcon} src={facebook_icon} alt="facebook" />
               <img className={styles.shareIcon} src={instagram_icon} alt="instagram" />
               <img className={styles.shareIcon} src={share_icon} alt="share" />
-            </div>
+            </div> */}
           </div>
           <div className={styles.priceAndActions}>
             <p className={styles.price}>{book.price !== 0 ? `$ ${book.price}` : "Free"}</p>

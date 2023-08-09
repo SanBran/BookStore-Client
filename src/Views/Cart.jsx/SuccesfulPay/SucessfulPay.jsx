@@ -19,7 +19,7 @@ const SucessfulPay = () => {
       <div className={styles.message}>
         <img className={styles.messageImg} src={successful_purchase} alt="ok" />
         <div className={styles.textContainer}>
-          <h1 className={styles.title}>Succesful purchase</h1>
+          <h1 className={styles.title}>Successful purchase</h1>
           <h4 className={styles.subtitle}>Go to 
           <span className={styles.underlined} onClick={()=>{navigate('/history')}}>your purchases</span> 
           to download the book</h4> 
