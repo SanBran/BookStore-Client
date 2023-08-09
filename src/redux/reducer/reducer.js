@@ -31,6 +31,7 @@ import {
   DELETE_COMMENT_BY_ID,
   GET_USERS,
   GET_USER_BY_ID,
+  DELETE_USERS_BY_ID,
   POST_USER,
   UPDATE_USER,
   OVERLAY_PROFILE,
@@ -57,7 +58,9 @@ import {
   GET_COUNTRIES,
   GET_LANGUAGES,
   GET_PUBLISHEDDATES,
-  GET_ALL_PAYMENTS
+  GET_ALL_PAYMENTS,
+  GET_TABLEADMIN_BOOKS,
+  GET_TABLEADMIN_USERS
 } from "../actions/types";
 
 let initialState = {
@@ -89,7 +92,10 @@ let initialState = {
   overlayProfile: false,
   showListwish: false,
   token: "",
-  totalUsers:""
+  totalUsers:"",
+  totalTableUsers:"",
+  tableAdminBooks:[],   // --- GET_TABLEADMIN_BOOKS
+  tableAdminUsers:[], //GET_TABLEADMIN_USERS
 };
 
 // !Tener el cuenta reducir el reducer en varias partes.
@@ -154,6 +160,14 @@ const reducer = (state = initialState, { type, payload }) => {
         allBooks: state.allBooks.filter((book) => book.id !== payload),
         allBooksCopy: [...state.allBooks],
       };
+
+      case DELETE_USERS_BY_ID:
+        return {
+          ...state,
+          allBooks: state.allBooks.filter((book) => book.id !== payload),
+          allBooksCopy: [...state.allBooks],
+        };
+
     //----------------------------FILTERS-------------------
     //case FILTER_BY_GENRER:
     // if (payload === "ALL")
@@ -567,6 +581,18 @@ const reducer = (state = initialState, { type, payload }) => {
         token: payload,
       };
 
+      case GET_TABLEADMIN_BOOKS:
+        return {
+          ...state,
+          tableAdminBooks: payload.books,
+        };
+        case GET_TABLEADMIN_USERS:
+          return {
+            ...state,
+            tableAdminUsers: payload.detail,   
+            totalTableUsers:payload.detail.totalUsers
+          };
+  
     default:
       return { ...state };
   }

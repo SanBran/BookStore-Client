@@ -4,6 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    border: solid red;
 
     color: black;
     font-family: 'Montserrat', sans-serif;
@@ -18,11 +19,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: -400px;
 }
 .image{
-    height: 450px;
-    width: 350px;
+    height: 60vh;
     object-fit: contain;
 
     overflow: hidden;
@@ -61,12 +60,10 @@
     padding-top: 0;
 
     margin-right: -400px;
-    position: absolute;
 
     /* background-color: #aeaeae1a; */
 
-    width: 400px;
-    height: 420px;
+   
     overflow: auto;
 }
 .plusIcon{

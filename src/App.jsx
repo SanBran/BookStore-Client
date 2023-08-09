@@ -35,14 +35,14 @@ import FailurePay from "./Views/Cart.jsx/FailurePay/FailurePay";
 //pasos para el deploy
 import axios from "axios";
 //-------local
-//  axios.defaults.baseURL = "http://localhost:8000/";
+// axios.defaults.baseURL = "http://localhost:8000/";
 //-------deployado
-axios.defaults.baseURL = "https://bookstorepf-production.up.railway.app";
+ axios.defaults.baseURL = "https://bookstorepf-production.up.railway.app";
 
 //-------Manejando cookies para mantener sesiones
 import Cookies from 'js-cookie';
 import { accessUser, getUserById, validateSession } from "./redux/actions/actions";
-import { addCart, updateCart } from "./redux/actions/actions";
+import { updateCart } from "./redux/actions/actions";
 
 
 
@@ -105,6 +105,7 @@ function App() {
           {showOverlayPerfile && <Profile />}
           <div >
             {location.pathname !== "/admin" 
+            && location.pathname !== "/admin/createBook" 
             && location.pathname !== "/profile" 
             && location.pathname !== "/access" 
             && (location.pathname !== "/results") 
@@ -118,7 +119,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/about_us" element={<AboutUs />} />
               <Route path="/access" element={<Access />} />
-              <Route path="/detail/:id" element={ token? <BooksDetail />:<Access/>} />
+              <Route path="/detail/:id" element={ <BooksDetail />} />
               <Route path="/profile" element={token? <Profile />:<Access/>} />
               <Route path="/wishlist" element={token? <Wishlist />:<Access/>} />
               <Route path="/history" element={token? <History />:<Access/>} />
