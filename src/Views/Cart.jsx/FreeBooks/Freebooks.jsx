@@ -5,9 +5,16 @@ import styles from "./Freebooks.module.css";
 import successful_purchase from '../../../assets/icons/successful_purchase.svg';
 import back_icon from '../../../assets/icons/back_icon.svg';
 import short_logo_icon from '../../../assets/icons/short_logo_icon.svg';
+import { useDispatch } from "react-redux";
+import { updateCart } from "../../../redux/actions/actions";
 
 const SuccessfulAcquisition = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch(updateCart([]))
+  },[])
 
   const [redirect, setRedirect] = useState(false);
   const [contador, setContador] = useState(15);

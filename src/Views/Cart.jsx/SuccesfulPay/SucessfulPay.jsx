@@ -3,9 +3,17 @@ import back_icon from '../../../assets/icons/back_icon.svg';
 import successful_purchase from '../../../assets/icons/successful_purchase.svg';
 import { Link, useNavigate } from "react-router-dom";
 import styles from './SucessfulPay.module.css';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { updateCart } from '../../../redux/actions/actions';
 
 const SucessfulPay = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch(updateCart([]))
+  },[])
   return (
     <div className={styles.container}>
       <div className={styles.backContainer} onClick={()=>{navigate('/')}}>
