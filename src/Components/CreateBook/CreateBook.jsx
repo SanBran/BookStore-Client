@@ -149,7 +149,7 @@ const CreateBook = ( ) => {
 
   const handleSubmit =  (event)=>{
     event.preventDefault();
-    if(validateSubmit()){
+    if(validateSubmit() && formData.pdfLink){
         try {
             
             
