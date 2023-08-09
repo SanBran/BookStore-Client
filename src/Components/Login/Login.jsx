@@ -73,6 +73,7 @@ const clientID = "637027522589-6jbd17n7qelc1mqtp4c1gl43lvjp57cf.apps.googleuserc
     const user = jwt_decode(response.credential);
     try {
       const token = await dispatch(accessGoogle(user));
+      localStorage.setItem('token', JSON.stringify(token));
       setError("");
       Cookies.set('valToken', token);
       Cookies.set('email', user.email);
