@@ -1,17 +1,22 @@
 import React, { useEffect } from 'react';
 import TabListGeneral from './TabList/TabListGeneral';
+import BooksTableList from '../../Components/BooksTableList/BooksTableList'
+import UsersTableList from '../../Components/UsersTableList/UsersTableList'
+import styles from './AdminDashboar.module.css'
+import logo from '../../sources/logoCompleto.png'
+
 import {
   Card,
+  Metric,
   Tab,
   TabGroup,
   TabList,
   TabPanel,
   TabPanels,
+  Text,
 } from "@tremor/react";
 import { useDispatch } from 'react-redux';
-import { getAllPayments, getUsers } from '../../redux/actions/actions';
-import logo from '../../sources/logoCompleto.png'
-import styles from './AdminDashboar.module.css'
+import {getAllPayments, getUsers ,getTableBooks,getTableUsers}  from "../../redux/actions/actions.js";
 import { useNavigate } from 'react-router-dom';
 
 function AdminDashboard() {
@@ -21,6 +26,8 @@ function AdminDashboard() {
   useEffect(() => {
     dispatch(getAllPayments());
     dispatch(getUsers());
+    dispatch(getTableBooks());
+    dispatch(getTableUsers());   
  
   }, [dispatch]);
 
@@ -42,11 +49,13 @@ function AdminDashboard() {
             <div className="mt-8">
               <button className='p-2 bg-orange-400 cursor-pointer rounded-md' onClick={()=> {navigate('/admin/createBook')}} >Upload new book</button>
               <h1>libros</h1>
+              <BooksTableList />
             </div>
           </TabPanel>
           <TabPanel>
             <div className="mt-8">
               <h1>usuarios</h1>
+              <UsersTableList />
             </div>
           </TabPanel>
           <TabPanel>

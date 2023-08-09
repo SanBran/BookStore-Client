@@ -28,6 +28,7 @@ import {
   UPDATE_COMMENT_BY_ID,
   DELETE_COMMENT_BY_ID,
   GET_USERS,
+  DELETE_USERS_BY_ID,
   GET_USER_BY_ID,
   POST_USER,
   UPDATE_USER,
@@ -59,7 +60,9 @@ import {
   GET_COUNTRIES,
   GET_LANGUAGES,
   GET_PUBLISHEDDATES,
-  GET_ALL_PAYMENTS
+  GET_ALL_PAYMENTS,
+  GET_TABLEADMIN_BOOKS,
+  GET_TABLEADMIN_USERS,
   //  GOOGLE_CONFIRM,
 } from "./types";
 
@@ -696,7 +699,7 @@ export function getUsers() {
   return async function (dispatch) {
     try {
       const response = await axios.post(`/findUser`);
-      console.log(response.data.detail);
+      // console.log("data.detail-->",response.data.detail);
       return dispatch({
         type: GET_USERS,
         payload: response.data,
@@ -912,6 +915,56 @@ export function getPublishedDates() {
       return dispatch({
         type: GET_PUBLISHEDDATES,
         payload: response.data.detail.settingFind,
+      });
+    } catch (error) {
+      throw Error(error.message);
+    }
+  };
+}
+
+export const getTableBooks = () => {
+  return async function (dispatch) {
+    try {
+      // console.log("GET_ALL_BOOKS*********************");
+      const response = await axios.post("/getBooks");
+      // console.log("getTableBooks==>" + response);
+      return dispatch({
+        type: GET_TABLEADMIN_BOOKS,
+        payload: response.data,
+      });
+    } catch (error) {
+      //console.log("error--" + error);
+      throw Error(error.message);
+    }
+  };
+};
+
+
+export const getTableUsers = () => {
+  return async function (dispatch) {
+    try {
+      console.log("GET_TABLEADMIN_USERS*********************");
+      const response = await axios.post(`/findUser`);
+       console.log("getTableUsers==>" + response.data);
+      return dispatch({
+        type: GET_TABLEADMIN_USERS,
+        payload: response.data,
+      });
+    } catch (error) {
+      //console.log("error--" + error);
+      throw Error(error.message);
+    }
+  };
+};
+
+export function deleteUserById(id) {
+  return async function (dispatch) {
+    try {
+      //console.log(title);
+      const response = await axios.delete(`/delUser/${id}`);
+      return dispatch({
+        type:  DELETE_USERS_BY_ID,
+        payload: response.data,
       });
     } catch (error) {
       throw Error(error.message);
