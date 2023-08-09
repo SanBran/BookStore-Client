@@ -52,19 +52,6 @@ const Comments = ({ id, book }) => {
         setIsEditModalOpen(true);
     }
 
-    // const handleEditComment = () => {
-    //     const finalComment = {
-    //         id: editCommentId,
-    //         comment: commentToEdit.comment,
-    //         rating: 5
-    //     }
-    //     dispatch(updateCommentById(finalComment))
-    //     setIsEditModalOpen(false)
-    //     const updatedComments = comments.map(comment =>
-    //         comment.id === editCommentId ? { ...comment, comment: commentToEdit.comment, rating: 5 } : comment
-    //     );
-    //     setComments(updatedComments);
-    // }
 
     const handleEditComment = () => {
         const finalComment = {
@@ -107,12 +94,9 @@ const Comments = ({ id, book }) => {
         rating: 0
     })
 
-
-
-
     const handleSubmit = (e) => {
         e.preventDefault()
-        if (form.comment.length > 1) {
+        if (form.comment.length >= 1) {
             dispatch(postComment(form))
             setShowSpinner(true)
             setTimeout(() => {
@@ -139,7 +123,7 @@ const Comments = ({ id, book }) => {
                     contentLabel="Editar Comentario"
                 >
                     <div className="bg-white p-4 rounded-lg shadow-lg">
-                        <h2 className="text-xl font-semibold mb-4">Editar Comentario</h2>
+                        <h2 className="text-xl font-semibold mb-4">Edit Comment</h2>
                         <textarea
                             className="w-full p-2 bg-white mb-2"
                             value={commentToEdit.comment}
@@ -197,9 +181,11 @@ const Comments = ({ id, book }) => {
                     :
                     <div >
                         <form onSubmit={handleSubmit} className="p-4 bg-gray-200 rounded-lg shadow-md ">
-                            <h3 className="text-lg font-semibold mb-2 flex items-center">
+
+                            <h3 className="text-lg font-semibold mb-2">
                                 Leave a comment <PiPencilLineBold className="ml-2 h-6 w-6" />
                             </h3>
+
                             <textarea
                                 value={form.comment}
                                 name="comment"
@@ -208,7 +194,8 @@ const Comments = ({ id, book }) => {
                                 cols='70'
                                 rows="3"
                                 placeholder="What do you think of the book?"
-                            ></textarea>
+                            />
+
                             <div className="flex items-center space-x-2 mb-2">
                                 {[1, 2, 3, 4, 5].map((index) => (
                                     <span
@@ -220,6 +207,7 @@ const Comments = ({ id, book }) => {
                                     </span>
                                 ))}
                             </div>
+
                             <input
                                 disabled={form.comment.length < 1}
                                 type="submit"
@@ -229,14 +217,15 @@ const Comments = ({ id, book }) => {
                                     : "bg-blue-500 hover:bg-blue-600 cursor-pointer transition-colors"
                                     }`}
                             />
-                            <div className='mt-3'>
 
+                            <div className='mt-3'>
                                 {showSpinner ? <span className={spinner.loader}></span> : null}
                             </div>
                         </form>
 
                     </div>
                 }
+
             </div>
             {comments && comments.map((comment, index) => (
                 <div className="bg-gray-300 p-3 mb-2 flex flex-col" key={index}>
@@ -262,7 +251,6 @@ const Comments = ({ id, book }) => {
                     </div>
                 </div>
             ))}
-
         </div>
     )
 }
