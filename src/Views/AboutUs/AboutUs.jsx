@@ -32,11 +32,11 @@ import Linkedin from './icon/linkedin.png'
 const AboutUs = ()=>{
     const teamMembers = [
         { name: 'Jose Fuenmayor', image: JoseImage , github: 'https://github.com/JoseAlbertoFC', linkedin: 'https://www.linkedin.com/in/josealbertofc/'},
-        { name: 'Sasha Camargo', image: SashaImage , github: '', linkedin: ''},
+        { name: 'Sasha Camargo', image: SashaImage , github: 'https://github.com/sashacamar', linkedin: ''},
         { name: 'Danny Ruiz', image: DanyImage  , github: 'https://github.com/JuanDanielRuiz', linkedin: 'https://www.linkedin.com/in/danny-ruiz-9b7a24175/'},
-        { name: 'Nazareno Lujan', image: NazaImage , github: '', linkedin: ''},
-        { name: 'Brandon Galarza', image: BranImage , github: '', linkedin: ''},
-        { name: 'Santiago Soto', image: SantiImage , github: '', linkedin: ''},
+        { name: 'Nazareno Lujan', image: NazaImage , github: 'https://github.com/OmarnLujan', linkedin: ''},
+        { name: 'Brandon Galarza', image: BranImage , github: 'https://github.com/SanBran', linkedin: ''},
+        { name: 'Santiago Soto', image: SantiImage , github: 'https://github.com/SH-ur', linkedin: 'http://linkedin.com/in/santiago-soto-43ab99260'},
         
         
         
