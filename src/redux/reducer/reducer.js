@@ -1,4 +1,5 @@
 import {
+  UPDATE_CART,
   GET_TOKEN,
   VALIDATE_SESSION,
   LOG_OUT,
@@ -408,13 +409,16 @@ const reducer = (state = initialState, { type, payload }) => {
     //----------------------------PAYMENTS----------------
     // revisar mercadoPago no estoy seguro como funciona
     case ADD_CART:
-      console.log("hola soy el cart", state.cart);
       return {
         ...state,
         cart: [...state.cart, payload],
       };
+    case UPDATE_CART:
+      return {
+        ...state,
+        cart: payload,
+      };
     case REMOVE_CART:
-      console.log(state.cart);
       filter = state.cart.filter((book) => book.id !== payload);
       return {
         ...state,

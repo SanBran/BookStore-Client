@@ -1,7 +1,7 @@
 //import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { accessUser, getPayments, getUserById, logOut } from "../../redux/actions/actions";
+import { accessUser, getPayments, getUserById, logOut, updateCart } from "../../redux/actions/actions";
 import { overlayProfile } from "../../redux/actions/actions";
 import styles from "./Profile.module.css";
 import { useEffect } from "react";
@@ -39,6 +39,8 @@ const Profile = () => {
     localStorage.removeItem("token")
     Cookies.remove('valToken');
     Cookies.remove('email');
+    localStorage.removeItem('cart');
+    await dispatch(updateCart([]))
 
     navigate("/");
   };

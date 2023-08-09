@@ -42,19 +42,37 @@ axios.defaults.baseURL = "https://bookstorepf-production.up.railway.app";
 //-------Manejando cookies para mantener sesiones
 import Cookies from 'js-cookie';
 import { accessUser, getUserById, validateSession } from "./redux/actions/actions";
+import { addCart, updateCart } from "./redux/actions/actions";
 
 
 
 function App() {
+  const cart = useSelector(state=>state.cart);
   const showOverlayPerfile = useSelector(state => state.overlayProfile);
   const location = useLocation();
   const dispatch = useDispatch();
 
   const [server, setServer] = useState(true);
-
-  const token = localStorage.getItem('token');
-
   
+  const token = localStorage.getItem('token');
+  
+//-------Recordar el Carrito de compras
+  const [next, setNext] = useState(false);
+  useEffect(()=>{
+    const cart = localStorage.getItem('cart');
+    if(cart){
+      const decodedToken = JSON.parse(cart);
+      dispatch(updateCart(decodedToken))
+    }
+    setNext(true);
+  },[])
+  
+  useEffect(()=>{
+    if(next && cart){
+      const jwt = JSON.stringify(cart);
+      localStorage.setItem('cart', jwt);
+    }
+  },[cart])
 
   useEffect(() => {
     const token = Cookies.get('valToken');
@@ -91,6 +109,7 @@ function App() {
             && location.pathname !== "/access" 
             && (location.pathname !== "/results") 
             && !location.pathname.startsWith('/payment')
+            && !location.pathname.startsWith('/freeBookacquisition')
             && (location.pathname !== "/")
               ? (<Navbar />)
               : (<></>)
