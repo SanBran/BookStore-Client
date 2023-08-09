@@ -11,6 +11,23 @@
     color: black;
     
 }
+/* ----------------Estilo del mensage*/
+
+.successMessage{
+    margin: 0;
+    width: 100%;
+    background-color: #96ff81;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 15px 0;
+
+    transition: all 0.3s ease-in-out;
+}
+.validate{
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-right: 15px;
+}
 /* ----------------Estilo del marco*/
 .structure{
     margin: 60px 0;

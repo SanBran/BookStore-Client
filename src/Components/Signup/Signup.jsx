@@ -7,7 +7,7 @@ import { expresions } from "../../utils/regex";
 
 import style from './Signup.module.css';
 
-const SignUp = ({ setForm }) => {
+const SignUp = ({ setForm, setSignUpSuccess }) => {
   const dispatch = useDispatch();
 
   const [errors, setErrors] = useState({
@@ -145,6 +145,7 @@ const SignUp = ({ setForm }) => {
           gender: "",
         });
         setForm('login');
+        setSignUpSuccess(true);
       } catch (error) {
         if(error.message === 'User ready exists') setErrors({ ...errors, email: 'User ready exists' })
       }
