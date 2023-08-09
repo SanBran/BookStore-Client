@@ -14,13 +14,13 @@ const CreateBook = ( ) => {
 
     const genericCover = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhRKhJb1aLmjwGX_ox0TA6eTxCv_5g3Nlr6w&usqp=CAU";
     const genericPDF = "https://www.ingenieria.unam.mx/dcsyhfi/material_didactico/Literatura_Hispanoamericana_Contemporanea/Autores_Q/QUIROGA/gallina.pdf"
-    const cloudinaryUrl = `https://api.cloudinary.com/v1_1/dajn5cfcv/image/upload`;
+    
 
     const allGenders = useSelector(state => state.genres);
     const uniqueGenres = [];
     allGenders?.map((gender) => uniqueGenres.includes(gender.nameType)? null : uniqueGenres.push(gender.nameType) );
 
-    const [pdfFile, setPdfFile] = useState(null);
+    
     const [formData, setFormData] = useState({
         image: genericCover,
         pdfLink: '',
@@ -147,62 +147,37 @@ const CreateBook = ( ) => {
               return true
     }
 
-    const form = new FormData();
-    
-    form.append("upload_preset", "ml_default");
-    form.append("file", pdfFile);
+  const handleSubmit =  (event)=>{
+    event.preventDefault();
+    if(validateSubmit()){
+        try {
+            
+            
+         dispatch(postBook(formData));
+            setFormData({
+                image: genericCover,
+                pdfLink: '',
+                title: '',
+                author: '',
+                editorial: '',
+                price: '',
+                country: '',
+                gender:'',
+                newGender:'',
+                language: '',
+                otherLanguage: '',
+                sinopsis: '',
+                publishedDate: '',
+                numPages: ''
+            })
+        } catch (error) {
+        }
+    }else{
+        console.log(errors);
+    }      
+}
 
-  const handleUpload = async () => {
-    try {
-      const res = await fetch(cloudinaryUrl, {
-        method: "POST",
-        body: form,
-        resourceType: 'auto'
-      });
-  
-      if (!res.ok) return null;
-  
-      const data = await res.json();
-      setFormData({
-        ...formData,
-        pdfLink: data.secure_url
-      })
-    } catch (error) {
-      console.log(error);
-    }
-  
-  };
-
-    const handleSubmit =  (event)=>{
-        event.preventDefault();
-         handleUpload()
-        if(validateSubmit()){
-            try {
-                
-                
-             dispatch(postBook(formData));
-                setFormData({
-                    image: genericCover,
-                    pdfLink: '',
-                    title: '',
-                    author: '',
-                    editorial: '',
-                    price: '',
-                    country: '',
-                    gender:'',
-                    newGender:'',
-                    language: '',
-                    otherLanguage: '',
-                    sinopsis: '',
-                    publishedDate: '',
-                    numPages: ''
-                })
-            } catch (error) {
-            }
-        }else{
-            console.log(errors);
-        }      
-    }
+console.log(formData);
       
     return(
         <form className={styles.form}>
@@ -218,7 +193,7 @@ const CreateBook = ( ) => {
             {errors.image.length ? <p className={styles.textError}>An image is required</p> : <></>}
             
             <label className={styles.label} >
-            <PdfUpload setPdfFile={setPdfFile} pdfFile={pdfFile}/>
+            <PdfUpload setFormData={setFormData} formData={formData}/>
                 
             </label>
 
