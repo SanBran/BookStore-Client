@@ -2,3 +2,6 @@
     position: relative;
     width: 230px
 }
+.container {
+ justify-content: center;
+}

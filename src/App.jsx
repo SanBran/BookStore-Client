@@ -35,9 +35,9 @@ import FailurePay from "./Views/Cart.jsx/FailurePay/FailurePay";
 //pasos para el deploy
 import axios from "axios";
 //-------local
-// axios.defaults.baseURL = "http://localhost:8000/";
+ axios.defaults.baseURL = "http://localhost:8000/";
 //-------deployado
- axios.defaults.baseURL = "https://bookstorepf-production.up.railway.app";
+ //axios.defaults.baseURL = "https://bookstorepf-production.up.railway.app";
 
 //-------Manejando cookies para mantener sesiones
 import Cookies from 'js-cookie';
@@ -51,6 +51,8 @@ function App() {
   const showOverlayPerfile = useSelector(state => state.overlayProfile);
   const location = useLocation();
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.userDetail);
+
 
   const [server, setServer] = useState(true);
   
@@ -134,9 +136,8 @@ function App() {
               <Route path="/payment/pendingpay" element={token? <PendingPay />:<Access/>} />
               <Route path="/payment/failurepay" element={token?<FailurePay />:<Access/>} />
               <Route path="/freeBookacquisition" element={token?<SuccessfulAcquisition />:<Access/>} />
+
               <Route path="/admin" element={token?<AdminDashboard />:<NotFound/>}/>
-
-
               <Route path="/admin/createBook" element={<CreateBook />}/>
 
 
