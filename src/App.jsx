@@ -106,7 +106,7 @@ function App() {
           <div >
             {location.pathname !== "/admin" 
             && location.pathname !== "/admin/createBook" 
-            &&location.pathname !== "/profile" 
+            && location.pathname !== "/profile" 
             && location.pathname !== "/access" 
             && (location.pathname !== "/results") 
             && !location.pathname.startsWith('/payment')

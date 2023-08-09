@@ -4,21 +4,18 @@ import BooksTableList from '../../Components/BooksTableList/BooksTableList'
 import UsersTableList from '../../Components/UsersTableList/UsersTableList'
 import styles from './AdminDashboar.module.css'
 import logo from '../../sources/logoCompleto.png'
-
 import {
   Card,
-  Metric,
+ 
   Tab,
   TabGroup,
   TabList,
   TabPanel,
   TabPanels,
-  Text,
+
 } from "@tremor/react";
 import { useDispatch } from 'react-redux';
 import { getAllPayments, getUsers, getTableBooks,getTableUsers  } from '../../redux/actions/actions';
-import logo from '../../sources/logoCompleto.png'
-import styles from './AdminDashboar.module.css'
 import { useNavigate } from 'react-router-dom';
 
 function AdminDashboard() {
