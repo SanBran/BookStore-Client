@@ -29,6 +29,8 @@ import BranImage from './Img/bran.jpeg'
 import SantiImage from './Img/santi.jpeg'
 import Github from './icon/code.png'
 import Linkedin from './icon/linkedin.png'
+import AleImage from './Img/ale.jpeg'
+import EnzoImage from './Img/enzo.jpeg'
 const AboutUs = ()=>{
     const teamMembers = [
         { name: 'Jose Fuenmayor', image: JoseImage , github: 'https://github.com/JoseAlbertoFC', linkedin: 'https://www.linkedin.com/in/josealbertofc/'},
@@ -37,6 +39,9 @@ const AboutUs = ()=>{
         { name: 'Nazareno Lujan', image: NazaImage , github: 'https://github.com/OmarnLujan', linkedin: ''},
         { name: 'Brandon Galarza', image: BranImage , github: 'https://github.com/SanBran', linkedin: ''},
         { name: 'Santiago Soto', image: SantiImage , github: 'https://github.com/SH-ur', linkedin: 'http://linkedin.com/in/santiago-soto-43ab99260'},
+        { name: 'Alejandro Aranguren', image: AleImage , github: 'https://github.com/larangur', linkedin: 'https://www.linkedin.com/in/larangurcol/'},
+        { name: 'Reservado para el patron', image: EnzoImage , github: 'https://github.com/larangur', linkedin: 'https://www.linkedin.com/in/larangurcol/'},
+        
         
         
         
