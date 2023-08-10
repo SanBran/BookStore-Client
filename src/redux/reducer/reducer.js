@@ -63,6 +63,8 @@ import {
   GET_TABLEADMIN_USERS,
   GET_BOOKS_DELETED,
   PUT_RESTORE_BOOKS,
+  GET_USERS_DELETED,
+  PUT_RESTORE_USERS,
 } from "../actions/types";
 
 let initialState = {
@@ -94,12 +96,14 @@ let initialState = {
   overlayProfile: false,
   showListwish: false,
   token: "",
-  totalUsers:"",
-  totalTableUsers:"",
-  tableAdminBooks:[],   // --- GET_TABLEADMIN_BOOKS
-  tableAdminUsers:[], //GET_TABLEADMIN_USERS
-  tableBooksDeleted:[], //GET_BOOKS_DELETED
-  booksRestore: {},// PUT_RESTORE_BOOKS,
+  totalUsers: "",
+  totalTableUsers: "",
+  tableAdminBooks: [], // --- GET_TABLEADMIN_BOOKS
+  tableAdminUsers: [], //GET_TABLEADMIN_USERS
+  tableBooksDeleted: [], //GET_BOOKS_DELETED
+  booksRestore: {}, // PUT_RESTORE_BOOKS,
+  tableUsersDeleted: [], //GET_USERS_DELETED
+  usersRestore: {}, // PUT_RESTORE_USERS,
 };
 
 // !Tener el cuenta reducir el reducer en varias partes.
@@ -165,12 +169,12 @@ const reducer = (state = initialState, { type, payload }) => {
         allBooksCopy: [...state.allBooks],
       };
 
-      case DELETE_USERS_BY_ID:
-        return {
-          ...state,
-          allBooks: state.allBooks.filter((book) => book.id !== payload),
-          allBooksCopy: [...state.allBooks],
-        };
+    case DELETE_USERS_BY_ID:
+      return {
+        ...state,
+        allBooks: state.allBooks.filter((book) => book.id !== payload),
+        allBooksCopy: [...state.allBooks],
+      };
 
     //----------------------------FILTERS-------------------
     //case FILTER_BY_GENRER:
@@ -507,7 +511,7 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         users: payload.detail,
-        totalUsers:payload.detail.totalUsers
+        totalUsers: payload.detail.totalUsers,
       };
     case GET_USER_BY_ID:
       return {
@@ -544,28 +548,28 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         access: payload,
       };
-//Esto es para práctica de Google
-//case GOOGLE_CONFIRM:
-//  return{...state, 
-//    //Sin respuesta aparente thanks to searchById
-//  }
+    //Esto es para práctica de Google
+    //case GOOGLE_CONFIRM:
+    //  return{...state,
+    //    //Sin respuesta aparente thanks to searchById
+    //  }
     case GET_TOKEN:
-      return{
+      return {
         ...state,
         //sin respuesta al estado
       };
-    
+
     case VALIDATE_SESSION:
-      return{
+      return {
         ...state,
         //sin respuesta al estado
-      }
-    
+      };
+
     case LOG_OUT:
-      return{
+      return {
         ...state,
         userDetail: payload,
-      }
+      };
 
     case PASSWORD_REQUEST:
       return {
@@ -585,30 +589,41 @@ const reducer = (state = initialState, { type, payload }) => {
         token: payload,
       };
 
-      case GET_TABLEADMIN_BOOKS:
-        return {
-          ...state,
-          tableAdminBooks: payload.books,
-        };
-        case GET_TABLEADMIN_USERS:
-          return {
-            ...state,
-            tableAdminUsers: payload.detail,   
-            totalTableUsers:payload.detail.totalUsers
-          };
-          case GET_BOOKS_DELETED:
-            //getBooksDeletd:[], //GET_BOOKS_DELETED
-            return {
-              ...state,
-              tableBooksDeleted: payload,
-            };
-          case PUT_RESTORE_BOOKS:
-            //booksRestore: {},// PUT_RESTORE_BOOKS,
-            return {
-              ...state,
-              booksRestore: payload,
-            };
-
+    case GET_TABLEADMIN_BOOKS:
+      return {
+        ...state,
+        tableAdminBooks: payload.books,
+      };
+    case GET_TABLEADMIN_USERS:
+      return {
+        ...state,
+        tableAdminUsers: payload.detail,
+        totalTableUsers: payload.detail.totalUsers,
+      };
+    case GET_BOOKS_DELETED:
+      //getBooksDeletd:[], //GET_BOOKS_DELETED
+      return {
+        ...state,
+        tableBooksDeleted: payload,
+      };
+    case PUT_RESTORE_BOOKS:
+      //booksRestore: {},// PUT_RESTORE_BOOKS,
+      return {
+        ...state,
+        booksRestore: payload,
+      };
+    case GET_USERS_DELETED:
+      //tableUsersDeleted:[], //GET_USERS_DELETED
+      return {
+        ...state,
+        tableUsersDeleted: payload,
+      };
+    case PUT_RESTORE_USERS:
+      //usersRestore: {},// PUT_RESTORE_USERS,
+      return {
+        ...state,
+        usersRestore: payload,
+      };
 
     default:
       return { ...state };
