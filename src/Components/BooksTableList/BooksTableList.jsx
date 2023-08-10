@@ -130,13 +130,14 @@ const ListBooks = () => {
     }
     return (
       <>
-        <div>
-          <Link to="/admin/createBook">
-            <button className={`${styles.confirmButton} ${styles.modalButton}`}>
+        <CreateBook open={open} setOpen={setOpen}/>
+        <Card>
+          
+            <button onClick={() => setOpen(true)} className={`${styles.confirmButton} ${styles.modalButton}`}>
               Add New Book
             </button>
-          </Link>
-        </div>
+          
+        </Card>
 
         <div>
           <Card>
