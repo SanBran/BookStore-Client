@@ -63,6 +63,8 @@ import {
   GET_ALL_PAYMENTS,
   GET_TABLEADMIN_BOOKS,
   GET_TABLEADMIN_USERS,
+  GET_BOOKS_DELETED,
+  PUT_RESTORE_BOOKS,
   //  GOOGLE_CONFIRM,
 } from "./types";
 
@@ -964,6 +966,37 @@ export function deleteUserById(id) {
       const response = await axios.delete(`/delUser/${id}`);
       return dispatch({
         type:  DELETE_USERS_BY_ID,
+        payload: response.data,
+      });
+    } catch (error) {
+      throw Error(error.message);
+    }
+  };
+}
+
+
+export function getBooksDeleted() {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get("/getDeletedBooks");
+      return dispatch({
+        type: GET_BOOKS_DELETED,
+        payload: response.data,
+      });
+    } catch (error) {
+      throw Error(error.message);
+    }
+  };
+}
+
+//booksRestore: {},// PUT_RESTORE_BOOKS,
+export function restoreUserById(id) {
+  return async function (dispatch) {
+    try {
+      console.log("restoreUserById---", id);
+      const response = await axios.put(`/restoreBook/${id}`);
+      return dispatch({
+        type:  PUT_RESTORE_BOOKS,
         payload: response.data,
       });
     } catch (error) {

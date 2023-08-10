@@ -60,7 +60,9 @@ import {
   GET_PUBLISHEDDATES,
   GET_ALL_PAYMENTS,
   GET_TABLEADMIN_BOOKS,
-  GET_TABLEADMIN_USERS
+  GET_TABLEADMIN_USERS,
+  GET_BOOKS_DELETED,
+  PUT_RESTORE_BOOKS,
 } from "../actions/types";
 
 let initialState = {
@@ -96,6 +98,8 @@ let initialState = {
   totalTableUsers:"",
   tableAdminBooks:[],   // --- GET_TABLEADMIN_BOOKS
   tableAdminUsers:[], //GET_TABLEADMIN_USERS
+  tableBooksDeleted:[], //GET_BOOKS_DELETED
+  booksRestore: {},// PUT_RESTORE_BOOKS,
 };
 
 // !Tener el cuenta reducir el reducer en varias partes.
@@ -592,7 +596,20 @@ const reducer = (state = initialState, { type, payload }) => {
             tableAdminUsers: payload.detail,   
             totalTableUsers:payload.detail.totalUsers
           };
-  
+          case GET_BOOKS_DELETED:
+            //getBooksDeletd:[], //GET_BOOKS_DELETED
+            return {
+              ...state,
+              tableBooksDeleted: payload,
+            };
+          case PUT_RESTORE_BOOKS:
+            //booksRestore: {},// PUT_RESTORE_BOOKS,
+            return {
+              ...state,
+              booksRestore: payload,
+            };
+
+
     default:
       return { ...state };
   }
