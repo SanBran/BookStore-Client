@@ -57,25 +57,29 @@ const AboutUs = ()=>{
                         <div key={index} className={styles.card}>
                               
                             <img className={styles.img_user} src={member.image} alt="img" />
-                            <img className={`${styles.icon} ${styles.time1}`} src={git} alt="" />
                             <div className={styles.icons}>
+                            <img className={`${styles.icon} ${styles.time1}`} src={git} alt="" />
                             <img className={`${styles.icon} ${styles.time2}`} src={css_logo} alt="" />
-                <img className={`${styles.icon} ${styles.time3}`} src={github_logo} alt="" />
-                <img className={`${styles.icon} ${styles.time4}`} src={js_logo} alt="" />
-                <img className={`${styles.icon} ${styles.time5}`} src={sequelize_logo} alt="" />
-                <img className={`${styles.icon} ${styles.time6}`} src={ts_logo} alt="" />
-                <img className={`${styles.icon} ${styles.time7}`} src={express_logo} alt="" />
+                            <img className={`${styles.icon} ${styles.time3}`} src={github_logo} alt="" />
+                            <img className={`${styles.icon} ${styles.time4}`} src={js_logo} alt="" />
+                            <img className={`${styles.icon} ${styles.time5}`} src={sequelize_logo} alt="" />
+                            <img className={`${styles.icon} ${styles.time6}`} src={ts_logo} alt="" />
+                            <img className={`${styles.icon} ${styles.time7}`} src={express_logo} alt="" />
                             </div>
-                <a href={member.github} target="_blank" class={styles.github}>
-                <img src={Github} alt="Imagen" class={styles.image} />
-              
-                </a>
-                <a href={member.linkedin} target="_blank" class={styles.github}>
-                <img src={Linkedin} alt="Imagen" class={styles.image} />
-              
-                </a>
-                
-                            <h1>{member.name}</h1>
+                            
+                            <div className={styles.title}>
+                                <div>
+                                    <a href={member.github} target="_blank" class={styles.github}>
+                                    <img src={Github} alt="Imagen" class={styles.image} />
+                                    </a>
+                                    <a href={member.linkedin} target="_blank" class={styles.github}>
+                                    <img src={Linkedin} alt="Imagen" class={styles.image} />
+                                    </a>
+                                </div>
+                                <div>
+                                    <h1 className={styles.name}>{member.name}</h1>
+                                </div>
+                            </div>
                         </div>
                     )
 
