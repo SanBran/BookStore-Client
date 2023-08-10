@@ -29,7 +29,6 @@ const Profile = () => {
   const showOverlayPerfile = useSelector((state) => state.overlayProfile);
   const userId = useSelector((state) => state.access.ref);
   const user = useSelector((state) => state.userDetail);
-  
 
   useEffect(() => {
     dispatch(getUserById(userId));
