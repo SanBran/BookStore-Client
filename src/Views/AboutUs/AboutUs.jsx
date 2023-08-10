@@ -22,7 +22,7 @@ import sql_logo from '../../assets/gifs/sql_logo.png';
 import ts_logo from '../../assets/gifs/ts_logo.png'
 import JoseImage from './Img/Jose.jpeg'
 import styles from './AboutUs.module.css'
-import SashaImage from './Img/sasha.jpeg'
+import SashaImage from './Img/sasha2.jpeg'
 import DanyImage from './Img/dany.jpeg'
 import NazaImage from './Img/naza.jpeg'
 import BranImage from './Img/bran.jpeg'
@@ -37,7 +37,7 @@ const AboutUs = ()=>{
         { name: 'Sasha Camargo', image: SashaImage , github: 'https://github.com/sashacamar', linkedin: ''},
         { name: 'Danny Ruiz', image: DanyImage  , github: 'https://github.com/JuanDanielRuiz', linkedin: 'https://www.linkedin.com/in/danny-ruiz-9b7a24175/'},
         { name: 'Nazareno Lujan', image: NazaImage , github: 'https://github.com/OmarnLujan', linkedin: ''},
-        { name: 'Brandon Galarza', image: BranImage , github: 'https://github.com/SanBran', linkedin: ''},
+        { name: 'Brandon Galarza', image: BranImage , github: 'https://github.com/SanBran', linkedin: 'https://www.linkedin.com/in/brandon-galarza-a46421120'},
         { name: 'Santiago Soto', image: SantiImage , github: 'https://github.com/SH-ur', linkedin: 'http://linkedin.com/in/santiago-soto-43ab99260'},
         { name: 'Alejandro Aranguren', image: AleImage , github: 'https://github.com/larangur', linkedin: 'https://www.linkedin.com/in/larangurcol/'},
         { name: 'Reservado para el patron', image: EnzoImage , github: 'https://github.com/larangur', linkedin: 'https://www.linkedin.com/in/larangurcol/'},
