@@ -65,6 +65,8 @@ import {
   GET_TABLEADMIN_USERS,
   GET_BOOKS_DELETED,
   PUT_RESTORE_BOOKS,
+  GET_USERS_DELETED,
+  PUT_RESTORE_USERS,
   //  GOOGLE_CONFIRM,
 } from "./types";
 
@@ -990,10 +992,10 @@ export function getBooksDeleted() {
 }
 
 //booksRestore: {},// PUT_RESTORE_BOOKS,
-export function restoreUserById(id) {
+export function restoreBooksById(id) {
   return async function (dispatch) {
     try {
-      console.log("restoreUserById---", id);
+      console.log("restoreBooksById---", id);
       const response = await axios.put(`/restoreBook/${id}`);
       return dispatch({
         type:  PUT_RESTORE_BOOKS,
@@ -1004,3 +1006,33 @@ export function restoreUserById(id) {
     }
   };
 }
+export function getUsersDeleted() {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get("/findDeletedUser");
+      return dispatch({
+        type: GET_USERS_DELETED,
+        payload: response.data,
+      });
+    } catch (error) {
+      throw Error(error.message);
+    }
+  };
+}
+
+export function restoreUserById(id) {
+  return async function (dispatch) {
+    try {
+      console.log("restoreUserById---", id);
+      const response = await axios.put(`/restoreUser/${id}`);
+      return dispatch({
+        type:  PUT_RESTORE_USERS,
+        payload: response.data,
+      });
+    } catch (error) {
+      throw Error(error.message);
+    }
+  };
+}
+//GET_USERS_DELETED,
+//PUT_RESTORE_USERS,  restoreUser

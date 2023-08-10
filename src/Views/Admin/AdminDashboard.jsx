@@ -16,7 +16,7 @@ import {
 
 } from "@tremor/react";
 import { useDispatch } from 'react-redux';
-import { getAllPayments, getUsers, getTableBooks,getTableUsers,getBooksDeleted  } from '../../redux/actions/actions';
+import { getAllPayments, getUsers, getTableBooks,getTableUsers,getBooksDeleted,getUsersDeleted  } from '../../redux/actions/actions';
 import { useNavigate } from 'react-router-dom';
 
 function AdminDashboard() {
@@ -31,6 +31,7 @@ function AdminDashboard() {
     dispatch(getTableBooks());
     dispatch(getTableUsers());   
     dispatch(getBooksDeleted());
+    dispatch(getUsersDeleted());
  
   }, [dispatch]);
 
@@ -44,7 +45,6 @@ function AdminDashboard() {
           <Tab>General</Tab>
           <Tab>Books</Tab>
           <Tab>Users</Tab>
-          <Tab>Pays</Tab>
         </TabList>
         <TabPanels>
           <TabListGeneral />
