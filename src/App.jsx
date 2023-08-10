@@ -97,7 +97,7 @@ function App() {
       }
     })()
   }, [])
-
+ 
 
   return (
     <>
@@ -138,9 +138,9 @@ function App() {
               <Route path="/payment/failurepay" element={token?<FailurePay />:<Access/>} />
               <Route path="/freeBookacquisition" element={token?<SuccessfulAcquisition />:<Access/>} />
 
-              <Route path="/admin" element={token?<AdminDashboard />:<NotFound/>}/>
+              <Route path="/admin" element={<AdminDashboard />}/>
               <Route path="/admin/createBook" element={<CreateBook />}/>
-
+              
 
               <Route path="*" element={<NotFound />} />
             </Routes>
