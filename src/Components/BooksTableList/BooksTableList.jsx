@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./BooksTableList.module.css";
-import { deleteBooksById,restoreUserById } from "../../redux/actions/actions.js";
+import { deleteBooksById,restoreBooksById } from "../../redux/actions/actions.js";
 
 import CreateBook from "../CreateBook/CreateBook";
 
@@ -99,7 +99,7 @@ const ListBooks = () => {
       try {
         if (deleteItemId) {
           // Llama a la acción deleteBooksById con el ID del elemento a eliminar
-          const deleteItem = await dispatch(restoreUserById(deleteItemId));
+          const deleteItem = await dispatch(restoreBooksById(deleteItemId));
           console.log("confirmRestore", deleteItem);
           // Aquí puedes realizar cualquier acción adicional después de la eliminación
           setMessage(deleteItem);
