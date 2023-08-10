@@ -8,8 +8,12 @@ import edit_icon from '../../assets/icons/edit_icon.svg';
 import plus_icon from '../../assets/icons/plus_icon.svg';
 import { postBook } from '../../redux/actions/actions';
 import PdfUpload from '../PdfUpload/PdfUpload';
+import success from '../../sources/success.png'
 
-const CreateBook = ( ) => {
+const CreateBook = ({open, setOpen} ) => {
+
+    
+
     const dispatch = useDispatch();
 
     const genericCover = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhRKhJb1aLmjwGX_ox0TA6eTxCv_5g3Nlr6w&usqp=CAU";
@@ -19,6 +23,9 @@ const CreateBook = ( ) => {
     const allGenders = useSelector(state => state.genres);
     const uniqueGenres = [];
     allGenders?.map((gender) => uniqueGenres.includes(gender.nameType)? null : uniqueGenres.push(gender.nameType) );
+
+    //----------Renderizado de creación exitosa
+const [loadingSuccess, setLoadingSuccess] = useState(false);
 
     
     const [formData, setFormData] = useState({
@@ -37,24 +44,7 @@ const CreateBook = ( ) => {
         publishedDate: '',
         numPages: ''
 });
-    //-------formulario hardcodeado para pruebas
-    // const [formData, setFormData] = useState({
-    //     image: genericCover,
-    //     pdfLink: genericPDF,
-    //     title: 'La gallina degollada',
-    //     author: 'Horacio Quiroga',
-    //     editorial: 'Editorial Fuego Azul',
-    //     price: '100',
-    //     country: '',
-    //     gender:'',
-    //     newGender:'',
-    //     language: '',
-    //     otherLanguage: '',
-    //     // allGenders: [],
-    //     sinopsis: 'Narra la historia del matrimonio Mazzini-Ferraz que parece estar maldito, ya que sus cuatro hijos varones, al llegar al año y medio, sufren convulsiones que los dejan muy disminuidos mentalmente y con una virtualmente nula capacidad de razonar. El quinto hijo, una niña, nace y crece sin mayores problemas y con una capacidad mental normal. Un día los hermanos ven con detenimiento como una gallina es degollada y luego cocinada para la cena. Este hecho, en apariencia simple, desata de manera imprevisible una tragedia. Los hermanos deciden replicar el acto atroz que acaban de presenciar y utilizan a su hermanita para aquello.',
-    //     publishedDate: '1904',
-    //     numPages: '7'
-    // });
+   
     const [errors, setErrors] = useState({
         image: '',
         title: '',
@@ -154,6 +144,7 @@ const CreateBook = ( ) => {
             
             
          dispatch(postBook(formData));
+         setLoadingSuccess(true);
             setFormData({
                 image: genericCover,
                 pdfLink: '',
@@ -170,15 +161,32 @@ const CreateBook = ( ) => {
                 publishedDate: '',
                 numPages: ''
             })
+            setTimeout(() => {
+                setLoadingSuccess(false);
+              }, 5000)
         } catch (error) {
         }
     }else{
         console.log(errors);
     }      
 }
+
+
       
     return(
-        <form className={styles.form}>
+        <>
+        {open 
+            ? 
+        <div  className={styles.mainContainer}>
+            {loadingSuccess && (
+        <div className={styles.successMessage}>
+            <img className={styles.succesLogo} src={success} alt="succes" />
+          <h2>Upload Successful!</h2>
+        </div>
+      )}
+            <form className={styles.form}>
+            <button className={styles.btnClose} onClick={() => setOpen(false)}>x</button>
+            <div className={styles.container}>
             <div className={styles.imageContainer}>
                 <img className={styles.image} src={formData.image !== '' ? formData.image : genericCover} alt="libro" />
                 <div className={styles.DragAndDrop}>
@@ -234,10 +242,10 @@ const CreateBook = ( ) => {
             </label>
             {errors.editorial.length ? <p className={styles.textError}>{errors.editorial}</p> : <></>}
 
-            <label className={styles.label} >
+            <label className={styles.labelPrice} >
                 <h3>Price $</h3>
                 <input
-                    className={errors.price.length ? (`${styles.input} ${styles.error}`) : styles.input}
+                    className={errors.price.length ? (`${styles.inputPrice} ${styles.error}`) : styles.inputPrice}
                     name="price"
                     onChange={handleChange}
                     value={formData.price}
@@ -367,8 +375,12 @@ const CreateBook = ( ) => {
 
 
             </div>
+            </div>
             <button className={styles.createBtn} onClick={handleSubmit}>CREATE BOOK</button>
         </form>
+        </div>
+        :   <></>}
+        </>
     )
 
 };

@@ -4,6 +4,7 @@ import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./BooksTableList.module.css";
 import { deleteBooksById } from "../../redux/actions/actions.js";
+import CreateBook from "../CreateBook/CreateBook";
 
 //import styles from "./Book.module.css";
 import { StatusOnlineIcon } from "@heroicons/react/outline";
@@ -34,6 +35,12 @@ const ListBooks = () => {
     const [deleteItemId, setDeleteItemId] = useState(null);
     const [deleteItemTitle, setDeleteItemtitle] = useState(null);
     const [message, setMessage] = useState("");
+    const [open, setOpen] = useState(false)
+
+    
+      const handleClose = () => {
+        setOpen(false)
+      }
 
     // useEffect(() => {
     //   dispatch(getTableBooks());
@@ -71,14 +78,15 @@ const ListBooks = () => {
 
     return (
       <>
+      <CreateBook open={open} setOpen={setOpen}/>
         <Card>
-          <Link to="/admin/createBook">
-            <button className={`${styles.confirmButton} ${styles.modalButton}`}>
+          
+            <button onClick={() => setOpen(true)} className={`${styles.confirmButton} ${styles.modalButton}`}>
               Add New Book
             </button>
-          </Link>
+          
         </Card>
-
+        
         <div>
           <Card>
             <Table className={`mt-5 ${styles.tableContainer}`}>
