@@ -1,14 +1,18 @@
 /* Estilo para la tabla */
 .tableContainer {
-    width: 80%; /* Ancho de la tabla */
-    margin: left ; /* Centrar la tabla en la página */
+    width: 80%; /*Ancho de la tabla */
+    margin: center ; /* Centrar la tabla en la página */
   }
   
   /* Estilo para el encabezado de la tabla */
   .tableHeader {
-    background-color: lightblue; /* Color de fondo del encabezado */
+    background-color: darkcyan; /* Color de fondo del encabezado */
+    color: white;
   }
-  
+  .tableHeaderDeleted {
+    background-color:darkred ; /* Color de fondo del encabezado */
+    color: white;
+  }
   /* Estilo para el cuerpo de la tabla */
   .tableBody {
     background-color: lightgrey; /* Color de fondo del cuerpo */
@@ -16,21 +20,24 @@
 
   /* Estilo para la columna del título */
   .firstColumn {
-    width: 30%; /* Ancho fijo para la columna del título */
-    white-space: normal;
+     width:min-content; /*Ancho fijo para la columna del título */
+    white-space:normal;
+    color: white;
   }
   
   /* Estilo para la columna del autor */
   .secondColumn {
     word-wrap: normal;
-    width: 20px; /* Ancho fijo para la columna del autor */
+     width:min-content ; /*Ancho fijo para la columna del autor */
     white-space: nowrap;
+    color: white;
   }
   
   /* Estilo para la columna del género */
   .thirdColumn {
-    width: 10%; /* Ancho fijo para la columna del género */
+    /* width: 10%; Ancho fijo para la columna del género */
     white-space: normal;
+    color: white;
   }
   /* BooksTableList.module.css */
   .modalContent {
@@ -56,7 +63,7 @@
     justify-content: center;
     align-items: center;
   } 
-  .deleteIcon {
+  .icon {
     cursor: pointer;
   }
 
@@ -68,7 +75,9 @@
   .blueText {
     color: darkblue;
   }
-  
+  .whiteText {
+    color: white;
+  }
   .boldText {
     font-weight: bold;
   }
@@ -91,3 +100,25 @@
     margin-left: 10px;
     cursor: pointer;
   }
+
+  /* Estilo para estado activo */
+.activeStatus {
+  background-color: green;
+  color: black;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+/* Estilo para estado borrado */
+.deletedStatus {
+  background-color: red;
+  color: white;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+.columnHeaderText {
+  background-color: darkcyan;
+  color: white;
+}

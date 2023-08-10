@@ -5,8 +5,7 @@ import UsersTableList from '../../Components/UsersTableList/UsersTableList'
 import styles from './AdminDashboar.module.css'
 import logo from '../../sources/logoCompleto.png'
 import {
-  Card,
- 
+  Card, 
   Tab,
   TabGroup,
   TabList,
@@ -15,7 +14,7 @@ import {
 
 } from "@tremor/react";
 import { useDispatch } from 'react-redux';
-import { getAllPayments, getUsers, getTableBooks,getTableUsers  } from '../../redux/actions/actions';
+import { getAllPayments, getUsers, getTableBooks,getTableUsers,getBooksDeleted  } from '../../redux/actions/actions';
 import { useNavigate } from 'react-router-dom';
 
 function AdminDashboard() {
@@ -27,6 +26,7 @@ function AdminDashboard() {
     dispatch(getUsers());
     dispatch(getTableBooks());
     dispatch(getTableUsers());   
+    dispatch(getBooksDeleted());
  
   }, [dispatch]);
 
@@ -46,8 +46,8 @@ function AdminDashboard() {
           <TabListGeneral />
           <TabPanel>
             <div className="mt-8">
-              <button className='p-2 bg-orange-400 cursor-pointer rounded-md' onClick={()=> {navigate('/admin/createBook')}} >Upload new book</button>
-              <h1>libros</h1>
+              {/* <button className='p-2 bg-orange-400 cursor-pointer rounded-md' onClick={()=> {navigate('/admin/createBook')}} >Upload new book</button> */}
+              <h2>list of Books </h2>
               <BooksTableList />
             </div>
           </TabPanel>
