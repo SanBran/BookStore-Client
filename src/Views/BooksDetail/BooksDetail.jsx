@@ -58,7 +58,6 @@ const BooksDetail = () => {
   }, [dispatch, id])
 
   const book = useSelector(state => state.details)
-  const [autores, setAutores] = useState([])
 
   if (book.author) {
     const cleanedAuthor = book.author.replace(/[\{\}\"\\]/g, "");
@@ -123,118 +122,98 @@ const BooksDetail = () => {
       throw new Error(error.message);
     }
   }
-  console.log(book.price)
   return (
-    <div className={`${styles.container} ${darkMode ? styles.dark : styles.light}`}>
-      <button className={styles.mode} onClick={toggleDarkMode}>Cambiar modo</button>
-      <>
-        <div className={styles.bookInfo}>
-          <img className={styles.bookImg} src={book.image !== "Image not Available" ? book.image : genericCover} alt={book.title} />
-          <div className={styles.bookDetails}>
-            <h2 className={styles.title}>{book.title}</h2>
-            <div className={styles.authorContainer}>
-              <p className={styles.author}>by</p>
-              {processedAuthor?.map((author, index) => (
-                <p className={styles.author} key={index}>{author}</p>
-              ))}
-            </div>
-            {/* <div className={styles.share}>
-              <img className={styles.shareIcon} src={facebook_icon} alt="facebook" />
-              <img className={styles.shareIcon} src={instagram_icon} alt="instagram" />
-              <img className={styles.shareIcon} src={share_icon} alt="share" />
-            </div> */}
-          </div>
-          <div className={styles.priceAndActions}>
-            <p className={styles.price}>{book.price !== 0 ? `$ ${book.price}` : "Free"}</p>
-            <p className={styles.format}>PDF format</p>
-            {
 
-              book.price !== 0 ? (
+    <>
 
-                <button className={styles.buyBtn} onClick={() => { navigate(`/payment/${book.id}`) }} >Buy Now</button>
-
-              ) :
-                (
-                  <Link to={`/freeBookacquisition`}>
-                    <button className={styles.buyBtn} onClick={handlerfreebooks} >Buy Now</button>
-                  </Link>
-
-
-                )
-            }
-
-            <button className={styles.cartBtn} onClick={() => { handlerCart(book) }}>{inCart ? "REMOVE FROM CART" : "ADD TO CART"}</button>
-          </div>
-        </div>
-        <div className={styles.descriptionContainer}>
-
-          <div className={styles.switchContainer}>
-            <div
-              className={showDescription ? styles.switchFocus : styles.switch}
-              onClick={() => setShowDescription(true)}
-            >
-              <h1 className={styles.switchTitle}>Description</h1>
-            </div>
-            <div
-              className={!showDescription ? styles.switchFocus : styles.switch}
-              onClick={() => setShowDescription(false)}
-            >
-              <h1 className={styles.switchTitle}>Details</h1>
-            </div>
-          </div>
-
-          <div className={styles.textContainer}>
-            {showDescription ? (
-              <p className={styles.description}>{showDescription && book.sinopsis}</p>
-            ) : (
-              <div className={styles.details}>
-                <div className={styles.detailTextContaiter}>
-                  <h3 className={styles.titleDetail}>Language</h3>
-                  <h3 className={styles.textDetail}>{book.language}</h3>
-                </div>
-
-                <div className={styles.detailTextContaiter}>
-                  <h3 className={styles.titleDetail}>Published date</h3>
-                  <h3 className={styles.textDetail}>{book.publishedDate}</h3>
-                </div>
-
-                <div className={styles.detailTextContaiter}>
-                  <h3 className={styles.titleDetail}>Editorial</h3>
-                  <h3 className={styles.textDetail}>{book.editorial}</h3>
-                </div>
-
-                <div className={styles.detailTextContaiter}>
-                  <h3 className={styles.titleDetail}>Gender</h3>
-                  <h3 className={styles.textDetail}>
-                    {processedGender?.map((gender, index) => (
-                      <span key={index}>{gender}</span>
-                    ))}
-                  </h3>
-                </div>
+      <div className={`${styles.container} ${darkMode ? styles.dark : styles.light}`}>
+        <>
+          <div className={styles.bookInfo}>
+            <img className={styles.bookImg} src={book.image !== "Image not Available" ? book.image : genericCover} alt={book.title} />
+            <div className={styles.bookDetails}>
+              <h2 className={styles.title}>{book.title}</h2>
+              <div className={styles.authorContainer}>
+                <p className={styles.author}>by</p>
+                {processedAuthor?.map((author, index) => (
+                  <p className={styles.author} key={index}>{author}</p>
+                ))}
               </div>
-            )}
+            </div>
+            <div className={styles.priceAndActions}>
+              <p className={styles.price}>{book.price !== 0 ? `$ ${book.price}` : "Free"}</p>
+              <p className={styles.format}>PDF format</p>
+              {
+
+                book.price !== 0 ? (
+
+                  <button className={styles.buyBtn} onClick={() => { navigate(`/payment/${book.id}`) }} >Buy Now</button>
+
+                ) :
+                  (
+                    <Link to={`/freeBookacquisition`}>
+                      <button className={styles.buyBtn} onClick={handlerfreebooks} >Buy Now</button>
+                    </Link>
+
+
+                  )
+              }
+
+              <button className={styles.cartBtn} onClick={() => { handlerCart(book) }}>{inCart ? "REMOVE FROM CART" : "ADD TO CART"}</button>
+            </div>
           </div>
-        </div>
-      </>
-      <div>
-        {autores && autores.length !== 0 ? (
-          <>
-            <h3>Books narrated by the author</h3>
-            {autores[0]?.book?.map((book) => (
-              <Link onClick={() => window.scrollTo(0, 0)} key={book.id} to={`/detail/${book.id}`}>
-                <div>
-                  <img src={book.image} alt={book.title} />
-                  <h4>{book.title}</h4>
+          <div className={styles.descriptionContainer}>
+
+            <div className={styles.switchContainer}>
+              <div
+                className={showDescription ? styles.switchFocus : styles.switch}
+                onClick={() => setShowDescription(true)}
+              >
+                <h1 className={styles.switchTitle}>Description</h1>
+              </div>
+              <div
+                className={!showDescription ? styles.switchFocus : styles.switch}
+                onClick={() => setShowDescription(false)}
+              >
+                <h1 className={styles.switchTitle}>Details</h1>
+              </div>
+            </div>
+
+            <div className={styles.textContainer}>
+              {showDescription ? (
+                <p className={styles.description}>{showDescription && book.sinopsis}</p>
+              ) : (
+                <div className={styles.details}>
+                  <div className={styles.detailTextContaiter}>
+                    <h3 className={styles.titleDetail}>Language</h3>
+                    <h3 className={styles.textDetail}>{book.language}</h3>
+                  </div>
+
+                  <div className={styles.detailTextContaiter}>
+                    <h3 className={styles.titleDetail}>Published date</h3>
+                    <h3 className={styles.textDetail}>{book.publishedDate}</h3>
+                  </div>
+
+                  <div className={styles.detailTextContaiter}>
+                    <h3 className={styles.titleDetail}>Editorial</h3>
+                    <h3 className={styles.textDetail}>{book.editorial}</h3>
+                  </div>
+
+                  <div className={styles.detailTextContaiter}>
+                    <h3 className={styles.titleDetail}>Gender</h3>
+                    <h3 className={styles.textDetail}>
+                      {processedGender?.map((gender, index) => (
+                        <span key={index}>{gender}</span>
+                      ))}
+                    </h3>
+                  </div>
                 </div>
-              </Link>
-            ))}
-          </>
-        ) : (
-          <h3>No books related with Author</h3>
-        )}
+              )}
+            </div>
+          </div>
+        </>
       </div>
       <Comments id={id} book={book} />
-    </div>
+    </>
   );
 }
 
