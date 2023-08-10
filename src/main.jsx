@@ -11,9 +11,9 @@ import "@tremor/react"
 
 import { GoogleOAuthProvider } from '@react-oauth/google';
 //---------clientID para usar en el localhost:3000
-const clientID = "637027522589-6jbd17n7qelc1mqtp4c1gl43lvjp57cf.apps.googleusercontent.com";
+// const clientID = "637027522589-6jbd17n7qelc1mqtp4c1gl43lvjp57cf.apps.googleusercontent.com";
 //---------clientID para usar en el https://book-store-client-coral.vercel.app/
-// const clientID = "637027522589-j7nin8g8gico6g5hsfkkg98u2r4gfbj6.apps.googleusercontent.com";
+const clientID = "637027522589-j7nin8g8gico6g5hsfkkg98u2r4gfbj6.apps.googleusercontent.com";
 
 // Establece el elemento raíz de tu aplicación para que los lectores de pantalla no vean el contenido principal cuando el modal esté abierto
 Modal.setAppElement('#root');
