@@ -36,11 +36,11 @@ const AboutUs = ()=>{
         { name: 'Jose Fuenmayor', image: JoseImage , github: 'https://github.com/JoseAlbertoFC', linkedin: 'https://www.linkedin.com/in/josealbertofc/'},
         { name: 'Sasha Camargo', image: SashaImage , github: 'https://github.com/sashacamar', linkedin: ''},
         { name: 'Danny Ruiz', image: DanyImage  , github: 'https://github.com/JuanDanielRuiz', linkedin: 'https://www.linkedin.com/in/danny-ruiz-9b7a24175/'},
-        { name: 'Nazareno Lujan', image: NazaImage , github: 'https://github.com/OmarnLujan', linkedin: ''},
+        { name: 'Nazareno Lujan', image: NazaImage , github: 'https://github.com/OmarnLujan', linkedin: 'https://www.linkedin.com/in/omar-nazareno-lujan-8b09b0268/'},
         { name: 'Brandon Galarza', image: BranImage , github: 'https://github.com/SanBran', linkedin: 'https://www.linkedin.com/in/brandon-galarza-a46421120'},
         { name: 'Santiago Soto', image: SantiImage , github: 'https://github.com/SH-ur', linkedin: 'http://linkedin.com/in/santiago-soto-43ab99260'},
         { name: 'Alejandro Aranguren', image: AleImage , github: 'https://github.com/larangur', linkedin: 'https://www.linkedin.com/in/larangurcol/'},
-        { name: 'Reservado para el patron', image: EnzoImage , github: 'https://github.com/larangur', linkedin: 'https://www.linkedin.com/in/larangurcol/'},
+        { name: 'Enzo Magurno', image: EnzoImage , github: 'https://github.com/EnzoMagurno', linkedin: 'https://www.linkedin.com/in/enzomagurno'},
         
         
         
