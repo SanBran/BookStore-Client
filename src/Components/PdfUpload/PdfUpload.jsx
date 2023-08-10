@@ -4,7 +4,6 @@ import styles from './PdfUpload.module.css'
 
 const PdfUpload = ({setFormData, formData}) => {
   const cloudinaryUrl = `https://api.cloudinary.com/v1_1/dajn5cfcv/image/upload`;
-  console.log("1");
   
 
   const handleFileChange = async (e) => {

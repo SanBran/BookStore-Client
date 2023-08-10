@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import TabListGeneral from './TabList/TabListGeneral';
 import BooksTableList from '../../Components/BooksTableList/BooksTableList'
 import UsersTableList from '../../Components/UsersTableList/UsersTableList'
+import CreateBook from '../../Components/CreateBook/CreateBook';
 import styles from './AdminDashboar.module.css'
 import logo from '../../sources/logoCompleto.png'
 import {
@@ -21,6 +22,8 @@ function AdminDashboard() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+ 
+
   useEffect(() => {
     dispatch(getAllPayments());
     dispatch(getUsers());
@@ -38,28 +41,25 @@ function AdminDashboard() {
       <TabGroup>
         <TabList className="mt-10">
           <Tab>General</Tab>
-          <Tab>Libros</Tab>
-          <Tab>Usuarios</Tab>
-          <Tab>Pagos</Tab>
+          <Tab>Books</Tab>
+          <Tab>Users</Tab>
+          <Tab>Pays</Tab>
         </TabList>
         <TabPanels>
           <TabListGeneral />
           <TabPanel>
             <div className="mt-8">
-              {/* <button className='p-2 bg-orange-400 cursor-pointer rounded-md' onClick={()=> {navigate('/admin/createBook')}} >Upload new book</button> */}
               <h2>list of Books </h2>
               <BooksTableList />
             </div>
           </TabPanel>
           <TabPanel>
             <div className="mt-8">
-              <h1>usuarios</h1>
               <UsersTableList />
             </div>
           </TabPanel>
           <TabPanel>
             <div className="mt-8">
-              <h1>usuarios</h1>
             </div>
           </TabPanel>
         </TabPanels>

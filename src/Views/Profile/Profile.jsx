@@ -20,6 +20,7 @@ import log_out_icon from "../../assets/icons/log_out_icon.svg";
 import wishlist_icon from "../../assets/icons/wishlist_fill_icon.svg";
 import purchase_history_icon from "../../assets/icons/purchase_history_icon.svg";
 import settings_icon from "../../assets/icons/settings_icon.svg";
+import admin_icon from "../../assets/icons/admin_icon.svg";
 
 //userData={name, birthday, country, phone, phoneCode, gender, email, password, dniPasaport, status, rol, photoUser, listWish}
 const Profile = () => {
@@ -87,7 +88,7 @@ const Profile = () => {
           {user.rol === "admin" ? (
             <div>
               <Link className={styles.navItem} to="/admin">
-                <img src={settings_icon} alt="⚙️" />
+                <img src={admin_icon} alt="⚙️" />
                 Dashboard
               </Link>
             </div>

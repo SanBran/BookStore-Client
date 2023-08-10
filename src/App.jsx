@@ -35,14 +35,14 @@ import FailurePay from "./Views/Cart.jsx/FailurePay/FailurePay";
 //pasos para el deploy
 import axios from "axios";
 //-------local
-// axios.defaults.baseURL = "http://localhost:8000/";
+//  axios.defaults.baseURL = "http://localhost:8000/";
 //-------deployado
  axios.defaults.baseURL = "https://bookstorepf-production.up.railway.app";
 
 //-------Manejando cookies para mantener sesiones
 import Cookies from 'js-cookie';
 import { accessUser, getUserById, validateSession } from "./redux/actions/actions";
-import { updateCart } from "./redux/actions/actions";
+import { addCart, updateCart } from "./redux/actions/actions";
 
 
 
@@ -51,6 +51,8 @@ function App() {
   const showOverlayPerfile = useSelector(state => state.overlayProfile);
   const location = useLocation();
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.userDetail);
+
 
   const [server, setServer] = useState(true);
   
@@ -95,7 +97,7 @@ function App() {
       }
     })()
   }, [])
-
+ 
 
   return (
     <>
@@ -105,6 +107,7 @@ function App() {
           {showOverlayPerfile && <Profile />}
           <div >
             {location.pathname !== "/admin" 
+            && location.pathname !== "/admin/" 
             && location.pathname !== "/admin/createBook" 
             && location.pathname !== "/profile" 
             && location.pathname !== "/access" 
@@ -119,7 +122,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/about_us" element={<AboutUs />} />
               <Route path="/access" element={<Access />} />
-              <Route path="/detail/:id" element={ <BooksDetail />} />
+              <Route path="/detail/:id" element={<BooksDetail />} />
               <Route path="/profile" element={token? <Profile />:<Access/>} />
               <Route path="/wishlist" element={token? <Wishlist />:<Access/>} />
               <Route path="/history" element={token? <History />:<Access/>} />
@@ -134,11 +137,10 @@ function App() {
               <Route path="/payment/pendingpay" element={token? <PendingPay />:<Access/>} />
               <Route path="/payment/failurepay" element={token?<FailurePay />:<Access/>} />
               <Route path="/freeBookacquisition" element={token?<SuccessfulAcquisition />:<Access/>} />
-              <Route path="/admin" element={token?<AdminDashboard />:<NotFound/>}/>
 
-
+              <Route path="/admin" element={<AdminDashboard />}/>
               <Route path="/admin/createBook" element={<CreateBook />}/>
-
+              
 
               <Route path="*" element={<NotFound />} />
             </Routes>

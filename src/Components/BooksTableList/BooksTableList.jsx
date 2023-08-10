@@ -4,7 +4,7 @@ import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./BooksTableList.module.css";
 import { deleteBooksById,restoreUserById } from "../../redux/actions/actions.js";
-
+import CreateBook from "../CreateBook/CreateBook";
 //import styles from "./Book.module.css";
 import { StatusOnlineIcon } from "@heroicons/react/outline";
 import {
@@ -45,9 +45,16 @@ const ListBooks = () => {
     const [deleteItemId, setDeleteItemId] = useState(null);
     const [deleteItemTitle, setDeleteItemtitle] = useState(null);
     const [message, setMessage] = useState("");
+
     const [idModal, setidModal] = useState(null);
     const [messageText, setMessageText] = useState("");
     const [activeTab, setActiveTab] = useState("activos");
+
+    const [open, setOpen] = useState(false)
+      const handleClose = () => {
+        setOpen(false)
+      }
+
 
     const handleTabChange = (tab) => {
       setActiveTab(tab);
@@ -127,14 +134,15 @@ const ListBooks = () => {
     }
     return (
       <>
-        <div>
-          <Link to="/admin/createBook">
-            <button className={`${styles.confirmButton} ${styles.modalButton}`}>
+
+      <CreateBook open={open} setOpen={setOpen}/>
+        <Card>
+          
+            <button onClick={() => setOpen(true)} className={`${styles.confirmButton} ${styles.modalButton}`}>
               Add New Book
             </button>
-          </Link>
-        </div>
-
+          
+        </Card>
         <div>
           <Card>
             <div className={styles.tabs}>
