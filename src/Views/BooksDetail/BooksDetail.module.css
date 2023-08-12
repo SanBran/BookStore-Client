@@ -4,7 +4,7 @@
     margin: 0 auto;
     padding: 20px;
     font-family: Arial, sans-serif;
-    padding-top: 6rem;
+    padding-top: 150px;
 
     display: flex;
     flex-direction: column;
@@ -187,7 +187,8 @@
 /* -----Estilos en la descripcion y detalles */
 .textContainer{
     margin: 30px 0;    
-    margin-left: 120px;
+    margin-left: 130px;
+    margin-bottom: 100px;
 }
 .description{
     text-align: start;
@@ -201,7 +202,7 @@
 .detailTextContaiter{
     margin: 0;
     margin-top: 10px;
-    width: 580px;
+    width: 565px;
 
     border-bottom: 1px solid #D5D5D5;
     display: flex;

@@ -53,12 +53,22 @@
     position: absolute;
     background: none;
     color: #FA9D1B;
-    left: 330px;
-    bottom: 22px;
-
+    left: 23.5vw;
+    bottom: 55px;
+    cursor: pointer;
+}
+.boton2{
+    position: absolute;
+    background: none;
+    left: 23.5vw;
+    bottom: 5px;
+    cursor: pointer;
+}
+.boton2 img{
+    width: 40px;
 }
 
-.boton2{
+/* .boton2{
     position: absolute;
     background-color: #FA9D1B;
     border-radius: 10px;
@@ -81,7 +91,7 @@
     bottom: 20px;
     right: 20px;
 
-}
+} */
 
 .rating{
     font-size:small;
