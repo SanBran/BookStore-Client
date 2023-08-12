@@ -99,7 +99,7 @@ const Book = ({ books }) => {
         )
       ) : (
         <button onClick={handleToLog} className={styles.boton2}>
-          Add to cart
+            <img src={add_cart_icon} alt="x" />
         </button>
       )}
       <Link className={styles.image} to={`/detail/${id}`}>

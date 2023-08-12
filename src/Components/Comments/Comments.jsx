@@ -180,8 +180,7 @@ const Comments = ({ id, book }) => {
 
                 {!loggedIn ? (
                     <div>
-                        <h2>Log In to leave a comment</h2>
-                        <Link to={'/access'}>Here</Link>
+                        <Link className={style.navigate} to={'/access'}>{'Log In to leave a comment →  '}</Link>
                     </div>
                 ) : (
                     <div>
