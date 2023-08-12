@@ -7,7 +7,10 @@ import { AiOutlineStar, AiFillStar, AiOutlineDelete } from 'react-icons/ai'
 import { BiSolidRename } from 'react-icons/bi'
 import { PiPencilLineBold } from 'react-icons/pi'
 import spinner from './Spinner.module.css'
-import Modal from 'react-modal'
+import Modal from 'react-modal';
+
+import edit_icon from '../../assets/icons/edit2_icon.svg';
+import bin_icon from '../../assets/icons/bin_icon.svg';
 
 
 const Comments = ({ id, book }) => {
@@ -15,10 +18,6 @@ const Comments = ({ id, book }) => {
     const loggedIn = useSelector(state => state.access.state)
 
     const userId = useSelector(state => state.access.ref)
-
-
-    console.log(userId);
-
 
     const dispatch = useDispatch()
 
@@ -35,6 +34,8 @@ const Comments = ({ id, book }) => {
     })
 
     const [comments, setComments] = useState(book.comments)
+
+    console.log(comments);
 
     useEffect(() => {
         setComments(book.comments)
@@ -118,26 +119,16 @@ const Comments = ({ id, book }) => {
     }
 
     return (
-        <div className="flex justify-center h-screen">
-            <div>
+        <div className={style.container}>
+            <div className={style.container2}>
                 <Modal
                     isOpen={isEditModalOpen}
                     onRequestClose={() => setIsEditModalOpen(false)}
                     contentLabel="Editar Comentario"
+                    className={style.modal}
                 >
-                    <div className="bg-white p-4 rounded-lg shadow-lg">
+                    <div className={style.modalContent}>
                         <h2 className="text-xl font-semibold mb-4">Edit Comment</h2>
-                        <textarea
-                            className="w-full p-2 bg-white mb-2"
-                            value={commentToEdit.comment}
-                            onChange={(e) =>
-                                setCommentToEdit({
-                                    ...commentToEdit,
-                                    comment: e.target.value
-                                })
-                            }
-                            rows="3"
-                        />
                         <div className="flex items-center space-x-2 mb-2">
                             {[1, 2, 3, 4, 5].map((index) => (
                                 <span
@@ -158,16 +149,28 @@ const Comments = ({ id, book }) => {
                                 </span>
                             ))}
                         </div>
+
+                        <textarea
+                            className={style.textarea}
+                            value={commentToEdit.comment}
+                            onChange={(e) =>
+                                setCommentToEdit({
+                                    ...commentToEdit,
+                                    comment: e.target.value
+                                })
+                            }
+                            rows="3"
+                        />
                         <div className="flex justify-end">
                             <button
                                 onClick={() => setIsEditModalOpen(false)}
-                                className="mr-2 px-4 text-white hover:bg-gray-600 py-2 cursor-pointer"
+                                className={style.botonSelect}
                             >
                                 Cancel
                             </button>
                             <button
                                 onClick={handleEditComment}
-                                className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 cursor-pointer"
+                                className={style.botonSelect}
                             >
                                 Update Comment
                             </button>
@@ -182,54 +185,61 @@ const Comments = ({ id, book }) => {
                     </div>
                 ) : (
                     <div>
-                        <form onSubmit={handleSubmit} className="p-4 bg-gray-200 rounded-lg shadow-md">
-                            <h3 className="text-lg font-semibold mb-2">
-                                Leave a comment <PiPencilLineBold className="ml-2 h-6 w-6" />
-                            </h3>
-                            <textarea
-                                value={form.comment}
-                                name="comment"
-                                onChange={handleChange}
-                                className="w-full p-2 bg-white mb-2"
-                                cols='90'
-                                rows="3"
-                                placeholder="What do you think of the book?"
-                            />
-                            <div className="flex items-center space-x-2 mb-2">
-                                {[1, 2, 3, 4, 5].map((index) => (
-                                    <span
-                                        key={index}
-                                        onClick={() => setRating(index)}
-                                        className="cursor-pointer"
-                                    >
-                                        {index <= rating ? (
-                                            <AiFillStar className="text-yellow-500 h-5 w-5 text-lg" />
-                                        ) : (
-                                            <AiOutlineStar className="text-lg text-gray-400 h-5 w-5" />
-                                        )}
-                                    </span>
-                                ))}
+                        <form onSubmit={handleSubmit} className={`p-4 rounded-lg shadow-md ${style.form}`}>
+                            <div className={style.titleText}>
+                                <h3 className={`text-lg font-semibold mb-2 ${style.text}`}>
+                                Write your review 
+                                </h3>
+                                <div className="flex items-center space-x-2 mb-2">
+                                    {[1, 2, 3, 4, 5].map((index) => (
+                                        <span
+                                            key={index}
+                                            onClick={() => setRating(index)}
+                                            className="cursor-pointer"
+                                        >
+                                            {index <= rating ? (
+                                                <AiFillStar className="text-yellow-500 h-5 w-5 text-lg" />
+                                            ) : (
+                                                <AiOutlineStar className="text-lg text-gray-400 h-5 w-5" />
+                                            )}
+                                        </span>
+                                    ))}
+                                </div>
                             </div>
-                            <input
-                                disabled={form.comment.length < 1}
-                                type="submit"
-                                value="Send"
-                                className={`py-2 px-4 rounded-md text-white ${form.comment.length < 1
-                                    ? "bg-gray-400  hover:cursor-not-allowed opacity-70"
-                                    : "bg-blue-500 hover:bg-blue-600 cursor-pointer transition-colors"
-                                    }`}
-                            />
-                            <div className='mt-3'>
-                                {showSpinner ? <span className={spinner.loader}></span> : null}
+                            
+                            <div className={style.description}>
+                                <textarea
+                                    value={form.comment}
+                                    name="comment"
+                                    onChange={handleChange}
+                                    className={style.textarea}
+                                    cols='90'
+                                    rows="3"
+                                    placeholder="What do you think of the book?"
+                                />
+                                
+                                <input
+                                    disabled={form.comment.length < 1}
+                                    type="submit"
+                                    value="Send review"
+                                    className={`${style.boton} ${form.comment.length < 1
+                                        ? style.botonBase
+                                        : style.botonActivo
+                                        }`}
+                                />
                             </div>
                         </form>
+                                <div className='mt-3'>
+                                    {showSpinner ? <span className={spinner.loader}></span> : null}
+                                </div>
                     </div>
                 )}
 
                 {comments && comments.map((comment, index) => (
-                    <div className="bg-gray-300 p-3 mb-2 flex flex-col" key={index}>
+                    <div className={`p-3 mb-2 flex flex-col ${style.border}`} key={index}>
+                        <h5 className={style.date}>{comment.createdAt.slice(0,10)}</h5>
                         <div className="flex">
-                            <p className="text-gray-800 font-semibold">{comment.comment}</p>
+                            <p className={style.comment}>{comment.comment}</p>
                         </div>
                         <div className="flex items-center space-x-2 mt-auto">
                             {Array.from({ length: MAX_STARS }).map((star, starIndex) => (
@@ -243,11 +253,11 @@ const Comments = ({ id, book }) => {
                             ))}
                             {userId === comment.userId && (
                                 <div className="ml-auto">
-                                    <button className="mr-2 text-gray-600 hover:text-gray-800 cursor-pointer" onClick={() => openEditModal(comment.id, comment.comment, comment.rating)}>
-                                        <BiSolidRename />
+                                    <button className={style.icon} onClick={() => openEditModal(comment.id, comment.comment, comment.rating)}>
+                                        <img src={edit_icon} alt="x" />
                                     </button>
-                                    <button className="hover:text-red-600 cursor-pointer" onClick={() => handleDeleteComment(comment.id)}>
-                                        <AiOutlineDelete />
+                                    <button className={style.icon} onClick={() => handleDeleteComment(comment.id)}>
+                                        <img src={bin_icon} alt="" />
                                     </button>
                                 </div>
                             )}

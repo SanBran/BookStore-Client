@@ -1,0 +1,22 @@
+<svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M54.9758 9.84671C54.4961 9.10984 53.8091 8.49577 52.9818 8.0644C52.1546 7.63303 51.2154 7.39909 50.2557 7.38539H14.7164L13.106 1.82282C12.9433 1.28585 12.5803 0.81354 12.0762 0.482808C11.572 0.152076 10.9564 -0.0175904 10.3295 0.00144351H4.77651C4.04013 0.00144351 3.33392 0.26076 2.81322 0.722346C2.29252 1.18393 2 1.80998 2 2.46276C2 3.11554 2.29252 3.74159 2.81322 4.20317C3.33392 4.66476 4.04013 4.92408 4.77651 4.92408H8.21938L15.8826 30.1772C16.0453 30.7141 16.4083 31.1865 16.9124 31.5172C17.4166 31.8479 18.0322 32.0176 18.6591 31.9986H43.6477C44.1604 31.9972 44.6627 31.87 45.0988 31.631C45.535 31.3921 45.888 31.0507 46.1187 30.6448L55.2257 14.4986C55.6204 13.7652 55.8042 12.9565 55.7606 12.1448C55.717 11.3331 55.4474 10.5436 54.9758 9.84671ZM41.9262 27.0759H20.7692L16.2435 12.308H50.2557L41.9262 27.0759Z" fill="#FA9D1B"/>
+<path d="M17.8138 44C20.1428 44 22.0308 42.433 22.0308 40.5C22.0308 38.567 20.1428 37 17.8138 37C15.4848 37 13.5968 38.567 13.5968 40.5C13.5968 42.433 15.4848 44 17.8138 44Z" fill="#FA9D1B"/>
+<path d="M45.7515 44C47.7893 44 49.4413 42.433 49.4413 40.5C49.4413 38.567 47.7893 37 45.7515 37C43.7136 37 42.0616 38.567 42.0616 40.5C42.0616 42.433 43.7136 44 45.7515 44Z" fill="#FA9D1B"/>
+<g filter="url(#filter0_d_876_90)">
+<circle cx="13" cy="21" r="9" fill="white"/>
+</g>
+<path d="M13.058 25.3053L13.058 16.851" stroke="#FA9D1B" stroke-width="3" stroke-linecap="round"/>
+<path d="M8.90405 21.111H17.3583" stroke="#FA9D1B" stroke-width="3" stroke-linecap="round"/>
+<defs>
+<filter id="filter0_d_876_90" x="0" y="8" width="26" height="26" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset/>
+<feGaussianBlur stdDeviation="2"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_876_90"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_876_90" result="shape"/>
+</filter>
+</defs>
+</svg>

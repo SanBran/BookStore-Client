@@ -1,5 +1,7 @@
-import fav1 from "../../sources/fav1.png";
-import fav2 from "../../sources/fav2.png";
+import fav1 from "../../sources/fav1.svg";
+import fav2 from "../../sources/fav2.svg";
+import add_cart_icon from '../../assets/icons/add_cart_icon.svg';
+import remove_cart_icon from '../../assets/icons/remove_cart_icon.svg';
 import { Link } from "react-router-dom";
 import StarRating from "../StarRating/StarRating";
 import styles from "./Book.module.css";
@@ -87,12 +89,12 @@ const Book = ({ books }) => {
       )}
       {user.state ? (
         cart ? (
-          <button onClick={handleCart} className={styles.boton2s}>
-            ✔
+          <button onClick={handleCart} className={styles.boton2}>
+            <img src={remove_cart_icon} alt="x" />
           </button>
         ) : (
           <button onClick={handleCart} className={styles.boton2}>
-            Add to cart
+            <img src={add_cart_icon} alt="x" />
           </button>
         )
       ) : (
@@ -107,17 +109,19 @@ const Book = ({ books }) => {
           alt={`${title} from ${author}`}
         />
       </Link>
-
+      
+      <Link to={`/detail/${id}`}>
       <div className={styles.textContainer}>
         <div className={styles.title}>{title}</div>
         <div className={styles.author}>{author}</div>
         <div className={styles.rating}><StarRating rating={comments} /></div>
         {price && price ? (
           <div className={styles.price}>${price}</div>
-        ) : (
-          <div className={styles.price}>Free</div>
-        )}
+          ) : (
+            <div className={styles.price}>Free</div>
+            )}
       </div>
+      </Link>
     </div>
   );
 };

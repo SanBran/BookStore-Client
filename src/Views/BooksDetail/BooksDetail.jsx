@@ -1,10 +1,12 @@
-import { detailBookById, getBooksByAuthor, addCart, removeCart } from "../../redux/actions/actions"
-import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { Link, useNavigate, useParams } from "react-router-dom"
-import styles from './BooksDetail.module.css'
-import parseAuthors from "../../utils/parseAuthors"
-import axios from "axios"
+import { detailBookById, getBooksByAuthor, addCart, removeCart } from "../../redux/actions/actions";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import styles from './BooksDetail.module.css';
+import parseAuthors from "../../utils/parseAuthors";
+import axios from "axios";
+
+import StarRating from "../../Components/StarRating/StarRating";
 
 
 //-----icons
@@ -211,8 +213,8 @@ const BooksDetail = () => {
             </div>
           </div>
         </>
-      </div>
       <Comments id={id} book={book} />
+      </div>
     </>
   );
 }
