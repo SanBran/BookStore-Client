@@ -32,9 +32,10 @@ import {
   Italic,
 } from "@tremor/react";
 
-import icoDel from "../../assets/icons/delete.png";
-import icoEdit from "../../assets/icons/edit.png";
-import icoVer from "../../assets/icons/view.png";
+import icoDel from "../../assets/icons/bin_icon.svg";
+import icoEdit from "../../assets/icons/edit2_icon.svg";
+import icoVer from "../../assets/icons/eye_icon.svg";
+import iconPlus from '../../assets/icons/plus_icon.svg';
 
 import { getTableBooks, getBooksDeleted } from "../../redux/actions/actions.js";
 
@@ -131,18 +132,10 @@ const ListBooks = () => {
     return (
       <>
         <CreateBook open={open} setOpen={setOpen}/>
-        <Card>
-          
-            <button onClick={() => setOpen(true)} className={`${styles.confirmButton} ${styles.modalButton}`}>
-              Add New Book
-            </button>
-          
-        </Card>
 
         <div>
           <Card>
             <div className={styles.tabs}>
-              <Button size="lg" color="emerald">
                 <div
                   className={`${styles.tab} ${
                     activeTab === "activos" && styles.activeTab
@@ -151,18 +144,20 @@ const ListBooks = () => {
                 >
                   Activos
                 </div>
-              </Button>{" "}
-              &nbsp; &nbsp; &nbsp; &nbsp;
-              <Button size="lg" color="red">
                 <div
                   className={`${styles.tab} ${
                     activeTab === "borrados" && styles.activeTab
                   }`}
                   onClick={() => handleTabChange("borrados")}
                 >
-                  Borrados{" "}
+                  Borrados
                 </div>
-              </Button>
+          
+                <button onClick={() => setOpen(true)} className={`${styles.button}`}>
+                  <img className={styles.icon} src={iconPlus} alt="+" /> Add New Book
+                </button>
+        
+
             </div>
 
             <Table className={`mt-5 ${styles.tableContainer}`}>
@@ -184,10 +179,10 @@ const ListBooks = () => {
                     <Text color="white"> STATUS</Text>
                   </TableHeaderCell>
                   <TableHeaderCell>
-                    <Text color="white"> Action</Text>
+                    <Text color="white"> ACTIONS</Text>
                   </TableHeaderCell>
                   <TableHeaderCell>
-                    <Text color="white"> Events</Text>
+                    <Text color="white"> EVENTS</Text>
                   </TableHeaderCell>
                 </TableRow>
               </TableHead>
@@ -195,8 +190,8 @@ const ListBooks = () => {
               <TableBody className={styles.tableBody}>
                 {filteredList?.map((item) => (
                   // Renderizar cada fila de acuerdo a la pestaña activa
-                  <TableRow key={item.id}>
-                    <TableCell>
+                  <TableRow className={styles.tableRow} key={item.id}>
+                    <TableCell className={styles.TableCell}>
                       <p className={`${styles.boldText}`}>{item.title}</p>
                       {item.author && (
                         <ul>
@@ -206,11 +201,12 @@ const ListBooks = () => {
                         </ul>
                       )}
                     </TableCell>
-                    <TableCell>
+                    <TableCell className={styles.TableCell}>
                       <Text>{item.gender}</Text>
                     </TableCell>
-                    <TableCell>
-                      {item.status ? (
+                    <TableCell className={styles.TableCell}>
+                      {console.log(item, item.status)}
+                      {item.deletedAt === null ? (
                         <span
                           className={`${styles.statusBadge} ${styles.activeStatus}`}
                         >
@@ -224,9 +220,9 @@ const ListBooks = () => {
                         </span>
                       )}
                     </TableCell>
-                    <TableCell>
+                    <TableCell className={styles.TableCell}>
                       <p>
-                        <Link to={`/detail/${item.id}`}>
+                        <Link className={styles.link} to={`/detail/${item.id}`}>
                           <img
                             key={item.id}
                             src={icoVer}
@@ -238,14 +234,16 @@ const ListBooks = () => {
                           Ver{" "}
                         </Link>
                       </p>
-                      <p>
+                      <p onClick={() => openModal(item.id, item.title,"1")}
+
+                      style={{"cursor":"pointer", "display":"flex", "alignItems":"center", "color":"black"}}>
                         {activeTab === "activos" ? (
                           <>
                             <img
                               key={item.id}
                               src={icoDel}
                               alt="Delete"
-                              onClick={() => openModal(item.id, item.title,"1")}
+                              // onClick={() => openModal(item.id, item.title,"1")}
                               className={styles.icon}
                             />
                             Delete
@@ -264,7 +262,7 @@ const ListBooks = () => {
                         )}
                       </p>
                     </TableCell>
-                    <TableCell>
+                    <TableCell className={styles.TableCell}>
                       <Text>
                         {" "}
                         <Bold>Creado</Bold>
@@ -310,27 +308,30 @@ const ListBooks = () => {
             {deleteItemId && (
               <p className={styles.centeredText}>with ID: {deleteItemId}</p>
             )}
- {idModal === "1" ? (
-    <button
-      className={`${styles.confirmButton} ${styles.modalButton}`}
-      onClick={confirmDelete}
-    >
-      Confirm
-    </button>
-  ) : (
-    <button
-      className={`${styles.confirmButton} ${styles.modalButton}`}
-      onClick={confirmRestore}
-    >
-      Confirm
-    </button>
-  )}
+            <div className={styles.buttonsContainer}>
+
+          {idModal === "1" ? (
+              <button
+                className={`${styles.confirmButton} ${styles.modalButton}`}
+                onClick={confirmDelete}
+              >
+                Confirm
+              </button>
+            ) : (
+              <button
+                className={`${styles.confirmButton} ${styles.modalButton}`}
+                onClick={confirmRestore}
+              >
+                Confirm
+              </button>
+            )}
             <button
               className={`${styles.cancelButton} ${styles.modalButton}`}
               onClick={closeModal}
             >
               Cancel
             </button>
+            </div>
           </Modal>
         </div>
       </>

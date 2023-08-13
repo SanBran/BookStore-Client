@@ -5,6 +5,7 @@ import Book from "../CardBook/Book";
 import styles from "./Wishlist.module.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Empty from "../../Views/Empty/Empty";
 
 function Wishlist() {
   const userInfo = useSelector((state) => state.userDetail);
@@ -48,7 +49,7 @@ function Wishlist() {
           <Book key={(book.id+2)} books={book} />
         ))}
         </>)
-        :(<>Empty</>)
+        :(<Empty/>)
         }
       </div>
     </div>

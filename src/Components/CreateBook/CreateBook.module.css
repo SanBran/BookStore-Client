@@ -24,7 +24,7 @@
     width: 60vw;
     gap: 10px;
     padding: 50px;
-    background-color: aliceblue;
+    background-color: white;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     
 
@@ -49,7 +49,7 @@
     align-items: center;
 }
 .image{
-    height: 65vh;
+    height: 450px;
     object-fit: contain;
 
     overflow: hidden;
@@ -87,6 +87,7 @@
     
    width: 30vw;
     overflow: auto;
+    height: 450px;
 }
 .plusIcon{
     width: 15px;
@@ -96,6 +97,7 @@
     width: 100%;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 .label h3{
     display: flex;
@@ -117,7 +119,7 @@
 }
 .input{
     width: 100%;
-    height: 15px !important;
+    height: 30px !important;
     padding-left: 20px;
     margin-top: 10px;
 
@@ -133,17 +135,20 @@
 
     transition: all 0.3s ease;
 }
+.width50{
+    width: 45% !important;
+}
 .otherInput{
     border: none ;
     border-bottom: 1px solid #B6B6B6;
 }
 .select{
     width: 100% !important;
-    height: 20px !important;
+    height: 35px !important;
 }
 
 .labelPrice{
-width: 99%;
+    width: 99%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -166,7 +171,7 @@ width: 99%;
 
 .inputPrice{
     width: 60%;
-    height: 15px !important;
+    height: 30px !important;
     margin-top: 10px;
 
     font-family: 'Montserrat', sans-serif;
@@ -252,9 +257,9 @@ width: 99%;
 .btnClose{
     position: relative;
     margin-left: 100%;
-    background-color: #feac38;
-    border-radius: 20%;
-    padding: 1px 5px 3px 6px;
+    border-radius: 100%;
+    cursor: pointer;
+
 }
 
 .successMessage {
