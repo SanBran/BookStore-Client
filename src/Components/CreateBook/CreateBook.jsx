@@ -8,7 +8,8 @@ import edit_icon from '../../assets/icons/edit_icon.svg';
 import plus_icon from '../../assets/icons/plus_icon.svg';
 import { postBook } from '../../redux/actions/actions';
 import PdfUpload from '../PdfUpload/PdfUpload';
-import success from '../../sources/success.png'
+import success from '../../sources/success.png';
+import close_button from '../../assets/icons/close_button.svg'
 
 const CreateBook = ({open, setOpen} ) => {
 
@@ -179,13 +180,15 @@ const [loadingSuccess, setLoadingSuccess] = useState(false);
             ? 
         <div  className={styles.mainContainer}>
             {loadingSuccess && (
-        <div className={styles.successMessage}>
+            <div className={styles.successMessage}>
             <img className={styles.succesLogo} src={success} alt="succes" />
           <h2>Upload Successful!</h2>
         </div>
       )}
             <form className={styles.form}>
-            <button className={styles.btnClose} onClick={() => setOpen(false)}>x</button>
+            <button className={styles.btnClose} onClick={() => setOpen(false)}>
+            <img src={close_button} alt="x" />
+            </button>
             <div className={styles.container}>
             <div className={styles.imageContainer}>
                 <img className={styles.image} src={formData.image !== '' ? formData.image : genericCover} alt="libro" />
@@ -348,7 +351,7 @@ const [loadingSuccess, setLoadingSuccess] = useState(false);
             <label className={styles.label} >
                 <h3>Published date</h3>
                 <input
-                    className={errors.publishedDate.length ? (`${styles.input} ${styles.error}`) : styles.input}
+                    className={errors.publishedDate.length ? (`${styles.input} ${styles.error} ${styles.width50}`) : (`${styles.width50} ${styles.input}`)}
                     name="publishedDate"
                     onChange={handleChange}
                     value={formData.publishedDate}
@@ -362,7 +365,7 @@ const [loadingSuccess, setLoadingSuccess] = useState(false);
             <label className={styles.label}>
                 <h3>Num. of pages</h3>
                 <input
-                    className={errors.numPages.length ? (`${styles.input} ${styles.error}`) : styles.input}
+                    className={errors.numPages.length ? (`${styles.input} ${styles.error} ${styles.width50}`) : (`${styles.width50} ${styles.input}`)}
                     name="numPages"
                     onChange={handleChange}
                     value={formData.numPages}
