@@ -99,6 +99,7 @@ const ListBooks = () => {
     const confirmRestore = async () =>{
       try {
         if (deleteItemId) {
+          console.log(deleteItemId);
           // Llama a la acción deleteBooksById con el ID del elemento a eliminar
           const deleteItem = await dispatch(restoreBooksById(deleteItemId));
           console.log("confirmRestore", deleteItem);
@@ -129,6 +130,7 @@ const ListBooks = () => {
       );
       return formattedDate;
     }
+    console.log(idModal);
     return (
       <>
         <CreateBook open={open} setOpen={setOpen}/>
@@ -205,7 +207,7 @@ const ListBooks = () => {
                       <Text>{item.gender}</Text>
                     </TableCell>
                     <TableCell className={styles.TableCell}>
-                      {console.log(item, item.status)}
+                      {/* {console.log(item, item.status)} */}
                       {item.deletedAt === null ? (
                         <span
                           className={`${styles.statusBadge} ${styles.activeStatus}`}
@@ -234,31 +236,32 @@ const ListBooks = () => {
                           Ver{" "}
                         </Link>
                       </p>
-                      <p onClick={() => openModal(item.id, item.title,"1")}
-
-                      style={{"cursor":"pointer", "display":"flex", "alignItems":"center", "color":"black"}}>
+                      <p>
                         {activeTab === "activos" ? (
                           <>
                             <img
                               key={item.id}
                               src={icoDel}
                               alt="Delete"
-                              // onClick={() => openModal(item.id, item.title,"1")}
+                              onClick={() => openModal(item.id, item.title,"1")}
                               className={styles.icon}
                             />
                             Delete
                           </>
                         ) : (
-                          <>
+                          <div
+                          onClick={() => openModal(item.id, item.title ,"2")}
+                          style={{"cursor":"pointer", "display":"flex", "alignItems":"center", "color":"black"}}
+                          >
                             <img
                               key={item.id}
                               src={icoEdit}
                               alt="Restaurar"
-                              onClick={() => openModal(item.id, item.title ,"2")}
+                              // onClick={() => openModal(item.id, item.title ,"2")}
                               className={styles.icon}
                             />
                             Restaurar
-                          </>
+                          </div>
                         )}
                       </p>
                     </TableCell>
