@@ -1,4 +1,3 @@
-import React, {useRef} from 'react'
 import { useState } from 'react'
 import styles from  './Sidebar.module.css'
 import logo from '../../sources/logo.png'

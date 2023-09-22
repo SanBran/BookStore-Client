@@ -23,14 +23,18 @@
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     font-size: larger;
-    
+    height: 100px;
+    overflow: scroll;
 }
 
 .author {
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
     font-size: small;
-    color:grey
+    height: 20px;
+    color:grey;
+    overflow: scroll;
+    
 }
 
 .image {
@@ -97,3 +101,25 @@
     font-size:small;
 }
 
+@media(max-width: 1200px) {
+    
+    .title {
+        
+        font-size: medium;
+        
+    }
+    
+    .author {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        font-size: small;
+        height: 20px;
+        color:grey;
+        overflow: scroll;
+        
+    }
+
+    .rating{
+        font-size:x-small;
+    }
+}

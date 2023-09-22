@@ -32,6 +32,7 @@ select:focus-visible, nav button:focus-visible, button:focus{
 }
 
 .profile{
+    position: relative;
     display: flex;
   justify-content: center;
   overflow: hidden;
@@ -75,8 +76,8 @@ select:focus-visible, nav button:focus-visible, button:focus{
     
     display: flex;
     align-items: center;
-    justify-content:space-between;
-    width: 95vw;
+    justify-content:space-around;
+    width: 100vw;
     gap: 30px;
 }
 
@@ -99,17 +100,35 @@ select:focus-visible, nav button:focus-visible, button:focus{
     
   }
 
-@media (max-width: 400px) {
+
+@media (max-width: 768px) {
+
+    .containerNologo{
+       
+        top: -50px;
+        
+        
+    }
+    .profile{
+        right: 3vw;
+    }
+}
+
+@media (max-width: 550px) {
     .logo{
         font-size:1.5rem;
     }
 
     .profile{
         height: 30px;
+        width: 30px;
     }
   
     
+    
   }
+
+
 
 
 /* -----esto no va despues, borrar */

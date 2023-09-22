@@ -3,7 +3,6 @@
 .container{
     position: relative;
     display: flex;
-    flex-direction: row;
     width: 96.4vw;
     height: 60vh;
     max-height: 600px;
@@ -34,25 +33,28 @@
 
 .leftButton {
     position: absolute;
+    font-size:x-large;
+    font-weight: 900;
     margin-left: 25px;
     top: 30vh;
     z-index: 1;
     border-radius:100px;
-    padding: 1%;
-    padding-right: 1.5%;
-    background-color: #FA9D1B;
-
+    background-color: #fa9d1b00;
+    color: #FA9D1B;
+    cursor: pointer;
 }
 .rightButton {
     position: absolute;
-    margin-right: 25px;
+    font-size:x-large;
+    font-weight: 900;
+    
     top: 30vh;
-    right: 0;
+    right: 5vw;
     border-radius:100px;
-    padding: 1%;
-    padding-left: 1.5%;
-    background-color: #FA9D1B;
-
+   
+    background-color: #fa9d1b00;
+    color: #FA9D1B;
+    cursor: pointer;
 }
 
 .bookInfo{
