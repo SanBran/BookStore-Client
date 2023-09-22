@@ -12,8 +12,9 @@ div:focus-visible, div:focus, button:focus-visible, button:focus, div button:foc
     position: fixed;
     display: flex;
     flex-direction: column;
+    top: 0;
     align-items: center;
-    background-color: rgb(247, 247, 247);
+    background-color: rgb(255, 255, 255);
     width: 70px;
     height: 100vh;
     z-index: 999;
@@ -23,7 +24,7 @@ div:focus-visible, div:focus, button:focus-visible, button:focus, div button:foc
     position: fixed;
     display: flex;
     flex-direction: column;
-    background-color: rgb(247, 247, 247);
+    background-color: rgb(255, 255, 255);
     width: 265px;
     height: 100vh;
     z-index: 999;
@@ -49,7 +50,6 @@ div:focus-visible, div:focus, button:focus-visible, button:focus, div button:foc
     justify-content: center;
     align-items: center;
     top: 25px;
-    left: -5px;
     font-weight: 400;
     font-size: x-large;
     color: black;
@@ -141,4 +141,10 @@ div:focus-visible, div:focus, button:focus-visible, button:focus, div button:foc
     color: black;
     box-shadow: 5px 8px 5px rgba(0, 0, 0, 0.096);
 
+}
+
+@media(max-width: 768px) {
+    .container{
+        display: none;
+    }
 }

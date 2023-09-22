@@ -6,7 +6,6 @@ import Access from "./Views/Access/Access";
 import Navbar from "./Components/Navbar/Navbar";
 import Profile from "./Views/Profile/Profile";
 import Wishlist from "./Components/Wishlist/Wishlist";
-import Dashboard from "./Components/Dashboard/Dashboard";
 import History from "./Components/History/History";
 import Settings from "./Views/Settings/Settings";
 import Filters from "./Components/Filters/Filters";
@@ -42,7 +41,7 @@ import axios from "axios";
 //-------Manejando cookies para mantener sesiones
 import Cookies from 'js-cookie';
 import { accessUser, getUserById, validateSession } from "./redux/actions/actions";
-import { addCart, updateCart } from "./redux/actions/actions";
+import {  updateCart } from "./redux/actions/actions";
 
 
 
@@ -51,7 +50,6 @@ function App() {
   const showOverlayPerfile = useSelector(state => state.overlayProfile);
   const location = useLocation();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.userDetail);
 
 
   const [server, setServer] = useState(true);
@@ -67,14 +65,14 @@ function App() {
       dispatch(updateCart(decodedToken))
     }
     setNext(true);
-  },[])
+  },[dispatch])
   
   useEffect(()=>{
     if(next && cart){
       const jwt = JSON.stringify(cart);
       localStorage.setItem('cart', jwt);
     }
-  },[cart])
+  },[cart, next])
 
   useEffect(() => {
     const token = Cookies.get('valToken');
@@ -86,7 +84,7 @@ function App() {
         await dispatch(getUserById(user.id))
       })()
     }
-  }, [])
+  }, [dispatch])
 
   useEffect(() => {
     (async () => {
