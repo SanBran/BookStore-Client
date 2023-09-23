@@ -1,9 +1,9 @@
 .container{
+    position: relative;
     display: flex;
     margin-left: -250px;
-    border: 1px solid rgb(203, 203, 203);
     border-radius:50px ;
-    
+    width: 50vw;
 }
 
 .bar{
@@ -11,7 +11,7 @@
     padding: 10px;
     color: rgb(68, 68, 68);
     background-color: rgb(255, 255, 255);
-    /* border: none; */
+    border: none;
 }
 
 .icon{
@@ -42,13 +42,20 @@
 @media(max-width: 550px) {
     .container{
         height: 30px;
-        width: 50vw;
+        width: 60vw;
+        
     }
     .icon{
 
         
         font-size:x-large;
         
-}
+    }
+    .genres{
+
+        
+        width: 50%;
+        
+    }
 
 }
