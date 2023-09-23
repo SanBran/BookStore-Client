@@ -1,14 +1,14 @@
 .booksContainer {
     position: relative;
     top: 1px;
-
     margin: 0 auto;
     
      height: fit-content;
      width: 85vw;
      
     display: grid;
-    grid-template-columns:1fr 1fr 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(50px,330px));
+    gap: 50px;
      justify-content:center;
      
  
@@ -21,8 +21,9 @@
     .booksContainer {
         position: relative;
         top: 80px;
-     
+        gap: 20px;
      }
   
     
   }
+

@@ -78,7 +78,6 @@ select:focus-visible, nav button:focus-visible, button:focus{
     align-items: center;
     justify-content:space-around;
     width: 100vw;
-    gap: 30px;
 }
 
 .back{
@@ -92,11 +91,20 @@ select:focus-visible, nav button:focus-visible, button:focus{
 }
 
 
-@media (max-width: 1020px) {
+@media (max-width: 2000px) {
+    .profile{
+        right: -50px;
+    }
+    
+  }
+@media (max-width: 1500px) {
     .logo{
         font-size:2rem;
     }
-  
+    .profile{
+        right: -10px;
+    }
+    
     
   }
 
@@ -124,6 +132,12 @@ select:focus-visible, nav button:focus-visible, button:focus{
         width: 30px;
     }
   
+    .containerNologo{
+        background-color: rgba(236, 234, 234, 0.068);
+        box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.096);
+        left: -8px;
+        width: 107vw;
+    }
     
     
   }
