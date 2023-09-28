@@ -20,15 +20,16 @@ select:focus-visible, nav button:focus-visible, button:focus{
 .logo{
     color: #FA9D1B;
     margin: 0;
-    font-size:3rem;
-    padding-left: 5vw;
+    height: 50px;
+    cursor:pointer;
+}
+
+.btnlogo{
+    position: relative;
+    background: none;
 }
 .Nologo{
-    color:#fa9d1b00;
-    cursor:default;
-    margin: 0;
-    font-size:3rem;
-    padding-left: 5vw;
+    height: 30px;
 }
 
 .profile{
@@ -120,6 +121,10 @@ select:focus-visible, nav button:focus-visible, button:focus{
     .profile{
         right: 3vw;
     }
+
+    .btnlogo{
+        left: 50px;
+     }
 }
 
 @media (max-width: 550px) {
@@ -139,9 +144,17 @@ select:focus-visible, nav button:focus-visible, button:focus{
         width: 107vw;
     }
     
+    .btnlogo{
+        left: 0;
+     }
     
   }
 
+  @media (min-width: 768px) {
+    .Nologo{
+        display: none;
+     }
+  }
 
 
 
