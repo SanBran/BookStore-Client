@@ -7,7 +7,7 @@
      width: 85vw;
      
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(50px,330px));
+    grid-template-columns: repeat(auto-fill, minmax(50px,400px));
     gap: 50px;
      justify-content:center;
      

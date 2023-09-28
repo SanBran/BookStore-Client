@@ -1,12 +1,13 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./Navbar.module.css";
 import SearchBar from "../SearchBar/SearchBar";
 import { overlayProfile } from "../../redux/actions/actions";
-import { useDispatch, useSelector } from "react-redux";
 import cart_icon from '../../assets/icons/cart_icon.svg';
 import profileLogo from "../../sources/profile-user.png";
 import Cart from "../../Views/Cart.jsx/Cart";
-import { useState } from "react";
+import logo from '../../sources/logo.png'
 
 const Navbar = () => {
   //const [overlayPerfile,setOverlayPerfile] = useState(false);
@@ -35,17 +36,23 @@ const Navbar = () => {
   const closeModal = () => {
     setModalIsOpen(false);
   };
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth', // Opciones: 'auto', 'smooth'
+    });
+  };
 
   return (
     <nav className={styles.containerNologo}>
-      <div>
-        <Link to="/">
-          <h1 className={styles.Nologo}>Book Store</h1>
-        </Link>
-      </div>
-      <div className={styles.search}>
+     
+      <button onClick={scrollToTop} className={styles.btnlogo}>
+        <img className={styles.Nologo} src={logo} alt="logo" />
+        </button>
+      
+      
         <SearchBar />
-      </div>
+     
       {access ? (
         <div className={styles.cartContainer}>
           <img className={styles.cartIcon} src={cart_icon} alt="🛒" onClick={openModal} />
