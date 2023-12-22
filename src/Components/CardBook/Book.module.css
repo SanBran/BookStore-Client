@@ -1,9 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 
 .container {
+    
     display: flex;
-    height: 190px;
-    width: 25vw;
     gap: 10px;
     cursor: pointer;
     -moz-osx-font-smoothing: grayscale;
@@ -23,14 +22,18 @@
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     font-size: larger;
-    
+    height: 90px;
+    overflow: scroll;
 }
 
 .author {
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
     font-size: small;
-    color:grey
+    height: 20px;
+    color:grey;
+    overflow: scroll;
+    
 }
 
 .image {
@@ -53,14 +56,14 @@
     position: absolute;
     background: none;
     color: #FA9D1B;
-    left: 23.5vw;
+    right: 10px;
     bottom: 55px;
     cursor: pointer;
 }
 .boton2{
     position: absolute;
     background: none;
-    left: 23.5vw;
+    right: 10px;
     bottom: 5px;
     cursor: pointer;
 }
@@ -96,4 +99,43 @@
 .rating{
     font-size:small;
 }
+
+@media(max-width: 1200px) {
+    
+    .title {
+        
+        font-size: medium;
+        
+    }
+    
+    .author {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        font-size: small;
+        height: 20px;
+        color:grey;
+        overflow: scroll;
+        
+    }
+
+    .rating{
+        font-size:x-small;
+    }
+}
+
+@media (max-width: 500px) {
+    
+    .boton{
+        
+        left: 270px;
+        
+    }
+    .boton2{
+        
+        left: 270px;
+        
+    }
+   
+    
+  }
 

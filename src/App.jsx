@@ -45,13 +45,13 @@ import { accessUser, getUserById, validateSession } from "./redux/actions/action
 import { updateCart } from "./redux/actions/actions";
 
 
-
 function App() {
   const cart = useSelector(state=>state.cart);
   const showOverlayPerfile = useSelector(state => state.overlayProfile);
   const location = useLocation();
   const dispatch = useDispatch();
   //const user = useSelector((state) => state.userDetail);
+
 
 
   const [server, setServer] = useState(true);

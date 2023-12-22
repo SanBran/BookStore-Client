@@ -1,4 +1,4 @@
-import React, {useRef} from 'react'
+import {useRef} from 'react'
 import { useEffect, useState } from "react";
 import Books from "../../Components/PanelBooks/Books";
 import Slide from "../../Components/Slide/Slide";
