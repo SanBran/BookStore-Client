@@ -6,6 +6,7 @@ import Access from "./Views/Access/Access";
 import Navbar from "./Components/Navbar/Navbar";
 import Profile from "./Views/Profile/Profile";
 import Wishlist from "./Components/Wishlist/Wishlist";
+//import Dashboard from "./Components/Dashboard/Dashboard";
 import History from "./Components/History/History";
 import Settings from "./Views/Settings/Settings";
 import Filters from "./Components/Filters/Filters";
@@ -36,13 +37,12 @@ import axios from "axios";
 //-------local
 //  axios.defaults.baseURL = "http://localhost:8000/";
 //-------deployado
- axios.defaults.baseURL = "https://bookstorepf-production.up.railway.app";
+ axios.defaults.baseURL = "https://bookstore-ac0i.onrender.com/";
 
 //-------Manejando cookies para mantener sesiones
 import Cookies from 'js-cookie';
 import { accessUser, getUserById, validateSession } from "./redux/actions/actions";
-import {  updateCart } from "./redux/actions/actions";
-
+import { updateCart } from "./redux/actions/actions";
 
 
 function App() {
@@ -50,6 +50,8 @@ function App() {
   const showOverlayPerfile = useSelector(state => state.overlayProfile);
   const location = useLocation();
   const dispatch = useDispatch();
+  //const user = useSelector((state) => state.userDetail);
+
 
 
   const [server, setServer] = useState(true);
