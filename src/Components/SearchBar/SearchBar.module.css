@@ -1,20 +1,17 @@
 .container{
+    position: relative;
     display: flex;
-    margin-left: -50px;
-    border: 1px solid rgb(203, 203, 203);
+   
     border-radius:50px ;
-
+    width: 50vw;
 }
 
 .bar{
-    width: 30vw;
-    height: 45px;
-    border: none;
-    border-radius:0 0 0 0 ;
+    width: 100%;
     padding: 10px;
     color: rgb(68, 68, 68);
     background-color: rgb(255, 255, 255);
-
+    border: none;
 }
 
 .icon{
@@ -34,7 +31,7 @@
     padding: 0;
     background-color: rgb(255, 255, 255);
     text-align: end;
-    
+    width: 40%;
     font-weight: 400;
     font-weight:500;
     border: none;
@@ -42,3 +39,23 @@
     color: rgb(109, 109, 109);
 }
 
+@media(max-width: 550px) {
+    .container{
+        height: 30px;
+        width: 60vw;
+        
+    }
+    .icon{
+
+        
+        font-size:x-large;
+        
+    }
+    .genres{
+
+        
+        width: 50%;
+        
+    }
+
+}

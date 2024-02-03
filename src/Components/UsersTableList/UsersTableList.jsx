@@ -31,9 +31,8 @@ import {
   Italic,
 } from "@tremor/react";
 
-import icoDel from "../../assets/icons/delete.png";
-import icoEdit from "../../assets/icons/edit.png";
-import icoVer from "../../assets/icons/view.png";
+import icoDel from "../../assets/icons/bin_icon.svg";
+import icoEdit from "../../assets/icons/edit2_icon.svg";
 
 import { getTableUsers,restoreUserById  ,getUsersDeleted } from "../../redux/actions/actions.js";
 
@@ -134,8 +133,7 @@ const Listusers = () => {
         <div>
           <Card>
             <div className={styles.tabs}>
-              <Button size="lg" color="emerald">
-                <div
+            <div
                   className={`${styles.tab} ${
                     activeTab === "activos" && styles.activeTab
                   }`}
@@ -143,18 +141,14 @@ const Listusers = () => {
                 >
                   Activos
                 </div>
-              </Button>{" "}
-              &nbsp; &nbsp; &nbsp; &nbsp;
-              <Button size="lg" color="red">
                 <div
                   className={`${styles.tab} ${
                     activeTab === "borrados" && styles.activeTab
                   }`}
                   onClick={() => handleTabChange("borrados")}
                 >
-                  Borrados{" "}
+                  Borrados
                 </div>
-              </Button>
             </div>
 
             <Table className={`mt-5 ${styles.tableContainer}`}>
@@ -176,10 +170,10 @@ const Listusers = () => {
                     <Text color="white"> STATUS</Text>
                   </TableHeaderCell>
                   <TableHeaderCell>
-                    <Text color="white"> Action</Text>
+                    <Text color="white"> ACTIONS</Text>
                   </TableHeaderCell>
                   <TableHeaderCell>
-                    <Text color="white"> Events</Text>
+                    <Text color="white"> EVENTS</Text>
                   </TableHeaderCell>
                 </TableRow>
               </TableHead>
@@ -187,16 +181,16 @@ const Listusers = () => {
               <TableBody className={styles.tableBody}>
                 {filteredList?.map((item) => (
                   // Renderizar cada fila de acuerdo a la pestaña activa
-                  <TableRow key={item.id}>
-                    <TableCell>
+                  <TableRow className={styles.tableRow} key={item.id}>
+                    <TableCell className={styles.TableCell}>
                       <p className={`${styles.boldText}`}>{item.name}</p>
                       
                     </TableCell>
-                    <TableCell>
+                    <TableCell className={styles.TableCell}>
                       <Text>{item.email}</Text>
                     </TableCell>
-                    <TableCell>
-                      {item.status ? (
+                    <TableCell className={styles.TableCell}>
+                      {item.deletedAt === null ? (
                         <span
                           className={`${styles.statusBadge} ${styles.activeStatus}`}
                         >
@@ -210,7 +204,7 @@ const Listusers = () => {
                         </span>
                       )}
                     </TableCell>
-                    <TableCell>
+                    <TableCell className={styles.TableCell}>
                       {/* <p>
                         <Link to={`/detail/${item.id}`}>
                           <img
@@ -250,7 +244,7 @@ const Listusers = () => {
                         )}
                       </p>
                     </TableCell>
-                    <TableCell>
+                    <TableCell className={styles.TableCell}>
                       <Text>
                         {" "}
                         <Bold>Creado</Bold>
@@ -296,27 +290,30 @@ const Listusers = () => {
             {deleteItemId && (
               <p className={styles.centeredText}>with ID: {deleteItemId}</p>
             )}
- {idModal === "1" ? (
-    <button
-      className={`${styles.confirmButton} ${styles.modalButton}`}
-      onClick={confirmDelete}
-    >
-      Confirm
-    </button>
-  ) : (
-    <button
-      className={`${styles.confirmButton} ${styles.modalButton}`}
-      onClick={confirmRestore}
-    >
-      Confirm
-    </button>
-  )}
-            <button
-              className={`${styles.cancelButton} ${styles.modalButton}`}
-              onClick={closeModal}
-            >
-              Cancel
-            </button>
+            <div className={styles.buttonsContainer}>
+
+            {idModal === "1" ? (
+                <button
+                  className={`${styles.confirmButton} ${styles.modalButton}`}
+                  onClick={confirmDelete}
+                >
+                  Confirm
+                </button>
+              ) : (
+                <button
+                  className={`${styles.confirmButton} ${styles.modalButton}`}
+                  onClick={confirmRestore}
+                >
+                  Confirm
+                </button>
+              )}
+              <button
+                className={`${styles.cancelButton} ${styles.modalButton}`}
+                onClick={closeModal}
+              >
+                Cancel
+              </button>
+            </div>
           </Modal>
         </div>
       </>

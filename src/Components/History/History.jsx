@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./Histoy.module.css";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Empty from "../../Views/Empty/Empty";
 
 
 function History() {
@@ -64,8 +65,8 @@ function History() {
           </div>
         ))}
         </>)
-        :(<>Empty</>)
-        }
+        :(<Empty/>)
+      }
       </div>
     </div>
   );

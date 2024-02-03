@@ -7,6 +7,7 @@ import Navbar from "./Components/Navbar/Navbar";
 import Profile from "./Views/Profile/Profile";
 import Wishlist from "./Components/Wishlist/Wishlist";
 //import Dashboard from "./Components/Dashboard/Dashboard";
+//import Dashboard from "./Components/Dashboard/Dashboard";
 import History from "./Components/History/History";
 import Settings from "./Views/Settings/Settings";
 import Filters from "./Components/Filters/Filters";
@@ -45,13 +46,13 @@ import { accessUser, getUserById, validateSession } from "./redux/actions/action
 import { updateCart } from "./redux/actions/actions";
 
 
-
 function App() {
   const cart = useSelector(state=>state.cart);
   const showOverlayPerfile = useSelector(state => state.overlayProfile);
   const location = useLocation();
   const dispatch = useDispatch();
   //const user = useSelector((state) => state.userDetail);
+
 
 
   const [server, setServer] = useState(true);

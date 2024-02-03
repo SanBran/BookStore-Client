@@ -25,7 +25,7 @@
 }
 
 .books{
-    width: 96vw;
+    width: calc(100vw-75px)
 }
 .paginationContainer{
     width: 96vw;
@@ -36,6 +36,13 @@
     .title {
         top: 10vh;
         text-align: center;
+    }
+    .container{
+        
+        left: 0;
+       
+        
+        
     }
   
     

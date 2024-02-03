@@ -1,7 +1,44 @@
 .logoCompleto{
-    position: relative;
-    width: 230px
+    width: 230px;
+    margin-right: 50px;
+    cursor: pointer;
 }
 .container {
  justify-content: center;
+}
+
+
+.tabsContainer{
+    margin-left: 25px;
+}
+.tab{
+    margin: 0 !important;
+    padding: 10px 20px !important;
+    border-bottom: 2px solid #FA9D1B !important;
+    color:black !important;
+    font-weight: bold !important;
+    font-size: 18px !important;
+
+    background: none !important;
+
+    cursor: pointer;
+    transition: all 0s ease !important;
+
+
+}
+.activeTab{
+    margin: 0 !important;
+    background: none;
+    color: #FA9D1B !important;
+    font-size: 18px !important;
+
+    font-weight: bold !important;
+    padding: 10px 20px !important;
+
+
+    border-top: 3px solid #FA9D1B !important;
+    border-right: 3px solid #FA9D1B !important;
+    border-left: 3px solid #FA9D1B !important;
+
+    transition: all 0s ease !important;
 }

@@ -20,6 +20,11 @@ import { getAllPayments, getUsers, getTableBooks,getTableUsers,getBooksDeleted,g
 import { useNavigate } from 'react-router-dom';
 
 function AdminDashboard() {
+  const [activeTab, setActiveTab] = useState("general");
+    const handleTabChange = (tab) => {
+      setActiveTab(tab);
+    };
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -39,12 +44,21 @@ function AdminDashboard() {
  <>
         
     <Card className="mt-1 h-screen w-screen">
-    <img onClick={()=> navigate('/') } className={styles.logoCompleto} src={logo} alt="" />
       <TabGroup>
-        <TabList className="mt-10">
-          <Tab>General</Tab>
-          <Tab>Books</Tab>
-          <Tab>Users</Tab>
+        <TabList className={`mt-10 ${styles.tabsContainer}`}>
+    <img onClick={()=> navigate('/') } className={styles.logoCompleto} src={logo} alt="" />
+          <Tab 
+          className={`${ activeTab === "general" ? styles.activeTab : styles.tab}`}
+          onClick={() => handleTabChange("general")}
+          >General</Tab>
+          <Tab
+          className={`${ activeTab === "books" ? styles.activeTab : styles.tab}`}
+          onClick={() => handleTabChange("books")}          
+          >Books</Tab>
+          <Tab
+          className={`${ activeTab === "users" ? styles.activeTab : styles.tab}`}
+          onClick={() => handleTabChange("users")}
+          >Users</Tab>
         </TabList>
         <TabPanels>
           <TabListGeneral />
