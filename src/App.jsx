@@ -39,6 +39,7 @@ import axios from "axios";
 //  axios.defaults.baseURL = "http://localhost:8000/";
 //-------deployado
  axios.defaults.baseURL = "https://bookstore-ac0i.onrender.com/";
+ //Ok, si hay más conflictos porque esto apunta al github de alguien más, me tocará mucha documentación.
 
 //-------Manejando cookies para mantener sesiones
 import Cookies from 'js-cookie';
